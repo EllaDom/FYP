@@ -1,0 +1,39 @@
+graph [
+  directed 1
+  capec_id "324"
+  name "TCP (ISN) Sequence Predictability Probe"
+  abstraction "Detailed"
+  status "Stable"
+  description "This type of operating system probe attempts to determine an estimate for how predictable the sequence number generation algorithm is for a remote host. Statistical techniques, such as standard deviation, can be used to determine how predictable the sequence number generation is for a system. This result can then be compared to a database of operating system behaviors to determine a likely match for operating system and version."
+  likelihood "Medium"
+  severity "Low"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "312"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The ability to monitor and interact with network communications.Access to at least one host, and the privileges to interface with the network interface card."
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "A tool capable of sending and receiving packets from a remote system."
+  consequences [
+    scope "_networkx_list_start"
+    scope "Confidentiality"
+    impact "Read Data"
+  ]
+  consequences [
+    scope "Confidentiality"
+    scope "Access Control"
+    scope "Authorization"
+    impact "Bypass Protection Mechanism"
+  ]
+  mitigations "[]"
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "200"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "200"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+]

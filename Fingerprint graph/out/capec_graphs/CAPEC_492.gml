@@ -1,0 +1,38 @@
+graph [
+  directed 1
+  capec_id "492"
+  name "Regular Expression Exponential Blowup"
+  abstraction "Standard"
+  status "Draft"
+  description "An adversary may execute an attack on a program that uses a poor Regular Expression(Regex) implementation by choosing input that results in an extreme situation for the Regex. A typical extreme situation operates at exponential time compared to the input size. This is due to most implementations using a Nondeterministic Finite Automaton(NFA) state machine to be built by the Regex algorithm since NFA allows backtracking and thus more complex regular expressions."
+  likelihood ""
+  severity ""
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "130"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "This type of an attack requires the ability to identify hosts running a poorly implemented Regex, and the ability to send crafted input to exploit the regular expression."
+  skills_required "[]"
+  resources_required "[]"
+  consequences "[]"
+  mitigations "_networkx_list_start"
+  mitigations "Test custom written Regex with fuzzing to determine if the Regex is a poor one. Add timeouts to processes that handle the Regex logic. If an evil Regex is found rewrite it as a good Regex."
+  example_instances "[]"
+  related_weaknesses "400"
+  related_weaknesses "1333"
+  matched_cwes "1333"
+  matched_cwes "400"
+  taxonomy_mappings "_networkx_list_start"
+  taxonomy_mappings [
+    taxonomy_name "OWASP Attacks"
+    entry_id ""
+    entry_name "Regular expression Denial of Service - ReDoS"
+  ]
+  execution_flow "[]"
+  node [
+    id 0
+    label "require_the_ability_to_identify_hosts_running_a_poorly_implemented_regex"
+  ]
+]

@@ -1,0 +1,155 @@
+graph [
+  directed 1
+  capec_id "87"
+  name "Forceful Browsing"
+  abstraction "Standard"
+  status "Draft"
+  description "An attacker employs forceful browsing (direct URL entry) to access portions of a website that are otherwise unreachable. Usually, a front controller or similar design pattern is employed to protect access to portions of a web application. Forceful browsing enables an attacker to access information, perform privileged operations and otherwise reach sections of the web application that have been improperly protected."
+  likelihood "High"
+  severity "High"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "115"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The forcibly browseable pages or accessible resources must be discoverable and improperly protected."
+  skills_required "_networkx_list_start"
+  skills_required [
+    level "Low"
+    description "Forcibly browseable pages can be discovered by using a number of automated tools. Doing the same manually is tedious but by no means difficult."
+  ]
+  resources_required "_networkx_list_start"
+  resources_required "None: No specialized resources are required to execute this type of attack. A directory listing is helpful, but not a requirement."
+  consequences [
+    scope "_networkx_list_start"
+    scope "Confidentiality"
+    impact "Read Data"
+  ]
+  consequences [
+    scope "Confidentiality"
+    scope "Access Control"
+    scope "Authorization"
+    impact "Bypass Protection Mechanism"
+  ]
+  mitigations "Authenticate request to every resource. In addition, every page or resource must ensure that the request it is handling has been made in an authorized context."
+  mitigations "Forceful browsing can also be made difficult to a large extent by not hard-coding names of application pages or resources. This way, the attacker cannot figure out, from the application alone, the resources available from the present context."
+  example_instances "_networkx_list_start"
+  example_instances "A bulletin board application provides an administrative interface at admin.aspx when the user logging in belongs to the administrators group. An attacker can access the admin.aspx interface by making a direct request to the page. Not having access to the interface appropriately protected allows the attacker to perform administrative functions without having to authenticate themself in that role."
+  related_weaknesses "425"
+  related_weaknesses "285"
+  related_weaknesses "693"
+  matched_cwes "285"
+  matched_cwes "425"
+  matched_cwes "693"
+  taxonomy_mappings [
+    taxonomy_name "WASC"
+    entry_id "34"
+    entry_name "Predictable Resource Location"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "OWASP Attacks"
+    entry_id ""
+    entry_name "Forced browsing"
+  ]
+  execution_flow [
+    step "1"
+    phase "Explore"
+    description "[Spider] Using an automated tool, an attacker follows all public links on a web site. They record all the links they find."
+    techniques "Use a spidering tool to follow and record all links."
+    techniques "Use a proxy tool to record all links visited during a manual traversal of the web application."
+  ]
+  execution_flow [
+    step "2"
+    phase "Experiment"
+    description "[Attempt well-known or guessable resource locations] Using an automated tool, an attacker requests a variety of well-known URLs that correspond to administrative, debugging, or other useful internal actions. They record all the positive responses from the server."
+    techniques "Use a spidering tool to follow and record attempts on well-known URLs."
+    techniques "Use a proxy tool to record all links visited during a manual traversal of attempts on well-known URLs."
+  ]
+  execution_flow [
+    step "3"
+    phase "Exploit"
+    description "[Use unauthorized resources] By visiting the unprotected resource, the attacker makes use of unauthorized functionality."
+    techniques "_networkx_list_start"
+    techniques "Access unprotected functions and execute them."
+  ]
+  execution_flow [
+    step "4"
+    phase "Exploit"
+    description "[View unauthorized data] The attacker discovers and views unprotected sensitive data."
+    techniques "_networkx_list_start"
+    techniques "Direct request of protected pages that directly access database back-ends. (e.g., list.jsp, accounts.jsp, status.jsp, etc.)"
+  ]
+  node [
+    id 0
+    label "follow_all_public_links_on_a_web_site"
+  ]
+  node [
+    id 1
+    label "record_all_the_links_they_find"
+  ]
+  node [
+    id 2
+    label "record_all_links_visited_during_a_manual_traversal_of_the_web_application"
+  ]
+  node [
+    id 3
+    label "record_all_the_positive_responses_from_the_server"
+  ]
+  node [
+    id 4
+    label "visit_the_unprotected_resource"
+  ]
+  node [
+    id 5
+    label "execute_them"
+  ]
+  node [
+    id 6
+    label "view_unauthorized_data"
+  ]
+  node [
+    id 7
+    label "provide_an_administrative_interface"
+  ]
+  node [
+    id 8
+    label "access_the_admin_aspx_interface"
+  ]
+  edge [
+    source 0
+    target 1
+  ]
+  edge [
+    source 1
+    target 2
+  ]
+  edge [
+    source 2
+    target 3
+  ]
+  edge [
+    source 2
+    target 4
+  ]
+  edge [
+    source 3
+    target 2
+  ]
+  edge [
+    source 4
+    target 5
+  ]
+  edge [
+    source 5
+    target 6
+  ]
+  edge [
+    source 6
+    target 7
+  ]
+  edge [
+    source 7
+    target 8
+  ]
+]

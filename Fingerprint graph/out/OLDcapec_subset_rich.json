@@ -1,0 +1,195 @@
+[
+  {
+    "ID": "111",
+    "Name": "JSON Hijacking (aka JavaScript Hijacking)",
+    "Description": "",
+    "Relationships": [],
+    "Related_CWEs": [
+      {
+        "CWE_ID": "345",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "346",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "352",
+        "CWE_Name": null
+      }
+    ],
+    "Consequences": [
+      {
+        "Scope": "",
+        "Impact": ""
+      }
+    ],
+    "Mitigations": []
+  },
+  {
+    "ID": "112",
+    "Name": "Brute Force",
+    "Description": "",
+    "Relationships": [],
+    "Related_CWEs": [
+      {
+        "CWE_ID": "330",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "326",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "521",
+        "CWE_Name": null
+      }
+    ],
+    "Consequences": [
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      }
+    ],
+    "Mitigations": []
+  },
+  {
+    "ID": "115",
+    "Name": "Authentication Bypass",
+    "Description": "",
+    "Relationships": [],
+    "Related_CWEs": [
+      {
+        "CWE_ID": "287",
+        "CWE_Name": null
+      }
+    ],
+    "Consequences": [],
+    "Mitigations": []
+  },
+  {
+    "ID": "122",
+    "Name": "Privilege Abuse",
+    "Description": "",
+    "Relationships": [],
+    "Related_CWEs": [
+      {
+        "CWE_ID": "269",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "732",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "1317",
+        "CWE_Name": null
+      }
+    ],
+    "Consequences": [
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      }
+    ],
+    "Mitigations": []
+  },
+  {
+    "ID": "240",
+    "Name": "Resource Injection",
+    "Description": "",
+    "Relationships": [],
+    "Related_CWEs": [
+      {
+        "CWE_ID": "99",
+        "CWE_Name": null
+      }
+    ],
+    "Consequences": [
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      }
+    ],
+    "Mitigations": []
+  },
+  {
+    "ID": "560",
+    "Name": "Use of Known Domain Credentials",
+    "Description": "",
+    "Relationships": [],
+    "Related_CWEs": [
+      {
+        "CWE_ID": "522",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "307",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "308",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "309",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "262",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "263",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "654",
+        "CWE_Name": null
+      },
+      {
+        "CWE_ID": "1273",
+        "CWE_Name": null
+      }
+    ],
+    "Consequences": [
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      },
+      {
+        "Scope": "",
+        "Impact": ""
+      }
+    ],
+    "Mitigations": []
+  }
+]

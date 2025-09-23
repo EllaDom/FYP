@@ -1,0 +1,151 @@
+graph [
+  directed 1
+  capec_id "6"
+  name "Argument Injection"
+  abstraction "Standard"
+  status "Draft"
+  description "An attacker changes the behavior or state of a targeted application through injecting data or command syntax through the targets use of non-validated and non-filtered arguments of exposed services or methods."
+  likelihood "High"
+  severity "High"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "137"
+    nature "ChildOf"
+  ]
+  prerequisites "Target software fails to strip all user-supplied input of any content that could cause the shell to perform unexpected actions."
+  prerequisites "Software must allow for unvalidated or unfiltered input to be executed on operating system shell, and, optionally, the system configuration must allow for output to be sent back to client."
+  skills_required "_networkx_list_start"
+  skills_required [
+    level "Medium"
+    description "The attacker has to identify injection vector, identify the operating system-specific commands, and optionally collect the output."
+  ]
+  resources_required "_networkx_list_start"
+  resources_required "Ability to communicate synchronously or asynchronously with server. Optionally, ability to capture output directly through synchronous communication or other method such as FTP."
+  consequences [
+    scope "Confidentiality"
+    scope "Access Control"
+    scope "Authorization"
+    impact "Gain Privileges"
+  ]
+  consequences [
+    scope "_networkx_list_start"
+    scope "Integrity"
+    impact "Modify Data"
+  ]
+  consequences [
+    scope "_networkx_list_start"
+    scope "Confidentiality"
+    impact "Read Data"
+  ]
+  mitigations "Design: Do not program input values directly on command shell, instead treat user input as guilty until proven innocent. Build a function that takes user input and converts it to applications specific types and values, stripping or filtering out all unauthorized commands and characters in the process."
+  mitigations "Design: Limit program privileges, so if metacharacters or other methods circumvent program input validation routines and shell access is attained then it is not running under a privileged account. chroot jails create a sandbox for the application to execute in, making it more difficult for an attacker to elevate privilege even in the case that a compromise has occurred."
+  mitigations "Implementation: Implement an audit log that is written to a separate host, in the event of a compromise the audit log may be able to provide evidence and details of the compromise."
+  example_instances "_networkx_list_start"
+  example_instances "A recent example instance of argument injection occurred against Java Web Start technology, which eases the client side deployment for Java programs. The JNLP files that are used to describe the properties for the program. The client side Java runtime used the arguments in the property setting to define execution parameters, but if the attacker appends commands to an otherwise legitimate property file, then these commands are sent to the client command shell. [REF-482]"
+  related_weaknesses "74"
+  related_weaknesses "146"
+  related_weaknesses "184"
+  related_weaknesses "78"
+  related_weaknesses "185"
+  related_weaknesses "697"
+  matched_cwes "74"
+  matched_cwes "78"
+  taxonomy_mappings "[]"
+  execution_flow [
+    step "1"
+    phase "Explore"
+    description "[Discovery of potential injection vectors] Using an automated tool or manual discovery, the attacker identifies services or methods with arguments that could potentially be used as injection vectors (OS, API, SQL procedures, etc.)."
+    techniques "Manually cover the application and record the possible places where arguments could be passed into external systems."
+    techniques "Use a spider, for web applications, to create a list of URLs and associated inputs."
+  ]
+  execution_flow [
+    step "2"
+    phase "Experiment"
+    description "[1. Attempt variations on argument content] Possibly using an automated tool, the attacker will perform injection variations of the arguments."
+    techniques "Use a very large list of probe strings in order to detect if there is a positive result, and, what type of system has been targeted (if obscure)."
+    techniques "Use a proxy tool to record results, error messages and/or log if accessible."
+  ]
+  execution_flow [
+    step "3"
+    phase "Exploit"
+    description "[Abuse of the application] The attacker injects specific syntax into a particular argument in order to generate a specific malicious effect in the targeted application."
+    techniques "_networkx_list_start"
+    techniques "Manually inject specific payload into targeted argument."
+  ]
+  node [
+    id 0
+    label "cover_the_application"
+  ]
+  node [
+    id 1
+    label "create_a_list_of_urls_and_associated_inputs"
+  ]
+  node [
+    id 2
+    label "attempt_variations_on_argument_content"
+  ]
+  node [
+    id 3
+    label "detect_if_there_is_a_positive_result"
+  ]
+  node [
+    id 4
+    label "record_results"
+  ]
+  node [
+    id 5
+    label "inject_specific_syntax"
+  ]
+  node [
+    id 6
+    label "inject_the_payload"
+  ]
+  node [
+    id 7
+    label "describe_the_properties"
+  ]
+  node [
+    id 8
+    label "define_execution_parameters"
+  ]
+  node [
+    id 9
+    label "fail_to_strip_all_user_supplied_input_of_any_content_that_could_cause_the_shell_to_perform_unexpected_actions"
+  ]
+  edge [
+    source 0
+    target 1
+  ]
+  edge [
+    source 1
+    target 2
+  ]
+  edge [
+    source 2
+    target 3
+  ]
+  edge [
+    source 3
+    target 4
+  ]
+  edge [
+    source 4
+    target 5
+  ]
+  edge [
+    source 5
+    target 6
+  ]
+  edge [
+    source 6
+    target 7
+  ]
+  edge [
+    source 7
+    target 8
+  ]
+  edge [
+    source 8
+    target 9
+  ]
+]

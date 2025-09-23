@@ -1,0 +1,29 @@
+graph [
+  directed 1
+  capec_id "208"
+  name "Removing/short-circuiting 'Purse' logic: removing/mutating 'cash' decrements"
+  abstraction "Detailed"
+  status "Draft"
+  description "An attacker removes or modifies the logic on a client associated with monetary calculations resulting in incorrect information being sent to the server. A server may rely on a client to correctly compute monetary information. For example, a server might supply a price for an item and then rely on the client to correctly compute the total cost of a purchase given the number of items the user is buying. If the attacker can remove or modify the logic that controls these calculations, they can return incorrect values to the server. The attacker can use this to make purchases for a fraction of the legitimate cost or otherwise avoid correct billing for activities."
+  likelihood ""
+  severity "Medium"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "207"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The targeted server must rely on the client to correctly perform monetary calculations and must fail to detect errors in these calculations."
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "The attacker must have access to the client for the targeted service (this step is trivial for most web-based services). The attacker must also be able to reverse engineer the client in order to locate and modify the client's purse logic. Reverse engineering tools would be necessary for this."
+  consequences "[]"
+  mitigations "[]"
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "602"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "602"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+]

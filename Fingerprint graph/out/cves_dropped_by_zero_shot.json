@@ -1,0 +1,246 @@
+[
+  {
+    "CVE_ID": "CVE-2025-23641",
+    "Description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Thomas Ehrhardt Powie's pLinks PagePeeker allows DOM-Based XSS.This issue affects Powie's pLinks PagePeeker: from n/a through 1.0.2."
+  },
+  {
+    "CVE_ID": "CVE-2025-38106",
+    "Description": "In the Linux kernel, the following vulnerability has been resolved:\n\nio_uring: fix use-after-free of sq->thread in __io_uring_show_fdinfo()\n\nsyzbot reports:\n\nBUG: KASAN: slab-use-after-free in getrusage+0x1109/0x1a60\nRead of size 8 at addr ffff88810de2d2c8 by task a.out/304\n\nCPU: 0 UID: 0 PID: 304 Comm: a.out Not tainted 6.16.0-rc1 #1 PREEMPT(voluntary)\nHardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014\nCall Trace:\n <TASK>\n dump_stack_lvl+0x53/0x70\n print_report+0xd0/0x670\n ? __pfx__raw_spin_lock_irqsave+0x10/0x10\n ? getrusage+0x1109/0x1a60\n kasan_report+0xce/0x100\n ? getrusage+0x1109/0x1a60\n getrusage+0x1109/0x1a60\n ? __pfx_getrusage+0x10/0x10\n __io_uring_show_fdinfo+0x9fe/0x1790\n ? ksys_read+0xf7/0x1c0\n ? do_syscall_64+0xa4/0x260\n ? vsnprintf+0x591/0x1100\n ? __pfx___io_uring_show_fdinfo+0x10/0x10\n ? __pfx_vsnprintf+0x10/0x10\n ? mutex_trylock+0xcf/0x130\n ? __pfx_mutex_trylock+0x10/0x10\n ? __pfx_show_fd_locks+0x10/0x10\n ? io_uring_show_fdinfo+0x57/0x80\n io_uring_show_fdinfo+0x57/0x80\n seq_show+0x38c/0x690\n seq_read_iter+0x3f7/0x1180\n ? inode_set_ctime_current+0x160/0x4b0\n seq_read+0x271/0x3e0\n ? __pfx_seq_read+0x10/0x10\n ? __pfx__raw_spin_lock+0x10/0x10\n ? __mark_inode_dirty+0x402/0x810\n ? selinux_file_permission+0x368/0x500\n ? file_update_time+0x10f/0x160\n vfs_read+0x177/0xa40\n ? __pfx___handle_mm_fault+0x10/0x10\n ? __pfx_vfs_read+0x10/0x10\n ? mutex_lock+0x81/0xe0\n ? __pfx_mutex_lock+0x10/0x10\n ? fdget_pos+0x24d/0x4b0\n ksys_read+0xf7/0x1c0\n ? __pfx_ksys_read+0x10/0x10\n ? do_user_addr_fault+0x43b/0x9c0\n do_syscall_64+0xa4/0x260\n entry_SYSCALL_64_after_hwframe+0x77/0x7f\nRIP: 0033:0x7f0f74170fc9\nCode: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 8\nRSP: 002b:00007fffece049e8 EFLAGS: 00000206 ORIG_RAX: 0000000000000000\nRAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f0f74170fc9\nRDX: 0000000000001000 RSI: 00007fffece049f0 RDI: 0000000000000004\nRBP: 00007fffece05ad0 R08: 0000000000000000 R09: 00007fffece04d90\nR10: 0000000000000000 R11: 0000000000000206 R12: 00005651720a1100\nR13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000\n </TASK>\n\nAllocated by task 298:\n kasan_save_stack+0x33/0x60\n kasan_save_track+0x14/0x30\n __kasan_slab_alloc+0x6e/0x70\n kmem_cache_alloc_node_noprof+0xe8/0x330\n copy_process+0x376/0x5e00\n create_io_thread+0xab/0xf0\n io_sq_offload_create+0x9ed/0xf20\n io_uring_setup+0x12b0/0x1cc0\n do_syscall_64+0xa4/0x260\n entry_SYSCALL_64_after_hwframe+0x77/0x7f\n\nFreed by task 22:\n kasan_save_stack+0x33/0x60\n kasan_save_track+0x14/0x30\n kasan_save_free_info+0x3b/0x60\n __kasan_slab_free+0x37/0x50\n kmem_cache_free+0xc4/0x360\n rcu_core+0x5ff/0x19f0\n handle_softirqs+0x18c/0x530\n run_ksoftirqd+0x20/0x30\n smpboot_thread_fn+0x287/0x6c0\n kthread+0x30d/0x630\n ret_from_fork+0xef/0x1a0\n ret_from_fork_asm+0x1a/0x30\n\nLast potentially related work creation:\n kasan_save_stack+0x33/0x60\n kasan_record_aux_stack+0x8c/0xa0\n __call_rcu_common.constprop.0+0x68/0x940\n __schedule+0xff2/0x2930\n __cond_resched+0x4c/0x80\n mutex_lock+0x5c/0xe0\n io_uring_del_tctx_node+0xe1/0x2b0\n io_uring_clean_tctx+0xb7/0x160\n io_uring_cancel_generic+0x34e/0x760\n do_exit+0x240/0x2350\n do_group_exit+0xab/0x220\n __x64_sys_exit_group+0x39/0x40\n x64_sys_call+0x1243/0x1840\n do_syscall_64+0xa4/0x260\n entry_SYSCALL_64_after_hwframe+0x77/0x7f\n\nThe buggy address belongs to the object at ffff88810de2cb00\n which belongs to the cache task_struct of size 3712\nThe buggy address is located 1992 bytes inside of\n freed 3712-byte region [ffff88810de2cb00, ffff88810de2d980)\n\nwhich is caused by the task_struct pointed to by sq->thread being\nreleased while it is being used in the function\n__io_uring_show_fdinfo(). Holding ctx->uring_lock does not prevent ehre\nrelase or exit of sq->thread.\n\nFix this by assigning and looking up ->thread under RCU, and grabbing a\nreference to the task_struct. This e\n---truncated---"
+  },
+  {
+    "CVE_ID": "CVE-2025-49882",
+    "Description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Emraan Cheema CubeWP Framework allows DOM-Based XSS. This issue affects CubeWP Framework: from n/a through 1.1.23."
+  },
+  {
+    "CVE_ID": "CVE-2006-5811",
+    "Description": "PHP remote file inclusion vulnerability in library/translation.inc.php in OpenEMR 2.8.1, with register_globals enabled, allows remote attackers to execute arbitrary PHP code via a URL in the GLOBALS[srcdir] parameter."
+  },
+  {
+    "CVE_ID": "CVE-2003-0328",
+    "Description": "EPIC IRC Client (EPIC4) pre2.002, pre2.003, and possibly later versions, allows remote malicious IRC servers to cause a denial of service (crash) and possibly execute arbitrary code via a CTCP request from a large nickname, which causes an incorrect length calculation."
+  },
+  {
+    "CVE_ID": "CVE-2003-1431",
+    "Description": "Buffer overflow in Epic Games Unreal Engine 226f through 436 allows remote attackers to cause a denial of service (crash) via a long host string in the Unreal URL."
+  },
+  {
+    "CVE_ID": "CVE-2003-1432",
+    "Description": "Epic Games Unreal Engine 226f through 436 allows remote attackers to cause a denial of service (CPU consumption or crash) and possibly execute arbitrary code via (1) a packet with a negative size value, which is treated as a large positive number during memory allocation, or (2) a negative size value in a package file."
+  },
+  {
+    "CVE_ID": "CVE-2004-1805",
+    "Description": "Format string vulnerability in games using the Epic Games Unreal Engine 436 allows remote attackers to cause a denial of service (crash) and possibly execute arbitrary code via format string specifiers in class names."
+  },
+  {
+    "CVE_ID": "CVE-2006-2741",
+    "Description": "Cross-site scripting (XSS) vulnerability in Epicdesigns tinyBB 0.3 allow remote attackers to inject arbitrary web script or HTML via the q parameter in forgot.php, which is echoed in an error message, and other unspecified vectors."
+  },
+  {
+    "CVE_ID": "CVE-2008-4243",
+    "Description": "Directory traversal vulnerability in ImageServer (aka UTImageServer) in WebAdmin before 1.7 for Epic Games Unreal Tournament 3 (UT3) 1.3 allows remote attackers to read arbitrary files via a .. (dot dot) in the URI."
+  },
+  {
+    "CVE_ID": "CVE-2008-6441",
+    "Description": "Format string vulnerability in the Epic Games Unreal engine client, as used in multiple games, allows remote servers to execute arbitrary code via (1) the CLASS parameter in a DLMGR command, (2) a malformed package (PKG), and possibly (3) the LEVEL parameter in a WELCOME command."
+  },
+  {
+    "CVE_ID": "CVE-2018-13108",
+    "Description": "All ADB broadband gateways / routers based on the Epicentro platform are affected by a local root jailbreak vulnerability where attackers are able to gain root access on the device, and extract further information such as sensitive configuration data of the ISP (e.g., VoIP credentials) or attack the internal network of the ISP."
+  },
+  {
+    "CVE_ID": "CVE-2018-13109",
+    "Description": "All ADB broadband gateways / routers based on the Epicentro platform are affected by an authorization bypass vulnerability where attackers are able to access and manipulate settings within the web interface that are forbidden to end users (e.g., by the ISP). An attacker would be able to enable the TELNET server or other settings as well."
+  },
+  {
+    "CVE_ID": "CVE-2018-13110",
+    "Description": "All ADB broadband gateways / routers based on the Epicentro platform are affected by a privilege escalation vulnerability where attackers can gain access to the command line interface (CLI) if previously disabled by the ISP, escalate their privileges, and perform further attacks."
+  },
+  {
+    "CVE_ID": "CVE-2018-17707",
+    "Description": "This vulnerability allows remote attackers to execute arbitrary code on vulnerable installations of Epic Games Launcher versions prior to 8.2.2. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file. The specific flaw exists within the handler for the com.epicgames.launcher protocol. A crafted URI with the com.epicgames.launcher protocol can trigger execution of a system call composed from a user-supplied string. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-7241."
+  },
+  {
+    "CVE_ID": "CVE-2020-26412",
+    "Description": "Removed group members were able to use the To-Do functionality to retrieve updated information on confidential epics starting in GitLab EE 13.2 before 13.6.2."
+  },
+  {
+    "CVE_ID": "CVE-2021-22183",
+    "Description": "An issue has been discovered in GitLab affecting all versions starting with 11.8. GitLab was vulnerable to a stored XSS in the epics page, which could be exploited with user interactions."
+  },
+  {
+    "CVE_ID": "CVE-2021-32238",
+    "Description": "Epic Games / Psyonix Rocket League <=1.95 is affected by Buffer Overflow. Stack-based buffer overflow occurs when Rocket League handles UPK object files that can result in code execution and denial of service scenario."
+  },
+  {
+    "CVE_ID": "CVE-2023-5117",
+    "Description": "An issue was discovered in GitLab CE/EE affecting all versions before 17.6.0 in which users were unaware that files uploaded to comments on confidential issues and epics of public projects could be accessed without authentication via a direct link to the uploaded file URL."
+  },
+  {
+    "CVE_ID": "CVE-2008-7175",
+    "Description": "Cross-site scripting (XSS) vulnerability in wp-admin/admin.php in NextGEN Gallery 0.96 and earlier plugin for Wordpress allows remote attackers to inject arbitrary web script or HTML via the picture description field in a page edit action."
+  },
+  {
+    "CVE_ID": "CVE-2010-1186",
+    "Description": "Cross-site scripting (XSS) vulnerability in xml/media-rss.php in the NextGEN Gallery plugin before 1.5.2 for WordPress allows remote attackers to inject arbitrary web script or HTML via the mode parameter."
+  },
+  {
+    "CVE_ID": "CVE-2014-3123",
+    "Description": "Cross-site scripting (XSS) vulnerability in admin/manage-images.php in the NextCellent Gallery plugin before 1.19.18 for WordPress allows remote authenticated users with the NextGEN Upload images, NextGEN Manage gallery, or NextGEN Manage others gallery permission to inject arbitrary web script or HTML via the \"Alt & Title Text\" field."
+  },
+  {
+    "CVE_ID": "CVE-2018-1000172",
+    "Description": "Imagely NextGEN Gallery version 2.2.30 and earlier contains a Cross Site Scripting (XSS) vulnerability in Image Alt & Title Text. This attack appears to be exploitable via a victim viewing the image in the administrator page. This vulnerability appears to have been fixed in 2.2.45."
+  },
+  {
+    "CVE_ID": "CVE-2019-14314",
+    "Description": "A SQL injection vulnerability exists in the Imagely NextGEN Gallery plugin before 3.2.11 for WordPress. Successful exploitation of this vulnerability would allow a remote attacker to execute arbitrary SQL commands on the affected system via modules/nextgen_gallery_display/package.module.nextgen_gallery_display.php."
+  },
+  {
+    "CVE_ID": "CVE-2020-35942",
+    "Description": "A Cross-Site Request Forgery (CSRF) issue in the NextGEN Gallery plugin before 3.5.0 for WordPress allows File Upload and Local File Inclusion via settings modification, leading to Remote Code Execution and XSS. (It is possible to bypass CSRF protection by simply not including a nonce parameter.)"
+  },
+  {
+    "CVE_ID": "CVE-2021-0248",
+    "Description": "This issue is not applicable to NFX NextGen Software. On NFX Series devices the use of Hard-coded Credentials in Juniper Networks Junos OS allows an attacker to take over any instance of an NFX deployment. This issue is only exploitable through administrative interfaces. This issue affects: Juniper Networks Junos OS versions prior to 19.1R1 on NFX Series. No other platforms besides NFX Series devices are affected."
+  },
+  {
+    "CVE_ID": "CVE-2021-24293",
+    "Description": "In the eCommerce module of the NextGEN Gallery Pro WordPress plugin before 3.1.11, there is an action to call get_cart_items via photocrati_ajax , after that the settings[shipping_address][name] is able to inject malicious javascript."
+  },
+  {
+    "CVE_ID": "CVE-2015-1784",
+    "Description": "In nextgen-galery wordpress plugin before 2.0.77.3 there are two vulnerabilities which can allow an attacker to gain full access over the web application. The vulnerabilities lie in how the application validates user uploaded files and lack of security measures preventing unwanted HTTP requests."
+  },
+  {
+    "CVE_ID": "CVE-2015-1785",
+    "Description": "In nextgen-galery wordpress plugin before 2.0.77.3 there are two vulnerabilities which can allow an attacker to gain full access over the web application. The vulnerabilities lie in how the application validates user uploaded files and lack of security measures preventing unwanted HTTP requests."
+  },
+  {
+    "CVE_ID": "CVE-2022-38468",
+    "Description": "Cross-Site Request Forgery (CSRF) vulnerability in Imagely WordPress Gallery Plugin \u2013 NextGEN Gallery plugin\u00a0<= 3.28 leading to thumbnail alteration."
+  },
+  {
+    "CVE_ID": "CVE-2023-35098",
+    "Description": "Unauth. Reflected Cross-Site Scripting (XSS) vulnerability in John Brien WordPress NextGen GalleryView plugin <=\u00a00.5.5 versions."
+  },
+  {
+    "CVE_ID": "CVE-2024-24910",
+    "Description": "A local attacker can escalate privileges on affected Check Point ZoneAlarm Extreme Security NextGen, Identity Agent for Windows, and Identity Agent for Windows Terminal Server. To exploit this vulnerability, an attacker must first obtain the ability to execute local privileged code on the target system."
+  },
+  {
+    "CVE_ID": "CVE-2024-39627",
+    "Description": "Improper Neutralization of Input During Web Page Generation (XSS or 'Cross-site Scripting') vulnerability in Imagely NextGEN Gallery allows Stored XSS.This issue affects NextGEN Gallery: from n/a through 3.59.3."
+  },
+  {
+    "CVE_ID": "CVE-2025-25091",
+    "Description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in zackdesign NextGen Cooliris Gallery allows Stored XSS. This issue affects NextGen Cooliris Gallery: from n/a through 0.7."
+  },
+  {
+    "CVE_ID": "CVE-2025-28869",
+    "Description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in NotFound NextGEN Gallery Voting allows Reflected XSS. This issue affects NextGEN Gallery Voting: from n/a through 2.7.6."
+  },
+  {
+    "CVE_ID": "CVE-2025-53224",
+    "Description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Koen Schuit NextGEN Gallery Search allows Reflected XSS. This issue affects NextGEN Gallery Search: from n/a through 2.12."
+  },
+  {
+    "CVE_ID": "CVE-2006-1275",
+    "Description": "GGZ Gaming Zone 0.0.12 allows remote attackers to cause a denial of service (client disconnect) via inputs that produce malformed XML, including (1) trailing ' (apostrophe) character on the ID attribute in a PLAYER XML tag, (2) joining with a long ID attribute or non-trailing ' characters, which causes a <none> name to be assigned, and then disconnecting, or (3) a long CDATA message attribute, which prevents closing tags from being added to the string."
+  },
+  {
+    "CVE_ID": "CVE-2009-5065",
+    "Description": "Cross-site scripting (XSS) vulnerability in feedparser.py in Universal Feed Parser (aka feedparser or python-feedparser) before 5.0 allows remote attackers to inject arbitrary web script or HTML via vectors involving nested CDATA stanzas."
+  },
+  {
+    "CVE_ID": "CVE-2015-7580",
+    "Description": "Cross-site scripting (XSS) vulnerability in lib/rails/html/scrubbers.rb in the rails-html-sanitizer gem before 1.0.3 for Ruby on Rails 4.2.x and 5.x allows remote attackers to inject arbitrary web script or HTML via a crafted CDATA node."
+  },
+  {
+    "CVE_ID": "CVE-2020-12625",
+    "Description": "An issue was discovered in Roundcube Webmail before 1.4.4. There is a cross-site scripting (XSS) vulnerability in rcube_washtml.php because JavaScript code can occur in the CDATA of an HTML message."
+  },
+  {
+    "CVE_ID": "CVE-2021-45341",
+    "Description": "A buffer overflow vulnerability in CDataMoji of the jwwlib component of LibreCAD 2.2.0-rc3 and older allows an attacker to achieve Remote Code Execution using a crafted JWW document."
+  },
+  {
+    "CVE_ID": "CVE-2021-45342",
+    "Description": "A buffer overflow vulnerability in CDataList of the jwwlib component of LibreCAD 2.2.0-rc3 and older allows an attacker to achieve Remote Code Execution using a crafted JWW document."
+  },
+  {
+    "CVE_ID": "CVE-2022-23516",
+    "Description": "Loofah is a general library for manipulating and transforming HTML/XML documents and fragments, built on top of Nokogiri. Loofah >= 2.2.0, < 2.19.1 uses recursion for sanitizing CDATA sections, making it susceptible to stack exhaustion and raising a SystemStackError exception.  This may lead to a denial of service through CPU resource consumption. This issue is patched in version 2.19.1. Users who are unable to upgrade may be able to mitigate this vulnerability by limiting the length of the strings that are sanitized."
+  },
+  {
+    "CVE_ID": "CVE-2024-24815",
+    "Description": "CKEditor4 is an open source what-you-see-is-what-you-get HTML editor. A cross-site scripting vulnerability has been discovered in the core HTML parsing module in versions of CKEditor4 prior to 4.24.0-lts. It may affect all editor instances that enabled full-page editing mode or enabled CDATA elements in Advanced Content Filtering configuration (defaults to `script` and `style` elements). The vulnerability allows attackers to inject malformed HTML content bypassing Advanced Content Filtering mechanism, which could result in executing JavaScript code. An attacker could abuse faulty CDATA content detection and use it to prepare an intentional attack on the editor. A fix is available in version 4.24.0-lts."
+  },
+  {
+    "CVE_ID": "CVE-2009-1257",
+    "Description": "Heap-based buffer overflow in Magic ISO Maker 5.5 build 0274 allows remote attackers to cause a denial of service (crash) or execute arbitrary code via a crafted CCD file."
+  },
+  {
+    "CVE_ID": "CVE-2020-9062",
+    "Description": "Diebold Nixdorf ProCash 2100xe USB ATMs running Wincor Probase version 1.1.30 do not encrypt, authenticate, or verify the integrity of messages between the CCDM and the host computer, allowing an attacker with physical access to internal ATM components to commit deposit forgery by intercepting and modifying messages to the host computer, such as the amount and value of currency being deposited."
+  },
+  {
+    "CVE_ID": "CVE-2020-24301",
+    "Description": "Users of the HAPI FHIR Testpage Overlay 5.0.0 and below can use a specially crafted URL to exploit an XSS vulnerability in this module, allowing arbitrary JavaScript to be executed in the user's browser. The impact of this vulnerability is believed to be low, as this module is intended for testing and not believed to be widely used for any production purposes."
+  },
+  {
+    "CVE_ID": "CVE-2015-8396",
+    "Description": "Integer overflow in the ImageRegionReader::ReadIntoBuffer function in MediaStorageAndFileFormat/gdcmImageRegionReader.cxx in Grassroots DICOM (aka GDCM) before 2.6.2 allows attackers to execute arbitrary code via crafted header dimensions in a DICOM image file, which triggers a buffer overflow."
+  },
+  {
+    "CVE_ID": "CVE-2019-5085",
+    "Description": "An exploitable code execution vulnerability exists in the DICOM packet-parsing functionality of LEADTOOLS libltdic.so, version 20.0.2019.3.15. A specially crafted packet can cause an integer overflow, resulting in heap corruption. An attacker can send a packet to trigger this vulnerability."
+  },
+  {
+    "CVE_ID": "CVE-2019-5093",
+    "Description": "An exploitable code execution vulnerability exists in the DICOM network response functionality of LEADTOOLS libltdic.so version 20.0.2019.3.15. A specially crafted packet can cause an integer overflow, resulting in heap corruption. An attacker can send a packet to trigger this vulnerability."
+  },
+  {
+    "CVE_ID": "CVE-2022-24064",
+    "Description": "This vulnerability allows remote attackers to execute arbitrary code on affected installations of Sante DICOM Viewer Pro 11.8.8.0. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file. The specific flaw exists within the parsing of J2K images. Crafted data in a J2K file can trigger a write past the end of an allocated buffer. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-15161."
+  },
+  {
+    "CVE_ID": "CVE-2024-25386",
+    "Description": "Directory Traversal vulnerability in DICOM\u00ae Connectivity Framework by laurelbridge before v.2.7.6b allows a remote attacker to execute arbitrary code via the format_logfile.pl file."
+  },
+  {
+    "CVE_ID": "CVE-2024-22373",
+    "Description": "An out-of-bounds write vulnerability exists in the JPEG2000Codec::DecodeByStreamsCommon functionality of Mathieu Malaterre Grassroot DICOM 3.0.23. A specially crafted DICOM file can lead to a heap buffer overflow. An attacker can provide a malicious file to trigger this vulnerability."
+  },
+  {
+    "CVE_ID": "CVE-2025-5307",
+    "Description": "Santesoft Sante DICOM Viewer Pro contains a memory corruption vulnerability. A local attacker could exploit this issue to potentially disclose information and to execute arbitrary code on affected installations of Sante DICOM Viewer Pro."
+  },
+  {
+    "CVE_ID": "CVE-2013-6632",
+    "Description": "Integer overflow in Google Chrome before 31.0.1650.57 allows remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via unspecified vectors, as demonstrated during a Mobile Pwn2Own competition at PacSec 2013."
+  },
+  {
+    "CVE_ID": "CVE-2013-6802",
+    "Description": "Google Chrome before 31.0.1650.57 allows remote attackers to bypass intended sandbox restrictions by leveraging access to a renderer process, as demonstrated during a Mobile Pwn2Own competition at PacSec 2013, a different vulnerability than CVE-2013-6632."
+  },
+  {
+    "CVE_ID": "CVE-2023-21405",
+    "Description": "Knud from Fraktal.fi has found a flaw in some Axis Network Door Controllers and Axis Network\nIntercoms when communicating over OSDP, highlighting that the OSDP message parser crashes\nthe pacsiod process, causing a temporary unavailability of the door-controlling functionalities\nmeaning that doors cannot be opened or closed. No sensitive or customer data can be extracted\nas the Axis device is not further compromised. Please refer to the Axis security advisory for more information, mitigation and affected products and software versions."
+  },
+  {
+    "CVE_ID": "CVE-2022-33321",
+    "Description": "Cleartext Transmission of Sensitive Information vulnerability due to the use of Basic Authentication for HTTP connections in Mitsubishi Electric consumer electronics products (PHOTOVOLTAIC COLOR MONITOR ECO-GUIDE, HEMS adapter, Wi-Fi Interface, Air Conditioning, Induction hob, Mitsubishi Electric HEMS Energy Measurement Unit, Refrigerator, Remote control with Wi-Fi Interface, BATHROOM THERMO VENTILATOR, Rice cooker, Mitsubishi Electric HEMS control adapter, Energy Recovery Ventilator, Smart Switch, Ventilating Fan, Range hood fan, Energy Measurement Unit and Air Purifier) allows a remote unauthenticated attacker to disclose information in the products or cause a denial of service (DoS) condition as a result by sniffing credential information (username and password).\nThe wide range of models/versions of Mitsubishi Electric consumer electronics products are affected by this vulnerability.\nAs for the affected product models/versions, see the Mitsubishi Electric's advisory which is listed in [References] section.\n\n"
+  },
+  {
+    "CVE_ID": "CVE-2024-27974",
+    "Description": "Cross-site request forgery vulnerability in FUJIFILM printers which implement CentreWare Internet Services or Internet Services allows a remote unauthenticated attacker to alter user information. In the case the user is an administrator, the settings such as the administrator's ID, password, etc. may be altered. As for the details of affected product names, model numbers, and versions, refer to the information provided by the vendor listed under [References]."
+  },
+  {
+    "CVE_ID": "CVE-2024-12782",
+    "Description": "A vulnerability has been found in Fujifilm Business Innovation Apeos C3070, Apeos C5570 and Apeos C6580 up to 24.8.28 and classified as critical. This vulnerability affects unknown code of the file /home/index.html#hashHome of the component Web Interface. The manipulation leads to improper authorization. The attack can be initiated remotely. The exploit has been disclosed to the public and may be used. The real existence of this vulnerability is still doubted at the moment. The vendor explains that \"during technical verification it is not possible to reproduce any active actions like reboots which were mentioned in the original researcher disclosure.\""
+  },
+  {
+    "CVE_ID": "CVE-2025-48499",
+    "Description": "Out-of-bounds write vulnerability exists in FUJIFILM Business Innovation MFPs. A specially crafted IPP (Internet Printing Protocol) or LPD (Line Printer Daemon) packet may cause a denial-of-service (DoS) condition on an affected MFP. Resetting the MFP is required to recover from the denial-of-service (DoS) condition."
+  }
+]

@@ -1,0 +1,39 @@
+graph [
+  directed 1
+  capec_id "323"
+  name "TCP (ISN) Counter Rate Probe"
+  abstraction "Detailed"
+  status "Stable"
+  description "This OS detection probe measures the average rate of initial sequence number increments during a period of time. Sequence numbers are incremented using a time-based algorithm and are susceptible to a timing analysis that can determine the number of increments per unit time. The result of this analysis is then compared against a database of operating systems and versions to determine likely operation system matches."
+  likelihood "Medium"
+  severity "Low"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "312"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The ability to monitor and interact with network communications.Access to at least one host, and the privileges to interface with the network interface card."
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "Any type of active probing that involves non-standard packet headers requires the use of raw sockets, which is not available on particular operating systems (Microsoft Windows XP SP 2, for example). Raw socket manipulation on Unix/Linux requires root privileges. A tool capable of sending and receiving packets from a remote system."
+  consequences [
+    scope "_networkx_list_start"
+    scope "Confidentiality"
+    impact "Read Data"
+  ]
+  consequences [
+    scope "Confidentiality"
+    scope "Access Control"
+    scope "Authorization"
+    impact "Bypass Protection Mechanism"
+  ]
+  mitigations "[]"
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "200"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "200"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+]

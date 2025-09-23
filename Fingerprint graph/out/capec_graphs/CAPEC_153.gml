@@ -1,0 +1,29 @@
+graph [
+  directed 1
+  capec_id "153"
+  name "Input Data Manipulation"
+  abstraction "Meta"
+  status "Draft"
+  description "An attacker exploits a weakness in input validation by controlling the format, structure, and composition of data to an input-processing interface. By supplying input of a non-standard or unexpected form an attacker can adversely impact the security of the target."
+  likelihood ""
+  severity "Medium"
+  related_attack_patterns "[]"
+  prerequisites "_networkx_list_start"
+  prerequisites "The target must accept user data for processing and the manner in which this data is processed must depend on some aspect of the format or flags that the attacker can control."
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "None: No specialized resources are required to execute this type of attack."
+  consequences "[]"
+  mitigations "[]"
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "20"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "20"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+  node [
+    id 0
+    label "accept_user_data_for_processing_and"
+  ]
+]

@@ -1,0 +1,23 @@
+graph [
+  directed 1
+  capec_id "554"
+  name "Functionality Bypass"
+  abstraction "Meta"
+  status "Draft"
+  description "An adversary attacks a system by bypassing some or all functionality intended to protect it. Often, a system user will think that protection is in place, but the functionality behind those protections has been disabled by the adversary."
+  likelihood "Medium"
+  severity "High"
+  related_attack_patterns "[]"
+  prerequisites "[]"
+  skills_required "[]"
+  resources_required "[]"
+  consequences "[]"
+  mitigations "[]"
+  example_instances "[]"
+  related_weaknesses "424"
+  related_weaknesses "1299"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "1299"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+]

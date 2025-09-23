@@ -1,0 +1,69 @@
+graph [
+  directed 1
+  capec_id "578"
+  name "Disable Security Software"
+  abstraction "Standard"
+  status "Usable"
+  description "An adversary exploits a weakness in access control to disable security tools so that detection does not occur. This can take the form of killing processes, deleting registry keys so that tools do not start at run time, deleting log files, or other methods."
+  likelihood "Medium"
+  severity "Medium"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "176"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The adversary must have the capability to interact with the configuration of the targeted system."
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "None: No specialized resources are required to execute this type of attack."
+  consequences "_networkx_list_start"
+  consequences [
+    scope "_networkx_list_start"
+    scope "Availability"
+    impact "Hide Activities"
+  ]
+  mitigations "_networkx_list_start"
+  mitigations "Ensure proper permissions are in place to prevent adversaries from altering the execution status of security tools."
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "284"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "284"
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1556.006"
+    entry_name "Modify Authentication Process:&#160;Multi-Factor Authentication"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1562.001"
+    entry_name "Impair Defenses: Disable or Modify Tools"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1562.002"
+    entry_name "Impair Defenses: Disable Windows Event Logging"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1562.004"
+    entry_name "Impair Defenses: Disable or Modify System Firewall"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1562.007"
+    entry_name "Impair Defenses: Disable or Modify Cloud Firewall"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1562.008"
+    entry_name "Impair Defenses: Disable Cloud Logs"
+  ]
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1562.009"
+    entry_name "Impair Defenses: Safe Mode Boot"
+  ]
+  execution_flow "[]"
+]

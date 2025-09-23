@@ -1,0 +1,39 @@
+graph [
+  directed 1
+  capec_id "657"
+  name "Malicious Automated Software Update via Spoofing"
+  abstraction "Detailed"
+  status "Draft"
+  description "An attackers uses identify or content spoofing to trick a client into performing an automated software update from a malicious source. A malicious automated software update that leverages spoofing can include content or identity spoofing as well as protocol spoofing. Content or identity spoofing attacks can trigger updates in software by embedding scripted mechanisms within a malicious web page, which masquerades as a legitimate update source. Scripting mechanisms communicate with software components and trigger updates from locations specified by the attackers' server. The result is the client believing there is a legitimate software update available but instead downloading a malicious update from the attacker."
+  likelihood "High"
+  severity "High"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "186"
+    nature "ChildOf"
+  ]
+  prerequisites "[]"
+  skills_required "[]"
+  resources_required "[]"
+  consequences "_networkx_list_start"
+  consequences [
+    scope "Access Control"
+    scope "Availability"
+    scope "Confidentiality"
+    impact "Execute Unauthorized Commands"
+  ]
+  mitigations "[]"
+  example_instances "_networkx_list_start"
+  example_instances "An example of the spoofing strategy would be the eTrust Antivirus Webscan Automated Update Remote Code Execution vulnerability (CVE-2006-3976) and (CVE-2006-3977) whereby an ActiveX control could be remotely manipulated by an attacker controlled web page to download and execute the attackers' code without integrity checking."
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "494"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "494"
+  taxonomy_mappings "_networkx_list_start"
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1072"
+    entry_name "Software Deployment Tools"
+  ]
+  execution_flow "[]"
+]

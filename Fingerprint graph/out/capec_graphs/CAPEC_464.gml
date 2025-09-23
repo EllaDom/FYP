@@ -1,0 +1,39 @@
+graph [
+  directed 1
+  capec_id "464"
+  name "Evercookie"
+  abstraction "Standard"
+  status "Draft"
+  description "An attacker creates a very persistent cookie that stays present even after the user thinks it has been removed. The cookie is stored on the victim's machine in over ten places. When the victim clears the cookie cache via traditional means inside the browser, that operation removes the cookie from certain places but not others. The malicious code then replicates the cookie from all of the places where it was not deleted to all of the possible storage locations once again. So the victim again has the cookie in all of the original storage locations. In other words, failure to delete the cookie in even one location will result in the cookie's resurrection everywhere. The evercookie will also persist across different browsers because certain stores (e.g., Local Shared Objects) are shared between different browsers."
+  likelihood ""
+  severity "Medium"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "554"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The victim's browser is not configured to reject all cookiesThe victim visits a website that serves the attackers' evercookie"
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "Evercookie source code"
+  consequences "[]"
+  mitigations "Design: Browser's design needs to be changed to limit where cookies can be stored on the client side and provide an option to clear these cookies in all places, as well as another option to stop these cookies from being written in the first place."
+  mitigations "Design: Safari browser's private browsing mode is currently effective against evercookies."
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "359"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "359"
+  taxonomy_mappings "_networkx_list_start"
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1606.001"
+    entry_name "Forge Web Credentials: Web Cookies"
+  ]
+  execution_flow "[]"
+  node [
+    id 0
+    label "configure_the_victim_s_browser"
+  ]
+]

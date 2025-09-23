@@ -1,0 +1,28 @@
+graph [
+  directed 1
+  capec_id "184"
+  name "Software Integrity Attack"
+  abstraction "Meta"
+  status "Draft"
+  description "An attacker initiates a series of events designed to cause a user, program, server, or device to perform actions which undermine the integrity of software code, device data structures, or device firmware, achieving the modification of the target's integrity to achieve an insecure state."
+  likelihood ""
+  severity "Low"
+  related_attack_patterns "[]"
+  prerequisites "[]"
+  skills_required "_networkx_list_start"
+  skills_required [
+    level "Medium"
+    description "Manual or user-assisted attacks require deceptive mechanisms to trick the user into clicking a link or downloading and installing software. Automated update attacks require the attacker to host a payload and then trigger the installation of the payload code."
+  ]
+  resources_required "_networkx_list_start"
+  resources_required "Software Integrity Attacks are usually a late stage focus of attack activity which depends upon the success of a chain of prior events. The resources required to perform the attack vary with respect to the overall attack strategy, existing countermeasures which must be bypassed, and the success of early phase attack vectors."
+  consequences "[]"
+  mitigations "[]"
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "494"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "494"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+]

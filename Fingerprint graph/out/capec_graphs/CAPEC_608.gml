@@ -1,0 +1,38 @@
+graph [
+  directed 1
+  capec_id "608"
+  name "Cryptanalysis of Cellular Encryption"
+  abstraction "Detailed"
+  status "Draft"
+  description "The use of cryptanalytic techniques to derive cryptographic keys or otherwise effectively defeat cellular encryption to reveal traffic content. Some cellular encryption algorithms such as A5/1 and A5/2 (specified for GSM use) are known to be vulnerable to such attacks and commercial tools are available to execute these attacks and decrypt mobile phone conversations in real-time. Newer encryption algorithms in use by UMTS and LTE are stronger and currently believed to be less vulnerable to these types of attacks. Note, however, that an attacker with a Cellular Rogue Base Station can force the use of weak cellular encryption even by newer mobile devices."
+  likelihood ""
+  severity "High"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "97"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "None"
+  skills_required "_networkx_list_start"
+  skills_required [
+    level "Medium"
+    description "Adversaries can rent commercial supercomputer time globally to conduct cryptanalysis on encrypted data captured from mobile devices. Foreign governments have their own cryptanalysis technology and capabilities. Commercial cellular standards for encryption (GSM and CDMA) are also subject to adversary cryptanalysis."
+  ]
+  resources_required "[]"
+  consequences "_networkx_list_start"
+  consequences [
+    scope "_networkx_list_start"
+    scope "Confidentiality"
+    impact "Other"
+  ]
+  mitigations "Use of hardened baseband firmware on retransmission device to detect and prevent the use of weak cellular encryption."
+  mitigations "Monitor cellular RF interface to detect the usage of weaker-than-expected cellular encryption."
+  example_instances "[]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "327"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "327"
+  taxonomy_mappings "[]"
+  execution_flow "[]"
+]

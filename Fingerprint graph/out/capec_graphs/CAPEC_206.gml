@@ -1,0 +1,144 @@
+graph [
+  directed 1
+  capec_id "206"
+  name "Signing Malicious Code"
+  abstraction "Detailed"
+  status "Draft"
+  description "The adversary extracts credentials used for code signing from a production environment and then uses these credentials to sign malicious content with the developer's key. Many developers use signing keys to sign code or hashes of code. When users or applications verify the signatures are accurate they are led to believe that the code came from the owner of the signing key and that the code has not been modified since the signature was applied. If the adversary has extracted the signing credentials then they can use those credentials to sign their own code bundles. Users or tools that verify the signatures attached to the code will likely assume the code came from the legitimate developer and install or run the code, effectively allowing the adversary to execute arbitrary code on the victim's computer. This differs from CAPEC-673, because the adversary is performing the code signing."
+  likelihood ""
+  severity "Very High"
+  related_attack_patterns "_networkx_list_start"
+  related_attack_patterns [
+    capec_id "444"
+    nature "ChildOf"
+  ]
+  prerequisites "_networkx_list_start"
+  prerequisites "The targeted developer must use a signing key to sign code bundles. (Note that not doing this is not a defense - it only means that the adversary does not need to steal the signing key before forging code bundles in the developer's name.)"
+  skills_required "[]"
+  resources_required "_networkx_list_start"
+  resources_required "None: No specialized resources are required to execute this type of attack."
+  consequences "[]"
+  mitigations "Ensure digital certificates are protected and inaccessible by unauthorized uses."
+  mitigations "If a digital certificate has been compromised it should be revoked and regenerated."
+  mitigations "Even if a piece of software has a valid and trusted digital signature, it should be assessed for any weaknesses and vulnerabilities."
+  example_instances "In the famous Stuxnet malware incident, two digital certificates were compromised in order to sign malicious device drivers with legitimate credentials. The signing resulted in the malware appearing as trusted by the system it was running on, which facilitated the installation of the malware in kernel mode. This further resulted in Stuxnet remaining undetected for a significant amount of time. [REF-699]"
+  example_instances "The cyber espionage group CyberKittens leveraged a stolen certificate from AI Squared that allowed them to leverage a signed executable within Operation Wilted Tulip. This ultimately allowed the executable to run as trusted on the system, allowing a Crowd Strike stager to be loaded within the system's memory. [REF-714]"
+  related_weaknesses "_networkx_list_start"
+  related_weaknesses "732"
+  matched_cwes "_networkx_list_start"
+  matched_cwes "732"
+  taxonomy_mappings "_networkx_list_start"
+  taxonomy_mappings [
+    taxonomy_name "ATTACK"
+    entry_id "1553.002"
+    entry_name "Subvert Trust Controls:Code Signing"
+  ]
+  execution_flow [
+    step "1"
+    phase "Explore"
+    description "The adversary first attempts to obtain a digital certificate in order to sign their malware or tools. This certificate could be stolen, created by the adversary, or acquired normally through a certificate authority."
+    techniques "[]"
+  ]
+  execution_flow [
+    step "2"
+    phase "Explore"
+    description "Based on the type of certificate obtained, the adversary will create a goal for their attack. This is either a broad or targeted attack. If an adversary was able to steal a certificate from a targeted organization, they could target this organization by pretending to have legitimate code signed by them. In other cases, the adversary would simply sign their malware and pose as legitimate software such that any user might trust it. This is the more broad approach"
+    techniques "[]"
+  ]
+  execution_flow [
+    step "3"
+    phase "Experiment"
+    description "The adversary creates their malware and signs it with the obtained digital certificate. The adversary then checks if the code that they signed is valid either through downloading from the targeted source or testing locally."
+    techniques "[]"
+  ]
+  execution_flow [
+    step "4"
+    phase "Exploit"
+    description "Once the malware has been signed, it is then deployed to the desired location. They wait for a trusting user to run their malware, thinking that it is legitimate software. This malware could do a variety of things based on the motivation of the adversary."
+    techniques "[]"
+  ]
+  node [
+    id 0
+    label "attempt_to_obtain_a_digital_certificate_in_order_to_sign_their_malware_or_tools"
+  ]
+  node [
+    id 1
+    label "steal_this_certificate"
+  ]
+  node [
+    id 2
+    label "sign_their_malware"
+  ]
+  node [
+    id 3
+    label "create_their_malware"
+  ]
+  node [
+    id 4
+    label "check_if_the_code_that_they_signed_is_valid_either_through_downloading_from_the_targeted_source_or_testing_locally"
+  ]
+  node [
+    id 5
+    label "wait_thinking_that_it_is_legitimate_software"
+  ]
+  node [
+    id 6
+    label "compromise_two_digital_certificates"
+  ]
+  node [
+    id 7
+    label "leverage_a_stolen_certificate_that_allowed_them_to_leverage_a_signed_executable_within_operation_wilted_tulip"
+  ]
+  node [
+    id 8
+    label "allow_allowing_a_crowd_strike_stager_to_be_loaded_within_the_system_s_memory"
+  ]
+  node [
+    id 9
+    label "sign_code_bundles"
+  ]
+  edge [
+    source 0
+    target 1
+  ]
+  edge [
+    source 1
+    target 1
+  ]
+  edge [
+    source 1
+    target 2
+  ]
+  edge [
+    source 2
+    target 3
+  ]
+  edge [
+    source 2
+    target 5
+  ]
+  edge [
+    source 3
+    target 4
+  ]
+  edge [
+    source 4
+    target 2
+  ]
+  edge [
+    source 5
+    target 6
+  ]
+  edge [
+    source 6
+    target 7
+  ]
+  edge [
+    source 7
+    target 8
+  ]
+  edge [
+    source 8
+    target 9
+  ]
+]
