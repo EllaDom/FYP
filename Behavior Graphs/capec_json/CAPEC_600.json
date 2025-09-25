@@ -1,0 +1,330 @@
+{
+  "graph": {
+    "capec_id": "600",
+    "name": "Credential Stuffing",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "560",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "653",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The system/application uses one factor password based authentication, SSO, and/or cloud-based authentication.",
+      "The system/application does not have a sound password policy that is being enforced.",
+      "The system/application does not implement an effective password throttling mechanism.",
+      "The adversary possesses a list of known user accounts and corresponding passwords that may exist on the target."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "A Credential Stuffing attack is very straightforward."
+      }
+    ],
+    "resources_required": [
+      "A machine with sufficient resources for the job (e.g. CPU, RAM, HD).",
+      "A known list of username/password combinations.",
+      "A custom script that leverages the credential list to launch the attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Authorization"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Leverage multi-factor authentication for all authentication services and prior to granting an entity access to the domain network.",
+      "Create a strong password policy and ensure that your system enforces this policy.",
+      "Ensure users are not reusing username/password combinations for multiple systems, applications, or services.",
+      "Do not reuse local administrator account credentials across systems.",
+      "Deny remote use of local admin credentials to log into domain systems.",
+      "Do not allow accounts to be a local administrator on more than one system.",
+      "Implement an intelligent password throttling mechanism. Care must be taken to assure that these mechanisms do not excessively enable account lockout attacks such as CAPEC-2.",
+      "Monitor system and domain logs for abnormal credential access."
+    ],
+    "example_instances": [
+      "A user leverages the password \"Password123\" for a handful of application logins. An adversary obtains a victim's username/password combination from a breach of a social media application and executes a Credential Stuffing attack against multiple banking and credit card applications. Since the user leverages the same credentials for their bank account login, the adversary successfully authenticates to the user's bank account and transfer money to an offshore account.",
+      "In October 2014 J.P. Morgan's Corporate Challenge website was breached, resulting in adversaries obtaining multiple username/password pairs. A Credential Stuffing attack was then executed against J.P. Morgan Chase, which resulted in over 76 million households having their accounts compromised."
+    ],
+    "related_weaknesses": [
+      "522",
+      "307",
+      "308",
+      "309",
+      "262",
+      "263",
+      "654"
+    ],
+    "matched_cwes": [
+      "307",
+      "522"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1110.004",
+        "entry_name": "Brute Force:Credential Stuffing"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Credential stuffing"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Acquire known credentials] The adversary must obtain known credentials in order to access the target system, application, or service.",
+        "techniques": [
+          "An adversary purchases breached username/password combinations or leaked hashed passwords from the dark web.",
+          "An adversary leverages a key logger or phishing attack to steal user credentials as they are provided.",
+          "An adversary conducts a sniffing attack to steal credentials as they are transmitted.",
+          "An adversary gains access to a database and exfiltrates password hashes.",
+          "An adversary examines outward-facing configuration and properties files to discover hardcoded credentials."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Determine target's password policy] Determine the password policies of the target system/application to determine if the known credentials fit within the specified criteria.",
+        "techniques": [
+          "Determine minimum and maximum allowed password lengths.",
+          "Determine format of allowed passwords (whether they are required or allowed to contain numbers, special characters, etc., or whether they are allowed to contain words from the dictionary).",
+          "Determine account lockout policy (a strict account lockout policy will prevent brute force attacks if multiple passwords are known for a single user account)."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Attempt authentication] Try each username/password combination until the target grants access.",
+        "techniques": [
+          "Manually or automatically enter each username/password combination through the target's interface."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Impersonate] An adversary can use successful experiments or authentications to impersonate an authorized user or system or to laterally move within a system or application",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Spoofing] Malicious data can be injected into the target system or into a victim user's system by an adversary. The adversary can also pose as a legitimate user to perform social engineering attacks.",
+        "techniques": []
+      },
+      {
+        "step": "5",
+        "phase": "Exploit",
+        "description": "[Data Exfiltration] The adversary can obtain sensitive data contained within the system or application.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "breach_username_password_combinations",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_a_key_logger_or_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_a_sniffing_attack_to_steal_credentials_as_they_are_transmitted",
+      "attributes": {}
+    },
+    {
+      "id": "gain_access_to_a_database",
+      "attributes": {}
+    },
+    {
+      "id": "examine_outward_facing_configuration_and_properties",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_password_policies_of_the_target_application_system",
+      "attributes": {}
+    },
+    {
+      "id": "determine_minimum_and_maximum_allowed_password_lengths",
+      "attributes": {}
+    },
+    {
+      "id": "determine_account",
+      "attributes": {}
+    },
+    {
+      "id": "enter_the_first_password_for_each_known_user",
+      "attributes": {}
+    },
+    {
+      "id": "impersonate_an_authorized_user_or_system",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_the_password_password123",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_a_victim_s_username_password_combination",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_these_credentials",
+      "attributes": {}
+    },
+    {
+      "id": "breach_j_p_morgan_s_corporate_challenge_website",
+      "attributes": {}
+    },
+    {
+      "id": "execute_a_credential_stuffing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "enforce_that",
+      "attributes": {}
+    },
+    {
+      "id": "implement_an_effective_password_throttling_mechanism",
+      "attributes": {}
+    },
+    {
+      "id": "possess_a_list_of_known_user_accounts_and_corresponding_passwords_that_may_exist_on_the_target",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "breach_username_password_combinations",
+      "target": "leverage_a_key_logger_or_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_a_key_logger_or_phishing_attack",
+      "target": "conduct_a_sniffing_attack_to_steal_credentials_as_they_are_transmitted",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_a_sniffing_attack_to_steal_credentials_as_they_are_transmitted",
+      "target": "gain_access_to_a_database",
+      "attributes": {}
+    },
+    {
+      "source": "gain_access_to_a_database",
+      "target": "examine_outward_facing_configuration_and_properties",
+      "attributes": {}
+    },
+    {
+      "source": "examine_outward_facing_configuration_and_properties",
+      "target": "determine_the_password_policies_of_the_target_application_system",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_password_policies_of_the_target_application_system",
+      "target": "determine_minimum_and_maximum_allowed_password_lengths",
+      "attributes": {}
+    },
+    {
+      "source": "determine_minimum_and_maximum_allowed_password_lengths",
+      "target": "determine_account",
+      "attributes": {}
+    },
+    {
+      "source": "determine_account",
+      "target": "enter_the_first_password_for_each_known_user",
+      "attributes": {}
+    },
+    {
+      "source": "enter_the_first_password_for_each_known_user",
+      "target": "enter_the_first_password_for_each_known_user",
+      "attributes": {}
+    },
+    {
+      "source": "enter_the_first_password_for_each_known_user",
+      "target": "impersonate_an_authorized_user_or_system",
+      "attributes": {}
+    },
+    {
+      "source": "impersonate_an_authorized_user_or_system",
+      "target": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "target": "leverage_the_password_password123",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_password_password123",
+      "target": "obtain_a_victim_s_username_password_combination",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_a_victim_s_username_password_combination",
+      "target": "leverage_these_credentials",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_these_credentials",
+      "target": "breach_j_p_morgan_s_corporate_challenge_website",
+      "attributes": {}
+    },
+    {
+      "source": "breach_j_p_morgan_s_corporate_challenge_website",
+      "target": "execute_a_credential_stuffing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_credential_stuffing_attack",
+      "target": "enforce_that",
+      "attributes": {}
+    },
+    {
+      "source": "enforce_that",
+      "target": "implement_an_effective_password_throttling_mechanism",
+      "attributes": {}
+    },
+    {
+      "source": "implement_an_effective_password_throttling_mechanism",
+      "target": "possess_a_list_of_known_user_accounts_and_corresponding_passwords_that_may_exist_on_the_target",
+      "attributes": {}
+    }
+  ]
+}

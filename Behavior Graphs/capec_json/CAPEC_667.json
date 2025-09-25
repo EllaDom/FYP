@@ -1,0 +1,117 @@
+{
+  "graph": {
+    "capec_id": "667",
+    "name": "Bluetooth Impersonation AttackS (BIAS)",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary disguises the MAC address of their Bluetooth enabled device to one for which there exists an active and trusted connection and authenticates successfully. The adversary can then perform malicious actions on the target Bluetooth device depending on the target’s capabilities.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "616",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Knowledge of a target device's list of trusted connections."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Adversaries must be capable of using command line Linux tools."
+      },
+      {
+        "level": "Low",
+        "description": "Adversaries must be in close proximity to Bluetooth devices."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": ""
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": ""
+      }
+    ],
+    "mitigations": [
+      "Disable Bluetooth in public places.",
+      "Verify incoming Bluetooth connections; do not automatically trust.",
+      "Change default PIN passwords and always use one when connecting."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "290"
+    ],
+    "matched_cwes": [
+      "290"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Find disguise and target] The adversary starts the Bluetooth service on the attacking device and searches for nearby listening devices.",
+        "techniques": [
+          "Knowledge of a trusted MAC address.",
+          "Scanning for devices other than the target that may be trusted."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Disguise] Using the MAC address of the device the adversary wants to impersonate, they may use a tool such as spooftooth or macchanger to spoof their Bluetooth address and attempt to authenticate with the target.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Use device capabilities to accomplish goal] Finally, if authenticated successfully the adversary can perform tasks/information gathering dependent on the target's capabilities and connections.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_disguise_and_target",
+      "attributes": {}
+    },
+    {
+      "id": "start_the_bluetooth_service_on_the_attacking_device_and_searches_for_nearby_listening_devices",
+      "attributes": {}
+    },
+    {
+      "id": "want_to_impersonate",
+      "attributes": {}
+    },
+    {
+      "id": "accomplish_goal",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_disguise_and_target",
+      "target": "start_the_bluetooth_service_on_the_attacking_device_and_searches_for_nearby_listening_devices",
+      "attributes": {}
+    },
+    {
+      "source": "start_the_bluetooth_service_on_the_attacking_device_and_searches_for_nearby_listening_devices",
+      "target": "want_to_impersonate",
+      "attributes": {}
+    },
+    {
+      "source": "want_to_impersonate",
+      "target": "accomplish_goal",
+      "attributes": {}
+    }
+  ]
+}

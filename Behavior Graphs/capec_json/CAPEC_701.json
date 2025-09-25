@@ -1,0 +1,189 @@
+{
+  "graph": {
+    "capec_id": "701",
+    "name": "Browser in the Middle (BiTM)",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary exploits the inherent functionalities of a web browser, in order to establish an unnoticed remote desktop connection in the victim's browser to the adversary's system. The adversary must deploy a web client with a remote desktop session that the victim can access.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "94",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "148",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "98",
+        "nature": "CanFollow"
+      }
+    ],
+    "prerequisites": [
+      "The adversary must create a convincing web client to establish the connection. The victim then needs to be lured onto the adversary's webpage. In addition, the victim's machine must not use local authentication APIs, a hardware token, or a Trusted Platform Module (TPM) to authenticate."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": ""
+      }
+    ],
+    "resources_required": [
+      "A web application with a client is needed to enable the victim's browser to establish a remote desktop connection to the system of the adversary."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Authorization"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Implementation: Use strong, mutual authentication to fully authenticate with both ends of any communications channel"
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "294",
+      "345"
+    ],
+    "matched_cwes": [
+      "345",
+      "294"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify potential targets] The adversary identifies an application or service that the target is likely to use.",
+        "techniques": [
+          "The adversary stands up a server to host the transparent browser and entices victims to use it by using a domain name similar to the legitimate application. In addition to the transparent browser, the adversary could also install a web proxy, sniffer, keylogger, and other tools to assist in their goals."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Lure victims] The adversary crafts a phishing campaign to lure unsuspecting victims into using the transparent browser.",
+        "techniques": [
+          "An adversary can create a convincing email with a link to download the web client and interact with the transparent browser."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Monitor and Manipulate Data] When the victim establishes the connection to the transparent browser, the adversary can view victim activity and make alterations to what the victim sees when browsing the web.",
+        "techniques": [
+          "Once a victim has established a connection to the transparent browser, the adversary can use installed tools such as a web proxy, keylogger, or additional malicious browser extensions to gather and manipulate data or impersonate the victim."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_potential_targets",
+      "attributes": {}
+    },
+    {
+      "id": "identify_an_application_or_service_that_the_target_is_likely_to_use",
+      "attributes": {}
+    },
+    {
+      "id": "stand_a_server_to_host_the_transparent_browser_and_entices_victims_to_use_it_by_using_a_domain_name_similar_to_the_legitimate_application",
+      "attributes": {}
+    },
+    {
+      "id": "install_a_web_proxy_sniffer_keylogger_and_other_tools_to_assist_in_their_goals",
+      "attributes": {}
+    },
+    {
+      "id": "craft_a_phishing_campaign_to_lure_unsuspecting_victims_into_using_the_transparent_browser",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_convincing_email",
+      "attributes": {}
+    },
+    {
+      "id": "establish_the_connection_to_the_transparent_browser",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_convincing_web_client",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_be_lured_onto_the_adversary_s_webpage",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_potential_targets",
+      "target": "identify_an_application_or_service_that_the_target_is_likely_to_use",
+      "attributes": {}
+    },
+    {
+      "source": "identify_an_application_or_service_that_the_target_is_likely_to_use",
+      "target": "stand_a_server_to_host_the_transparent_browser_and_entices_victims_to_use_it_by_using_a_domain_name_similar_to_the_legitimate_application",
+      "attributes": {}
+    },
+    {
+      "source": "stand_a_server_to_host_the_transparent_browser_and_entices_victims_to_use_it_by_using_a_domain_name_similar_to_the_legitimate_application",
+      "target": "install_a_web_proxy_sniffer_keylogger_and_other_tools_to_assist_in_their_goals",
+      "attributes": {}
+    },
+    {
+      "source": "install_a_web_proxy_sniffer_keylogger_and_other_tools_to_assist_in_their_goals",
+      "target": "craft_a_phishing_campaign_to_lure_unsuspecting_victims_into_using_the_transparent_browser",
+      "attributes": {}
+    },
+    {
+      "source": "craft_a_phishing_campaign_to_lure_unsuspecting_victims_into_using_the_transparent_browser",
+      "target": "create_a_convincing_email",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_convincing_email",
+      "target": "establish_the_connection_to_the_transparent_browser",
+      "attributes": {}
+    },
+    {
+      "source": "establish_the_connection_to_the_transparent_browser",
+      "target": "establish_the_connection_to_the_transparent_browser",
+      "attributes": {}
+    },
+    {
+      "source": "establish_the_connection_to_the_transparent_browser",
+      "target": "create_a_convincing_web_client",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_convincing_web_client",
+      "target": "need_to_be_lured_onto_the_adversary_s_webpage",
+      "attributes": {}
+    }
+  ]
+}

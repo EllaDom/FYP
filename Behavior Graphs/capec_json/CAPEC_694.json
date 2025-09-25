@@ -1,0 +1,102 @@
+{
+  "graph": {
+    "capec_id": "694",
+    "name": "System Location Discovery",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "High",
+    "severity": "Very Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "169",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary must have some level of access to the system and have a basic understanding of the operating system in order to query the appropriate sources for relevant information."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "The adversary must know how to query various system sources of information respective of the system's operating system to obtain the relevant information."
+      }
+    ],
+    "resources_required": [
+      "The adversary requires access to the target's operating system tools to query relevant system information. On windows, registry queries can be conducted with powershell, wmi, or regedit. On Linux or macOS, queries can be performed with through a shell."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "To reduce the amount of information gathered, one could disable various geolocation features of the operating system not required for system operation."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "497"
+    ],
+    "matched_cwes": [
+      "497"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1614",
+        "entry_name": "System Language Discovery"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[System Locale Information Discovery] The adversary examines system information from various sources such as registry and native API functions and correlates the gathered information to infer the geographical location of the target system",
+        "techniques": [
+          "Registry Query: Query the registry key HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ContentIndex\\Language\\Language_Dialect on Windows to obtain system language, Computer\\HKEY_CURRENT_USER\\Keyboard Layout\\Preload to obtain the hexadecimal language IDs of the current user's preloaded keyboard layouts, and Computer\\HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation to obtain the system timezone configuration",
+          "Native API Requests: Parse the outputs of Windows API functions GetTimeZoneInformation, GetUserDefaultUILanguage, GetSystemDefaultUILanguage, GetKeyboardLayoutList and GetUserDefaultLangID to obtain information about languages, keyboard layouts, and timezones installed on the system or on macOS or Linux systems, query locale to obtain the $LANG environment variable and view keyboard layout information or use timeanddatectl status to show the system clock settings.",
+          "Read Configuration Files: For macOS and Linux-based systems, view the /etc/vconsole.conf file to get information about the keyboard mapping and console font."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "examine_system_information",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_system_language",
+      "attributes": {}
+    },
+    {
+      "id": "parse_the_outputs_of_windows_api_functions_gettimezoneinformation_getuserdefaultuilanguage_getsystemdefaultuilanguage_getkeyboardlayoutlist_and_getuserdefaultlangid",
+      "attributes": {}
+    },
+    {
+      "id": "query_the_appropriate_sources_for_relevant_information",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "examine_system_information",
+      "target": "obtain_system_language",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_system_language",
+      "target": "parse_the_outputs_of_windows_api_functions_gettimezoneinformation_getuserdefaultuilanguage_getsystemdefaultuilanguage_getkeyboardlayoutlist_and_getuserdefaultlangid",
+      "attributes": {}
+    },
+    {
+      "source": "parse_the_outputs_of_windows_api_functions_gettimezoneinformation_getuserdefaultuilanguage_getsystemdefaultuilanguage_getkeyboardlayoutlist_and_getuserdefaultlangid",
+      "target": "query_the_appropriate_sources_for_relevant_information",
+      "attributes": {}
+    }
+  ]
+}

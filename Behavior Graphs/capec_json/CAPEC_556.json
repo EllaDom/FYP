@@ -1,0 +1,42 @@
+{
+  "graph": {
+    "capec_id": "556",
+    "name": "Replace File Extension Handlers",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "When a file is opened, its file handler is checked to determine which program opens the file. File handlers are configuration properties of many operating systems. Applications can modify the file handler for a given file extension to call an arbitrary program when a file with the given extension is opened.",
+    "likelihood": "",
+    "severity": "",
+    "related_attack_patterns": [
+      {
+        "capec_id": "542",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Inspect registry for changes. Limit privileges of user accounts so changes to default file handlers can only be performed by authorized administrators."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "284"
+    ],
+    "matched_cwes": [
+      "284"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1546.001",
+        "entry_name": "Event Triggered Execution:Change Default File Association"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [],
+  "edges": []
+}

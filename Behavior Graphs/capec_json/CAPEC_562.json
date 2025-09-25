@@ -1,0 +1,42 @@
+{
+  "graph": {
+    "capec_id": "562",
+    "name": "Modify Shared File",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary manipulates the files in a shared location by adding malicious programs, scripts, or exploit code to valid content. Once a user opens the shared content, the tainted content is executed.",
+    "likelihood": "",
+    "severity": "",
+    "related_attack_patterns": [
+      {
+        "capec_id": "17",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Disallow shared content. Protect shared folders by minimizing users that have write access. Use utilities that mitigate exploitation like the Microsoft Enhanced Mitigation Experience Toolkit (EMET) to prevent exploits from being run."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "284"
+    ],
+    "matched_cwes": [
+      "284"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1080",
+        "entry_name": "Taint shared content"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [],
+  "edges": []
+}

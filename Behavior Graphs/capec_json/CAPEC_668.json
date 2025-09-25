@@ -1,0 +1,154 @@
+{
+  "graph": {
+    "capec_id": "668",
+    "name": "Key Negotiation of Bluetooth Attack (KNOB)",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary can exploit a flaw in Bluetooth key negotiation allowing them to decrypt information sent between two devices communicating via Bluetooth. The adversary uses an Adversary in the Middle setup to modify packets sent between the two devices during the authentication process, specifically the entropy bits. Knowledge of the number of entropy bits will allow the attacker to easily decrypt information passing over the line of communication.",
+    "likelihood": "Low",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "115",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "148",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "Person in the Middle network setup."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "Ability to modify packets."
+      }
+    ],
+    "resources_required": [
+      "Bluetooth adapter, packet capturing capabilities."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Newer Bluetooth firmwares ensure that the KNOB is not negotaited in plaintext. Update your device."
+    ],
+    "example_instances": [
+      "Given users Alice, Bob and Charlie (Charlie being the attacker), Alice and Bob begin to agree on an encryption key when connecting. While Alice sends a message to Bob that an encryption key with 16 bytes of entropy should be used, Charlie changes this to 1 and forwards the request to Bob and continues forwarding these packets until authentication is successful."
+    ],
+    "related_weaknesses": [
+      "425",
+      "285",
+      "693"
+    ],
+    "matched_cwes": [
+      "285",
+      "425",
+      "693"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1565.002",
+        "entry_name": "Data Manipulation: Transmitted Data Manipulation"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Discovery] Using an established Person in the Middle setup, search for Bluetooth devices beginning the authentication process.",
+        "techniques": [
+          "Use packet capture tools."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Change the entropy bits] Upon recieving the initial key negotiation packet from the master, the adversary modifies the entropy bits requested to 1 to allow for easy decryption before it is forwarded.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Capture and decrypt data] Once the entropy of encryption is known, the adversary can capture data and then decrypt on their device.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "begin_the_authentication_process",
+      "attributes": {}
+    },
+    {
+      "id": "capture_packets",
+      "attributes": {}
+    },
+    {
+      "id": "change_the_entropy_bits",
+      "attributes": {}
+    },
+    {
+      "id": "know_the_entropy_of_encryption",
+      "attributes": {}
+    },
+    {
+      "id": "get_a_user",
+      "attributes": {}
+    },
+    {
+      "id": "send_a_message",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "begin_the_authentication_process",
+      "target": "capture_packets",
+      "attributes": {}
+    },
+    {
+      "source": "capture_packets",
+      "target": "change_the_entropy_bits",
+      "attributes": {}
+    },
+    {
+      "source": "change_the_entropy_bits",
+      "target": "know_the_entropy_of_encryption",
+      "attributes": {}
+    },
+    {
+      "source": "know_the_entropy_of_encryption",
+      "target": "get_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "get_a_user",
+      "target": "send_a_message",
+      "attributes": {}
+    }
+  ]
+}

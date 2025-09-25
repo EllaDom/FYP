@@ -1,0 +1,98 @@
+{
+  "graph": {
+    "capec_id": "639",
+    "name": "Probe System Files",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "An adversary obtains unauthorized information due to improperly protected files. If an application stores sensitive information in a file that is not protected by proper access control, then an adversary can access the file and search for sensitive information.",
+    "likelihood": "",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "545",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "An adversary has access to the file system of a system."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Verify that files have proper access controls set, and reduce the storage of sensitive information to only what is necessary."
+    ],
+    "example_instances": [
+      "Adversaries may search local file systems and remote file shares for files containing passwords. These can be files created by users to store their own credentials, shared credential stores for a group of individuals, configuration files containing passwords for a system or service, or source code/binary files containing embedded passwords.",
+      "Adversaries may search network shares on computers they have compromised to find files of interest."
+    ],
+    "related_weaknesses": [
+      "552"
+    ],
+    "matched_cwes": [
+      "552"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1039",
+        "entry_name": "Data from Network Shared Drive"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1552.001",
+        "entry_name": "Unsecured Credentials: Credentials in Files"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1552.003",
+        "entry_name": "Unsecured Credentials: Bash History"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1552.004",
+        "entry_name": "Unsecured Credentials: Private Keys"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1552.006",
+        "entry_name": "Unsecured Credentials: Group Policy Preferences"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "search_local_file_systems_and_remote_file_shares",
+      "attributes": {}
+    },
+    {
+      "id": "search_network_shares",
+      "attributes": {}
+    },
+    {
+      "id": "have_access_to_the_file_system_of_a_system",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "search_local_file_systems_and_remote_file_shares",
+      "target": "search_network_shares",
+      "attributes": {}
+    },
+    {
+      "source": "search_network_shares",
+      "target": "have_access_to_the_file_system_of_a_system",
+      "attributes": {}
+    }
+  ]
+}

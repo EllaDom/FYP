@@ -1,0 +1,163 @@
+{
+  "graph": {
+    "capec_id": "647",
+    "name": "Collect Data from Registries",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary exploits a weakness in authorization to gather system-specific data and sensitive information within a registry (e.g., Windows Registry, Mac plist). These contain information about the system configuration, software, operating system, and security. The adversary can leverage information gathered in order to carry out further attacks.",
+    "likelihood": "Medium",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "150",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary must have obtained logical access to the system by some means (e.g., via obtained credentials or planting malware on the system).",
+      "The adversary must have capability to navigate the operating system to peruse the registry."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Once the adversary has logical access (which can potentially require high knowledge and skill level), the adversary needs only the capability and facility to navigate the system through the OS graphical user interface or the command line."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Employ a robust and layered defensive posture in order to prevent unauthorized users on your system.",
+      "Employ robust identification and audit/blocking via using an allowlist of applications on your system. Unnecessary applications, utilities, and configurations will have a presence in the system registry that can be leveraged by an adversary through this attack pattern."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "285"
+    ],
+    "matched_cwes": [
+      "285"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1005",
+        "entry_name": "Data from Local System"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1012",
+        "entry_name": "Query Registry"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1552.002",
+        "entry_name": "Unsecured Credentials: Credentials in Registry"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Gain logical access to system] An adversary must first gain logical access to the system it wants to gather registry information from,",
+        "techniques": [
+          "Obtain user account credentials and access the system",
+          "Plant malware on the system that will give remote logical access to the adversary"
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Determine if the permissions are correct] Once logical access is gained, an adversary will determine if they have the proper permissions, or are authorized, to view registry information. If they do not, they will need to escalate privileges on the system through other means",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Peruse registry for information] Once an adversary has access to a registry, they will gather all system-specific data and sensitive information that they deem useful.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Follow-up attack] Use any information or weaknesses found to carry out a follow-up attack",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "obtain_logical_access_to_the_system",
+      "attributes": {}
+    },
+    {
+      "id": "gain_logical_access_to_the_system_it_wants_to_gather_registry_information_from",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_the_legitimate_credentials",
+      "attributes": {}
+    },
+    {
+      "id": "give_remote_logical_access_to_the_adversary",
+      "attributes": {}
+    },
+    {
+      "id": "need_if_they_do_not",
+      "attributes": {}
+    },
+    {
+      "id": "gather_all_system_specific_data_and_sensitive_information_that_they_deem_useful",
+      "attributes": {}
+    },
+    {
+      "id": "navigate_the_operating_system",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "obtain_logical_access_to_the_system",
+      "target": "gain_logical_access_to_the_system_it_wants_to_gather_registry_information_from",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_logical_access_to_the_system",
+      "target": "navigate_the_operating_system",
+      "attributes": {}
+    },
+    {
+      "source": "gain_logical_access_to_the_system_it_wants_to_gather_registry_information_from",
+      "target": "obtain_the_legitimate_credentials",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_the_legitimate_credentials",
+      "target": "give_remote_logical_access_to_the_adversary",
+      "attributes": {}
+    },
+    {
+      "source": "give_remote_logical_access_to_the_adversary",
+      "target": "need_if_they_do_not",
+      "attributes": {}
+    },
+    {
+      "source": "need_if_they_do_not",
+      "target": "gather_all_system_specific_data_and_sensitive_information_that_they_deem_useful",
+      "attributes": {}
+    },
+    {
+      "source": "gather_all_system_specific_data_and_sensitive_information_that_they_deem_useful",
+      "target": "obtain_logical_access_to_the_system",
+      "attributes": {}
+    }
+  ]
+}

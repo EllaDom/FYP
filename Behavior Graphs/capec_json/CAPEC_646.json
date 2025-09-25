@@ -1,0 +1,58 @@
+{
+  "graph": {
+    "capec_id": "646",
+    "name": "Peripheral Footprinting",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "Adversaries may attempt to obtain information about attached peripheral devices and components connected to a computer system. Examples may include discovering the presence of iOS devices by searching for backups, analyzing the Windows registry to determine what USB devices have been connected, or infecting a victim system with malware to report when a USB device has been connected. This may allow the adversary to gain additional insight about the system or network environment, which may be useful in constructing further attacks.",
+    "likelihood": "Low",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "169",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary needs either physical or remote access to the victim system."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The adversary needs to be able to infect the victim system in a manner that gives them remote access."
+      },
+      {
+        "level": "Medium",
+        "description": "If analyzing the Windows registry, the adversary must understand the registry structure to know where to look for devices."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Identify programs that may be used to acquire peripheral information and block them by using a software restriction policy or tools that restrict program execution by using a process allowlist."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1120",
+        "entry_name": "Peripheral Device Discovery"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "need_physical_access_to_the_victim_system",
+      "attributes": {}
+    }
+  ],
+  "edges": []
+}

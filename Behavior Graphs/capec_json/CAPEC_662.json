@@ -1,0 +1,257 @@
+{
+  "graph": {
+    "capec_id": "662",
+    "name": "Adversary in the Browser (AiTB)",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "94",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary must install or convince a user to install a Trojan.",
+      "There are two components communicating with each other.",
+      "An attacker is able to identify the nature and mechanism of communication between the two target components.",
+      "Strong mutual authentication is not used between the two target components yielding opportunity for adversarial interposition.",
+      "For browser pivoting, the SeDebugPrivilege and a high-integrity process must both exist to execute this attack."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "Tricking the victim into installing the Trojan is often the most difficult aspect of this attack. Afterwards, the remainder of this attack is fairly trivial."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Ensure software and applications are only downloaded from legitimate and reputable sources, in addition to conducting integrity checks on the downloaded component.",
+      "Leverage anti-malware tools, which can detect Trojan Horse malware.",
+      "Use strong, out-of-band mutual authentication to always fully authenticate both ends of any communications channel.",
+      "Limit user permissions to prevent browser pivoting.",
+      "Ensure browser sessions are regularly terminated and when their effective lifetime ends."
+    ],
+    "example_instances": [
+      "An adversary conducts a phishing attack and tricks a victim into installing a malicious browser plugin. The adversary then positions themself between the victim and their banking institution. The victim begins by initiating a funds transfer from their personal savings to their personal checking account. Using injected JavaScript, the adversary captures this request and modifies it to transfer an increased amount of funds to an account that they controls, before sending it to the bank. The bank processes the transfer and sends the confirmation notice back to the victim, which is instead intercepted by the adversary. The adversary modifies the confirmation to reflect the original transaction details and sends this modified message back to the victim. Upon receiving the confirmation, the victim assumes the transfer was successful and is unaware that their money has just been transferred to the adversary.",
+      "In 2020, the Agent Tesla malware was leveraged to conduct AiTB attacks against organizations within the gas, oil, and other energy sectors. The malware was delivered via a spearphishing campaign and has the capability to form-grab, keylog, copy clipboard data, extract credentials, and capture screenshots. [REF-630]",
+      "Boy in the browser attacks are a subset of AiTB attacks. Similar to AiTB attacks, the adversary must first trick the victim into installing a Trojan, either via social engineering or drive-by-download attacks. The malware then modifies the victim's \"hosts\" file in order to reroute web traffic from an intended website to an adversary-controlled website that mimics the legitimate website. The adversary is now able to observe, intercept, and/or modify all traffic, as in a traditional Adversary in the Middle attack (CAPEC-94). BiTB attacks are low-cost, easy to execute, and more difficult to detect since the malware often removes itself once the attack has concluded. [REF-631]",
+      "Man in the Mobile attacks are a subset of AiTB attacks that target mobile device users. Like AiTB attacks, an adversary convinces a victim to install a Trojan mobile application on their mobile device, often under the guise of security. Once the victim has installed the application, the adversary can capture all SMS traffic to bypass SMS-based out-of-band authentication systems. [REF-632]"
+    ],
+    "related_weaknesses": [
+      "300",
+      "494"
+    ],
+    "matched_cwes": [
+      "494"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1185",
+        "entry_name": "Man in the Browser"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Man-in-the-browser attack"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Experiment",
+        "description": "The adversary tricks the victim into installing the Trojan Horse malware onto their system.",
+        "techniques": [
+          "Conduct phishing attacks, drive-by malware installations, or masquerade malicious browser extensions as being legitimate."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "The adversary inserts themself into the communication channel initially acting as a routing proxy between the two targeted components.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "The adversary observes, filters, or alters passed data of their choosing to gain access to sensitive information or to manipulate the actions of the two target components for their own purposes.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "trick_the_victim",
+      "attributes": {}
+    },
+    {
+      "id": "execute_a_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "insert_themself",
+      "attributes": {}
+    },
+    {
+      "id": "place_themself",
+      "attributes": {}
+    },
+    {
+      "id": "process_the_transfer",
+      "attributes": {}
+    },
+    {
+      "id": "modify_the_confirmation",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_aitb_attacks_against_organizations_within_the_gas_oil_and_other_energy_sectors",
+      "attributes": {}
+    },
+    {
+      "id": "deliver_the_malware",
+      "attributes": {}
+    },
+    {
+      "id": "modify_the_victim_s_hosts_file",
+      "attributes": {}
+    },
+    {
+      "id": "target_mobile_device_users",
+      "attributes": {}
+    },
+    {
+      "id": "convince_a_victim",
+      "attributes": {}
+    },
+    {
+      "id": "instal_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "attributes": {}
+    },
+    {
+      "id": "yield_opportunity_for_adversarial_interposition",
+      "attributes": {}
+    },
+    {
+      "id": "execute_this_type_of_attack",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "trick_the_victim",
+      "target": "execute_a_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "trick_the_victim",
+      "target": "modify_the_victim_s_hosts_file",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_phishing_attack",
+      "target": "insert_themself",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_phishing_attack",
+      "target": "place_themself",
+      "attributes": {}
+    },
+    {
+      "source": "insert_themself",
+      "target": "execute_a_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "place_themself",
+      "target": "process_the_transfer",
+      "attributes": {}
+    },
+    {
+      "source": "process_the_transfer",
+      "target": "modify_the_confirmation",
+      "attributes": {}
+    },
+    {
+      "source": "modify_the_confirmation",
+      "target": "modify_the_confirmation",
+      "attributes": {}
+    },
+    {
+      "source": "modify_the_confirmation",
+      "target": "conduct_aitb_attacks_against_organizations_within_the_gas_oil_and_other_energy_sectors",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_aitb_attacks_against_organizations_within_the_gas_oil_and_other_energy_sectors",
+      "target": "deliver_the_malware",
+      "attributes": {}
+    },
+    {
+      "source": "deliver_the_malware",
+      "target": "trick_the_victim",
+      "attributes": {}
+    },
+    {
+      "source": "modify_the_victim_s_hosts_file",
+      "target": "target_mobile_device_users",
+      "attributes": {}
+    },
+    {
+      "source": "target_mobile_device_users",
+      "target": "convince_a_victim",
+      "attributes": {}
+    },
+    {
+      "source": "convince_a_victim",
+      "target": "instal_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "instal_the_application",
+      "target": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "target": "yield_opportunity_for_adversarial_interposition",
+      "attributes": {}
+    },
+    {
+      "source": "yield_opportunity_for_adversarial_interposition",
+      "target": "execute_this_type_of_attack",
+      "attributes": {}
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "graph": {
+    "capec_id": "691",
+    "name": "Spoof Open-Source Software Metadata",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "690",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "184",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "444",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "630",
+        "nature": "PeerOf"
+      }
+    ],
+    "prerequisites": [
+      "Identification of a popular open-source component whose metadata is to be spoofed."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "Ability to spoof a variety of software metadata to convince victims the source is trusted."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Accountability"
+        ],
+        "impact": "Hide Activities"
+      },
+      {
+        "scope": [
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      }
+    ],
+    "mitigations": [
+      "Before downloading open-source software, perform precursory metadata checks to determine the author(s), frequency of updates, when the software was last updated, and if the software is widely leveraged.",
+      "Within package managers, look for conflicting or non-unique repository references to determine if multiple packages share the same repository reference.",
+      "Reference vulnerability databases to determine if the software contains known vulnerabilities.",
+      "Only download open-source software from reputable hosting sites or package managers.",
+      "Only download open-source software that has been adequately signed by the developer(s). For repository commits/tags, look for the \"Verified\" status and for developers leveraging \"Vigilant Mode\" (GitHub) or similar modes.",
+      "After downloading open-source software, ensure integrity values have not changed.",
+      "Before executing or incorporating the software, leverage automated testing techniques (e.g., static and dynamic analysis) to determine if the software behaves maliciously."
+    ],
+    "example_instances": [
+      "An adversary provides a malicious open-source library, claiming to provide extended logging features and functionality, and spoofs the metadata with that of a widely used legitimate library. The adversary then tricks victims into including this library in their underlying application. Once the malicious software is incorporated into the application, the adversary is able to manipulate and exfiltrate log data."
+    ],
+    "related_weaknesses": [
+      "494"
+    ],
+    "matched_cwes": [
+      "494"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1195.001",
+        "entry_name": "Supply Chain Compromise: Compromise Software Dependencies and Development Tools"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1195.002",
+        "entry_name": "Supply Chain Compromise: Compromise Software Supply Chain"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "craft_malicious_libraries",
+      "attributes": {}
+    },
+    {
+      "id": "trick_the_victim",
+      "attributes": {}
+    },
+    {
+      "id": "incorporate_the_malicious_software",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "craft_malicious_libraries",
+      "target": "trick_the_victim",
+      "attributes": {}
+    },
+    {
+      "source": "trick_the_victim",
+      "target": "incorporate_the_malicious_software",
+      "attributes": {}
+    }
+  ]
+}

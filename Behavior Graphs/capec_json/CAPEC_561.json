@@ -1,0 +1,251 @@
+{
+  "graph": {
+    "capec_id": "561",
+    "name": "Windows Admin Shares with Stolen Credentials",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary guesses or obtains (i.e. steals or purchases) legitimate Windows administrator credentials (e.g. userID/password) to access Windows Admin Shares on a local machine or within a Windows domain.",
+    "likelihood": "",
+    "severity": "",
+    "related_attack_patterns": [
+      {
+        "capec_id": "653",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "165",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "549",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "545",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The system/application is connected to the Windows domain.",
+      "The target administrative share allows remote use of local admin credentials to log into domain systems.",
+      "The adversary possesses a list of known Windows administrator credentials that exist on the target domain."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Once an adversary obtains a known Windows credential, leveraging it is trivial."
+      }
+    ],
+    "resources_required": [
+      "A list of known Windows administrator credentials for the targeted domain."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Authorization"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Do not reuse local administrator account credentials across systems.",
+      "Deny remote use of local admin credentials to log into domain systems.",
+      "Do not allow accounts to be a local administrator on more than one system."
+    ],
+    "example_instances": [
+      "APT32 has leveraged Windows' built-in Net utility to use Windows Administrative Shares to copy and execute remote malware. [REF-579]",
+      "In May 2017, APT15 laterally moved within a Windows domain via Windows Administrative Shares to copy files to and from compromised host systems. This further allowed for the remote execution of malware. [REF-578]"
+    ],
+    "related_weaknesses": [
+      "522",
+      "308",
+      "309",
+      "294",
+      "263",
+      "262",
+      "521"
+    ],
+    "matched_cwes": [
+      "521",
+      "522",
+      "294"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1021.002",
+        "entry_name": "Remote Services:SMB/Windows Admin Shares"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Acquire known Windows administrator credentials] The adversary must obtain known Windows administrator credentials in order to access the administrative network shares.",
+        "techniques": [
+          "An adversary purchases breached Windows administrator credentials from the dark web.",
+          "An adversary leverages a key logger or phishing attack to steal administrator credentials as they are provided.",
+          "An adversary conducts a sniffing attack to steal Windows administrator credentials as they are transmitted.",
+          "An adversary gains access to a Windows domain system/files and exfiltrates Windows administrator password hashes.",
+          "An adversary examines outward-facing configuration and properties files to discover hardcoded Windows administrator credentials."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Attempt domain authentication] Try each Windows administrator credential against the hidden network shares until the target grants access.",
+        "techniques": [
+          "Manually or automatically enter each administrator credential through the target's interface."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Malware Execution] An adversary can remotely execute malware within the administrative network shares to infect other systems within the domain.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Data Exfiltration] The adversary can remotely obtain sensitive data contained within the administrative network shares.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "breach_windows_administrator_credentials_from_the_dark_web",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_a_key_logger_or_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_a_sniffing_attack_to_steal_credentials_as_they_are_transmitted",
+      "attributes": {}
+    },
+    {
+      "id": "gain_access_to_a_windows_domain_system_files",
+      "attributes": {}
+    },
+    {
+      "id": "examine_outward_facing_configuration_and_properties",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_domain_authentication",
+      "attributes": {}
+    },
+    {
+      "id": "enter_each_credential",
+      "attributes": {}
+    },
+    {
+      "id": "execute_malicious_commands",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_sensitive_data_contained_within_the_administrative_network_shares",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_windows_built_in_net_utility",
+      "attributes": {}
+    },
+    {
+      "id": "move_to_copy_files_to_and_from_compromised_host_systems",
+      "attributes": {}
+    },
+    {
+      "id": "connect_the_system_application",
+      "attributes": {}
+    },
+    {
+      "id": "possess_a_list_of_known_windows_administrator_credentials_that_exist_on_the_target_domain",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "breach_windows_administrator_credentials_from_the_dark_web",
+      "target": "leverage_a_key_logger_or_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_a_key_logger_or_phishing_attack",
+      "target": "conduct_a_sniffing_attack_to_steal_credentials_as_they_are_transmitted",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_a_sniffing_attack_to_steal_credentials_as_they_are_transmitted",
+      "target": "gain_access_to_a_windows_domain_system_files",
+      "attributes": {}
+    },
+    {
+      "source": "gain_access_to_a_windows_domain_system_files",
+      "target": "examine_outward_facing_configuration_and_properties",
+      "attributes": {}
+    },
+    {
+      "source": "examine_outward_facing_configuration_and_properties",
+      "target": "attempt_domain_authentication",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_domain_authentication",
+      "target": "enter_each_credential",
+      "attributes": {}
+    },
+    {
+      "source": "enter_each_credential",
+      "target": "execute_malicious_commands",
+      "attributes": {}
+    },
+    {
+      "source": "execute_malicious_commands",
+      "target": "obtain_sensitive_data_contained_within_the_administrative_network_shares",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_sensitive_data_contained_within_the_administrative_network_shares",
+      "target": "leverage_windows_built_in_net_utility",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_windows_built_in_net_utility",
+      "target": "move_to_copy_files_to_and_from_compromised_host_systems",
+      "attributes": {}
+    },
+    {
+      "source": "move_to_copy_files_to_and_from_compromised_host_systems",
+      "target": "connect_the_system_application",
+      "attributes": {}
+    },
+    {
+      "source": "connect_the_system_application",
+      "target": "possess_a_list_of_known_windows_administrator_credentials_that_exist_on_the_target_domain",
+      "attributes": {}
+    }
+  ]
+}

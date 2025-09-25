@@ -1,0 +1,328 @@
+{
+  "graph": {
+    "capec_id": "676",
+    "name": "NoSQL Injection",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "248",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Awareness of the technology stack being leveraged by the target application.",
+      "NoSQL queries used by the application to store, retrieve, or modify data.",
+      "User-controllable input that is not properly validated by the application as part of NoSQL queries.",
+      "Target potentially susceptible to operator replacement attacks."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "For keyword and JavaScript injection attacks, it is fairly simple for someone with basic NoSQL knowledge to perform NoSQL injection, once the target's technology stack has been determined."
+      },
+      {
+        "level": "Medium",
+        "description": "For operator replacement attacks, the adversary must also have knowledge of HTTP Parameter Pollution attacks and how to conduct them."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Strong input validation - All user-controllable input must be validated and filtered for illegal characters as well as relevant NoSQL and JavaScript content. NoSQL-specific keywords, such as $ne, $eq or $gt for MongoDB, must be filtered in addition to characters such as a single-quote(') or semicolons (;) based on the context in which they appear. Validation should also extend to expected types.",
+      "If possible, leverage safe APIs (e.g., PyMongo and Flask-PyMongo for Python and MongoDB) for queries as opposed to building queries from strings.",
+      "Ensure the most recent version of a NoSQL database and it's corresponding API are used by the application.",
+      "Use of custom error pages - Adversaries can glean information about the nature of queries from descriptive error messages. Input validation must be coupled with customized error pages that inform about an error without disclosing information about the database or application.",
+      "Exercise the principle of Least Privilege with regards to application accounts to minimize damage if a NoSQL injection attack is successful.",
+      "If using MongoDB, disable server-side JavaScript execution and leverage a sanitization module such as \"mongo-sanitize\".",
+      "If using PHP with MongoDB, ensure all special query operators (starting with $) use single quotes to prevent operator replacement attacks.",
+      "Additional mitigations will depend on the NoSQL database, API, and programming language leveraged by the application."
+    ],
+    "example_instances": [
+      "The following examples primarily cite MongoDB, PHP, and NodeJS attacks due to their prominence and popularity. However, please note that these attacks are not exclusive to this NoSQL instance, programming language, or runtime framework. Within NodeJS, Login Bypass attacks are possible via MongoDB if user-input is not properly validated and sanitized [REF-670]. //NodeJS with Express.js db.collection('users').find({ \"user\": req.query.user,  \"password\": req.query.password });  The above code works fine if the user were to submit a query like the following: https://example.org/login?user=patrick&password=1234  But an adversary could submit a malicious query such as the below, which would be interpreted by the code as follows: https://example.org/login?user=patrick&password[$ne]= //NodeJS with Express.js db.collection('users').find({ \"user\": bob,  \"password\": {\"&ne\": \"\"} }); This will result in a Login Bypass attack, as the query will succeed for all values where Bob's password is not an empty string.",
+      "MongoDB instances are also vulnerable to JavaScript Injection Attacks when user input is not properly validated and sanitized. //PHP with MongoDB db.collection.find({$where: function() { return (this.username == $username) } } );  If the user properly specifies a username, then this code will execute as intended. However, an adversary can inject JavaScript into the \"$username\" variable to achieve a NoSQL Injection attack as follows: //PHP with MongoDB db.collection.find({$where: function() { return (this.username == 'foo'; sleep(5000) ) } } ); This will result in the server sleeping for 5 seconds if the attack was successful. An adversary could supply a larger value to deny service to the application.",
+      "If leveraging PHP with MongoDB, operator replacement attacks are possible if special query operators are not properly addressed. The below example from OWASP's \"Test for NoSQL Injection\" displays a simple case of how this could occur.[REF-668] db.myCollection.find({$where: function() { return obj.credits - obj.debits < 0; } } );  Even though the above query does not depend on any user input, it is vulnerable to a NoSQL injection attack via operator replacement on the \"$where\" keyword. In this case, the adversary could exploit MongoDB in the following manner: $where: function() { //arbitrary JavaScript here }"
+    ],
+    "related_weaknesses": [
+      "943",
+      "1286"
+    ],
+    "matched_cwes": [
+      "1286"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey target application] Due to the number of NoSQL databases available and the numerous language/API combinations of each, the adversary must first survey the target application to learn what technologies are being leveraged and how they interact with user-driven data.",
+        "techniques": [
+          "Determine the technology stack leveraged by the target application, such as the application server, drivers, frameworks, APIs, and databases being utilized.",
+          "Identify areas of the application that interact with user input and may be involved with NoSQL queries."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Identify user-controllable input susceptible to injection] After identifying the technology stack being used and where user-driven input is leveraged, determine the user-controllable input susceptible to injection such as authentication or search forms. For each user-controllable input that the adversary suspects is vulnerable to NoSQL injection, attempt to inject characters or keywords that have special meaning in the given NoSQL database or language (e.g., \"$ne\" for MongoDB or \"$exists\" for PHP/MongoDB), or JavaScript that can be executed within the application. The goal is to create a NoSQL query with an invalid syntax.",
+        "techniques": [
+          "Use web browser to inject input through text fields or through HTTP GET parameters.",
+          "Use a web application debugging tool such as Tamper Data, TamperIE, WebScarab,etc. to modify HTTP POST parameters, hidden fields, non-freeform fields, etc.",
+          "Use network-level packet injection tools such as netcat to inject input",
+          "Use modified client (modified by reverse engineering) to inject input."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Experiment with NoSQL Injection vulnerabilities] After determining that a given input is vulnerable to NoSQL Injection, hypothesize what the underlying query looks like. Iteratively try to add logic to the query to extract information from the database, modify/delete information in the database, or execute commands on the server.",
+        "techniques": [
+          "Use public resources such as OWASP's \"Testing for NoSQL Injection\" [REF-668] or Null Sweep's \"NoSQL Injection Cheatsheet\" [REF-669] and try different approaches for adding logic to NoSQL queries.",
+          "Iteratively add logic to the NoSQL query and use detailed error messages from the server to debug the query.",
+          "Attempt an HTTP Parameter Pollution attack to replace language-specific keywords, such as \"where\" within PHP [CAPEC-460]."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Exploit NoSQL Injection vulnerability] After refining and adding various logic to NoSQL queries, craft and execute the underlying NoSQL query that will be used to attack the target system.",
+        "techniques": [
+          "Craft and Execute underlying NoSQL query"
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_technology_stack_leveraged_by_the_target_application_such_as_the_application_server_drivers_frameworks_apis_and_databases_being_utilized",
+      "attributes": {}
+    },
+    {
+      "id": "identify_areas_of_the_application_that_interact_with_user_input_and_may_be_involved_with_nosql_queries",
+      "attributes": {}
+    },
+    {
+      "id": "determine_user_controllable_input_susceptible_to_injection",
+      "attributes": {}
+    },
+    {
+      "id": "inject_characters_or_keywords_that_have_special_meaning",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_nosql_query",
+      "attributes": {}
+    },
+    {
+      "id": "inject_input",
+      "attributes": {}
+    },
+    {
+      "id": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_add_logic_to_the_query_to_extract_information_from_the_database_or_to_modify_or_delete_information_in_the_database",
+      "attributes": {}
+    },
+    {
+      "id": "try_different_approaches_for_adding_logic_to_nosql_queries",
+      "attributes": {}
+    },
+    {
+      "id": "add_logic",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_an_http_parameter_pollution_attack",
+      "attributes": {}
+    },
+    {
+      "id": "validate_user_input",
+      "attributes": {}
+    },
+    {
+      "id": "work_if_the_user_were_to_submit_a_query_like_the_following",
+      "attributes": {}
+    },
+    {
+      "id": "specify_a_username",
+      "attributes": {}
+    },
+    {
+      "id": "inject_arbitrary_javascript_code",
+      "attributes": {}
+    },
+    {
+      "id": "supply_a_larger_value",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_php",
+      "attributes": {}
+    },
+    {
+      "id": "display_a_simple_case_of_how_this_could_occur_ref_668_db_mycollection_find_where_function",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_mongodb",
+      "attributes": {}
+    },
+    {
+      "id": "validate_that",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_target_application",
+      "target": "determine_the_technology_stack_leveraged_by_the_target_application_such_as_the_application_server_drivers_frameworks_apis_and_databases_being_utilized",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_technology_stack_leveraged_by_the_target_application_such_as_the_application_server_drivers_frameworks_apis_and_databases_being_utilized",
+      "target": "identify_areas_of_the_application_that_interact_with_user_input_and_may_be_involved_with_nosql_queries",
+      "attributes": {}
+    },
+    {
+      "source": "identify_areas_of_the_application_that_interact_with_user_input_and_may_be_involved_with_nosql_queries",
+      "target": "determine_user_controllable_input_susceptible_to_injection",
+      "attributes": {}
+    },
+    {
+      "source": "determine_user_controllable_input_susceptible_to_injection",
+      "target": "inject_characters_or_keywords_that_have_special_meaning",
+      "attributes": {}
+    },
+    {
+      "source": "inject_characters_or_keywords_that_have_special_meaning",
+      "target": "create_a_nosql_query",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_nosql_query",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "try_to_add_logic_to_the_query_to_extract_information_from_the_database_or_to_modify_or_delete_information_in_the_database",
+      "attributes": {}
+    },
+    {
+      "source": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_add_logic_to_the_query_to_extract_information_from_the_database_or_to_modify_or_delete_information_in_the_database",
+      "target": "try_different_approaches_for_adding_logic_to_nosql_queries",
+      "attributes": {}
+    },
+    {
+      "source": "try_different_approaches_for_adding_logic_to_nosql_queries",
+      "target": "add_logic",
+      "attributes": {}
+    },
+    {
+      "source": "add_logic",
+      "target": "attempt_an_http_parameter_pollution_attack",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_an_http_parameter_pollution_attack",
+      "target": "validate_user_input",
+      "attributes": {}
+    },
+    {
+      "source": "validate_user_input",
+      "target": "work_if_the_user_were_to_submit_a_query_like_the_following",
+      "attributes": {}
+    },
+    {
+      "source": "validate_user_input",
+      "target": "specify_a_username",
+      "attributes": {}
+    },
+    {
+      "source": "work_if_the_user_were_to_submit_a_query_like_the_following",
+      "target": "validate_user_input",
+      "attributes": {}
+    },
+    {
+      "source": "specify_a_username",
+      "target": "inject_arbitrary_javascript_code",
+      "attributes": {}
+    },
+    {
+      "source": "inject_arbitrary_javascript_code",
+      "target": "supply_a_larger_value",
+      "attributes": {}
+    },
+    {
+      "source": "supply_a_larger_value",
+      "target": "leverage_php",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_php",
+      "target": "display_a_simple_case_of_how_this_could_occur_ref_668_db_mycollection_find_where_function",
+      "attributes": {}
+    },
+    {
+      "source": "display_a_simple_case_of_how_this_could_occur_ref_668_db_mycollection_find_where_function",
+      "target": "exploit_mongodb",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_mongodb",
+      "target": "validate_that",
+      "attributes": {}
+    }
+  ]
+}

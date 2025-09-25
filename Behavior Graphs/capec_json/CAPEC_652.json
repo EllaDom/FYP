@@ -1,0 +1,258 @@
+{
+  "graph": {
+    "capec_id": "652",
+    "name": "Use of Known Kerberos Credentials",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary obtains (i.e. steals or purchases) legitimate Kerberos credentials (e.g. Kerberos service account userID/password or Kerberos Tickets) with the goal of achieving authenticated access to additional systems, applications, or services within the domain.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "560",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The system/application leverages Kerberos authentication.",
+      "The system/application uses one factor password-based authentication, SSO, and/or cloud-based authentication for Kerberos service accounts.",
+      "The system/application does not have a sound password policy that is being enforced for Kerberos service accounts.",
+      "The system/application does not implement an effective password throttling mechanism for authenticating to Kerberos service accounts.",
+      "The targeted network allows for network sniffing attacks to succeed."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Once an adversary obtains a known Kerberos credential, leveraging it is trivial."
+      }
+    ],
+    "resources_required": [
+      "A valid Kerberos ticket or a known Kerberos service account credential."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Authorization"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Create a strong password policy and ensure that your system enforces this policy for Kerberos service accounts.",
+      "Ensure Kerberos service accounts are not reusing username/password combinations for multiple systems, applications, or services.",
+      "Do not reuse Kerberos service account credentials across systems.",
+      "Deny remote use of Kerberos service account credentials to log into domain systems.",
+      "Do not allow Kerberos service accounts to be a local administrator on more than one system.",
+      "Enable at least AES Kerberos encryption for tickets.",
+      "Monitor system and domain logs for abnormal credential access."
+    ],
+    "example_instances": [
+      "Bronze Butler (also known as Tick), has been shown to leverage forged Kerberos Ticket Granting Tickets (TGTs) and Ticket Granting Service (TGS) tickets to maintain administrative access on a number of systems. [REF-584]",
+      "PowerSploit's Invoke-Kerberoast module can be leveraged to request Ticket Granting Service (TGS) tickets and return crackable ticket hashes. [REF-585] [REF-586]"
+    ],
+    "related_weaknesses": [
+      "522",
+      "307",
+      "308",
+      "309",
+      "262",
+      "263",
+      "654",
+      "294",
+      "836"
+    ],
+    "matched_cwes": [
+      "307",
+      "522",
+      "294"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1558",
+        "entry_name": "Steal or Forge Kerberos Tickets"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Acquire known Kerberos credentials] The adversary must obtain known Kerberos credentials in order to access the target system, application, or service within the domain.",
+        "techniques": [
+          "An adversary purchases breached Kerberos service account username/password combinations or leaked hashed passwords from the dark web.",
+          "An adversary guesses the credentials to a weak Kerberos service account.",
+          "An adversary conducts a sniffing attack to steal Kerberos tickets as they are transmitted.",
+          "An adversary conducts a Kerberoasting attack."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Attempt Kerberos authentication] Try each Kerberos credential against various resources within the domain until the target grants access.",
+        "techniques": [
+          "Manually or automatically enter each Kerberos service account credential through the target's interface.",
+          "Attempt a Pass the Ticket attack."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Impersonate] An adversary can use successful experiments or authentications to impersonate an authorized user or system, or to laterally move within the domain",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Spoofing] Malicious data can be injected into the target system or into other systems on the domain. The adversary can also pose as a legitimate domain user to perform social engineering attacks.",
+        "techniques": []
+      },
+      {
+        "step": "5",
+        "phase": "Exploit",
+        "description": "[Data Exfiltration] The adversary can obtain sensitive data contained within domain systems or applications.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "breach_kerberos_service_account_username_password_combinations",
+      "attributes": {}
+    },
+    {
+      "id": "guess_the_credentials",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_a_sniffing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_a_kerberoasting_attack",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_kerberos",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_a_pass_the_ticket_attack",
+      "attributes": {}
+    },
+    {
+      "id": "impersonate_an_authorized_user_or_system",
+      "attributes": {}
+    },
+    {
+      "id": "pose_to_perform_social_engineering_attacks",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "attributes": {}
+    },
+    {
+      "id": "request_ticket_granting_service_tgs_tickets",
+      "attributes": {}
+    },
+    {
+      "id": "enforce_that",
+      "attributes": {}
+    },
+    {
+      "id": "implement_an_effective_password_throttling_mechanism_for_authenticating_to_kerberos_service_accounts",
+      "attributes": {}
+    },
+    {
+      "id": "allow_for_network_sniffing_attacks_to_succeed",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "breach_kerberos_service_account_username_password_combinations",
+      "target": "guess_the_credentials",
+      "attributes": {}
+    },
+    {
+      "source": "breach_kerberos_service_account_username_password_combinations",
+      "target": "attempt_a_pass_the_ticket_attack",
+      "attributes": {}
+    },
+    {
+      "source": "guess_the_credentials",
+      "target": "conduct_a_sniffing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_a_sniffing_attack",
+      "target": "conduct_a_kerberoasting_attack",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_a_kerberoasting_attack",
+      "target": "attempt_kerberos",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_kerberos",
+      "target": "breach_kerberos_service_account_username_password_combinations",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_a_pass_the_ticket_attack",
+      "target": "impersonate_an_authorized_user_or_system",
+      "attributes": {}
+    },
+    {
+      "source": "impersonate_an_authorized_user_or_system",
+      "target": "pose_to_perform_social_engineering_attacks",
+      "attributes": {}
+    },
+    {
+      "source": "pose_to_perform_social_engineering_attacks",
+      "target": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "target": "request_ticket_granting_service_tgs_tickets",
+      "attributes": {}
+    },
+    {
+      "source": "request_ticket_granting_service_tgs_tickets",
+      "target": "enforce_that",
+      "attributes": {}
+    },
+    {
+      "source": "enforce_that",
+      "target": "implement_an_effective_password_throttling_mechanism_for_authenticating_to_kerberos_service_accounts",
+      "attributes": {}
+    },
+    {
+      "source": "implement_an_effective_password_throttling_mechanism_for_authenticating_to_kerberos_service_accounts",
+      "target": "allow_for_network_sniffing_attacks_to_succeed",
+      "attributes": {}
+    }
+  ]
+}

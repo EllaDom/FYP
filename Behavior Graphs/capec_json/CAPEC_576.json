@@ -1,0 +1,69 @@
+{
+  "graph": {
+    "capec_id": "576",
+    "name": "Group Permission Footprinting",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "An adversary exploits functionality meant to identify information about user groups and their permissions on the target system to an authorized user. By knowing what users/permissions are registered on the target system, the adversary can inform further and more targeted malicious behavior. An example Windows command which can list local groups is \"net localgroup\".",
+    "likelihood": "Low",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "169",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary must have gained access to the target system via physical or logical means in order to carry out this attack."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Other"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [
+      "Identify programs (such as \"net\") that may be used to enumerate local group permissions and block them by using a software restriction Policy or tools that restrict program execution by using a process allowlist."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1069",
+        "entry_name": "Permission Groups Discovery"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1615",
+        "entry_name": "Group Policy Discovery"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "gain_access_to_the_target_system",
+      "attributes": {}
+    }
+  ],
+  "edges": []
+}
