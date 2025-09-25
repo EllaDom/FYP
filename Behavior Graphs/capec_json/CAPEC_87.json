@@ -1,0 +1,196 @@
+{
+  "graph": {
+    "capec_id": "87",
+    "name": "Forceful Browsing",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An attacker employs forceful browsing (direct URL entry) to access portions of a website that are otherwise unreachable. Usually, a front controller or similar design pattern is employed to protect access to portions of a web application. Forceful browsing enables an attacker to access information, perform privileged operations and otherwise reach sections of the web application that have been improperly protected.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "115",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The forcibly browseable pages or accessible resources must be discoverable and improperly protected."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Forcibly browseable pages can be discovered by using a number of automated tools. Doing the same manually is tedious but by no means difficult."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack. A directory listing is helpful, but not a requirement."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [
+      "Authenticate request to every resource. In addition, every page or resource must ensure that the request it is handling has been made in an authorized context.",
+      "Forceful browsing can also be made difficult to a large extent by not hard-coding names of application pages or resources. This way, the attacker cannot figure out, from the application alone, the resources available from the present context."
+    ],
+    "example_instances": [
+      "A bulletin board application provides an administrative interface at admin.aspx when the user logging in belongs to the administrators group. An attacker can access the admin.aspx interface by making a direct request to the page. Not having access to the interface appropriately protected allows the attacker to perform administrative functions without having to authenticate themself in that role."
+    ],
+    "related_weaknesses": [
+      "425",
+      "285",
+      "693"
+    ],
+    "matched_cwes": [
+      "285",
+      "425",
+      "693"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "34",
+        "entry_name": "Predictable Resource Location"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Forced browsing"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Spider] Using an automated tool, an attacker follows all public links on a web site. They record all the links they find.",
+        "techniques": [
+          "Use a spidering tool to follow and record all links.",
+          "Use a proxy tool to record all links visited during a manual traversal of the web application."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Attempt well-known or guessable resource locations] Using an automated tool, an attacker requests a variety of well-known URLs that correspond to administrative, debugging, or other useful internal actions. They record all the positive responses from the server.",
+        "techniques": [
+          "Use a spidering tool to follow and record attempts on well-known URLs.",
+          "Use a proxy tool to record all links visited during a manual traversal of attempts on well-known URLs."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Use unauthorized resources] By visiting the unprotected resource, the attacker makes use of unauthorized functionality.",
+        "techniques": [
+          "Access unprotected functions and execute them."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[View unauthorized data] The attacker discovers and views unprotected sensitive data.",
+        "techniques": [
+          "Direct request of protected pages that directly access database back-ends. (e.g., list.jsp, accounts.jsp, status.jsp, etc.)"
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "follow_all_public_links_on_a_web_site",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_the_links_they_find",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_the_positive_responses_from_the_server",
+      "attributes": {}
+    },
+    {
+      "id": "visit_the_unprotected_resource",
+      "attributes": {}
+    },
+    {
+      "id": "execute_them",
+      "attributes": {}
+    },
+    {
+      "id": "view_unauthorized_data",
+      "attributes": {}
+    },
+    {
+      "id": "provide_an_administrative_interface",
+      "attributes": {}
+    },
+    {
+      "id": "access_the_admin_aspx_interface",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "follow_all_public_links_on_a_web_site",
+      "target": "record_all_the_links_they_find",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_the_links_they_find",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "record_all_the_positive_responses_from_the_server",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "visit_the_unprotected_resource",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_the_positive_responses_from_the_server",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "visit_the_unprotected_resource",
+      "target": "execute_them",
+      "attributes": {}
+    },
+    {
+      "source": "execute_them",
+      "target": "view_unauthorized_data",
+      "attributes": {}
+    },
+    {
+      "source": "view_unauthorized_data",
+      "target": "provide_an_administrative_interface",
+      "attributes": {}
+    },
+    {
+      "source": "provide_an_administrative_interface",
+      "target": "access_the_admin_aspx_interface",
+      "attributes": {}
+    }
+  ]
+}

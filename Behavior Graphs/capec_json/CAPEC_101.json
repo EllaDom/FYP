@@ -1,0 +1,209 @@
+{
+  "graph": {
+    "capec_id": "101",
+    "name": "Server Side Include (SSI) Injection",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker can use Server Side Include (SSI) Injection to send code to a web application that then gets executed by the web server. Doing so enables the attacker to achieve similar results to Cross Site Scripting, viz., arbitrary code execution and information disclosure, albeit on a more limited scale, since the SSI directives are nowhere near as powerful as a full-fledged scripting language. Nonetheless, the attacker can conveniently gain access to sensitive files, such as password files, and execute shell commands.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "253",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "600",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "A web server that supports server side includes and has them enabled",
+      "User controllable input that can carry include directives to the web server"
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The attacker needs to be aware of SSI technology, determine the nature of injection and be able to craft input that results in the SSI directives being executed."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack. Determining whether the server supports SSI does not require special tools, and nor does injecting directives that get executed. Spidering tools can make the task of finding and following links easier."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      }
+    ],
+    "mitigations": [
+      "Set the OPTIONS IncludesNOEXEC in the global access.conf file or local .htaccess (Apache) file to deny SSI execution in directories that do not need them",
+      "All user controllable input must be appropriately sanitized before use in the application. This includes omitting, or encoding, certain characters or strings that have the potential of being interpreted as part of an SSI directive",
+      "Server Side Includes must be enabled only if there is a strong business reason to do so. Every additional component enabled on the web server increases the attack surface as well as administrative overhead"
+    ],
+    "example_instances": [
+      "Consider a website hosted on a server that permits Server Side Includes (SSI), such as Apache with the \"Options Includes\" directive enabled. Whenever an error occurs, the HTTP Headers along with the entire request are logged, which can then be displayed on a page that allows review of such errors. A malicious user can inject SSI directives in the HTTP Headers of a request designed to create an error. When these logs are eventually reviewed, the server parses the SSI directives and executes them."
+    ],
+    "related_weaknesses": [
+      "97",
+      "74",
+      "20"
+    ],
+    "matched_cwes": [
+      "20",
+      "74"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "36",
+        "entry_name": "SSI Injection"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Server-Side Includes (SSI) Injection"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine applicability] The adversary determines whether server side includes are enabled on the target web server.",
+        "techniques": [
+          "Look for popular page file names. The attacker will look for .shtml, .shtm, .asp, .aspx, and other well-known strings in URLs to help determine whether SSI functionality is enabled.",
+          "Fetch .htaccess file. In Apache web server installations, the .htaccess file may enable server side includes in specific locations. In those cases, the .htaccess file lives inside the directory where SSI is enabled, and is theoretically fetchable from the web server. Although most web servers deny fetching the .htaccess file, a misconfigured server will allow it. Thus, an attacker will frequently try it."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Find Injection Point] Look for user controllable input, including HTTP headers, that can carry server side include directives to the web server.",
+        "techniques": [
+          "Use a spidering tool to follow and record all links. Make special note of any links that include parameters in the URL.",
+          "Use a proxy tool to record all links visited during a manual traversal of the web application. Make special note of any links that include parameters in the URL. Manual traversal of this type is frequently necessary to identify forms that are GET method forms rather than POST forms."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Inject SSI] Using the found injection point, the adversary sends arbitrary code to be inlcuded by the application on the server side. They may then need to view a particular page in order to have the server execute the include directive and run a command or open a file on behalf of the adversary.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_applicability",
+      "attributes": {}
+    },
+    {
+      "id": "deny_fetching_the_htaccess_file",
+      "attributes": {}
+    },
+    {
+      "id": "try_it",
+      "attributes": {}
+    },
+    {
+      "id": "find_injection_point",
+      "attributes": {}
+    },
+    {
+      "id": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "identify_forms_that_are_get_method_forms_rather_than_post_forms",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_view_a_particular_page",
+      "attributes": {}
+    },
+    {
+      "id": "consider_a_website_hosted_on_a_server_that_permits_server_side_includes_ssi_such_as_apache_with_the_options_includes_directive_enabled",
+      "attributes": {}
+    },
+    {
+      "id": "inject_ssi_directives_in_the_http_headers_of_a_request_designed_to_create_an_error",
+      "attributes": {}
+    },
+    {
+      "id": "review_these_logs",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_applicability",
+      "target": "deny_fetching_the_htaccess_file",
+      "attributes": {}
+    },
+    {
+      "source": "deny_fetching_the_htaccess_file",
+      "target": "try_it",
+      "attributes": {}
+    },
+    {
+      "source": "try_it",
+      "target": "find_injection_point",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_point",
+      "target": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "source": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "target": "identify_forms_that_are_get_method_forms_rather_than_post_forms",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "source": "identify_forms_that_are_get_method_forms_rather_than_post_forms",
+      "target": "need_to_view_a_particular_page",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_view_a_particular_page",
+      "target": "consider_a_website_hosted_on_a_server_that_permits_server_side_includes_ssi_such_as_apache_with_the_options_includes_directive_enabled",
+      "attributes": {}
+    },
+    {
+      "source": "consider_a_website_hosted_on_a_server_that_permits_server_side_includes_ssi_such_as_apache_with_the_options_includes_directive_enabled",
+      "target": "inject_ssi_directives_in_the_http_headers_of_a_request_designed_to_create_an_error",
+      "attributes": {}
+    },
+    {
+      "source": "inject_ssi_directives_in_the_http_headers_of_a_request_designed_to_create_an_error",
+      "target": "review_these_logs",
+      "attributes": {}
+    }
+  ]
+}

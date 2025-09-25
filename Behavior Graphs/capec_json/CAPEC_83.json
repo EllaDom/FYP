@@ -1,0 +1,253 @@
+{
+  "graph": {
+    "capec_id": "83",
+    "name": "XPath Injection",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker can craft special user-controllable input consisting of XPath expressions to inject the XML database and bypass authentication or glean information that they normally would not be able to. XPath Injection enables an attacker to talk directly to the XML database, thus bypassing the application completely. XPath Injection results from the failure of an application to properly sanitize input used as part of dynamic XPath expressions used to query an XML database.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "250",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "XPath queries used to retrieve information stored in XML documents",
+      "User-controllable input not properly sanitized before being used as part of XPath queries"
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "XPath Injection shares the same basic premises with SQL Injection. An attacker must have knowledge of XPath syntax and constructs in order to successfully leverage XPath Injection"
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Strong input validation - All user-controllable input must be validated and filtered for illegal characters as well as content that can be interpreted in the context of an XPath expression. Characters such as a single-quote(') or operators such as or (|), and (&) and such should be filtered if the application does not expect them in the context in which they appear. If such content cannot be filtered, it must at least be properly escaped to avoid them being interpreted as part of XPath expressions.",
+      "Use of parameterized XPath queries - Parameterization causes the input to be restricted to certain domains, such as strings or integers, and any input outside such domains is considered invalid and the query fails.",
+      "Use of custom error pages - Attackers can glean information about the nature of queries from descriptive error messages. Input validation must be coupled with customized error pages that inform about an error without disclosing information about the database or application."
+    ],
+    "example_instances": [
+      "Consider an application that uses an XML database to authenticate its users. The application retrieves the user name and password from a request and forms an XPath expression to query the database. An attacker can successfully bypass authentication and login without valid credentials through XPath Injection. This can be achieved by injecting the query to the XML database with XPath syntax that causes the authentication check to fail. Improper validation of user-controllable input and use of a non-parameterized XPath expression enable the attacker to inject an XPath expression that causes authentication bypass."
+    ],
+    "related_weaknesses": [
+      "91",
+      "74",
+      "20",
+      "707"
+    ],
+    "matched_cwes": [
+      "20",
+      "74",
+      "91",
+      "707"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "39",
+        "entry_name": "XPath Injection"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Blind XPath Injection"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "XPATH Injection"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the target] Using a browser or an automated tool, an adversary records all instances of user-controllable input used to contruct XPath queries.",
+        "techniques": [
+          "Use an automated tool to record all instances of user-controllable input used to contruct XPath queries.",
+          "Use a browser to manually explore the website and analyze how the application processes inputs."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Determine the tructure of queries] Using manual or automated means, test inputs found for XPath weaknesses.",
+        "techniques": [
+          "Use an automated tool automatically probe the inputs for XPath weaknesses.",
+          "Manually probe the inputs using characters such as single quote (') that can cause XPath-releated errors, thus indicating an XPath weakness."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Inject content into XPath query] Craft malicious content containing XPath expressions that is not validated by the application and is executed as part of the XPath queries.",
+        "techniques": [
+          "Use the crafted input to execute unexpected queries that can disclose sensitive database information to the attacker.",
+          "Use a combination of single quote (') and boolean expressions such as \"or 1=1\" to manipulate XPath logic.",
+          "Use XPath functions in the malicious content such as \"string-length\", \"substring\", or \"count\" to gain information about the XML document structure being used."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_instances_of_user_controllable_input_used_to_contruct_xml_queries",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_tructure_of_queries",
+      "attributes": {}
+    },
+    {
+      "id": "probe_the_inputs_for_xpath_weaknesses",
+      "attributes": {}
+    },
+    {
+      "id": "craft_malicious_content_containing_xpath_expressions_that_is_not_validated_by_the_application_and_is_executed_as_part_of_the_xpath_queries",
+      "attributes": {}
+    },
+    {
+      "id": "execute_unexpected_queries_that_can_disclose_sensitive_database_information_to_the_attacker",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_xpath_logic",
+      "attributes": {}
+    },
+    {
+      "id": "substre_to_gain_information_about_the_xml_document_structure_being_used",
+      "attributes": {}
+    },
+    {
+      "id": "consider_an_application_that_uses_an_xml_database_to_authenticate_its_users",
+      "attributes": {}
+    },
+    {
+      "id": "retrieve_the_user_name_and_password",
+      "attributes": {}
+    },
+    {
+      "id": "bypass_authentication_and_login",
+      "attributes": {}
+    },
+    {
+      "id": "achieve_this",
+      "attributes": {}
+    },
+    {
+      "id": "enable_the_attacker",
+      "attributes": {}
+    },
+    {
+      "id": "retrieve_information_stored_in_xml_documents",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_target_application",
+      "target": "record_all_instances_of_user_controllable_input_used_to_contruct_xml_queries",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_instances_of_user_controllable_input_used_to_contruct_xml_queries",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "determine_the_tructure_of_queries",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_tructure_of_queries",
+      "target": "probe_the_inputs_for_xpath_weaknesses",
+      "attributes": {}
+    },
+    {
+      "source": "probe_the_inputs_for_xpath_weaknesses",
+      "target": "probe_the_inputs_for_xpath_weaknesses",
+      "attributes": {}
+    },
+    {
+      "source": "probe_the_inputs_for_xpath_weaknesses",
+      "target": "craft_malicious_content_containing_xpath_expressions_that_is_not_validated_by_the_application_and_is_executed_as_part_of_the_xpath_queries",
+      "attributes": {}
+    },
+    {
+      "source": "craft_malicious_content_containing_xpath_expressions_that_is_not_validated_by_the_application_and_is_executed_as_part_of_the_xpath_queries",
+      "target": "execute_unexpected_queries_that_can_disclose_sensitive_database_information_to_the_attacker",
+      "attributes": {}
+    },
+    {
+      "source": "execute_unexpected_queries_that_can_disclose_sensitive_database_information_to_the_attacker",
+      "target": "manipulate_xpath_logic",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_xpath_logic",
+      "target": "substre_to_gain_information_about_the_xml_document_structure_being_used",
+      "attributes": {}
+    },
+    {
+      "source": "substre_to_gain_information_about_the_xml_document_structure_being_used",
+      "target": "consider_an_application_that_uses_an_xml_database_to_authenticate_its_users",
+      "attributes": {}
+    },
+    {
+      "source": "consider_an_application_that_uses_an_xml_database_to_authenticate_its_users",
+      "target": "retrieve_the_user_name_and_password",
+      "attributes": {}
+    },
+    {
+      "source": "retrieve_the_user_name_and_password",
+      "target": "bypass_authentication_and_login",
+      "attributes": {}
+    },
+    {
+      "source": "bypass_authentication_and_login",
+      "target": "achieve_this",
+      "attributes": {}
+    },
+    {
+      "source": "achieve_this",
+      "target": "enable_the_attacker",
+      "attributes": {}
+    },
+    {
+      "source": "enable_the_attacker",
+      "target": "retrieve_information_stored_in_xml_documents",
+      "attributes": {}
+    }
+  ]
+}

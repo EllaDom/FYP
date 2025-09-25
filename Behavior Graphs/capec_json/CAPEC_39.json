@@ -1,0 +1,315 @@
+{
+  "graph": {
+    "capec_id": "39",
+    "name": "Manipulating Opaque Client-based Data Tokens",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "In circumstances where an application holds important data client-side in tokens (cookies, URLs, data files, and so forth) that data can be manipulated. If client or server-side application components reinterpret that data as authentication tokens or data (such as store item pricing or wallet information) then even opaquely manipulating that data may bear fruit for an Attacker. In this pattern an attacker undermines the assumption that client side tokens have been adequately protected from tampering through use of encryption or obfuscation.",
+    "likelihood": "High",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "22",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "An attacker already has some access to the system or can steal the client based data tokens from another user who has access to the system.",
+      "For an Attacker to viably execute this attack, some data (later interpreted by the application) must be held client-side in a way that can be manipulated without detection. This means that the data or tokens are not CRCd as part of their value or through a separate meta-data store elsewhere."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "If the client site token is obfuscated."
+      },
+      {
+        "level": "High",
+        "description": "If the client site token is encrypted."
+      }
+    ],
+    "resources_required": [
+      "The Attacker needs no special hardware-based resources in order to conduct this attack. Software plugins, such as Tamper Data for Firefox, may help in manipulating URL- or cookie-based data."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "One solution to this problem is to protect encrypted data with a CRC of some sort. If knowing who last manipulated the data is important, then using a cryptographic \"message authentication code\" (or hMAC) is prescribed. However, this guidance is not a panacea. In particular, any value created by (and therefore encrypted by) the client, which itself is a \"malicious\" value, all the protective cryptography in the world can't make the value 'correct' again. Put simply, if the client has control over the whole process of generating and encoding the value, then simply protecting its integrity doesn't help.",
+      "Make sure to protect client side authentication tokens for confidentiality (encryption) and integrity (signed hash)",
+      "Make sure that all session tokens use a good source of randomness",
+      "Perform validation on the server side to make sure that client side data tokens are consistent with what is expected."
+    ],
+    "example_instances": [
+      "With certain price watching websites, that aggregate products available prices, the user can buy items through whichever vendors has product availability, the best price, or other differentiator. Once a user selects an item, the site must broker the purchase of that item with the vendor. Because vendors sell the same product through different channel partners at different prices, token exchange between price watching sites and selling vendors will often contain pricing information. With some price watching sites, manipulating URL-data (which is encrypted) even opaquely yields different prices charged by the fulfilling vendor. If the manipulated price turns out higher, the Attacker can cancel purchase. If the Attacker succeeded in manipulating the token and creating a lower price, they proceed.",
+      "Upon successful authentication user is granted an encrypted authentication cookie by the server and it is stored on the client. One piece of information stored in the authentication cookie reflects the access level of the user (e.g. \"u\" for user). The authentication cookie is encrypted using the Electronic Code Book (ECB) mode, that naively encrypts each of the plaintext blocks to each of the ciphertext blocks separately. An attacker knows the structure of the cookie and can figure out what bits (encrypted) store the information relating to the access level of the user. An attacker modifies the authentication cookie and effectively substitutes \"u\" for \"a\" by flipping some of the corresponding bits of ciphertext (trial and error). Once the correct \"flip\" is found, when the system is accessed, the attacker is granted administrative privileges in the system. Note that in this case an attacker did not have to figure out the exact encryption algorithm or find the secret key, but merely exploit the weakness inherent in using the ECB encryption mode.",
+      "Archangel Weblog 0.90.02 allows remote attackers to bypass authentication by setting the ba_admin cookie to 1. See also: CVE-2006-0944"
+    ],
+    "related_weaknesses": [
+      "353",
+      "285",
+      "302",
+      "472",
+      "565",
+      "315",
+      "539",
+      "384",
+      "233"
+    ],
+    "matched_cwes": [
+      "285",
+      "384"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Enumerate information passed to client side] The attacker identifies the parameters used as part of tokens to take business or security decisions",
+        "techniques": [
+          "Use WebScarab to reveal hidden fields while browsing.",
+          "Use a sniffer to capture packets",
+          "View source of web page to find hidden fields",
+          "Examine URL to see if any opaque tokens are in it",
+          "Disassemble or decompile client-side application",
+          "Use debugging tools such as File Monitor, Registry Monitor, Debuggers, etc."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Determine protection mechanism for opaque token] The attacker determines the protection mechanism used to protect the confidentiality and integrity of these data tokens. They may be obfuscated or a full blown encryption may be used.",
+        "techniques": [
+          "Look for signs of well-known character encodings",
+          "Look for cryptographic signatures",
+          "Look for delimiters or other indicators of structure"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Modify parameter/token values] Trying each parameter in turn, the attacker modifies the values",
+        "techniques": [
+          "Modify tokens logically",
+          "Modify tokens arithmetically",
+          "Modify tokens bitwise",
+          "Modify structural components of tokens",
+          "Modify order of parameters/tokens"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Experiment",
+        "description": "[Cycle through values for each parameter.] Depending on the nature of the application, the attacker now cycles through values of each parameter and observes the effects of this modification in the data returned by the server",
+        "techniques": [
+          "Use network-level packet injection tools such as netcat",
+          "Use application-level data modification tools such as Tamper Data, WebScarab, TamperIE, etc.",
+          "Use modified client (modified by reverse engineering)",
+          "Use debugging tools to modify data in client"
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_the_parameters_used_as_part_of_tokens_to_take_business_or_security_decisions",
+      "attributes": {}
+    },
+    {
+      "id": "find_hidden_fields",
+      "attributes": {}
+    },
+    {
+      "id": "capture_packets",
+      "attributes": {}
+    },
+    {
+      "id": "determine_protection_mechanism_for_opaque_token",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_protection_mechanism_used_to_protect_the_confidentiality_and_integrity_of_these_data_tokens",
+      "attributes": {}
+    },
+    {
+      "id": "obfuscate_they",
+      "attributes": {}
+    },
+    {
+      "id": "try_each_parameter",
+      "attributes": {}
+    },
+    {
+      "id": "modify_structural_components_of_tokens",
+      "attributes": {}
+    },
+    {
+      "id": "modify_order_of_parameters_tokens",
+      "attributes": {}
+    },
+    {
+      "id": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "attributes": {}
+    },
+    {
+      "id": "watch_websites",
+      "attributes": {}
+    },
+    {
+      "id": "select_an_item",
+      "attributes": {}
+    },
+    {
+      "id": "sell_the_same_product",
+      "attributes": {}
+    },
+    {
+      "id": "grant_an_encrypted_authentication_cookie_by_the_server",
+      "attributes": {}
+    },
+    {
+      "id": "know_the_structure_of_the_cookie",
+      "attributes": {}
+    },
+    {
+      "id": "replace_cookie",
+      "attributes": {}
+    },
+    {
+      "id": "find_the_correct_flip",
+      "attributes": {}
+    },
+    {
+      "id": "allow_remote_attackers",
+      "attributes": {}
+    },
+    {
+      "id": "steal_the_client",
+      "attributes": {}
+    },
+    {
+      "id": "execute_this_type_of_attack",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_the_parameters_used_as_part_of_tokens_to_take_business_or_security_decisions",
+      "target": "find_hidden_fields",
+      "attributes": {}
+    },
+    {
+      "source": "find_hidden_fields",
+      "target": "capture_packets",
+      "attributes": {}
+    },
+    {
+      "source": "capture_packets",
+      "target": "determine_protection_mechanism_for_opaque_token",
+      "attributes": {}
+    },
+    {
+      "source": "determine_protection_mechanism_for_opaque_token",
+      "target": "determine_the_protection_mechanism_used_to_protect_the_confidentiality_and_integrity_of_these_data_tokens",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_protection_mechanism_used_to_protect_the_confidentiality_and_integrity_of_these_data_tokens",
+      "target": "obfuscate_they",
+      "attributes": {}
+    },
+    {
+      "source": "obfuscate_they",
+      "target": "try_each_parameter",
+      "attributes": {}
+    },
+    {
+      "source": "try_each_parameter",
+      "target": "modify_structural_components_of_tokens",
+      "attributes": {}
+    },
+    {
+      "source": "modify_structural_components_of_tokens",
+      "target": "modify_order_of_parameters_tokens",
+      "attributes": {}
+    },
+    {
+      "source": "modify_order_of_parameters_tokens",
+      "target": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "target": "watch_websites",
+      "attributes": {}
+    },
+    {
+      "source": "watch_websites",
+      "target": "select_an_item",
+      "attributes": {}
+    },
+    {
+      "source": "watch_websites",
+      "target": "grant_an_encrypted_authentication_cookie_by_the_server",
+      "attributes": {}
+    },
+    {
+      "source": "select_an_item",
+      "target": "sell_the_same_product",
+      "attributes": {}
+    },
+    {
+      "source": "sell_the_same_product",
+      "target": "watch_websites",
+      "attributes": {}
+    },
+    {
+      "source": "grant_an_encrypted_authentication_cookie_by_the_server",
+      "target": "grant_an_encrypted_authentication_cookie_by_the_server",
+      "attributes": {}
+    },
+    {
+      "source": "grant_an_encrypted_authentication_cookie_by_the_server",
+      "target": "know_the_structure_of_the_cookie",
+      "attributes": {}
+    },
+    {
+      "source": "know_the_structure_of_the_cookie",
+      "target": "replace_cookie",
+      "attributes": {}
+    },
+    {
+      "source": "replace_cookie",
+      "target": "find_the_correct_flip",
+      "attributes": {}
+    },
+    {
+      "source": "find_the_correct_flip",
+      "target": "allow_remote_attackers",
+      "attributes": {}
+    },
+    {
+      "source": "allow_remote_attackers",
+      "target": "steal_the_client",
+      "attributes": {}
+    },
+    {
+      "source": "steal_the_client",
+      "target": "execute_this_type_of_attack",
+      "attributes": {}
+    }
+  ]
+}

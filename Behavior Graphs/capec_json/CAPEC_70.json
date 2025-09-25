@@ -1,0 +1,136 @@
+{
+  "graph": {
+    "capec_id": "70",
+    "name": "Try Common or Default Usernames and Passwords",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary may try certain common or default usernames and passwords to gain access into the system and perform unauthorized actions. An adversary may try an intelligent brute force using empty passwords, known vendor default credentials, as well as a dictionary of common usernames and passwords. Many vendor products come preconfigured with default (and thus well-known) usernames and passwords that should be deleted prior to usage in a production environment. It is a common mistake to forget to remove these default login credentials. Another problem is that users would pick very simple (common) passwords (e.g. \"secret\" or \"password\") that make it easier for the attacker to gain access to the system compared to using a brute force attack or even a dictionary attack using a full dictionary.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "49",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "600",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "560",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "561",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "653",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The system uses one factor password based authentication.The adversary has the means to interact with the system."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "An adversary just needs to gain access to common default usernames/passwords specific to the technologies used by the system. Additionally, a brute force attack leveraging common passwords can be easily realized if the user name is known."
+      }
+    ],
+    "resources_required": [
+      "Technology or vendor specific list of default usernames and passwords."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Delete all default account credentials that may be put in by the product vendor.",
+      "Implement a password throttling mechanism. This mechanism should take into account both the IP address and the log in name of the user.",
+      "Put together a strong password policy and make sure that all user created passwords comply with it. Alternatively automatically generate strong passwords for users.",
+      "Passwords need to be recycled to prevent aging, that is every once in a while a new password must be chosen."
+    ],
+    "example_instances": [
+      "A user sets their password to \"123\" or intentionally leaves their password blank. If the system does not have password strength enforcement against a sound password policy, this password may be admitted. Passwords like these two examples are two simple and common passwords that are easily able to be guessed by the adversary.",
+      "Cisco 2700 Series Wireless Location Appliances (version 2.1.34.0 and earlier) have a default administrator username \"root\" with a password \"password\". This allows remote attackers to easily obtain administrative privileges. See also: CVE-2006-5288",
+      "In April 2019, adversaries attacked several popular IoT devices (a VOIP phone, an office printer, and a video decoder) across multiple customer locations. An investigation conducted by the Microsoft Security Resposne Center (MSRC) discovered that these devices were used to gain initial access to corporate networks. In two of the cases, the passwords for the devices were deployed without changing the default manufacturer’s passwords and in the third instance the latest security update had not been applied to the device. [REF-572]"
+    ],
+    "related_weaknesses": [
+      "521",
+      "262",
+      "263",
+      "798",
+      "654",
+      "308",
+      "309"
+    ],
+    "matched_cwes": [
+      "521",
+      "798"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1078.001",
+        "entry_name": "Valid Accounts:Default Accounts"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "choose_their_own_passwords",
+      "attributes": {}
+    },
+    {
+      "id": "admit_if_the_system_does_not_have_password_strength_enforcement_against_a_sound_password_policy",
+      "attributes": {}
+    },
+    {
+      "id": "have_a_default_administrator_username_root_with_a_password_password",
+      "attributes": {}
+    },
+    {
+      "id": "attack_several_popular_iot_devices_a_voip_phone_an_office_printer_and_a_video_decoder_across_multiple_customer_locations",
+      "attributes": {}
+    },
+    {
+      "id": "deploy_the_passwords_for_the_devices",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "choose_their_own_passwords",
+      "target": "admit_if_the_system_does_not_have_password_strength_enforcement_against_a_sound_password_policy",
+      "attributes": {}
+    },
+    {
+      "source": "admit_if_the_system_does_not_have_password_strength_enforcement_against_a_sound_password_policy",
+      "target": "have_a_default_administrator_username_root_with_a_password_password",
+      "attributes": {}
+    },
+    {
+      "source": "have_a_default_administrator_username_root_with_a_password_password",
+      "target": "attack_several_popular_iot_devices_a_voip_phone_an_office_printer_and_a_video_decoder_across_multiple_customer_locations",
+      "attributes": {}
+    },
+    {
+      "source": "attack_several_popular_iot_devices_a_voip_phone_an_office_printer_and_a_video_decoder_across_multiple_customer_locations",
+      "target": "deploy_the_passwords_for_the_devices",
+      "attributes": {}
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "graph": {
+    "capec_id": "66",
+    "name": "SQL Injection",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "This attack exploits target software that constructs SQL statements based on user input. An attacker crafts input strings so that when the target software constructs SQL statements based on the input, the resulting SQL statement performs actions other than those the application intended. SQL Injection results from failure of the application to appropriately validate input.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "248",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "SQL queries used by the application to store, retrieve or modify data.",
+      "User-controllable input that is not properly validated by the application as part of SQL queries."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "It is fairly simple for someone with basic SQL knowledge to perform SQL injection, in general. In certain instances, however, specific knowledge of the database employed may be required."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Strong input validation - All user-controllable input must be validated and filtered for illegal characters as well as SQL content. Keywords such as UNION, SELECT or INSERT must be filtered in addition to characters such as a single-quote(') or SQL-comments (--) based on the context in which they appear.",
+      "Use of parameterized queries or stored procedures - Parameterization causes the input to be restricted to certain domains, such as strings or integers, and any input outside such domains is considered invalid and the query fails. Note that SQL Injection is possible even in the presence of stored procedures if the eventual query is constructed dynamically.",
+      "Use of custom error pages - Attackers can glean information about the nature of queries from descriptive error messages. Input validation must be coupled with customized error pages that inform about an error without disclosing information about the database or application."
+    ],
+    "example_instances": [
+      "With PHP-Nuke versions 7.9 and earlier, an attacker can successfully access and modify data, including sensitive contents such as usernames and password hashes, and compromise the application through SQL Injection. The protection mechanism against SQL Injection employs a denylist approach to input validation. However, because of an improper denylist, it is possible to inject content such as \"foo'/**/UNION\" or \"foo UNION/**/\" to bypass validation and glean sensitive information from the database. See also: CVE-2006-5525"
+    ],
+    "related_weaknesses": [
+      "89",
+      "1286"
+    ],
+    "matched_cwes": [
+      "1286",
+      "89"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "19",
+        "entry_name": "SQL Injection"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "SQL Injection"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey application] The attacker first takes an inventory of the functionality exposed by the application.",
+        "techniques": [
+          "Spider web sites for all available links",
+          "Sniff network communications with application using a utility such as WireShark."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Determine user-controllable input susceptible to injection] Determine the user-controllable input susceptible to injection. For each user-controllable input that the attacker suspects is vulnerable to SQL injection, attempt to inject characters that have special meaning in SQL (such as a single quote character, a double quote character, two hyphens, a parenthesis, etc.). The goal is to create a SQL query with an invalid syntax.",
+        "techniques": [
+          "Use web browser to inject input through text fields or through HTTP GET parameters.",
+          "Use a web application debugging tool such as Tamper Data, TamperIE, WebScarab,etc. to modify HTTP POST parameters, hidden fields, non-freeform fields, etc.",
+          "Use network-level packet injection tools such as netcat to inject input",
+          "Use modified client (modified by reverse engineering) to inject input."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Experiment with SQL Injection vulnerabilities] After determining that a given input is vulnerable to SQL Injection, hypothesize what the underlying query looks like. Iteratively try to add logic to the query to extract information from the database, or to modify or delete information in the database.",
+        "techniques": [
+          "Use public resources such as \"SQL Injection Cheat Sheet\" at http://ferruh.mavituna.com/makale/sql-injection-cheatsheet/, and try different approaches for adding logic to SQL queries.",
+          "Add logic to query, and use detailed error messages from the server to debug the query. For example, if adding a single quote to a query causes an error message, try : \"' OR 1=1; --\", or something else that would syntactically complete a hypothesized query. Iteratively refine the query.",
+          "Use \"Blind SQL Injection\" techniques to extract information about the database schema.",
+          "If a denial of service attack is the goal, try stacking queries. This does not work on all platforms (most notably, it does not work on Oracle or MySQL). Examples of inputs to try include: \"'; DROP TABLE SYSOBJECTS; --\" and \"'); DROP TABLE SYSOBJECTS; --\". These particular queries will likely not work because the SYSOBJECTS table is generally protected."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Exploit SQL Injection vulnerability] After refining and adding various logic to SQL queries, craft and execute the underlying SQL query that will be used to attack the target system. The goal is to reveal, modify, and/or delete database data, using the knowledge obtained in the previous step. This could entail crafting and executing multiple SQL queries if a denial of service attack is the intent.",
+        "techniques": [
+          "Craft and Execute underlying SQL query"
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "take_an_inventory_of_the_entry_points_of_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "use_a_utility_such_as_wireshark",
+      "attributes": {}
+    },
+    {
+      "id": "determine_user_controllable_input_susceptible_to_injection",
+      "attributes": {}
+    },
+    {
+      "id": "inject_characters_that_have_special_meaning_in_sql_such_as_a_single_quote_character_a_double_quote_character_two_hyphens_a_parenthesis_etc",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_sql_query",
+      "attributes": {}
+    },
+    {
+      "id": "inject_input",
+      "attributes": {}
+    },
+    {
+      "id": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "id": "vulnerabilitie_after_determining_that_a_given_input_is_vulnerable_to_sql_injection_hypothesize_the_underlying_query_looks_what_like",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_add_logic_to_the_query_to_extract_information_from_the_database_or_to_modify_or_delete_information_in_the_database",
+      "attributes": {}
+    },
+    {
+      "id": "try_different_approaches_for_adding_logic_to_sql_queries",
+      "attributes": {}
+    },
+    {
+      "id": "add_logic",
+      "attributes": {}
+    },
+    {
+      "id": "add_a_single_quote",
+      "attributes": {}
+    },
+    {
+      "id": "refine_the_query",
+      "attributes": {}
+    },
+    {
+      "id": "extract_information_about_database_schema",
+      "attributes": {}
+    },
+    {
+      "id": "try_if_a_denial_of_service_attack_is_the_goal",
+      "attributes": {}
+    },
+    {
+      "id": "work_most_notably_it_does_not_work_on_oracle_or_mysql",
+      "attributes": {}
+    },
+    {
+      "id": "work_because_the_sysobjects_table_is_generally_protected",
+      "attributes": {}
+    },
+    {
+      "id": "entail_crafting_and_executing_multiple_sql_queries",
+      "attributes": {}
+    },
+    {
+      "id": "employ_a_denylist_approach",
+      "attributes": {}
+    },
+    {
+      "id": "inject_content_such_as_foo_union_or_foo_union_to_bypass_validation_and_glean_sensitive_information_from_the_database",
+      "attributes": {}
+    },
+    {
+      "id": "validate_that",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "take_an_inventory_of_the_entry_points_of_the_application",
+      "target": "use_a_utility_such_as_wireshark",
+      "attributes": {}
+    },
+    {
+      "source": "use_a_utility_such_as_wireshark",
+      "target": "determine_user_controllable_input_susceptible_to_injection",
+      "attributes": {}
+    },
+    {
+      "source": "determine_user_controllable_input_susceptible_to_injection",
+      "target": "inject_characters_that_have_special_meaning_in_sql_such_as_a_single_quote_character_a_double_quote_character_two_hyphens_a_parenthesis_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_characters_that_have_special_meaning_in_sql_such_as_a_single_quote_character_a_double_quote_character_two_hyphens_a_parenthesis_etc",
+      "target": "create_a_sql_query",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_sql_query",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "vulnerabilitie_after_determining_that_a_given_input_is_vulnerable_to_sql_injection_hypothesize_the_underlying_query_looks_what_like",
+      "attributes": {}
+    },
+    {
+      "source": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "vulnerabilitie_after_determining_that_a_given_input_is_vulnerable_to_sql_injection_hypothesize_the_underlying_query_looks_what_like",
+      "target": "try_to_add_logic_to_the_query_to_extract_information_from_the_database_or_to_modify_or_delete_information_in_the_database",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_add_logic_to_the_query_to_extract_information_from_the_database_or_to_modify_or_delete_information_in_the_database",
+      "target": "try_different_approaches_for_adding_logic_to_sql_queries",
+      "attributes": {}
+    },
+    {
+      "source": "try_different_approaches_for_adding_logic_to_sql_queries",
+      "target": "add_logic",
+      "attributes": {}
+    },
+    {
+      "source": "add_logic",
+      "target": "add_a_single_quote",
+      "attributes": {}
+    },
+    {
+      "source": "add_a_single_quote",
+      "target": "refine_the_query",
+      "attributes": {}
+    },
+    {
+      "source": "refine_the_query",
+      "target": "extract_information_about_database_schema",
+      "attributes": {}
+    },
+    {
+      "source": "extract_information_about_database_schema",
+      "target": "try_if_a_denial_of_service_attack_is_the_goal",
+      "attributes": {}
+    },
+    {
+      "source": "try_if_a_denial_of_service_attack_is_the_goal",
+      "target": "work_most_notably_it_does_not_work_on_oracle_or_mysql",
+      "attributes": {}
+    },
+    {
+      "source": "work_most_notably_it_does_not_work_on_oracle_or_mysql",
+      "target": "work_because_the_sysobjects_table_is_generally_protected",
+      "attributes": {}
+    },
+    {
+      "source": "work_because_the_sysobjects_table_is_generally_protected",
+      "target": "entail_crafting_and_executing_multiple_sql_queries",
+      "attributes": {}
+    },
+    {
+      "source": "entail_crafting_and_executing_multiple_sql_queries",
+      "target": "employ_a_denylist_approach",
+      "attributes": {}
+    },
+    {
+      "source": "employ_a_denylist_approach",
+      "target": "inject_content_such_as_foo_union_or_foo_union_to_bypass_validation_and_glean_sensitive_information_from_the_database",
+      "attributes": {}
+    },
+    {
+      "source": "inject_content_such_as_foo_union_or_foo_union_to_bypass_validation_and_glean_sensitive_information_from_the_database",
+      "target": "validate_that",
+      "attributes": {}
+    }
+  ]
+}

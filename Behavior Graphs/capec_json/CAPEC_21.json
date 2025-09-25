@@ -1,0 +1,306 @@
+{
+  "graph": {
+    "capec_id": "21",
+    "name": "Exploitation of Trusted Identifiers",
+    "abstraction": "Meta",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [],
+    "prerequisites": [
+      "Server software must rely on weak identifier proof and/or verification schemes.",
+      "Identifiers must have long lifetimes and potential for reusability.",
+      "Server software must allow concurrent sessions to exist."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To achieve a direct connection with the weak or non-existent server session access control, and pose as an authorized user"
+      }
+    ],
+    "resources_required": [
+      "Ability to deploy software on network.",
+      "Ability to communicate synchronously or asynchronously with server."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Design: utilize strong federated identity such as SAML to encrypt and sign identity tokens in transit.",
+      "Implementation: Use industry standards session key generation mechanisms that utilize high amount of entropy to generate the session key. Many standard web and application servers will perform this task on your behalf.",
+      "Implementation: If the identifier is used for authentication, such as in the so-called single sign on use cases, then ensure that it is protected at the same level of assurance as authentication tokens.",
+      "Implementation: If the web or application server supports it, then encrypting and/or signing the identifier (such as cookie) can protect the ID if intercepted.",
+      "Design: Use strong session identifiers that are protected in transit and at rest.",
+      "Implementation: Utilize a session timeout for all sessions, for example 20 minutes. If the user does not explicitly logout, the server terminates their session after this period of inactivity. If the user logs back in then a new session key is generated.",
+      "Implementation: Verify authenticity of all identifiers at runtime."
+    ],
+    "example_instances": [
+      "Thin client applications like web applications are particularly vulnerable to session ID attacks. Since the server has very little control over the client, but still must track sessions, data, and objects on the server side, cookies and other mechanisms have been used to pass the key to the session data between the client and server. When these session keys are compromised it is trivial for an adversary to impersonate a user's session in effect, have the same capabilities as the authorized user. There are two main ways for an adversary to exploit session IDs. A brute force attack involves an adversary repeatedly attempting to query the system with a spoofed session header in the HTTP request. A web server that uses a short session ID can be easily spoofed by trying many possible combinations so the parameters session-ID= 1234 has few possible combinations, and an adversary can retry several hundred or thousand request with little to no issue on their side. The second method is interception, where a tool such as wireshark is used to sniff the wire and pull off any unprotected session identifiers. The adversary can then use these variables and access the application.",
+      "For example, in a message queuing system that allows service requesters to post messages to its queue through an open channel (such as anonymous FTP), authorization is done through checking group or role membership contained in the posted message. However, there is no proof that the message itself, the information in the message (such group or role membership), or the process that wrote the message to the queue is authentic and authorized to do so."
+    ],
+    "related_weaknesses": [
+      "290",
+      "302",
+      "346",
+      "539",
+      "6",
+      "384",
+      "664",
+      "602",
+      "642"
+    ],
+    "matched_cwes": [
+      "384",
+      "602",
+      "290"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1134",
+        "entry_name": "Access Token Manipulation"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1528",
+        "entry_name": "Steal Application Access Token"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1539",
+        "entry_name": "Steal Web Session Cookie"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the application for Indicators of Susceptibility] Using a variety of methods, until one is found that applies to the target, the adversary probes for cookies, session tokens, or entry points that bypass identifiers altogether.",
+        "techniques": [
+          "Spider all available pages",
+          "Attack known bad interfaces",
+          "Search outward-facing configuration and properties files for identifiers."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Fetch samples] The adversary fetches many samples of identifiers. This may be through legitimate access (logging in, legitimate connections, etc.) or via systematic probing.",
+        "techniques": [
+          "An adversary makes many anonymous connections and records the session IDs assigned.",
+          "An adversary makes authorized connections and records the session tokens or credentials issued.",
+          "An adversary gains access to (legitimately or illegitimately) a nearby system (e.g., in the same operations network, DMZ, or local network) and makes a connection from it, attempting to gain the same privileges as a trusted system."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Impersonate] An adversary can use successful experiments or authentications to impersonate an authorized user or system or to laterally move within a system or application",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Spoofing] Malicious data can be injected into the target system or into a victim user's system by an adversary. The adversary can also pose as a legitimate user to perform social engineering attacks.",
+        "techniques": []
+      },
+      {
+        "step": "5",
+        "phase": "Exploit",
+        "description": "[Data Exfiltration] The adversary can obtain sensitive data contained within the system or application.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_application_for_indicators_of_susceptibility",
+      "attributes": {}
+    },
+    {
+      "id": "spider_the_web_site_for_all_available_links",
+      "attributes": {}
+    },
+    {
+      "id": "know_bad_interfaces",
+      "attributes": {}
+    },
+    {
+      "id": "examine_outward_facing_configuration_and_properties",
+      "attributes": {}
+    },
+    {
+      "id": "fetch_many_samples_of_identifiers",
+      "attributes": {}
+    },
+    {
+      "id": "make_many_anonymous_connections",
+      "attributes": {}
+    },
+    {
+      "id": "make_authorized_connections_and_records_the_session_tokens_or_credentials_issued",
+      "attributes": {}
+    },
+    {
+      "id": "gain_access_to_legitimately_or_illegitimately",
+      "attributes": {}
+    },
+    {
+      "id": "impersonate_an_authorized_user_or_system",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "attributes": {}
+    },
+    {
+      "id": "track_sessions_data_and_objects_on_the_server_side_cookies_and_other_mechanisms",
+      "attributes": {}
+    },
+    {
+      "id": "compromise_these_session_keys",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_session_ids",
+      "attributes": {}
+    },
+    {
+      "id": "involve_an_adversary_repeatedly_attempting_to_query_the_system_with_a_spoofed_session_header_in_the_http_request",
+      "attributes": {}
+    },
+    {
+      "id": "spoof_id",
+      "attributes": {}
+    },
+    {
+      "id": "sniff_the_wire",
+      "attributes": {}
+    },
+    {
+      "id": "access_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "send_a_message",
+      "attributes": {}
+    },
+    {
+      "id": "have_long_lifetimes_and_potential_for_reusability",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_application_for_indicators_of_susceptibility",
+      "target": "spider_the_web_site_for_all_available_links",
+      "attributes": {}
+    },
+    {
+      "source": "spider_the_web_site_for_all_available_links",
+      "target": "know_bad_interfaces",
+      "attributes": {}
+    },
+    {
+      "source": "know_bad_interfaces",
+      "target": "examine_outward_facing_configuration_and_properties",
+      "attributes": {}
+    },
+    {
+      "source": "examine_outward_facing_configuration_and_properties",
+      "target": "fetch_many_samples_of_identifiers",
+      "attributes": {}
+    },
+    {
+      "source": "fetch_many_samples_of_identifiers",
+      "target": "make_many_anonymous_connections",
+      "attributes": {}
+    },
+    {
+      "source": "make_many_anonymous_connections",
+      "target": "make_authorized_connections_and_records_the_session_tokens_or_credentials_issued",
+      "attributes": {}
+    },
+    {
+      "source": "make_authorized_connections_and_records_the_session_tokens_or_credentials_issued",
+      "target": "gain_access_to_legitimately_or_illegitimately",
+      "attributes": {}
+    },
+    {
+      "source": "gain_access_to_legitimately_or_illegitimately",
+      "target": "impersonate_an_authorized_user_or_system",
+      "attributes": {}
+    },
+    {
+      "source": "impersonate_an_authorized_user_or_system",
+      "target": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_sensitive_data_contained_within_the_system_or_application",
+      "target": "track_sessions_data_and_objects_on_the_server_side_cookies_and_other_mechanisms",
+      "attributes": {}
+    },
+    {
+      "source": "track_sessions_data_and_objects_on_the_server_side_cookies_and_other_mechanisms",
+      "target": "compromise_these_session_keys",
+      "attributes": {}
+    },
+    {
+      "source": "compromise_these_session_keys",
+      "target": "exploit_session_ids",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_session_ids",
+      "target": "involve_an_adversary_repeatedly_attempting_to_query_the_system_with_a_spoofed_session_header_in_the_http_request",
+      "attributes": {}
+    },
+    {
+      "source": "involve_an_adversary_repeatedly_attempting_to_query_the_system_with_a_spoofed_session_header_in_the_http_request",
+      "target": "spoof_id",
+      "attributes": {}
+    },
+    {
+      "source": "spoof_id",
+      "target": "sniff_the_wire",
+      "attributes": {}
+    },
+    {
+      "source": "sniff_the_wire",
+      "target": "access_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "access_the_application",
+      "target": "send_a_message",
+      "attributes": {}
+    },
+    {
+      "source": "send_a_message",
+      "target": "have_long_lifetimes_and_potential_for_reusability",
+      "attributes": {}
+    }
+  ]
+}

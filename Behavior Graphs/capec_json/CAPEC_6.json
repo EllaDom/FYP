@@ -1,0 +1,191 @@
+{
+  "graph": {
+    "capec_id": "6",
+    "name": "Argument Injection",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An attacker changes the behavior or state of a targeted application through injecting data or command syntax through the targets use of non-validated and non-filtered arguments of exposed services or methods.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "137",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Target software fails to strip all user-supplied input of any content that could cause the shell to perform unexpected actions.",
+      "Software must allow for unvalidated or unfiltered input to be executed on operating system shell, and, optionally, the system configuration must allow for output to be sent back to client."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The attacker has to identify injection vector, identify the operating system-specific commands, and optionally collect the output."
+      }
+    ],
+    "resources_required": [
+      "Ability to communicate synchronously or asynchronously with server. Optionally, ability to capture output directly through synchronous communication or other method such as FTP."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Design: Do not program input values directly on command shell, instead treat user input as guilty until proven innocent. Build a function that takes user input and converts it to applications specific types and values, stripping or filtering out all unauthorized commands and characters in the process.",
+      "Design: Limit program privileges, so if metacharacters or other methods circumvent program input validation routines and shell access is attained then it is not running under a privileged account. chroot jails create a sandbox for the application to execute in, making it more difficult for an attacker to elevate privilege even in the case that a compromise has occurred.",
+      "Implementation: Implement an audit log that is written to a separate host, in the event of a compromise the audit log may be able to provide evidence and details of the compromise."
+    ],
+    "example_instances": [
+      "A recent example instance of argument injection occurred against Java Web Start technology, which eases the client side deployment for Java programs. The JNLP files that are used to describe the properties for the program. The client side Java runtime used the arguments in the property setting to define execution parameters, but if the attacker appends commands to an otherwise legitimate property file, then these commands are sent to the client command shell. [REF-482]"
+    ],
+    "related_weaknesses": [
+      "74",
+      "146",
+      "184",
+      "78",
+      "185",
+      "697"
+    ],
+    "matched_cwes": [
+      "74",
+      "78"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Discovery of potential injection vectors] Using an automated tool or manual discovery, the attacker identifies services or methods with arguments that could potentially be used as injection vectors (OS, API, SQL procedures, etc.).",
+        "techniques": [
+          "Manually cover the application and record the possible places where arguments could be passed into external systems.",
+          "Use a spider, for web applications, to create a list of URLs and associated inputs."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[1. Attempt variations on argument content] Possibly using an automated tool, the attacker will perform injection variations of the arguments.",
+        "techniques": [
+          "Use a very large list of probe strings in order to detect if there is a positive result, and, what type of system has been targeted (if obscure).",
+          "Use a proxy tool to record results, error messages and/or log if accessible."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Abuse of the application] The attacker injects specific syntax into a particular argument in order to generate a specific malicious effect in the targeted application.",
+        "techniques": [
+          "Manually inject specific payload into targeted argument."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "cover_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_list_of_urls_and_associated_inputs",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_variations_on_argument_content",
+      "attributes": {}
+    },
+    {
+      "id": "detect_if_there_is_a_positive_result",
+      "attributes": {}
+    },
+    {
+      "id": "record_results",
+      "attributes": {}
+    },
+    {
+      "id": "inject_specific_syntax",
+      "attributes": {}
+    },
+    {
+      "id": "inject_the_payload",
+      "attributes": {}
+    },
+    {
+      "id": "describe_the_properties",
+      "attributes": {}
+    },
+    {
+      "id": "define_execution_parameters",
+      "attributes": {}
+    },
+    {
+      "id": "fail_to_strip_all_user_supplied_input_of_any_content_that_could_cause_the_shell_to_perform_unexpected_actions",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "cover_the_application",
+      "target": "create_a_list_of_urls_and_associated_inputs",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_list_of_urls_and_associated_inputs",
+      "target": "attempt_variations_on_argument_content",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_variations_on_argument_content",
+      "target": "detect_if_there_is_a_positive_result",
+      "attributes": {}
+    },
+    {
+      "source": "detect_if_there_is_a_positive_result",
+      "target": "record_results",
+      "attributes": {}
+    },
+    {
+      "source": "record_results",
+      "target": "inject_specific_syntax",
+      "attributes": {}
+    },
+    {
+      "source": "inject_specific_syntax",
+      "target": "inject_the_payload",
+      "attributes": {}
+    },
+    {
+      "source": "inject_the_payload",
+      "target": "describe_the_properties",
+      "attributes": {}
+    },
+    {
+      "source": "describe_the_properties",
+      "target": "define_execution_parameters",
+      "attributes": {}
+    },
+    {
+      "source": "define_execution_parameters",
+      "target": "fail_to_strip_all_user_supplied_input_of_any_content_that_could_cause_the_shell_to_perform_unexpected_actions",
+      "attributes": {}
+    }
+  ]
+}

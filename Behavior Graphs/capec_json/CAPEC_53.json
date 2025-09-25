@@ -1,0 +1,222 @@
+{
+  "graph": {
+    "capec_id": "53",
+    "name": "Postfix, Null Terminate, and Backslash",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "If a string is passed through a filter of some kind, then a terminal NULL may not be valid. Using alternate representation of NULL allows an adversary to embed the NULL mid-string while postfixing the proper data so that the filter is avoided. One example is a filter that looks for a trailing slash character. If a string insertion is possible, but the slash must exist, an alternate encoding of NULL in mid-string may be used.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "267",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Null terminators are not properly handled by the filter."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "An adversary needs to understand alternate encodings, what the filter looks for and the data format acceptable to the target API"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Properly handle Null characters. Make sure canonicalization is properly applied. Do not pass Null characters to the underlying APIs.",
+      "Assume all input is malicious. Create an allowlist that defines all valid input to the software system based on the requirements specifications. Input that does not match against the allowlist should not be permitted to enter into the system."
+    ],
+    "example_instances": [
+      "A rather simple injection is possible in a URL: http://getAccessHostname/sekbin/  helpwin.gas.bat?mode=&draw=x&file=x&module=&locale=[insert relative path here]  [%00][%5C]&chapter= This attack has appeared with regularity in the wild. There are many variations of this kind of attack. Spending a short amount of time injecting against Web applications will usually result in a new exploit being discovered."
+    ],
+    "related_weaknesses": [
+      "158",
+      "172",
+      "173",
+      "74",
+      "20",
+      "697",
+      "707"
+    ],
+    "matched_cwes": [
+      "20",
+      "74",
+      "707"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the application for user-controllable inputs] Using a browser, an automated tool or by inspecting the application, an adversary records all entry points to the application.",
+        "techniques": [
+          "Use a spidering tool to follow and record all links and analyze the web pages to find entry points. Make special note of any links that include parameters in the URL.",
+          "Use a proxy tool to record all user input entry points visited during a manual traversal of the web application.",
+          "Use a browser to manually explore the website and analyze how it is constructed. Many browsers' plugins are available to facilitate the analysis or automate the discovery.",
+          "Manually inspect the application to find entry points."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Probe entry points to locate vulnerabilities] The adversary uses the entry points gathered in the \"Explore\" phase as a target list and injects postfix null byte(s) followed by a backslash to observe how the application handles them as input. The adversary is looking for areas where user input is placed in the middle of a string, and the null byte causes the application to stop processing the string at the end of the user input.",
+        "techniques": [
+          "Try different encodings for null such as \\0 or %00 followed by an encoding for the backslash character."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Remove data after null byte(s)] After determined entry points that are vulnerable, the adversary places a null byte(s) followed by a backslash such that they bypass an input filter and remove data after the null byte(s) in a way that is beneficial to them.",
+        "techniques": [
+          "If the input is a directory as part of a longer file path, add a null byte(s) followed by a backslash at the end of the input to try to traverse to the given directory."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_application_for_user_controllable_inputs",
+      "attributes": {}
+    },
+    {
+      "id": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "id": "inspect_the_application_to_find_entry_points",
+      "attributes": {}
+    },
+    {
+      "id": "locate_vulnerabilities",
+      "attributes": {}
+    },
+    {
+      "id": "try_different_encodings_for_null_such_as_0_or",
+      "attributes": {}
+    },
+    {
+      "id": "remove_data",
+      "attributes": {}
+    },
+    {
+      "id": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "id": "be_many_variations_of_this_kind_of_attack",
+      "attributes": {}
+    },
+    {
+      "id": "spend_a_short_amount_of_time_injecting_against_web_applications",
+      "attributes": {}
+    },
+    {
+      "id": "handle_null_terminators",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_application_for_user_controllable_inputs",
+      "target": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "source": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "source": "facilitate_the_analysis",
+      "target": "inspect_the_application_to_find_entry_points",
+      "attributes": {}
+    },
+    {
+      "source": "inspect_the_application_to_find_entry_points",
+      "target": "locate_vulnerabilities",
+      "attributes": {}
+    },
+    {
+      "source": "locate_vulnerabilities",
+      "target": "try_different_encodings_for_null_such_as_0_or",
+      "attributes": {}
+    },
+    {
+      "source": "try_different_encodings_for_null_such_as_0_or",
+      "target": "remove_data",
+      "attributes": {}
+    },
+    {
+      "source": "remove_data",
+      "target": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "source": "append_a_null_byte",
+      "target": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "source": "append_a_null_byte",
+      "target": "be_many_variations_of_this_kind_of_attack",
+      "attributes": {}
+    },
+    {
+      "source": "be_many_variations_of_this_kind_of_attack",
+      "target": "spend_a_short_amount_of_time_injecting_against_web_applications",
+      "attributes": {}
+    },
+    {
+      "source": "spend_a_short_amount_of_time_injecting_against_web_applications",
+      "target": "handle_null_terminators",
+      "attributes": {}
+    }
+  ]
+}

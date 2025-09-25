@@ -1,0 +1,295 @@
+{
+  "graph": {
+    "capec_id": "61",
+    "name": "Session Fixation",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "The attacker induces a client to establish a session with the target software using a session identifier provided by the attacker. Once the user successfully authenticates to the target software, the attacker uses the (now privileged) session identifier in their own transactions. This attack leverages the fact that the target software either relies on client-generated session identifiers or maintains the same session identifiers after privilege elevation.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "593",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Session identifiers that remain unchanged when the privilege levels change.",
+      "Permissive session management mechanism that accepts random user-generated session identifiers",
+      "Predictable session identifiers"
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Only basic skills are required to determine and fixate session identifiers in a user's browser. Subsequent attacks may require greater skill levels depending on the attackers' motives."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Use a strict session management mechanism that only accepts locally generated session identifiers: This prevents attackers from fixating session identifiers of their own choice.",
+      "Regenerate and destroy session identifiers when there is a change in the level of privilege: This ensures that even though a potential victim may have followed a link with a fixated identifier, a new one is issued when the level of privilege changes.",
+      "Use session identifiers that are difficult to guess or brute-force: One way for the attackers to obtain valid session identifiers is by brute-forcing or guessing them. By choosing session identifiers that are sufficiently random, brute-forcing or guessing becomes very difficult."
+    ],
+    "example_instances": [
+      "Consider a banking application that issues a session identifier in the URL to a user before login, and uses the same identifier to identify the customer following successful authentication. An attacker can easily leverage session fixation to access a victim's account by having the victim click on a forged link that contains a valid session identifier from a trapped session setup by the attacker. Once the victim is authenticated, the attacker can take over the session and continue with the same levels of privilege as the victim.",
+      "An attacker can hijack user sessions, bypass authentication controls and possibly gain administrative privilege by fixating the session of a user authenticating to the Management Console on certain versions of Macromedia JRun 4.0. This can be achieved by setting the session identifier in the user's browser and having the user authenticate to the Management Console. Session fixation is possible since the application server does not regenerate session identifiers when there is a change in the privilege levels. See also: CVE-2004-2182"
+    ],
+    "related_weaknesses": [
+      "384",
+      "664",
+      "732"
+    ],
+    "matched_cwes": [
+      "384",
+      "732"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "37",
+        "entry_name": "Session Fixation"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Session fixation"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Setup the Attack] Setup a session: The attacker has to setup a trap session that provides a valid session identifier, or select an arbitrary identifier, depending on the mechanism employed by the application. A trap session is a dummy session established with the application by the attacker and is used solely for the purpose of obtaining valid session identifiers. The attacker may also be required to periodically refresh the trap session in order to obtain valid session identifiers.",
+        "techniques": [
+          "The attacker chooses a predefined identifier that they know.",
+          "The attacker creates a trap session for the victim."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Attract a Victim] Fixate the session: The attacker now needs to transfer the session identifier from the trap session to the victim by introducing the session identifier into the victim's browser. This is known as fixating the session. The session identifier can be introduced into the victim's browser by leveraging cross site scripting vulnerability, using META tags or setting HTTP response headers in a variety of ways.",
+        "techniques": [
+          "Attackers can put links on web sites (such as forums, blogs, or comment forms).",
+          "Attackers can establish rogue proxy servers for network protocols that give out the session ID and then redirect the connection to the legitimate service.",
+          "Attackers can email attack URLs to potential victims through spam and phishing techniques."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Abuse the Victim's Session] Takeover the fixated session: Once the victim has achieved a higher level of privilege, possibly by logging into the application, the attacker can now take over the session using the fixated session identifier.",
+        "techniques": [
+          "The attacker loads the predefined session ID into their browser and browses to protected data or functionality.",
+          "The attacker loads the predefined session ID into their software and utilizes functionality with the rights of the victim."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "setup_the_attack",
+      "attributes": {}
+    },
+    {
+      "id": "setup_a_trap_session_that_provides_a_valid_session_identifier",
+      "attributes": {}
+    },
+    {
+      "id": "enable_the_attacker",
+      "attributes": {}
+    },
+    {
+      "id": "choose_a_predefined_identifier",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_trap_session_for_the_victim",
+      "attributes": {}
+    },
+    {
+      "id": "attract_a_victim",
+      "attributes": {}
+    },
+    {
+      "id": "know_this",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_session_ids",
+      "attributes": {}
+    },
+    {
+      "id": "put_links_on_web_sites_such_as_forums_blogs_or_comment_forms",
+      "attributes": {}
+    },
+    {
+      "id": "establish_rogue_proxy_servers_for_network_protocols_that_give_out_the_session_id_and_then_redirect_the_connection_to_the_legitimate_service",
+      "attributes": {}
+    },
+    {
+      "id": "email_attack_urls",
+      "attributes": {}
+    },
+    {
+      "id": "achieve_a_higher_level_of_privilege",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_session_id",
+      "attributes": {}
+    },
+    {
+      "id": "consider_a_banking_application_that_issues_a_session_identifier_in_the_url_to_a_user_before_login",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_sessions",
+      "attributes": {}
+    },
+    {
+      "id": "authenticate_the_victim",
+      "attributes": {}
+    },
+    {
+      "id": "hijack_user_sessions_bypass_authentication_controls",
+      "attributes": {}
+    },
+    {
+      "id": "achieve_this",
+      "attributes": {}
+    },
+    {
+      "id": "regenerate_session_identifiers",
+      "attributes": {}
+    },
+    {
+      "id": "remain_when_the_privilege_levels_change",
+      "attributes": {}
+    },
+    {
+      "id": "accept_random_user_generated_session_identifiers",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "setup_the_attack",
+      "target": "setup_a_trap_session_that_provides_a_valid_session_identifier",
+      "attributes": {}
+    },
+    {
+      "source": "setup_a_trap_session_that_provides_a_valid_session_identifier",
+      "target": "enable_the_attacker",
+      "attributes": {}
+    },
+    {
+      "source": "enable_the_attacker",
+      "target": "choose_a_predefined_identifier",
+      "attributes": {}
+    },
+    {
+      "source": "choose_a_predefined_identifier",
+      "target": "create_a_trap_session_for_the_victim",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_trap_session_for_the_victim",
+      "target": "attract_a_victim",
+      "attributes": {}
+    },
+    {
+      "source": "attract_a_victim",
+      "target": "know_this",
+      "attributes": {}
+    },
+    {
+      "source": "know_this",
+      "target": "exploit_session_ids",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_session_ids",
+      "target": "put_links_on_web_sites_such_as_forums_blogs_or_comment_forms",
+      "attributes": {}
+    },
+    {
+      "source": "put_links_on_web_sites_such_as_forums_blogs_or_comment_forms",
+      "target": "establish_rogue_proxy_servers_for_network_protocols_that_give_out_the_session_id_and_then_redirect_the_connection_to_the_legitimate_service",
+      "attributes": {}
+    },
+    {
+      "source": "establish_rogue_proxy_servers_for_network_protocols_that_give_out_the_session_id_and_then_redirect_the_connection_to_the_legitimate_service",
+      "target": "email_attack_urls",
+      "attributes": {}
+    },
+    {
+      "source": "email_attack_urls",
+      "target": "achieve_a_higher_level_of_privilege",
+      "attributes": {}
+    },
+    {
+      "source": "achieve_a_higher_level_of_privilege",
+      "target": "load_the_session_id",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_session_id",
+      "target": "load_the_session_id",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_session_id",
+      "target": "consider_a_banking_application_that_issues_a_session_identifier_in_the_url_to_a_user_before_login",
+      "attributes": {}
+    },
+    {
+      "source": "consider_a_banking_application_that_issues_a_session_identifier_in_the_url_to_a_user_before_login",
+      "target": "leverage_sessions",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_sessions",
+      "target": "authenticate_the_victim",
+      "attributes": {}
+    },
+    {
+      "source": "authenticate_the_victim",
+      "target": "hijack_user_sessions_bypass_authentication_controls",
+      "attributes": {}
+    },
+    {
+      "source": "hijack_user_sessions_bypass_authentication_controls",
+      "target": "achieve_this",
+      "attributes": {}
+    },
+    {
+      "source": "achieve_this",
+      "target": "regenerate_session_identifiers",
+      "attributes": {}
+    },
+    {
+      "source": "regenerate_session_identifiers",
+      "target": "remain_when_the_privilege_levels_change",
+      "attributes": {}
+    },
+    {
+      "source": "remain_when_the_privilege_levels_change",
+      "target": "accept_random_user_generated_session_identifiers",
+      "attributes": {}
+    }
+  ]
+}

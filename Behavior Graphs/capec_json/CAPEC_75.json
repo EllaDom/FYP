@@ -1,0 +1,105 @@
+{
+  "graph": {
+    "capec_id": "75",
+    "name": "Manipulating Writeable Configuration Files",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "Generally these are manually edited files that are not in the preview of the system administrators, any ability on the attackers' behalf to modify these files, for example in a CVS repository, gives unauthorized access directly to the application, the same as authorized users.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "176",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Configuration files must be modifiable by the attacker"
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "To identify vulnerable configuration files, and understand how to manipulate servers and erase forensic evidence"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Design: Enforce principle of least privilege",
+      "Design: Backup copies of all configuration files",
+      "Implementation: Integrity monitoring for configuration files",
+      "Implementation: Enforce audit logging on code and configuration promotion procedures.",
+      "Implementation: Load configuration from separate process and memory space, for example a separate physical device like a CD"
+    ],
+    "example_instances": [
+      "The BEA Weblogic server uses a config.xml file to store configuration data. If this file is not properly protected by the system access control, an attacker can write configuration information to redirect server output through system logs, database connections, malicious URLs and so on. Access to the Weblogic server may be from a so-called Custom realm which manages authentication and authorization privileges on behalf of user principals. Given write access, the attacker can insert a pointer to a custom realm jar file in the config.xml < CustomRealm ConfigurationData=\"java.util.Properties\"  Name=\"CustomRealm\"  RealmClassName=\"Maliciousrealm.jar\"  /> The main issue with configuration files is that the attacker can leverage all the same functionality the server has, but for malicious means. Given the complexity of server configuration, these changes may be very hard for administrators to detect."
+    ],
+    "related_weaknesses": [
+      "349",
+      "99",
+      "77",
+      "346",
+      "353",
+      "354"
+    ],
+    "matched_cwes": [
+      "77"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "store_data",
+      "attributes": {}
+    },
+    {
+      "id": "protect_this_file",
+      "attributes": {}
+    },
+    {
+      "id": "give_write_access",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_all_the_same_functionality_the_server_has",
+      "attributes": {}
+    },
+    {
+      "id": "give_the_complexity_of_server_configuration",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "store_data",
+      "target": "protect_this_file",
+      "attributes": {}
+    },
+    {
+      "source": "protect_this_file",
+      "target": "give_write_access",
+      "attributes": {}
+    },
+    {
+      "source": "give_write_access",
+      "target": "leverage_all_the_same_functionality_the_server_has",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_all_the_same_functionality_the_server_has",
+      "target": "give_the_complexity_of_server_configuration",
+      "attributes": {}
+    }
+  ]
+}

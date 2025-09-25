@@ -1,0 +1,279 @@
+{
+  "graph": {
+    "capec_id": "42",
+    "name": "MIME Conversion",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker exploits a weakness in the MIME conversion routine to cause a buffer overflow and gain control over the mail server machine. The MIME system is designed to allow various different information formats to be interpreted and sent via e-mail. Attack points exist when data are converted to MIME compatible format and back.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "100",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The target system uses a mail server.",
+      "Mail server vendor has not released a patch for the MIME conversion routine, the patch itself has a security hole or does not fix the original problem, or the patch has not been applied to the user's system."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "It may be trivial to cause a DoS via this attack pattern"
+      },
+      {
+        "level": "High",
+        "description": "Causing arbitrary code to execute on the target system."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Stay up to date with third party vendor patches",
+      "Disable the 7 to 8 bit conversion. This can be done by removing the F=9 flag from all Mailer specifications in the sendmail.cf file. For example, a sendmail.cf file with these changes applied should look similar to (depending on your system and configuration): Mlocal, P=/usr/libexec/mail.local, F=lsDFMAw5:/|@qrmn, S=10/30, R=20/40, T=DNS/RFC822/X-Unix,  A=mail -d $u  Mprog, P=/bin/sh, F=lsDFMoqeu, S=10/30, R=20/40, D=$z:/,  T=X-Unix,  A=sh -c $u This can be achieved for the \"Mlocal\" and \"Mprog\" Mailers by modifying the \".mc\" file to include the following lines: define(`LOCAL_MAILER_FLAGS', ifdef(`LOCAL_MAILER_FLAGS', `translit(LOCAL_MAILER_FLAGS, `9')',  `rmn'))  define(`LOCAL_SHELL_FLAGS', ifdef(`LOCAL_SHELL_FLAGS', `translit(LOCAL_SHELL_FLAGS, `9')',  `eu')) and then rebuilding the sendmail.cf file using m4(1). From \"Exploiting Software\", please see reference below.",
+      "Use the sendmail restricted shell program (smrsh)",
+      "Use mail.local"
+    ],
+    "example_instances": [
+      "A MIME conversion buffer overflow exists in Sendmail versions 8.8.3 and 8.8.4. Sendmail versions 8.8.3 and 8.8.4 are vulnerable to a buffer overflow in the MIME handling code. By sending a message with specially-crafted headers to the server, a remote attacker can overflow a buffer and execute arbitrary commands on the system with root privileges. Sendmail performs a 7 bit to 8 bit conversion on email messages. This vulnerability is due to the fact that insufficient bounds checking was performed while performing these conversions. This gave attacker an opportunity to overwrite the internal stack of sendmail while it is executing with root privileges. An attacker first probes the target system to figure out what mail server is used on the system and what version. An attacker could then test out the exploit at their leisure on their own machine running the same version of the mail server before using it in the wild. See also: CVE-1999-0047"
+    ],
+    "related_weaknesses": [
+      "120",
+      "119",
+      "74",
+      "20"
+    ],
+    "matched_cwes": [
+      "74",
+      "20",
+      "119",
+      "120"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify target mail server] The adversary identifies a target mail server that they wish to attack.",
+        "techniques": [
+          "Use Nmap on a system to identify a mail server service."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Determine viability of attack] Determine whether the mail server is unpatched and is potentially vulnerable to one of the known MIME conversion buffer overflows (e.g. Sendmail 8.8.3 and 8.8.4).",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Find injection vector] Identify places in the system where vulnerable MIME conversion routines may be used.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Experiment",
+        "description": "[Craft overflow content] The adversary crafts e-mail messages with special headers that will cause a buffer overflow for the vulnerable MIME conversion routine. The intent of this attack is to leverage the overflow for execution of arbitrary code and gain access to the mail server machine, so the adversary will craft an email that not only overflows the targeted buffer but does so in such a way that the overwritten return address is replaced with one of the adversary's choosing.",
+        "techniques": [
+          "Create malicious shellcode that will execute when the program execution is returned to it.",
+          "Use a NOP-sled in the overflow content to more easily \"slide\" into the malicious code. This is done so that the exact return address need not be correct, only in the range of all of the NOPs"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Overflow the buffer] Send e-mail messages to the target system with specially crafted headers that trigger the buffer overflow and execute the shell code.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_web_mail_server",
+      "attributes": {}
+    },
+    {
+      "id": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "id": "identify_places_in_the_system_where_vulnerable_mime_conversion_routines_may_be_used",
+      "attributes": {}
+    },
+    {
+      "id": "craft_e",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "id": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "attributes": {}
+    },
+    {
+      "id": "sle_nop",
+      "attributes": {}
+    },
+    {
+      "id": "do_this",
+      "attributes": {}
+    },
+    {
+      "id": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "id": "handle_code",
+      "attributes": {}
+    },
+    {
+      "id": "send_a_message",
+      "attributes": {}
+    },
+    {
+      "id": "perform_a_7_bit_to_8_bit_conversion_on_email_messages",
+      "attributes": {}
+    },
+    {
+      "id": "enable_the_attacker",
+      "attributes": {}
+    },
+    {
+      "id": "probe_systems",
+      "attributes": {}
+    },
+    {
+      "id": "test_the_exploit",
+      "attributes": {}
+    },
+    {
+      "id": "use_a_mail_server",
+      "attributes": {}
+    },
+    {
+      "id": "release_a_patch_for_the_mime_conversion_routine",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_web_mail_server",
+      "target": "identify_target_web_mail_server",
+      "attributes": {}
+    },
+    {
+      "source": "identify_target_web_mail_server",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "identify_places_in_the_system_where_vulnerable_mime_conversion_routines_may_be_used",
+      "attributes": {}
+    },
+    {
+      "source": "identify_places_in_the_system_where_vulnerable_mime_conversion_routines_may_be_used",
+      "target": "craft_e",
+      "attributes": {}
+    },
+    {
+      "source": "craft_e",
+      "target": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "target": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "attributes": {}
+    },
+    {
+      "source": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "target": "sle_nop",
+      "attributes": {}
+    },
+    {
+      "source": "sle_nop",
+      "target": "do_this",
+      "attributes": {}
+    },
+    {
+      "source": "do_this",
+      "target": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "source": "overflow_the_buffer",
+      "target": "handle_code",
+      "attributes": {}
+    },
+    {
+      "source": "handle_code",
+      "target": "send_a_message",
+      "attributes": {}
+    },
+    {
+      "source": "send_a_message",
+      "target": "perform_a_7_bit_to_8_bit_conversion_on_email_messages",
+      "attributes": {}
+    },
+    {
+      "source": "perform_a_7_bit_to_8_bit_conversion_on_email_messages",
+      "target": "enable_the_attacker",
+      "attributes": {}
+    },
+    {
+      "source": "enable_the_attacker",
+      "target": "probe_systems",
+      "attributes": {}
+    },
+    {
+      "source": "probe_systems",
+      "target": "test_the_exploit",
+      "attributes": {}
+    },
+    {
+      "source": "test_the_exploit",
+      "target": "use_a_mail_server",
+      "attributes": {}
+    },
+    {
+      "source": "use_a_mail_server",
+      "target": "release_a_patch_for_the_mime_conversion_routine",
+      "attributes": {}
+    }
+  ]
+}

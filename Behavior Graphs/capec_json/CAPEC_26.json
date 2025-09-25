@@ -1,0 +1,171 @@
+{
+  "graph": {
+    "capec_id": "26",
+    "name": "Leveraging Race Conditions",
+    "abstraction": "Meta",
+    "status": "Stable",
+    "description": "The adversary targets a race condition occurring when multiple processes access and manipulate the same resource concurrently, and the outcome of the execution depends on the particular order in which the access takes place. The adversary can leverage a race condition by \"running the race\", modifying the resource and modifying the normal execution flow. For instance, a race condition can occur while accessing a file: the adversary can trick the system by replacing the original file with their version and cause the system to read the malicious file.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [],
+    "prerequisites": [
+      "A resource is accessed/modified concurrently by multiple processes such that a race condition exists.",
+      "The adversary has the ability to modify the resource."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "Being able to \"run the race\" requires basic knowledge of concurrent processing including synchonization techniques."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Use safe libraries to access resources such as files.",
+      "Be aware that improper use of access function calls such as chown(), tempfile(), chmod(), etc. can cause a race condition.",
+      "Use synchronization to control the flow of execution.",
+      "Use static analysis tools to find race conditions.",
+      "Pay attention to concurrency problems related to the access of resources."
+    ],
+    "example_instances": [
+      "The Net Direct client for Linux before 6.0.5 in Nortel Application Switch 2424, VPN 3050 and 3070, and SSL VPN Module 1000 extracts and executes files with insecure permissions, which allows local users to exploit a race condition to replace a world-writable file in /tmp/NetClient and cause another user to execute arbitrary code when attempting to execute this client, as demonstrated by replacing /tmp/NetClient/client. See also: CVE-2007-1057",
+      "The following code illustrates a file that is accessed multiple times by name in a publicly accessible directory. A race condition exists between the accesses where an attacker can replace the file referenced by the name (see [REF-107]). include <sys/types.h>  include <fcntl.h>  include <unistd.h>   define FILE \"/tmp/myfile\"  define UID 100   void test(char *str)  { int fd;  fd = creat(FILE, 0644);  if(fd == -1) return;  chown(FILE, UID, -1); /* BAD */  close(fd);  }   int main(int argc, char **argv)  { char *userstr;  if(argc > 1) { userstr = argv[1];  test(userstr);  }  return 0;  }"
+    ],
+    "related_weaknesses": [
+      "368",
+      "363",
+      "366",
+      "370",
+      "362",
+      "662",
+      "689",
+      "667",
+      "665",
+      "1223",
+      "1254",
+      "1298"
+    ],
+    "matched_cwes": [
+      "368",
+      "662"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "The adversary explores to gauge what level of access they have.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "The adversary gains access to a resource on the target host. The adversary modifies the targeted resource. The resource's value is used to determine the next normal execution action.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "The resource is modified/checked concurrently by multiple processes. By using one of the processes, the adversary is able to modify the value just before it is consumed by a different process. A race condition occurs and is exploited by the adversary to abuse the target host.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "explore_to_gauge_what_level_of_access_they_have",
+      "attributes": {}
+    },
+    {
+      "id": "gain_access_to_a_resource_on_the_target_host",
+      "attributes": {}
+    },
+    {
+      "id": "modify_the_resource",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_next_normal_execution_action",
+      "attributes": {}
+    },
+    {
+      "id": "modify_the_value",
+      "attributes": {}
+    },
+    {
+      "id": "execute_files_with_insecure_permissions_which_allows_local_users_to_exploit_a_race_condition_to_replace_a_world_writable_file_in_tmp_netclient_and_cause_another_user_to_execute_arbitrary_code_when_attempting_to_execute_this_client",
+      "attributes": {}
+    },
+    {
+      "id": "include_sys_types_h",
+      "attributes": {}
+    },
+    {
+      "id": "access_a_resource",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "explore_to_gauge_what_level_of_access_they_have",
+      "target": "gain_access_to_a_resource_on_the_target_host",
+      "attributes": {}
+    },
+    {
+      "source": "gain_access_to_a_resource_on_the_target_host",
+      "target": "modify_the_resource",
+      "attributes": {}
+    },
+    {
+      "source": "modify_the_resource",
+      "target": "determine_the_next_normal_execution_action",
+      "attributes": {}
+    },
+    {
+      "source": "modify_the_resource",
+      "target": "modify_the_value",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_next_normal_execution_action",
+      "target": "modify_the_resource",
+      "attributes": {}
+    },
+    {
+      "source": "modify_the_value",
+      "target": "execute_files_with_insecure_permissions_which_allows_local_users_to_exploit_a_race_condition_to_replace_a_world_writable_file_in_tmp_netclient_and_cause_another_user_to_execute_arbitrary_code_when_attempting_to_execute_this_client",
+      "attributes": {}
+    },
+    {
+      "source": "execute_files_with_insecure_permissions_which_allows_local_users_to_exploit_a_race_condition_to_replace_a_world_writable_file_in_tmp_netclient_and_cause_another_user_to_execute_arbitrary_code_when_attempting_to_execute_this_client",
+      "target": "include_sys_types_h",
+      "attributes": {}
+    },
+    {
+      "source": "include_sys_types_h",
+      "target": "access_a_resource",
+      "attributes": {}
+    },
+    {
+      "source": "access_a_resource",
+      "target": "modify_the_resource",
+      "attributes": {}
+    }
+  ]
+}

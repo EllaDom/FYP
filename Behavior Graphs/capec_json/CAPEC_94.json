@@ -1,0 +1,204 @@
+{
+  "graph": {
+    "capec_id": "94",
+    "name": "Adversary in the Middle (AiTM)",
+    "abstraction": "Meta",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "668",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "There are two components communicating with each other.",
+      "An attacker is able to identify the nature and mechanism of communication between the two target components.",
+      "An attacker can eavesdrop on the communication between the target components.",
+      "Strong mutual authentication is not used between the two target components yielding opportunity for attacker interposition.",
+      "The communication occurs in clear (not encrypted) or with insufficient and spoofable encryption."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "This attack can get sophisticated since the attack may use cryptography."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Ensure Public Keys are signed by a Certificate Authority",
+      "Encrypt communications using cryptography (e.g., SSL/TLS)",
+      "Use Strong mutual authentication to always fully authenticate both ends of any communications channel.",
+      "Exchange public keys using a secure channel"
+    ],
+    "example_instances": [
+      "In 2017, security researcher Jerry Decime discovered that Equifax mobile applications were not leveraging HTTPS in all areas. Although authentication was properly utilizing HTTPS, in addition to validating the root of trust of the server certificate, other areas of the application were using HTTP to communicate. Adversaries could then conduct MITM attacks on rogue WiFi or cellular networks and hijack the UX. This further allowed the adversaries to prompt users for sensitive data, which could then be obtained in the plaintext response. [REF-636]"
+    ],
+    "related_weaknesses": [
+      "300",
+      "290",
+      "593",
+      "287",
+      "294"
+    ],
+    "matched_cwes": [
+      "287",
+      "294",
+      "290"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1557",
+        "entry_name": "Adversary-in-the-Middle"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Man-in-the-middle attack"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine Communication Mechanism] The adversary determines the nature and mechanism of communication between two components, looking for opportunities to exploit.",
+        "techniques": [
+          "Perform a sniffing attack and observe communication to determine a communication protocol.",
+          "Look for application documentation that might describe a communication mechanism used by a target."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Position In Between Targets] The adversary inserts themself into the communication channel initially acting as a routing proxy between the two targeted components.",
+        "techniques": [
+          "Install spyware on a client that will intercept outgoing packets and route them to their destination as well as route incoming packets back to the client.",
+          "Exploit a weakness in an encrypted communication mechanism to gain access to traffic. Look for outdated mechanisms such as SSL."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Use Intercepted Data Maliciously] The adversary observes, filters, or alters passed data of its choosing to gain access to sensitive information or to manipulate the actions of the two target components for their own purposes.",
+        "techniques": [
+          "Prevent some messages from reaching their destination, causing a denial of service."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_a_sniffing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "insert_themself",
+      "attributes": {}
+    },
+    {
+      "id": "intercept_outgoing_packets",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_a_weakness_in_an_encrypted_communication_mechanism_to_gain_access_to_traffic",
+      "attributes": {}
+    },
+    {
+      "id": "prevent_some_messages",
+      "attributes": {}
+    },
+    {
+      "id": "utilize_https",
+      "attributes": {}
+    },
+    {
+      "id": "conduct_mitm_attacks_on_rogue_wifi_or_cellular_networks",
+      "attributes": {}
+    },
+    {
+      "id": "yield_opportunity_for_attacker_interposition",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "target": "conduct_a_sniffing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "target": "yield_opportunity_for_attacker_interposition",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_a_sniffing_attack",
+      "target": "insert_themself",
+      "attributes": {}
+    },
+    {
+      "source": "insert_themself",
+      "target": "intercept_outgoing_packets",
+      "attributes": {}
+    },
+    {
+      "source": "intercept_outgoing_packets",
+      "target": "exploit_a_weakness_in_an_encrypted_communication_mechanism_to_gain_access_to_traffic",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_a_weakness_in_an_encrypted_communication_mechanism_to_gain_access_to_traffic",
+      "target": "prevent_some_messages",
+      "attributes": {}
+    },
+    {
+      "source": "prevent_some_messages",
+      "target": "utilize_https",
+      "attributes": {}
+    },
+    {
+      "source": "utilize_https",
+      "target": "conduct_mitm_attacks_on_rogue_wifi_or_cellular_networks",
+      "attributes": {}
+    },
+    {
+      "source": "conduct_mitm_attacks_on_rogue_wifi_or_cellular_networks",
+      "target": "determine_the_nature_and_mechanism_of_communication_between_two_components",
+      "attributes": {}
+    }
+  ]
+}

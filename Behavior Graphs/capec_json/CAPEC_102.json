@@ -1,0 +1,240 @@
+{
+  "graph": {
+    "capec_id": "102",
+    "name": "Session Sidejacking",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "Session sidejacking takes advantage of an unencrypted communication channel between a victim and target system. The attacker sniffs traffic on a network looking for session tokens in unencrypted traffic. Once a session token is captured, the attacker performs malicious actions by using the stolen token with the targeted application to impersonate the victim. This attack is a specific method of session hijacking, which is exploiting a valid session token to gain unauthorized access to a target system or information. Other methods to perform a session hijacking are session fixation, cross-site scripting, or compromising a user or server machine and stealing the session token.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "593",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "An attacker and the victim are both using the same WiFi network.",
+      "The victim has an active session with a target system.",
+      "The victim is not using a secure channel to communicate with the target system (e.g. SSL, VPN, etc.)",
+      "The victim initiated communication with a target system that requires transfer of the session token or the target application uses AJAX and thereby periodically \"rings home\" asynchronously using the session token"
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Easy to use tools exist to automate this attack."
+      }
+    ],
+    "resources_required": [
+      "A packet sniffing tool, such as wireshark, can be used to capture session information."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      }
+    ],
+    "mitigations": [
+      "Make sure that HTTPS is used to communicate with the target system. Alternatively, use VPN if possible. It is important to ensure that all communication between the client and the server happens via an encrypted secure channel.",
+      "Modify the session token with each transmission and protect it with cryptography. Add the idea of request sequencing that gives the server an ability to detect replay attacks."
+    ],
+    "example_instances": [
+      "The attacker and the victim are using the same WiFi public hotspot. When the victim connects to the hotspot, they has a hosted e-mail account open. This e-mail account uses AJAX on the client side which periodically asynchronously connects to the server side and transfers, amongst other things, the user's session token to the server. The communication is supposed to happen over HTTPS. However, the configuration in the public hotspot initially disallows the HTTPS connection (or any other connection) between the victim and the hosted e-mail servers because the victim first needs to register with the hotspot. The victim does so, but their e-mail client already defaulted to using a connection without HTTPS, since it was denied access the first time. Victim's session token is now flowing unencrypted between the victim's browser and the hosted e-mail servers. The attacker leverages this opportunity to capture the session token and gain access to the victim's hosted e-mail account."
+    ],
+    "related_weaknesses": [
+      "294",
+      "522",
+      "523",
+      "319",
+      "614"
+    ],
+    "matched_cwes": [
+      "523",
+      "319",
+      "522",
+      "294"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Detect Unprotected Session Token Transfer] The attacker sniffs on the wireless network to detect unencrypted traffic that contains session tokens.",
+        "techniques": [
+          "The attacker uses a network sniffer tool like ferret or hamster to monitor the wireless traffic at a WiFi hotspot while examining it for evidence of transmittal of session tokens in unencrypted or recognizably encrypted form. An attacker applies their knowledge of the manner by which session tokens are generated and transmitted by various target systems to identify the session tokens."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Capture session token] The attacker uses sniffing tools to capture a session token from traffic.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Insert captured session token] The attacker attempts to insert a captured session token into communication with the targeted application to confirm viability for exploitation.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Session Token Exploitation] The attacker leverages the captured session token to interact with the targeted application in a malicious fashion, impersonating the victim.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "detect_unprotected_session_token_transfer",
+      "attributes": {}
+    },
+    {
+      "id": "sniff_to_detect_unencrypted_traffic_that_contains_session_tokens",
+      "attributes": {}
+    },
+    {
+      "id": "monitor_the_wireless_traffic",
+      "attributes": {}
+    },
+    {
+      "id": "apply_their_knowledge_of_the_manner_session_tokens_are_generated_and_by_which_transmitted_by_various_target_systems_to_identify_the_session_tokens",
+      "attributes": {}
+    },
+    {
+      "id": "capture_session",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_the_captured_session_token_to_interact_with_the_targeted_application_in_a_malicious_fashion",
+      "attributes": {}
+    },
+    {
+      "id": "use_the_same_wifi_public_hotspot",
+      "attributes": {}
+    },
+    {
+      "id": "suppose_the_communication",
+      "attributes": {}
+    },
+    {
+      "id": "disallow_the_https_connection_or_any_other_connection_between_the_victim_and_the_hosted_e_mail_servers",
+      "attributes": {}
+    },
+    {
+      "id": "default_since_it_was_denied_access_the_first_time",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_this_opportunity_to_capture_the_session_token_and_gain_access_to_the_victim_s_hosted_e_mail_account",
+      "attributes": {}
+    },
+    {
+      "id": "use_the_same_wifi_network",
+      "attributes": {}
+    },
+    {
+      "id": "have_an_active_session_with_the_target_system",
+      "attributes": {}
+    },
+    {
+      "id": "initiate_communication_with_a_target_system_that_requires_transfer_of_the_session_token_or",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "detect_unprotected_session_token_transfer",
+      "target": "sniff_to_detect_unencrypted_traffic_that_contains_session_tokens",
+      "attributes": {}
+    },
+    {
+      "source": "sniff_to_detect_unencrypted_traffic_that_contains_session_tokens",
+      "target": "monitor_the_wireless_traffic",
+      "attributes": {}
+    },
+    {
+      "source": "monitor_the_wireless_traffic",
+      "target": "apply_their_knowledge_of_the_manner_session_tokens_are_generated_and_by_which_transmitted_by_various_target_systems_to_identify_the_session_tokens",
+      "attributes": {}
+    },
+    {
+      "source": "apply_their_knowledge_of_the_manner_session_tokens_are_generated_and_by_which_transmitted_by_various_target_systems_to_identify_the_session_tokens",
+      "target": "capture_session",
+      "attributes": {}
+    },
+    {
+      "source": "capture_session",
+      "target": "leverage_the_captured_session_token_to_interact_with_the_targeted_application_in_a_malicious_fashion",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_captured_session_token_to_interact_with_the_targeted_application_in_a_malicious_fashion",
+      "target": "leverage_the_captured_session_token_to_interact_with_the_targeted_application_in_a_malicious_fashion",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_captured_session_token_to_interact_with_the_targeted_application_in_a_malicious_fashion",
+      "target": "use_the_same_wifi_public_hotspot",
+      "attributes": {}
+    },
+    {
+      "source": "use_the_same_wifi_public_hotspot",
+      "target": "suppose_the_communication",
+      "attributes": {}
+    },
+    {
+      "source": "suppose_the_communication",
+      "target": "disallow_the_https_connection_or_any_other_connection_between_the_victim_and_the_hosted_e_mail_servers",
+      "attributes": {}
+    },
+    {
+      "source": "disallow_the_https_connection_or_any_other_connection_between_the_victim_and_the_hosted_e_mail_servers",
+      "target": "default_since_it_was_denied_access_the_first_time",
+      "attributes": {}
+    },
+    {
+      "source": "default_since_it_was_denied_access_the_first_time",
+      "target": "leverage_this_opportunity_to_capture_the_session_token_and_gain_access_to_the_victim_s_hosted_e_mail_account",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_this_opportunity_to_capture_the_session_token_and_gain_access_to_the_victim_s_hosted_e_mail_account",
+      "target": "use_the_same_wifi_network",
+      "attributes": {}
+    },
+    {
+      "source": "use_the_same_wifi_network",
+      "target": "have_an_active_session_with_the_target_system",
+      "attributes": {}
+    },
+    {
+      "source": "have_an_active_session_with_the_target_system",
+      "target": "initiate_communication_with_a_target_system_that_requires_transfer_of_the_session_token_or",
+      "attributes": {}
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "graph": {
+    "capec_id": "37",
+    "name": "Retrieve Embedded Sensitive Data",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker examines a target system to find sensitive data that has been embedded within it. This information can reveal confidential contents, such as account numbers or individual keys/credentials that can be used as an intermediate step in a larger attack.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "167",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "In order to feasibly execute this type of attack, some valuable data must be present in client software.",
+      "Additionally, this information must be unprotected, or protected in a flawed fashion, or through a mechanism that fails to resist reverse engineering, statistical, or other attack."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The attacker must possess knowledge of client code structure as well as ability to reverse-engineer or decompile it or probe it in other ways. This knowledge is specific to the technology and language used for the client distribution"
+      }
+    ],
+    "resources_required": [
+      "The attacker must possess access to the system or code being exploited. Such access, for this set of attacks, will likely be physical. The attacker will make use of reverse engineering technologies, perhaps for data or to extract functionality from the binary. Such tool use may be as simple as \"Strings\" or a hex editor. Removing functionality may require the use of only a hex editor, or may require aspects of the toolchain used to construct the application: for instance the Adobe Flash development environment. Attacks of this nature do not require network access or undue CPU, memory, or other hardware-based resources."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [
+      "Using a tool such as 'strings' or similar to pull out text data, perhaps part of a database table, that extends beyond what a particular user's purview should be.",
+      "An attacker can also use a decompiler to decompile a downloaded Java applet in order to look for information such as hardcoded IP addresses, file paths, passwords or other such contents.",
+      "Attacker uses a tool such as a browser plug-in to pull cookie or other token information that, from a previous user at the same machine (perhaps a kiosk), allows the attacker to log in as the previous user."
+    ],
+    "related_weaknesses": [
+      "226",
+      "311",
+      "525",
+      "312",
+      "314",
+      "315",
+      "318",
+      "1239",
+      "1258",
+      "1266",
+      "1272",
+      "1278",
+      "1301",
+      "1330"
+    ],
+    "matched_cwes": [
+      "311",
+      "312"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1005",
+        "entry_name": "Data from Local System"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1552.004",
+        "entry_name": "Unsecured Credentials: Private Keys"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify Target] Attacker identifies client components to extract information from. These may be binary executables, class files, shared libraries (e.g., DLLs), configuration files, or other system files.",
+        "techniques": [
+          "Binary file extraction. The attacker extracts binary files from zips, jars, wars, PDFs or other composite formats.",
+          "Package listing. The attacker uses a package manifest provided with the software installer, or the filesystem itself, to identify component files suitable for attack."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Exploit",
+        "description": "[Retrieve Embedded Data] The attacker then uses a variety of techniques, such as sniffing, reverse-engineering, and cryptanalysis to retrieve the information of interest.",
+        "techniques": [
+          "API Profiling. The attacker monitors the software's use of registry keys or other operating system-provided storage locations that can contain sensitive information.",
+          "Execution in simulator. The attacker physically removes mass storage from the system and explores it using a simulator, external system, or other debugging harness.",
+          "Common decoding methods. The attacker applies methods to decode such encodings and compressions as Base64, unzip, unrar, RLE decoding, gzip decompression and so on.",
+          "Common data typing. The attacker looks for common file signatures for well-known file types (JPEG, TIFF, ASN.1, LDIF, etc.). If the signatures match, they attempt decoding in that format."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_known_client_identifiers",
+      "attributes": {}
+    },
+    {
+      "id": "extract_binary_files",
+      "attributes": {}
+    },
+    {
+      "id": "retrieve_the_information_of_interest",
+      "attributes": {}
+    },
+    {
+      "id": "monitor_the_software_s_use_of_registry_keys_or_other_operating_system_provided_storage_locations_that_can_contain_sensitive_information",
+      "attributes": {}
+    },
+    {
+      "id": "remove_mass_storage",
+      "attributes": {}
+    },
+    {
+      "id": "apply_methods",
+      "attributes": {}
+    },
+    {
+      "id": "type_common_data",
+      "attributes": {}
+    },
+    {
+      "id": "pull_text_data_perhaps_part_of_a_database_table",
+      "attributes": {}
+    },
+    {
+      "id": "decompile_a_downloaded_java_applet",
+      "attributes": {}
+    },
+    {
+      "id": "pull_cookie_or_other_token_information",
+      "attributes": {}
+    },
+    {
+      "id": "execute_this_type_of_attack",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_known_client_identifiers",
+      "target": "extract_binary_files",
+      "attributes": {}
+    },
+    {
+      "source": "extract_binary_files",
+      "target": "retrieve_the_information_of_interest",
+      "attributes": {}
+    },
+    {
+      "source": "retrieve_the_information_of_interest",
+      "target": "monitor_the_software_s_use_of_registry_keys_or_other_operating_system_provided_storage_locations_that_can_contain_sensitive_information",
+      "attributes": {}
+    },
+    {
+      "source": "monitor_the_software_s_use_of_registry_keys_or_other_operating_system_provided_storage_locations_that_can_contain_sensitive_information",
+      "target": "remove_mass_storage",
+      "attributes": {}
+    },
+    {
+      "source": "remove_mass_storage",
+      "target": "apply_methods",
+      "attributes": {}
+    },
+    {
+      "source": "apply_methods",
+      "target": "type_common_data",
+      "attributes": {}
+    },
+    {
+      "source": "type_common_data",
+      "target": "pull_text_data_perhaps_part_of_a_database_table",
+      "attributes": {}
+    },
+    {
+      "source": "pull_text_data_perhaps_part_of_a_database_table",
+      "target": "decompile_a_downloaded_java_applet",
+      "attributes": {}
+    },
+    {
+      "source": "decompile_a_downloaded_java_applet",
+      "target": "pull_cookie_or_other_token_information",
+      "attributes": {}
+    },
+    {
+      "source": "pull_cookie_or_other_token_information",
+      "target": "execute_this_type_of_attack",
+      "attributes": {}
+    }
+  ]
+}

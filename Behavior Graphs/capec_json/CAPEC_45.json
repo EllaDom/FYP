@@ -1,0 +1,250 @@
+{
+  "graph": {
+    "capec_id": "45",
+    "name": "Buffer Overflow via Symbolic Links",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "This type of attack leverages the use of symbolic links to cause buffer overflows. An adversary can try to create or manipulate a symbolic link file such that its contents result in out of bounds data. When the target software processes the symbolic link file, it could potentially overflow internal buffers with insufficient bounds checking.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "100",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary can create symbolic link on the target host.",
+      "The target host does not perform correct boundary checking while consuming data from a resources."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "An adversary can simply overflow a buffer by inserting a long string into an adversary-modifiable injection vector. The result can be a DoS."
+      },
+      {
+        "level": "High",
+        "description": "Exploiting a buffer overflow to inject malicious code into the stack of a software system or even the heap can require a higher skill level."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Pay attention to the fact that the resource you read from can be a replaced by a Symbolic link. You can do a Symlink check before reading the file and decide that this is not a legitimate way of accessing the resource.",
+      "Because Symlink can be modified by an adversary, make sure that the ones you read are located in protected directories.",
+      "Pay attention to the resource pointed to by your symlink links (See attack pattern named \"Forced Symlink race\"), they can be replaced by malicious resources.",
+      "Always check the size of the input data before copying to a buffer.",
+      "Use a language or compiler that performs automatic bounds checking.",
+      "Use an abstraction library to abstract away risky APIs. Not a complete solution.",
+      "Compiler-based canary mechanisms such as StackGuard, ProPolice and the Microsoft Visual Studio /GS flag. Unless this provides automatic bounds checking, it is not a complete solution.",
+      "Use OS-level preventative functionality. Not a complete solution."
+    ],
+    "example_instances": [
+      "The EFTP server has a buffer overflow that can be exploited if an adversary uploads a .lnk (link) file that contains more than 1,744 bytes. This is a classic example of an indirect buffer overflow. First the adversary uploads some content (the link file) and then the adversary causes the client consuming the data to be exploited. In this example, the ls command is exploited to compromise the server software."
+    ],
+    "related_weaknesses": [
+      "120",
+      "285",
+      "302",
+      "118",
+      "119",
+      "74",
+      "20",
+      "680",
+      "697"
+    ],
+    "matched_cwes": [
+      "20",
+      "120",
+      "74",
+      "285",
+      "119"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify target application] The adversary identifies a target application or program that might load in certain files to memory.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Find injection vector] The adversary identifies an injection vector to deliver the excessive content to the targeted application's buffer.",
+        "techniques": [
+          "The adversary creates or modifies a symbolic link pointing to those files which contain an excessive amount of data. If creating a symbolic link to one of those files causes different behavior in the application, then an injection vector has been identified."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Craft overflow file content] The adversary crafts the content to be injected. If the intent is to simply cause the software to crash, the content need only consist of an excessive quantity of random data. If the intent is to leverage the overflow for execution of arbitrary code, the adversary crafts the payload in such a way that the overwritten return address is replaced with one of the adversary's choosing.",
+        "techniques": [
+          "Create malicious shellcode that will execute when the program execution is returned to it.",
+          "Use a NOP-sled in the overflow content to more easily \"slide\" into the malicious code. This is done so that the exact return address need not be correct, only in the range of all of the NOPs"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Overflow the buffer] Using the specially crafted file content, the adversary creates a symbolic link from the identified resource to the malicious file, causing a targeted buffer overflow attack.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "identify_a_target_application_or_program_that_might_load_in_certain_files_to_memory",
+      "attributes": {}
+    },
+    {
+      "id": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_symbolic_link",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "id": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "attributes": {}
+    },
+    {
+      "id": "sle_nop",
+      "attributes": {}
+    },
+    {
+      "id": "do_this",
+      "attributes": {}
+    },
+    {
+      "id": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_that",
+      "attributes": {}
+    },
+    {
+      "id": "upload_some_content_the_link_file",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_the_ls_command",
+      "attributes": {}
+    },
+    {
+      "id": "perform_correct_boundary_checking",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_application",
+      "target": "identify_a_target_application_or_program_that_might_load_in_certain_files_to_memory",
+      "attributes": {}
+    },
+    {
+      "source": "identify_a_target_application_or_program_that_might_load_in_certain_files_to_memory",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "create_a_symbolic_link",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_symbolic_link",
+      "target": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_symbolic_link",
+      "target": "perform_correct_boundary_checking",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "target": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "attributes": {}
+    },
+    {
+      "source": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "target": "sle_nop",
+      "attributes": {}
+    },
+    {
+      "source": "sle_nop",
+      "target": "do_this",
+      "attributes": {}
+    },
+    {
+      "source": "do_this",
+      "target": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "source": "overflow_the_buffer",
+      "target": "exploit_that",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_that",
+      "target": "upload_some_content_the_link_file",
+      "attributes": {}
+    },
+    {
+      "source": "upload_some_content_the_link_file",
+      "target": "exploit_the_ls_command",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_the_ls_command",
+      "target": "create_a_symbolic_link",
+      "attributes": {}
+    }
+  ]
+}

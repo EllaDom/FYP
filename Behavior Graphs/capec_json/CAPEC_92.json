@@ -1,0 +1,171 @@
+{
+  "graph": {
+    "capec_id": "92",
+    "name": "Forced Integer Overflow",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "This attack forces an integer variable to go out of range. The integer variable is often used as an offset such as size of memory allocation or similarly. The attacker would typically control the value of such variable and try to get it out of range. For instance the integer in question is incremented past the maximum possible value, it may wrap to become a very small, or negative number, therefore providing a very incorrect value which can lead to unexpected behavior. At worst the attacker can execute arbitrary code.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "128",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The attacker can manipulate the value of an integer variable utilized by the target host.",
+      "The target host does not do proper range checking on the variable before utilizing it.",
+      "When the integer variable is incremented or decremented to an out of range value, it gets a very different value (e.g. very small or negative number)"
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "An attacker can simply overflow an integer by inserting an out of range value."
+      },
+      {
+        "level": "High",
+        "description": "Exploiting a buffer overflow by injecting malicious code into the stack of a software system or even the heap can require a higher skill level."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      }
+    ],
+    "mitigations": [
+      "Use a language or compiler that performs automatic bounds checking.",
+      "Carefully review the service's implementation before making it available to user. For instance you can use manual or automated code review to uncover vulnerabilities such as integer overflow.",
+      "Use an abstraction library to abstract away risky APIs. Not a complete solution.",
+      "Always do bound checking before consuming user input data."
+    ],
+    "example_instances": [
+      "Integer overflow in the ProcAuWriteElement function in server/dia/audispatch.c in Network Audio System (NAS) before 1.8a SVN 237 allows remote attackers to cause a denial of service (crash) and possibly execute arbitrary code via a large max_samples value. See also: CVE-2007-1544",
+      "The following code illustrates an integer overflow. The declaration of total integer as \"unsigned short int\" assumes that the length of the first and second arguments fits in such an integer [REF-547], [REF-548]. include <stdlib.h>  include <string.h>  include <stdio.h>   int main (int argc, char *const *argv)  { if (argc !=3){ printf(\"Usage: prog_name <string1> <string2>\\n\");  exit(-1);  }  unsigned short int total;  total = strlen(argv[1])+strlen(argv[2])+1;  char * buff = (char *)malloc(total);  strcpy(buff, argv[1]);  strcpy(buff, argv[2]);  }"
+    ],
+    "related_weaknesses": [
+      "190",
+      "128",
+      "120",
+      "122",
+      "196",
+      "680",
+      "697"
+    ],
+    "matched_cwes": [
+      "122",
+      "190",
+      "120"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "03",
+        "entry_name": "Integer Overflows"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "The first step is exploratory meaning the attacker looks for an integer variable that they can control.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "The attacker finds an integer variable that they can write into or manipulate and try to get the value of the integer out of the possible range.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "The integer variable is forced to have a value out of range which set its final value to an unexpected value.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "The target host acts on the data and unexpected behavior may happen.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_an_integer_variable_that_they_can_write_into_or_manipulate_and_try_to_get_the_value_of_the_integer_out_of_the_possible_range",
+      "attributes": {}
+    },
+    {
+      "id": "force_the_integer_variable",
+      "attributes": {}
+    },
+    {
+      "id": "assume_ref_547",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_the_value_of_an_integer_variable_utilized_by_the_target_host",
+      "attributes": {}
+    },
+    {
+      "id": "incremente_the_integer_variable",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_an_integer_variable_that_they_can_write_into_or_manipulate_and_try_to_get_the_value_of_the_integer_out_of_the_possible_range",
+      "target": "force_the_integer_variable",
+      "attributes": {}
+    },
+    {
+      "source": "force_the_integer_variable",
+      "target": "assume_ref_547",
+      "attributes": {}
+    },
+    {
+      "source": "assume_ref_547",
+      "target": "manipulate_the_value_of_an_integer_variable_utilized_by_the_target_host",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_the_value_of_an_integer_variable_utilized_by_the_target_host",
+      "target": "incremente_the_integer_variable",
+      "attributes": {}
+    }
+  ]
+}

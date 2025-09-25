@@ -1,0 +1,44 @@
+{
+  "graph": {
+    "capec_id": "115",
+    "name": "Authentication Bypass",
+    "abstraction": "Meta",
+    "status": "Draft",
+    "description": "An attacker gains access to application, service, or device with the privileges of an authorized or privileged user by evading or circumventing an authentication mechanism. The attacker is therefore able to access protected data without authentication ever having taken place.",
+    "likelihood": "",
+    "severity": "Medium",
+    "related_attack_patterns": [],
+    "prerequisites": [
+      "An authentication mechanism or subsystem implementing some form of authentication such as passwords, digest authentication, security certificates, etc."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "A client application, such as a web browser, or a scripting language capable of interacting with the target."
+    ],
+    "consequences": [],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "287"
+    ],
+    "matched_cwes": [
+      "287"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1548",
+        "entry_name": "Abuse Elevation Control Mechanism"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "implement_some_form_of_authentication_such_as_passwords_digest_authentication_security_certificates_etc",
+      "attributes": {}
+    }
+  ],
+  "edges": []
+}

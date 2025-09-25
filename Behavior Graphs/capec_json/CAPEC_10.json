@@ -1,0 +1,259 @@
+{
+  "graph": {
+    "capec_id": "10",
+    "name": "Buffer Overflow via Environment Variables",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "This attack pattern involves causing a buffer overflow through manipulation of environment variables. Once the adversary finds that they can modify an environment variable, they may try to overflow associated buffers. This attack leverages implicit trust often placed in environment variables.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "100",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The application uses environment variables.",
+      "An environment variable exposed to the user is vulnerable to a buffer overflow.",
+      "The vulnerable environment variable uses untrusted data.",
+      "Tainted data used in the environment variables is not properly validated. For instance boundary checking is not done before copying the input data to a buffer."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "An attacker can simply overflow a buffer by inserting a long string into an attacker-modifiable injection vector. The result can be a DoS."
+      },
+      {
+        "level": "High",
+        "description": "Exploiting a buffer overflow to inject malicious code into the stack of a software system or even the heap can require a higher skill level."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Do not expose environment variable to the user.",
+      "Do not use untrusted data in your environment variables.",
+      "Use a language or compiler that performs automatic bounds checking",
+      "There are tools such as Sharefuzz [REF-2] which is an environment variable fuzzer for Unix that support loading a shared library. You can use Sharefuzz to determine if you are exposing an environment variable vulnerable to buffer overflow."
+    ],
+    "example_instances": [
+      "A buffer overflow in sccw allows local users to gain root access via the $HOME environmental variable. See also: CVE-1999-0906",
+      "A buffer overflow in the rlogin program involves its consumption of the $TERM environmental variable. See also: CVE-1999-0046"
+    ],
+    "related_weaknesses": [
+      "120",
+      "302",
+      "118",
+      "119",
+      "74",
+      "99",
+      "20",
+      "680",
+      "733",
+      "697"
+    ],
+    "matched_cwes": [
+      "119",
+      "20",
+      "74",
+      "120"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Buffer Overflow via Environment Variables"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify target application] The adversary identifies a target application or program to perform the buffer overflow on. In this attack the adversary looks for an application that loads the content of an environment variable into a buffer.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Find injection vector] The adversary identifies an injection vector to deliver the excessive content to the targeted application's buffer.",
+        "techniques": [
+          "Change the values of environment variables thought to be used by the application to contain excessive data. If the program is loading the value of the environment variable into a buffer, this could cause a crash and an attack vector will be found."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Craft overflow content] The adversary crafts the content to be injected. If the intent is to simply cause the software to crash, the content need only consist of an excessive quantity of random data. If the intent is to leverage the overflow for execution of arbitrary code, the adversary crafts the payload in such a way that the overwritten return address is replaced with one of the adversary's choosing.",
+        "techniques": [
+          "Create malicious shellcode that will execute when the program execution is returned to it.",
+          "Use a NOP-sled in the overflow content to more easily \"slide\" into the malicious code. This is done so that the exact return address need not be correct, only in the range of all of the NOPs"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Overflow the buffer] Using the injection vector, the adversary injects the crafted overflow content into the buffer.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "id": "change_the_values_of_environment_variables",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_value_of_the_environment_variable",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "id": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "attributes": {}
+    },
+    {
+      "id": "sle_nop",
+      "attributes": {}
+    },
+    {
+      "id": "do_this",
+      "attributes": {}
+    },
+    {
+      "id": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "id": "involve_its_consumption_of_the_term_environmental_variable",
+      "attributes": {}
+    },
+    {
+      "id": "use_untrusted_data",
+      "attributes": {}
+    },
+    {
+      "id": "copy_the_input_data",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_application",
+      "target": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "identify_target_application",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "change_the_values_of_environment_variables",
+      "attributes": {}
+    },
+    {
+      "source": "change_the_values_of_environment_variables",
+      "target": "load_the_value_of_the_environment_variable",
+      "attributes": {}
+    },
+    {
+      "source": "change_the_values_of_environment_variables",
+      "target": "use_untrusted_data",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_value_of_the_environment_variable",
+      "target": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "target": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "attributes": {}
+    },
+    {
+      "source": "create_malicious_shellcode_that_will_execute_when_the_program_execution_is_returned_to_it",
+      "target": "sle_nop",
+      "attributes": {}
+    },
+    {
+      "source": "sle_nop",
+      "target": "do_this",
+      "attributes": {}
+    },
+    {
+      "source": "do_this",
+      "target": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "source": "overflow_the_buffer",
+      "target": "involve_its_consumption_of_the_term_environmental_variable",
+      "attributes": {}
+    },
+    {
+      "source": "involve_its_consumption_of_the_term_environmental_variable",
+      "target": "change_the_values_of_environment_variables",
+      "attributes": {}
+    },
+    {
+      "source": "use_untrusted_data",
+      "target": "copy_the_input_data",
+      "attributes": {}
+    }
+  ]
+}

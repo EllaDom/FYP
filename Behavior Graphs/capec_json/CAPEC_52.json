@@ -1,0 +1,354 @@
+{
+  "graph": {
+    "capec_id": "52",
+    "name": "Embedding NULL Bytes",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary embeds one or more null bytes in input to the target software. This attack relies on the usage of a null-valued byte as a string terminator in many environments. The goal is for certain components of the target software to stop processing the input when it encounters the null byte(s).",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "267",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The program does not properly handle postfix NULL terminators"
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "Directory traversal"
+      },
+      {
+        "level": "High",
+        "description": "Execution of arbitrary code"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      }
+    ],
+    "mitigations": [
+      "Properly handle the NULL characters supplied as part of user input prior to doing anything with the data."
+    ],
+    "example_instances": [
+      "Directory Browsing Assume a Web application allows a user to access a set of reports. The path to the reports directory may be something like web/username/reports. If the username is supplied via a hidden field, an adversary could insert a bogus username such as ../../../../../WINDOWS. If the adversary needs to remove the trailing string /reports, then they can simply insert enough characters so the string is truncated. Alternatively the adversary might apply the postfix NULL character (%00) to determine whether this terminates the string. Different forms of NULL to think about include PATH%00  PATH[0x00]  PATH[alternate representation of NULL character]  <script></script>%00",
+      "Exploitation of a buffer overflow vulnerability in the ActiveX component packaged with Adobe Systems Inc.'s Acrobat/Acrobat Reader allows remote adversaries to execute arbitrary code. The problem specifically exists upon retrieving a link of the following form: GET /any_existing_dir/any_existing_pdf.pdf%00[long string] HTTP/1.1 Where [long string] is a malicious crafted long string containing acceptable URI characters. The request must be made to a web server that truncates the request at the null byte (%00), otherwise an invalid file name is specified and a \"file not found\" page will be returned. Example web servers that truncate the requested URI include Microsoft IIS and Netscape Enterprise. Though the requested URI is truncated for the purposes of locating the file the long string is still passed to the Adobe ActiveX component responsible for rendering the page. This in turn triggers a buffer overflow within RTLHeapFree() allowing for an adversary to overwrite an arbitrary word in memory. The responsible instructions from RTLHeapFree() are shown here: 0x77F83AE5 MOV EAX,[EDI+8]  0x77F83AE8 MOV ECX,[EDI+C]  ...  0x77F83AED MOV [ECX],EAX The register EDI contains a pointer to a user-supplied string. The adversary therefore has control over both the ECX and EAX registers used in the shown MOV instruction. Successful exploitation allows remote adversaries to utilize the arbitrary word overwrite to redirect the flow of control and eventually take control of the affected system. Code execution will occur under the context of the user that instantiated the vulnerable version of Adobe Acrobat. An adversary does not need to establish a malicious web site as exploitation can occur by adding malicious content to the end of any embedded link and referencing any Microsoft IIS or Netscape Enterprise web server. Clicking on a direct malicious link is also not required as it may be embedded within an IMAGE tag, an IFRAME or an auto-loading script. Successful exploitation requires that a payload be written such that certain areas of the input are URI acceptable. This includes initial injected instructions as well as certain overwritten addresses. This increases the complexity of successful exploitation. While not trivial, exploitation is definitely plausible [REF-445]. See also: CVE-2004-0629",
+      "Consider the following PHP script: $whatever = addslashes($_REQUEST['whatever']);  include(\"/path/to/program/\" . $whatever . \"/header.htm\"); A malicious adversary might open the following URL, disclosing the boot.ini file: http://localhost/phpscript.php?whatever=../../../../boot.ini%00"
+    ],
+    "related_weaknesses": [
+      "158",
+      "172",
+      "173",
+      "74",
+      "20",
+      "697",
+      "707"
+    ],
+    "matched_cwes": [
+      "20",
+      "74",
+      "707"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "28",
+        "entry_name": "Null Byte Injection"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Embedding Null Code"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the application for user-controllable inputs] Using a browser, an automated tool or by inspecting the application, an adversary records all entry points to the application.",
+        "techniques": [
+          "Use a spidering tool to follow and record all links and analyze the web pages to find entry points. Make special note of any links that include parameters in the URL.",
+          "Use a proxy tool to record all user input entry points visited during a manual traversal of the web application.",
+          "Use a browser to manually explore the website and analyze how it is constructed. Many browsers' plugins are available to facilitate the analysis or automate the discovery.",
+          "Manually inspect the application to find entry points."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Probe entry points to locate vulnerabilities] The adversary uses the entry points gathered in the \"Explore\" phase as a target list and injects postfix null byte(s) to observe how the application handles them as input. The adversary is looking for areas where user input is placed in the middle of a string, and the null byte causes the application to stop processing the string at the end of the user input.",
+        "techniques": [
+          "Try different encodings for null such as \\0 or %00"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Remove data after null byte(s)] After determined entry points that are vulnerable, the adversary places a null byte(s) such that they remove data after the null byte(s) in a way that is beneficial to them.",
+        "techniques": [
+          "If the input is a directory as part of a longer file path, add a null byte(s) at the end of the input to try to traverse to the given directory."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_application_for_user_controllable_inputs",
+      "attributes": {}
+    },
+    {
+      "id": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "id": "inspect_the_application_to_find_entry_points",
+      "attributes": {}
+    },
+    {
+      "id": "locate_vulnerabilities",
+      "attributes": {}
+    },
+    {
+      "id": "try_different_encodings_for_null_such_as_0_or",
+      "attributes": {}
+    },
+    {
+      "id": "remove_data",
+      "attributes": {}
+    },
+    {
+      "id": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "id": "supply_the_username",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_remove_the_trailing_string",
+      "attributes": {}
+    },
+    {
+      "id": "apply_the_postfix_null_character_00",
+      "attributes": {}
+    },
+    {
+      "id": "process_the_request",
+      "attributes": {}
+    },
+    {
+      "id": "truncate_the_requested_uri",
+      "attributes": {}
+    },
+    {
+      "id": "trigger_a_buffer_overflow_within_rtlheapfree",
+      "attributes": {}
+    },
+    {
+      "id": "show_ecx_edi_c",
+      "attributes": {}
+    },
+    {
+      "id": "ecx_eax",
+      "attributes": {}
+    },
+    {
+      "id": "have_control_over_both_the_ecx_and_eax_registers_used_in_the_shown_mov_instruction",
+      "attributes": {}
+    },
+    {
+      "id": "craft_a_malicious_website",
+      "attributes": {}
+    },
+    {
+      "id": "include_initial_injected_instructions_as_well_as_certain_overwritten_addresses",
+      "attributes": {}
+    },
+    {
+      "id": "increase_the_complexity_of_successful_exploitation",
+      "attributes": {}
+    },
+    {
+      "id": "consider_the_following_php_script",
+      "attributes": {}
+    },
+    {
+      "id": "open_the_following_url",
+      "attributes": {}
+    },
+    {
+      "id": "handle_postfix_null_terminators",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_application_for_user_controllable_inputs",
+      "target": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "source": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "source": "facilitate_the_analysis",
+      "target": "inspect_the_application_to_find_entry_points",
+      "attributes": {}
+    },
+    {
+      "source": "inspect_the_application_to_find_entry_points",
+      "target": "locate_vulnerabilities",
+      "attributes": {}
+    },
+    {
+      "source": "locate_vulnerabilities",
+      "target": "try_different_encodings_for_null_such_as_0_or",
+      "attributes": {}
+    },
+    {
+      "source": "try_different_encodings_for_null_such_as_0_or",
+      "target": "remove_data",
+      "attributes": {}
+    },
+    {
+      "source": "remove_data",
+      "target": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "source": "append_a_null_byte",
+      "target": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "source": "append_a_null_byte",
+      "target": "supply_the_username",
+      "attributes": {}
+    },
+    {
+      "source": "supply_the_username",
+      "target": "need_to_remove_the_trailing_string",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_remove_the_trailing_string",
+      "target": "apply_the_postfix_null_character_00",
+      "attributes": {}
+    },
+    {
+      "source": "apply_the_postfix_null_character_00",
+      "target": "process_the_request",
+      "attributes": {}
+    },
+    {
+      "source": "process_the_request",
+      "target": "truncate_the_requested_uri",
+      "attributes": {}
+    },
+    {
+      "source": "truncate_the_requested_uri",
+      "target": "trigger_a_buffer_overflow_within_rtlheapfree",
+      "attributes": {}
+    },
+    {
+      "source": "trigger_a_buffer_overflow_within_rtlheapfree",
+      "target": "show_ecx_edi_c",
+      "attributes": {}
+    },
+    {
+      "source": "show_ecx_edi_c",
+      "target": "ecx_eax",
+      "attributes": {}
+    },
+    {
+      "source": "ecx_eax",
+      "target": "have_control_over_both_the_ecx_and_eax_registers_used_in_the_shown_mov_instruction",
+      "attributes": {}
+    },
+    {
+      "source": "have_control_over_both_the_ecx_and_eax_registers_used_in_the_shown_mov_instruction",
+      "target": "craft_a_malicious_website",
+      "attributes": {}
+    },
+    {
+      "source": "craft_a_malicious_website",
+      "target": "include_initial_injected_instructions_as_well_as_certain_overwritten_addresses",
+      "attributes": {}
+    },
+    {
+      "source": "include_initial_injected_instructions_as_well_as_certain_overwritten_addresses",
+      "target": "increase_the_complexity_of_successful_exploitation",
+      "attributes": {}
+    },
+    {
+      "source": "increase_the_complexity_of_successful_exploitation",
+      "target": "consider_the_following_php_script",
+      "attributes": {}
+    },
+    {
+      "source": "consider_the_following_php_script",
+      "target": "open_the_following_url",
+      "attributes": {}
+    },
+    {
+      "source": "open_the_following_url",
+      "target": "handle_postfix_null_terminators",
+      "attributes": {}
+    }
+  ]
+}

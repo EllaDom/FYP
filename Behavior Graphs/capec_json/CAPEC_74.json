@@ -1,0 +1,171 @@
+{
+  "graph": {
+    "capec_id": "74",
+    "name": "Manipulating State",
+    "abstraction": "Meta",
+    "status": "Stable",
+    "description": "\n            ",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [],
+    "prerequisites": [
+      "User state is maintained at least in some way in user-controllable locations, such as cookies or URL parameters.",
+      "There is a faulty finite state machine in the hardware logic that can be exploited."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The adversary needs to have knowledge of state management as employed by the target application, and also the ability to manipulate the state in a meaningful way."
+      }
+    ],
+    "resources_required": [
+      "The adversary needs a data tampering tool capable of generating and creating custom inputs to aid in the attack, like Fiddler, Wireshark, or a similar in-browser plugin (e.g., Tamper Data for Firefox)."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      }
+    ],
+    "mitigations": [
+      "Do not rely solely on user-controllable locations, such as cookies or URL parameters, to maintain user state.",
+      "Avoid sensitive information, such as usernames or authentication and authorization information, in user-controllable locations.",
+      "Sensitive information that is part of the user state must be appropriately protected to ensure confidentiality and integrity at each request.",
+      "All possible states must be handled by hardware finite state machines."
+    ],
+    "example_instances": [
+      "During the authentication process, an application stores the authentication decision (auth=0/1) in unencrypted cookies. At every request, this cookie is checked to permit or deny a request. An adversary can easily violate this representation of user state and set auth=1 at every request in order to gain illegitimate access and elevated privilege in the application."
+    ],
+    "related_weaknesses": [
+      "372",
+      "315",
+      "353",
+      "693",
+      "1245",
+      "1253",
+      "1265",
+      "1271"
+    ],
+    "matched_cwes": [
+      "693"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "Adversary determines the nature of state management employed by the target. This includes determining the location (client-side, server-side or both applications) and possibly the items stored as part of user state.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "The adversary now tries to modify the user state contents (possibly indiscriminately if the contents are encrypted or otherwise obfuscated) or cause a state transition and observe the effects of this change on the target.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "Having determined how to manipulate the state, the adversary can perform illegitimate actions.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_the_nature_of_state_management_employed_by_the_target",
+      "attributes": {}
+    },
+    {
+      "id": "include_determining_the_location_client_side_server_side_or_both_applications_and_possibly_the_items_stored_as_part_of_user_state",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_modify_the_user_state_contents",
+      "attributes": {}
+    },
+    {
+      "id": "determine_how_to_manipulate_the_state",
+      "attributes": {}
+    },
+    {
+      "id": "store_the_authentication_decision_auth_0_1_in_unencrypted_cookies",
+      "attributes": {}
+    },
+    {
+      "id": "check_this_cookie",
+      "attributes": {}
+    },
+    {
+      "id": "violate_this_representation_of_user_state",
+      "attributes": {}
+    },
+    {
+      "id": "maintain_user_state",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_that",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_the_nature_of_state_management_employed_by_the_target",
+      "target": "include_determining_the_location_client_side_server_side_or_both_applications_and_possibly_the_items_stored_as_part_of_user_state",
+      "attributes": {}
+    },
+    {
+      "source": "include_determining_the_location_client_side_server_side_or_both_applications_and_possibly_the_items_stored_as_part_of_user_state",
+      "target": "try_to_modify_the_user_state_contents",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_modify_the_user_state_contents",
+      "target": "determine_how_to_manipulate_the_state",
+      "attributes": {}
+    },
+    {
+      "source": "determine_how_to_manipulate_the_state",
+      "target": "store_the_authentication_decision_auth_0_1_in_unencrypted_cookies",
+      "attributes": {}
+    },
+    {
+      "source": "store_the_authentication_decision_auth_0_1_in_unencrypted_cookies",
+      "target": "check_this_cookie",
+      "attributes": {}
+    },
+    {
+      "source": "check_this_cookie",
+      "target": "violate_this_representation_of_user_state",
+      "attributes": {}
+    },
+    {
+      "source": "violate_this_representation_of_user_state",
+      "target": "maintain_user_state",
+      "attributes": {}
+    },
+    {
+      "source": "maintain_user_state",
+      "target": "exploit_that",
+      "attributes": {}
+    }
+  ]
+}

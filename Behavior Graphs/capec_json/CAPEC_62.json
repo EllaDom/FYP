@@ -1,0 +1,286 @@
+{
+  "graph": {
+    "capec_id": "62",
+    "name": "Cross Site Request Forgery",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An attacker crafts malicious web links and distributes them (via web pages, email, etc.), typically in a targeted manner, hoping to induce users to click on the link and execute the malicious action against some third-party application. If successful, the action embedded in the malicious link will be processed and accepted by the targeted application with the users' privilege level. This type of attack leverages the persistence and implicit trust placed in user session cookies by many web applications today. In such an architecture, once the user authenticates to an application and a session cookie is created on the user's system, all following transactions for that session are authenticated using that cookie including potential actions initiated by an attacker and simply \"riding\" the existing session cookie.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "21",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The attacker needs to figure out the exact invocation of the targeted malicious action and then craft a link that performs the said action. Having the user click on such a link is often accomplished by sending an email or posting such a link to a bulletin board or the likes."
+      }
+    ],
+    "resources_required": [
+      "All the attacker needs is the exact representation of requests to be made to the application and to be able to get the malicious link across to a victim."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Use cryptographic tokens to associate a request with a specific action. The token can be regenerated at every request so that if a request with an invalid token is encountered, it can be reliably discarded. The token is considered invalid if it arrived with a request other than the action it was supposed to be associated with.",
+      "Although less reliable, the use of the optional HTTP Referrer header can also be used to determine whether an incoming request was actually one that the user is authorized for, in the current context.",
+      "Additionally, the user can also be prompted to confirm an action every time an action concerning potentially sensitive data is invoked. This way, even if the attacker manages to get the user to click on a malicious link and request the desired action, the user has a chance to recover by denying confirmation. This solution is also implicitly tied to using a second factor of authentication before performing such actions.",
+      "In general, every request must be checked for the appropriate authentication token as well as authorization in the current session context."
+    ],
+    "example_instances": [
+      "While a user is logged into their bank account, an attacker can send an email with some potentially interesting content and require the user to click on a link in the email. The link points to or contains an attacker setup script, probably even within an iFrame, that mimics an actual user form submission to perform a malicious activity, such as transferring funds from the victim's account. The attacker can have the script embedded in, or targeted by, the link perform any arbitrary action as the authenticated user. When this script is executed, the targeted application authenticates and accepts the actions based on the victims existing session cookie. See also: Cross-site request forgery (CSRF) vulnerability in util.pl in @Mail WebMail 4.51 allows remote attackers to modify arbitrary settings and perform unauthorized actions as an arbitrary user, as demonstrated using a settings action in the SRC attribute of an IMG element in an HTML e-mail."
+    ],
+    "related_weaknesses": [
+      "352",
+      "306",
+      "664",
+      "732",
+      "1275"
+    ],
+    "matched_cwes": [
+      "352",
+      "732",
+      "306"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "09",
+        "entry_name": "Cross-Site Request Forgery"
+      },
+      {
+        "taxonomy_name": "OWASP Attacks",
+        "entry_id": "",
+        "entry_name": "Cross Site Request Forgery (CSRF)"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Explore target website] The attacker first explores the target website to determine pieces of functionality that are of interest to them (e.g. money transfers). The attacker will need a legitimate user account on the target website. It would help to have two accounts.",
+        "techniques": [
+          "Use web application debugging tool such as WebScarab, Tamper Data or TamperIE to analyze the information exchanged between the client and the server",
+          "Use network sniffing tool such as Wireshark to analyze the information exchanged between the client and the server",
+          "View HTML source of web pages that contain links or buttons that perform actions of interest."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Create a link that when clicked on, will execute the interesting functionality.] The attacker needs to create a link that will execute some interesting functionality such as transfer money, change a password, etc.",
+        "techniques": [
+          "Create a GET request containing all required parameters (e.g. https://www.somebank.com/members/transfer.asp?to=012345678901&amt=10000)",
+          "Create a form that will submit a POST request (e.g. <form method=\"POST\" action=\"https://www.somebank.com/members/transfer.asp\"><input type=\"hidden\" Name=\"to\" value=\"012345678901\"/><input type=\"hidden\" Name=\"amt\" value=\"10000\"/><input type=\"submit\" src=\"clickhere.jpg\"/></form>"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Convince user to click on link] Finally, the attacker needs to convince a user that is logged into the target website to click on a link to execute the CSRF attack.",
+        "techniques": [
+          "Execute a phishing attack and send the user an e-mail convincing them to click on a link.",
+          "Execute a stored XSS attack on a website to permanently embed the malicious link into the website.",
+          "Execute a stored XSS attack on a website where an XMLHTTPRequest object will automatically execute the attack as soon as a user visits the page. This removes the step of convincing a user to click on a link.",
+          "Include the malicious link on the attackers' own website where the user may have to click on the link, or where an XMLHTTPRequest object may automatically execute the attack when a user visits the site."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_target_web_site",
+      "attributes": {}
+    },
+    {
+      "id": "need_a_legitimate_user_account_on_the_target_website",
+      "attributes": {}
+    },
+    {
+      "id": "help_to_have_two_accounts",
+      "attributes": {}
+    },
+    {
+      "id": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "id": "use_a_utility_such_as_wireshark",
+      "attributes": {}
+    },
+    {
+      "id": "contain_links_or_buttons_that_perform_actions_of_interest",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_link_that_when_clicked_on_will_execute_the_interesting_functionality",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_create_a_link_that_will_execute_some_interesting_functionality_such_as_transfer_money",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_get_request_containing_all_required_parameters_e_g_https_www_somebank_com_members_transfer_asp_to_012345678901_amt_10000",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_form_that_will_submit_a_post_request",
+      "attributes": {}
+    },
+    {
+      "id": "execute_a_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "id": "execute_a_stored_xss_attack_on_a_website",
+      "attributes": {}
+    },
+    {
+      "id": "remove_the_step_of_convincing_a_user_to_click_on_a_link",
+      "attributes": {}
+    },
+    {
+      "id": "include_the_malicious_link_on_the_attackers_own_website_where_the_user_may_have_to_click_on_the_link_or_where_an_xmlhttprequest_object_may_automatically_execute_the_attack_when_a_user_visits_the_site",
+      "attributes": {}
+    },
+    {
+      "id": "log_a_user",
+      "attributes": {}
+    },
+    {
+      "id": "execute_this_script_the_targeted_application_authenticates",
+      "attributes": {}
+    },
+    {
+      "id": "see_cross_site_request_forgery_csrf_vulnerability_in_util_pl_in_mail",
+      "attributes": {}
+    },
+    {
+      "id": "allow_as_demonstrated_using_a_settings_action_in_the_src_attribute_of_an_img_element_in_an_html_e_mail",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_target_web_site",
+      "target": "find_target_web_site",
+      "attributes": {}
+    },
+    {
+      "source": "find_target_web_site",
+      "target": "need_a_legitimate_user_account_on_the_target_website",
+      "attributes": {}
+    },
+    {
+      "source": "need_a_legitimate_user_account_on_the_target_website",
+      "target": "help_to_have_two_accounts",
+      "attributes": {}
+    },
+    {
+      "source": "help_to_have_two_accounts",
+      "target": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "source": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "target": "use_a_utility_such_as_wireshark",
+      "attributes": {}
+    },
+    {
+      "source": "use_a_utility_such_as_wireshark",
+      "target": "contain_links_or_buttons_that_perform_actions_of_interest",
+      "attributes": {}
+    },
+    {
+      "source": "contain_links_or_buttons_that_perform_actions_of_interest",
+      "target": "create_a_link_that_when_clicked_on_will_execute_the_interesting_functionality",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_link_that_when_clicked_on_will_execute_the_interesting_functionality",
+      "target": "need_to_create_a_link_that_will_execute_some_interesting_functionality_such_as_transfer_money",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_create_a_link_that_will_execute_some_interesting_functionality_such_as_transfer_money",
+      "target": "create_a_get_request_containing_all_required_parameters_e_g_https_www_somebank_com_members_transfer_asp_to_012345678901_amt_10000",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_get_request_containing_all_required_parameters_e_g_https_www_somebank_com_members_transfer_asp_to_012345678901_amt_10000",
+      "target": "create_a_form_that_will_submit_a_post_request",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_form_that_will_submit_a_post_request",
+      "target": "execute_a_phishing_attack",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_phishing_attack",
+      "target": "execute_a_stored_xss_attack_on_a_website",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_stored_xss_attack_on_a_website",
+      "target": "execute_a_stored_xss_attack_on_a_website",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_stored_xss_attack_on_a_website",
+      "target": "remove_the_step_of_convincing_a_user_to_click_on_a_link",
+      "attributes": {}
+    },
+    {
+      "source": "remove_the_step_of_convincing_a_user_to_click_on_a_link",
+      "target": "include_the_malicious_link_on_the_attackers_own_website_where_the_user_may_have_to_click_on_the_link_or_where_an_xmlhttprequest_object_may_automatically_execute_the_attack_when_a_user_visits_the_site",
+      "attributes": {}
+    },
+    {
+      "source": "include_the_malicious_link_on_the_attackers_own_website_where_the_user_may_have_to_click_on_the_link_or_where_an_xmlhttprequest_object_may_automatically_execute_the_attack_when_a_user_visits_the_site",
+      "target": "log_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "log_a_user",
+      "target": "execute_this_script_the_targeted_application_authenticates",
+      "attributes": {}
+    },
+    {
+      "source": "execute_this_script_the_targeted_application_authenticates",
+      "target": "see_cross_site_request_forgery_csrf_vulnerability_in_util_pl_in_mail",
+      "attributes": {}
+    },
+    {
+      "source": "see_cross_site_request_forgery_csrf_vulnerability_in_util_pl_in_mail",
+      "target": "allow_as_demonstrated_using_a_settings_action_in_the_src_attribute_of_an_img_element_in_an_html_e_mail",
+      "attributes": {}
+    }
+  ]
+}

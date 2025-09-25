@@ -1,0 +1,285 @@
+{
+  "graph": {
+    "capec_id": "16",
+    "name": "Dictionary-based Password Attack",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "\n            ",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "49",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "600",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "560",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "561",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "653",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The system uses one factor password based authentication.",
+      "The system does not have a sound password policy that is being enforced.",
+      "The system does not implement an effective password throttling mechanism."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "A variety of password cracking tools and dictionaries are available to launch this type of an attack."
+      }
+    ],
+    "resources_required": [
+      "A machine with sufficient resources for the job (e.g. CPU, RAM, HD). Applicable dictionaries are required. Also a password cracking tool or a custom script that leverages the dictionary database to launch the attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Create a strong password policy and ensure that your system enforces this policy.",
+      "Implement an intelligent password throttling mechanism. Care must be taken to assure that these mechanisms do not excessively enable account lockout attacks such as CAPEC-2.",
+      "Leverage multi-factor authentication for all authentication services."
+    ],
+    "example_instances": [
+      "A system user selects the word \"treacherous\" as their passwords believing that it would be very difficult to guess. The password-based dictionary attack is used to crack this password and gain access to the account.",
+      "The Cisco LEAP challenge/response authentication mechanism uses passwords in a way that is susceptible to dictionary attacks, which makes it easier for remote attackers to gain privileges via brute force password guessing attacks. Cisco LEAP is a mutual authentication algorithm that supports dynamic derivation of session keys. With Cisco LEAP, mutual authentication relies on a shared secret, the user's logon password (which is known by the client and the network), and is used to respond to challenges between the user and the Remote Authentication Dial-In User Service (RADIUS) server. Methods exist for someone to write a tool to launch an offline dictionary attack on password-based authentications that leverage Microsoft MS-CHAP, such as Cisco LEAP. The tool leverages large password lists to efficiently launch offline dictionary attacks against LEAP user accounts, collected through passive sniffing or active techniques. See also: CVE-2003-1096"
+    ],
+    "related_weaknesses": [
+      "521",
+      "262",
+      "263",
+      "654",
+      "307",
+      "308",
+      "309"
+    ],
+    "matched_cwes": [
+      "307",
+      "521"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine application's/system's password policy] Determine the password policies of the target application/system.",
+        "techniques": [
+          "Determine minimum and maximum allowed password lengths.",
+          "Determine format of allowed passwords (whether they are required or allowed to contain numbers, special characters, etc., or whether they are allowed to contain words from the dictionary).",
+          "Determine account lockout policy (a strict account lockout policy will prevent brute force attacks)."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Select dictionaries] Pick the dictionaries to be used in the attack (e.g. different languages, specific terminology, etc.)",
+        "techniques": [
+          "Select dictionary based on particular users' preferred languages.",
+          "Select dictionary based on the application/system's supported languages."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Explore",
+        "description": "[Determine username(s) to target] Determine username(s) whose passwords to crack.",
+        "techniques": [
+          "Obtain username(s) by sniffing network packets.",
+          "Obtain username(s) by querying application/system (e.g. if upon a failed login attempt, the system indicates whether the entered username was valid or not)",
+          "Obtain usernames from filesystem (e.g. list of directories in C:\\Documents and Settings\\ in Windows, and list in /etc/passwd in UNIX-like systems)"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Use dictionary to crack passwords.] Use a password cracking tool that will leverage the dictionary to feed passwords to the system and see if they work.",
+        "techniques": [
+          "Try all words in the dictionary, as well as common misspellings of the words as passwords for the chosen username(s).",
+          "Try common combinations of words in the dictionary, as well as common misspellings of the combinations as passwords for the chosen username(s)."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_the_password_policies_of_the_target_application_system",
+      "attributes": {}
+    },
+    {
+      "id": "determine_minimum_and_maximum_allowed_password_lengths",
+      "attributes": {}
+    },
+    {
+      "id": "determine_account",
+      "attributes": {}
+    },
+    {
+      "id": "pick_the_dictionaries_to_be_used_in_the_attack_e_g_different_languages_specific_terminology_etc",
+      "attributes": {}
+    },
+    {
+      "id": "crack_whose_passwords",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_usernames_from_filesystem_e_g_list_of_directories_in_c_documents_and_settings_in_windows_and_list_in_etc_passwd_in_unix_like_systems",
+      "attributes": {}
+    },
+    {
+      "id": "try_all_words_in_the_dictionary_as_well_as_common_misspellings_of_the_words_as_passwords_for_the_chosen_username_s",
+      "attributes": {}
+    },
+    {
+      "id": "try_common_combinations_of_words_in_the_dictionary",
+      "attributes": {}
+    },
+    {
+      "id": "select_the_word_treacherous",
+      "attributes": {}
+    },
+    {
+      "id": "support_dynamic_derivation_of_session_keys",
+      "attributes": {}
+    },
+    {
+      "id": "rely_the_user_s_logon_password_which_is_known_by_the_client_and_the_network",
+      "attributes": {}
+    },
+    {
+      "id": "exist_for_someone_to_write_a_tool_to_launch_an_offline_dictionary_attack_on_password_based_authentications_that_leverage_microsoft_ms_chap_such_as_cisco_leap",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_large_password_lists",
+      "attributes": {}
+    },
+    {
+      "id": "see_1096",
+      "attributes": {}
+    },
+    {
+      "id": "enforce_that",
+      "attributes": {}
+    },
+    {
+      "id": "implement_an_effective_password_throttling_mechanism",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_the_password_policies_of_the_target_application_system",
+      "target": "determine_minimum_and_maximum_allowed_password_lengths",
+      "attributes": {}
+    },
+    {
+      "source": "determine_minimum_and_maximum_allowed_password_lengths",
+      "target": "determine_account",
+      "attributes": {}
+    },
+    {
+      "source": "determine_account",
+      "target": "pick_the_dictionaries_to_be_used_in_the_attack_e_g_different_languages_specific_terminology_etc",
+      "attributes": {}
+    },
+    {
+      "source": "pick_the_dictionaries_to_be_used_in_the_attack_e_g_different_languages_specific_terminology_etc",
+      "target": "crack_whose_passwords",
+      "attributes": {}
+    },
+    {
+      "source": "crack_whose_passwords",
+      "target": "obtain_usernames_from_filesystem_e_g_list_of_directories_in_c_documents_and_settings_in_windows_and_list_in_etc_passwd_in_unix_like_systems",
+      "attributes": {}
+    },
+    {
+      "source": "crack_whose_passwords",
+      "target": "try_all_words_in_the_dictionary_as_well_as_common_misspellings_of_the_words_as_passwords_for_the_chosen_username_s",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_usernames_from_filesystem_e_g_list_of_directories_in_c_documents_and_settings_in_windows_and_list_in_etc_passwd_in_unix_like_systems",
+      "target": "crack_whose_passwords",
+      "attributes": {}
+    },
+    {
+      "source": "try_all_words_in_the_dictionary_as_well_as_common_misspellings_of_the_words_as_passwords_for_the_chosen_username_s",
+      "target": "try_common_combinations_of_words_in_the_dictionary",
+      "attributes": {}
+    },
+    {
+      "source": "try_common_combinations_of_words_in_the_dictionary",
+      "target": "select_the_word_treacherous",
+      "attributes": {}
+    },
+    {
+      "source": "select_the_word_treacherous",
+      "target": "support_dynamic_derivation_of_session_keys",
+      "attributes": {}
+    },
+    {
+      "source": "support_dynamic_derivation_of_session_keys",
+      "target": "rely_the_user_s_logon_password_which_is_known_by_the_client_and_the_network",
+      "attributes": {}
+    },
+    {
+      "source": "rely_the_user_s_logon_password_which_is_known_by_the_client_and_the_network",
+      "target": "exist_for_someone_to_write_a_tool_to_launch_an_offline_dictionary_attack_on_password_based_authentications_that_leverage_microsoft_ms_chap_such_as_cisco_leap",
+      "attributes": {}
+    },
+    {
+      "source": "exist_for_someone_to_write_a_tool_to_launch_an_offline_dictionary_attack_on_password_based_authentications_that_leverage_microsoft_ms_chap_such_as_cisco_leap",
+      "target": "leverage_large_password_lists",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_large_password_lists",
+      "target": "see_1096",
+      "attributes": {}
+    },
+    {
+      "source": "see_1096",
+      "target": "enforce_that",
+      "attributes": {}
+    },
+    {
+      "source": "enforce_that",
+      "target": "implement_an_effective_password_throttling_mechanism",
+      "attributes": {}
+    }
+  ]
+}

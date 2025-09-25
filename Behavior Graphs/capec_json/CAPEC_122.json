@@ -1,0 +1,113 @@
+{
+  "graph": {
+    "capec_id": "122",
+    "name": "Privilege Abuse",
+    "abstraction": "Meta",
+    "status": "Draft",
+    "description": "An adversary is able to exploit features of the target that should be reserved for privileged users or administrators but are exposed to use by lower or non-privileged accounts. Access to sensitive information and functionality must be controlled to ensure that only authorized users are able to access these resources.",
+    "likelihood": "High",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "664",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The target must have misconfigured their access control mechanisms such that sensitive information, which should only be accessible to more trusted users, remains accessible to less trusted users.",
+      "The adversary must have access to the target, albeit with an account that is less privileged than would be appropriate for the targeted resources."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Adversary can leverage privileged features they already have access to without additional effort or skill. Adversary is only required to have access to an account with improper priveleges."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack. The ability to access the target is required."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [
+      "Configure account privileges such privileged/administrator functionality is not exposed to non-privileged/lower accounts."
+    ],
+    "example_instances": [
+      "Improperly configured account privileges allowed unauthorized users on a hospital's network to access the medical records for over 3,000 patients. Thus compromising data integrity and confidentiality in addition to HIPAA violations."
+    ],
+    "related_weaknesses": [
+      "269",
+      "732",
+      "1317"
+    ],
+    "matched_cwes": [
+      "269",
+      "732"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1548",
+        "entry_name": "Abuse Elevation Control Mechanism"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "configure_account_privileges",
+      "attributes": {}
+    },
+    {
+      "id": "compromise_data_integrity_and_confidentiality",
+      "attributes": {}
+    },
+    {
+      "id": "misconfigure_their_access_control_mechanisms_such_that_sensitive_information_which_should_only_be_accessible_to_more_trusted_users",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "configure_account_privileges",
+      "target": "compromise_data_integrity_and_confidentiality",
+      "attributes": {}
+    },
+    {
+      "source": "compromise_data_integrity_and_confidentiality",
+      "target": "misconfigure_their_access_control_mechanisms_such_that_sensitive_information_which_should_only_be_accessible_to_more_trusted_users",
+      "attributes": {}
+    }
+  ]
+}

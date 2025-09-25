@@ -1,0 +1,196 @@
+{
+  "graph": {
+    "capec_id": "67",
+    "name": "String Format Overflow in syslog()",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "This attack targets applications and software that uses the syslog() function insecurely. If an application does not explicitely use a format string parameter in a call to syslog(), user input can be placed in the format string parameter leading to a format string injection attack. Adversaries can then inject malicious format string commands into the function call leading to a buffer overflow. There are many reported software vulnerabilities with the root cause being a misuse of the syslog() function.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "100",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "135",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The Syslog function is used without specifying a format string argument, allowing user input to be placed direct into the function call as a format string."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "The code should be reviewed for misuse of the Syslog function call. Manual or automated code review can be used. The reviewer needs to ensure that all format string functions are passed a static string which cannot be controlled by the user and that the proper number of arguments are always sent to that function as well. If at all possible, do not use the %n operator in format strings. The following code shows a correct usage of Syslog(): syslog(LOG_ERR, \"%s\", cmdBuf); The following code shows a vulnerable usage of Syslog(): syslog(LOG_ERR, cmdBuf); // the buffer cmdBuff is taking user supplied data."
+    ],
+    "example_instances": [
+      "Format string vulnerability in TraceEvent function for ntop before 2.1 allows remote adversaries to execute arbitrary code by causing format strings to be injected into calls to the syslog function, via (1) an HTTP GET request, (2) a user name in HTTP authentication, or (3) a password in HTTP authentication. See also: CVE-2002-0412"
+    ],
+    "related_weaknesses": [
+      "120",
+      "134",
+      "74",
+      "20",
+      "680",
+      "697"
+    ],
+    "matched_cwes": [
+      "134",
+      "20",
+      "74",
+      "120"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "06",
+        "entry_name": "Format String"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify target application] The adversary identifies a target application or program to perform the buffer overflow on. In this attack, adversaries look for applications that use syslog() incorrectly.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Find injection vector] The adversary identifies an injection vector to deliver the excessive content to the targeted application's buffer. For each user-controllable input that the adversary suspects is vulnerable to format string injection, attempt to inject formatting characters such as %n, %s, etc.. The goal is to manipulate the string creation using these formatting characters.",
+        "techniques": [
+          "Inject probe payload which contains formatting characters (%s, %d, %n, etc.) through input parameters."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Craft overflow content] The adversary crafts the content to be injected. If the intent is to simply cause the software to crash, the content need only consist of an excessive quantity of random data. If the intent is to leverage the overflow for execution of arbitrary code, the adversary will craft a set of content that not only overflows the targeted buffer but does so in such a way that the overwritten return address is replaced with one of the adversaries' choosing which points to code injected by the adversary.",
+        "techniques": [
+          "The formatting characters %s and %d are useful for observing memory and trying to print memory addresses. If an adversary has access to the log being written to they can observer this output and use it to help craft their attack.",
+          "The formatting character %n is useful for adding extra data onto the buffer."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Overflow the buffer] Using the injection vector, the adversary supplies the program with the crafted format string injection, causing a buffer.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "id": "inject_formatting_characters_such_as_n_s_etc",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_the_string_creation",
+      "attributes": {}
+    },
+    {
+      "id": "inject_probe_payload_which_contains_formatting_characters",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "id": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "id": "specify_a_format_string_argument",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_application",
+      "target": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "identify_target_application",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "find_injection_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_injection_vector",
+      "target": "inject_formatting_characters_such_as_n_s_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_formatting_characters_such_as_n_s_etc",
+      "target": "manipulate_the_string_creation",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_the_string_creation",
+      "target": "inject_probe_payload_which_contains_formatting_characters",
+      "attributes": {}
+    },
+    {
+      "source": "inject_probe_payload_which_contains_formatting_characters",
+      "target": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_the_overflow_for_execution_of_arbitrary_code",
+      "target": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "source": "overflow_the_buffer",
+      "target": "specify_a_format_string_argument",
+      "attributes": {}
+    }
+  ]
+}

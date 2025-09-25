@@ -1,0 +1,315 @@
+{
+  "graph": {
+    "capec_id": "84",
+    "name": "XQuery Injection",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "This attack utilizes XQuery to probe and attack server systems; in a similar manner that SQL Injection allows an attacker to exploit SQL calls to RDBMS, XQuery Injection uses improperly validated data that is passed to XQuery commands to traverse and execute commands that the XQuery routines have access to. XQuery injection can be used to enumerate elements on the victim's environment, inject commands to the local host, or execute queries to remote files and data sources.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "250",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The XQL must execute unvalidated data"
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Basic understanding of XQuery"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      }
+    ],
+    "mitigations": [
+      "Design: Perform input allowlist validation on all XML input",
+      "Implementation: Run xml parsing and query infrastructure with minimal privileges so that an attacker is limited in their ability to probe other system resources from XQL."
+    ],
+    "example_instances": [
+      "An attacker can pass XQuery expressions embedded in otherwise standard XML documents. Like SQL injection attacks, the attacker tunnels through the application entry point to target the resource access layer. The string below is an example of an attacker accessing the accounts.xml to request the service provider send all user names back. doc(accounts.xml)//user[Name='*'] The attacks that are possible through XQuery are difficult to predict, if the data is not validated prior to executing the XQL."
+    ],
+    "related_weaknesses": [
+      "74",
+      "707"
+    ],
+    "matched_cwes": [
+      "74",
+      "707"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "46",
+        "entry_name": "XQuery Injection"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the application for user-controllable inputs] Using a browser or an automated tool, an attacker follows all public links and actions on a web site. They record all the links, the forms, the resources accessed and all other potential entry-points for the web application.",
+        "techniques": [
+          "Use a spidering tool to follow and record all links and analyze the web pages to find entry points. Make special note of any links that include parameters in the URL.",
+          "Use a proxy tool to record all user input entry points visited during a manual traversal of the web application.",
+          "Use a browser to manually explore the website and analyze how it is constructed. Many browsers' plugins are available to facilitate the analysis or automate the discovery."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Determine user-controllable input susceptible to injection] Determine the user-controllable input susceptible to injection. For each user-controllable input that the attacker suspects is vulnerable to XQL injection, attempt to inject characters that have special meaning in XQL. The goal is to create an XQL query with an invalid syntax.",
+        "techniques": [
+          "Use web browser to inject input through text fields or through HTTP GET parameters.",
+          "Use a web application debugging tool such as Tamper Data, TamperIE, WebScarab,etc. to modify HTTP POST parameters, hidden fields, non-freeform fields, etc.",
+          "Use XML files to inject input.",
+          "Use network-level packet injection tools such as netcat to inject input",
+          "Use modified client (modified by reverse engineering) to inject input."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Information Disclosure] The attacker crafts and injects an XQuery payload which is acted on by an XQL query leading to inappropriate disclosure of information.",
+        "techniques": [
+          "Leveraging one of the vulnerable inputs identified during the Experiment phase, inject malicious XQuery payload. The payload aims to get information on the structure of the underlying XML database and/or the content in it."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Manipulate the data in the XML database] The attacker crafts and injects an XQuery payload which is acted on by an XQL query leading to modification of application data.",
+        "techniques": [
+          "Leveraging one of the vulnerable inputs identified during the Experiment phase, inject malicious XQuery payload.. The payload tries to insert or replace data in the XML database."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_application_for_user_controllable_inputs",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_the_links_the_forms",
+      "attributes": {}
+    },
+    {
+      "id": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "id": "determine_user_controllable_input_susceptible_to_injection",
+      "attributes": {}
+    },
+    {
+      "id": "inject_characters_or_keywords_that_have_special_meaning",
+      "attributes": {}
+    },
+    {
+      "id": "create_an_xql_query",
+      "attributes": {}
+    },
+    {
+      "id": "inject_input",
+      "attributes": {}
+    },
+    {
+      "id": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "id": "inject_an_xquery_payload_which_is_acted_on_by_an_xql_query_leading_to_inappropriate_disclosure_of_information",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_one_of_the_vulnerable_inputs_identified_during_the_experiment_phase",
+      "attributes": {}
+    },
+    {
+      "id": "aim_to_get_information_on_the_structure_of_the_underlying_xml_database_and_or_the_content_in_it",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_the_data_in_the_xml_database",
+      "attributes": {}
+    },
+    {
+      "id": "pass_xquery_expressions_embedded_in_otherwise_standard_xml_documents",
+      "attributes": {}
+    },
+    {
+      "id": "tunnel_attacker",
+      "attributes": {}
+    },
+    {
+      "id": "access_the_accounts_xml",
+      "attributes": {}
+    },
+    {
+      "id": "execute_unvalidated_data",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_application_for_user_controllable_inputs",
+      "target": "record_all_the_links_the_forms",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_the_links_the_forms",
+      "target": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "source": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "source": "facilitate_the_analysis",
+      "target": "determine_user_controllable_input_susceptible_to_injection",
+      "attributes": {}
+    },
+    {
+      "source": "determine_user_controllable_input_susceptible_to_injection",
+      "target": "inject_characters_or_keywords_that_have_special_meaning",
+      "attributes": {}
+    },
+    {
+      "source": "inject_characters_or_keywords_that_have_special_meaning",
+      "target": "create_an_xql_query",
+      "attributes": {}
+    },
+    {
+      "source": "create_an_xql_query",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "inject_input",
+      "target": "inject_an_xquery_payload_which_is_acted_on_by_an_xql_query_leading_to_inappropriate_disclosure_of_information",
+      "attributes": {}
+    },
+    {
+      "source": "debug_tool_such_as_tamper_data_tamperie_webscarab_etc",
+      "target": "inject_input",
+      "attributes": {}
+    },
+    {
+      "source": "inject_an_xquery_payload_which_is_acted_on_by_an_xql_query_leading_to_inappropriate_disclosure_of_information",
+      "target": "leverage_one_of_the_vulnerable_inputs_identified_during_the_experiment_phase",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_one_of_the_vulnerable_inputs_identified_during_the_experiment_phase",
+      "target": "aim_to_get_information_on_the_structure_of_the_underlying_xml_database_and_or_the_content_in_it",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_one_of_the_vulnerable_inputs_identified_during_the_experiment_phase",
+      "target": "manipulate_the_data_in_the_xml_database",
+      "attributes": {}
+    },
+    {
+      "source": "aim_to_get_information_on_the_structure_of_the_underlying_xml_database_and_or_the_content_in_it",
+      "target": "manipulate_the_data_in_the_xml_database",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_the_data_in_the_xml_database",
+      "target": "leverage_one_of_the_vulnerable_inputs_identified_during_the_experiment_phase",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_the_data_in_the_xml_database",
+      "target": "pass_xquery_expressions_embedded_in_otherwise_standard_xml_documents",
+      "attributes": {}
+    },
+    {
+      "source": "pass_xquery_expressions_embedded_in_otherwise_standard_xml_documents",
+      "target": "tunnel_attacker",
+      "attributes": {}
+    },
+    {
+      "source": "tunnel_attacker",
+      "target": "access_the_accounts_xml",
+      "attributes": {}
+    },
+    {
+      "source": "access_the_accounts_xml",
+      "target": "access_the_accounts_xml",
+      "attributes": {}
+    },
+    {
+      "source": "access_the_accounts_xml",
+      "target": "execute_unvalidated_data",
+      "attributes": {}
+    }
+  ]
+}

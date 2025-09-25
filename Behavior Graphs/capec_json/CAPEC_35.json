@@ -1,0 +1,198 @@
+{
+  "graph": {
+    "capec_id": "35",
+    "name": "Leverage Executable Code in Non-Executable Files",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attack of this type exploits a system's trust in configuration and resource files. When the executable loads the resource (such as an image file or configuration file) the attacker has modified the file to either execute malicious code directly or manipulate the target process (e.g. application server) to execute based on the malicious configuration parameters. Since systems are increasingly interrelated mashing up resources from local and remote sources the possibility of this attack occurring is high.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "636",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "23",
+        "nature": "PeerOf"
+      },
+      {
+        "capec_id": "75",
+        "nature": "PeerOf"
+      }
+    ],
+    "prerequisites": [
+      "The attacker must have the ability to modify non-executable files consumed by the target software."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To identify and execute against an over-privileged system interface"
+      }
+    ],
+    "resources_required": [
+      "Ability to communicate synchronously or asynchronously with server that publishes an over-privileged directory, program, or interface. Optionally, ability to capture output directly through synchronous communication or other method such as FTP."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Design: Enforce principle of least privilege",
+      "Design: Run server interfaces with a non-root account and/or utilize chroot jails or other configuration techniques to constrain privileges even if attacker gains some limited access to commands.",
+      "Implementation: Perform testing such as pen-testing and vulnerability scanning to identify directories, programs, and interfaces that grant direct access to executables.",
+      "Implementation: Implement host integrity monitoring to detect any unwanted altering of configuration files.",
+      "Implementation: Ensure that files that are not required to execute, such as configuration files, are not over-privileged, i.e. not allowed to execute."
+    ],
+    "example_instances": [
+      "Virtually any system that relies on configuration files for runtime behavior is open to this attack vector. The configuration files are frequently stored in predictable locations, so an attacker that can fingerprint a server process such as a web server or database server can quickly identify the likely locale where the configuration is stored. And this is of course not limited to server processes. Unix shells rely on profile files to store environment variables, search paths for programs and so on. If the aliases are changed, then a standard Unix \"cp\" command can be rerouted to \"rm\" or other standard command so the user's intention is subverted.",
+      "The attack can be directed at a client system, such as causing buffer overrun through loading seemingly benign image files, as in Microsoft Security Bulletin MS04-028 where specially crafted JPEG files could cause a buffer overrun once loaded into the browser.",
+      "Another example targets clients reading pdf files. In this case the attacker simply appends javascript to the end of a legitimate url for a pdf (http://www.gnucitizen.org/blog/danger-danger-danger/) http://path/to/pdf/file.pdf#whatever_name_you_want=javascript:your_code_here The client assumes that they are reading a pdf, but the attacker has modified the resource and loaded executable javascript into the client's browser process.",
+      "The attack can also target server processes. The attacker edits the resource or configuration file, for example a web.xml file used to configure security permissions for a J2EE app server, adding role name \"public\" grants all users with the public role the ability to use the administration functionality. < security-constraint> <description>Security processing rules for admin screens</description>  <url-pattern>/admin/*</url-pattern>  <http-method>POST</http-method>  <http-method>GET</http-method> <auth-constraint> <role-name>administrator</role-name>  <role-name>public</role-name>  </auth-constraint>  </security-constraint> The server trusts its configuration file to be correct, but when they are manipulated, the attacker gains full control."
+    ],
+    "related_weaknesses": [
+      "94",
+      "96",
+      "95",
+      "97",
+      "272",
+      "59",
+      "282",
+      "270"
+    ],
+    "matched_cwes": [
+      "94",
+      "282",
+      "95",
+      "59"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1027.006",
+        "entry_name": "Obfuscated Files or Information: HTML Smuggling"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1027.009",
+        "entry_name": "Obfuscated Files or Information: Embedded Payloads"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1564.009",
+        "entry_name": "Hide Artifacts: Resource Forking"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "store_the_configuration_files",
+      "attributes": {}
+    },
+    {
+      "id": "limit_to_server_processes",
+      "attributes": {}
+    },
+    {
+      "id": "rely_to_store_environment_variables_search_paths_for_programs_and_so_on",
+      "attributes": {}
+    },
+    {
+      "id": "change_the_aliases",
+      "attributes": {}
+    },
+    {
+      "id": "direct_the_attack",
+      "attributes": {}
+    },
+    {
+      "id": "append_javascript",
+      "attributes": {}
+    },
+    {
+      "id": "target_server_processes",
+      "attributes": {}
+    },
+    {
+      "id": "edit_the_resource_or_configuration_file",
+      "attributes": {}
+    },
+    {
+      "id": "trust_its_configuration_file",
+      "attributes": {}
+    },
+    {
+      "id": "modify_files_that_the_target_software_will_consume",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "store_the_configuration_files",
+      "target": "limit_to_server_processes",
+      "attributes": {}
+    },
+    {
+      "source": "limit_to_server_processes",
+      "target": "rely_to_store_environment_variables_search_paths_for_programs_and_so_on",
+      "attributes": {}
+    },
+    {
+      "source": "rely_to_store_environment_variables_search_paths_for_programs_and_so_on",
+      "target": "change_the_aliases",
+      "attributes": {}
+    },
+    {
+      "source": "change_the_aliases",
+      "target": "direct_the_attack",
+      "attributes": {}
+    },
+    {
+      "source": "direct_the_attack",
+      "target": "append_javascript",
+      "attributes": {}
+    },
+    {
+      "source": "append_javascript",
+      "target": "target_server_processes",
+      "attributes": {}
+    },
+    {
+      "source": "target_server_processes",
+      "target": "edit_the_resource_or_configuration_file",
+      "attributes": {}
+    },
+    {
+      "source": "edit_the_resource_or_configuration_file",
+      "target": "trust_its_configuration_file",
+      "attributes": {}
+    },
+    {
+      "source": "trust_its_configuration_file",
+      "target": "modify_files_that_the_target_software_will_consume",
+      "attributes": {}
+    }
+  ]
+}

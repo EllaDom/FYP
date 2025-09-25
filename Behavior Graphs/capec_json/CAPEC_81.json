@@ -1,0 +1,188 @@
+{
+  "graph": {
+    "capec_id": "81",
+    "name": "Web Server Logs Tampering",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "Web Logs Tampering attacks involve an attacker injecting, deleting or otherwise tampering with the contents of web logs typically for the purposes of masking other malicious behavior. Additionally, writing malicious data to log files may target jobs, filters, reports, and other agents that process the logs in an asynchronous attack pattern. This pattern of attack is similar to \"Log Injection-Tampering-Forging\" except that in this case, the attack is targeting the logs of the web server and not the application.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "268",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Target server software must be a HTTP server that performs web logging."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To input faked entries into Web logs"
+      }
+    ],
+    "resources_required": [
+      "Ability to send specially formatted HTTP request to web server"
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Design: Use input validation before writing to web log",
+      "Design: Validate all log data before it is output"
+    ],
+    "example_instances": [
+      "Most web servers have a public interface, even if the majority of the site is password protected, there is usually at least a login site and brochureware that is publicly available. HTTP requests to the site are also generally logged to a Web log. From an attacker point of view, standard HTTP requests containing a malicious payload can be sent to the public website (with no other access required), when those requests appear in the log (such as http://victimsite/index.html?< malicious script> if they are followed by an administrator this may be sufficient to probe the administrator's host or local network."
+    ],
+    "related_weaknesses": [
+      "117",
+      "93",
+      "75",
+      "221",
+      "96",
+      "20",
+      "150",
+      "276",
+      "279",
+      "116"
+    ],
+    "matched_cwes": [
+      "276",
+      "20",
+      "279",
+      "116"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine Application Web Server Log File Format] The attacker observes the system and looks for indicators of which logging utility is being used by the web server.",
+        "techniques": [
+          "Determine logging utility being used by application web server (e.g. log4j), only possible if the application is known by the attacker or if the application returns error messages with logging utility information."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Determine Injectable Content] The attacker launches various logged actions with malicious data to determine what sort of log injection is possible.",
+        "techniques": [
+          "Attacker triggers logged actions with maliciously crafted data as inputs, parameters, arguments, etc."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Manipulate Log Files] The attacker alters the log contents either directly through manipulation or forging or indirectly through injection of specially crafted request that the web server will receive and write into the logs. This type of attack typically follows another attack and is used to try to cover the traces of the previous attack.",
+        "techniques": [
+          "Directly through log file or database manipulation, modify existing log entries."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "observe_system_behavior",
+      "attributes": {}
+    },
+    {
+      "id": "determine_logging_utility_being_used_by_application_web_server_e_g_log4j",
+      "attributes": {}
+    },
+    {
+      "id": "determine_injectable_content",
+      "attributes": {}
+    },
+    {
+      "id": "launch_various_logged_actions_with_malicious_data",
+      "attributes": {}
+    },
+    {
+      "id": "trigger_logged_actions_with_maliciously_crafted_data_as_inputs_parameters_arguments_etc",
+      "attributes": {}
+    },
+    {
+      "id": "alter_the_log_contents",
+      "attributes": {}
+    },
+    {
+      "id": "follow_attack",
+      "attributes": {}
+    },
+    {
+      "id": "modify_existing_log_entries",
+      "attributes": {}
+    },
+    {
+      "id": "log_http_requests_to_the_site",
+      "attributes": {}
+    },
+    {
+      "id": "craft_malicious_payload",
+      "attributes": {}
+    },
+    {
+      "id": "perform_web_logging",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "observe_system_behavior",
+      "target": "determine_logging_utility_being_used_by_application_web_server_e_g_log4j",
+      "attributes": {}
+    },
+    {
+      "source": "determine_logging_utility_being_used_by_application_web_server_e_g_log4j",
+      "target": "determine_injectable_content",
+      "attributes": {}
+    },
+    {
+      "source": "determine_injectable_content",
+      "target": "launch_various_logged_actions_with_malicious_data",
+      "attributes": {}
+    },
+    {
+      "source": "launch_various_logged_actions_with_malicious_data",
+      "target": "trigger_logged_actions_with_maliciously_crafted_data_as_inputs_parameters_arguments_etc",
+      "attributes": {}
+    },
+    {
+      "source": "trigger_logged_actions_with_maliciously_crafted_data_as_inputs_parameters_arguments_etc",
+      "target": "alter_the_log_contents",
+      "attributes": {}
+    },
+    {
+      "source": "alter_the_log_contents",
+      "target": "follow_attack",
+      "attributes": {}
+    },
+    {
+      "source": "follow_attack",
+      "target": "modify_existing_log_entries",
+      "attributes": {}
+    },
+    {
+      "source": "modify_existing_log_entries",
+      "target": "log_http_requests_to_the_site",
+      "attributes": {}
+    },
+    {
+      "source": "log_http_requests_to_the_site",
+      "target": "craft_malicious_payload",
+      "attributes": {}
+    },
+    {
+      "source": "craft_malicious_payload",
+      "target": "perform_web_logging",
+      "attributes": {}
+    }
+  ]
+}

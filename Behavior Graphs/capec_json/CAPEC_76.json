@@ -1,0 +1,260 @@
+{
+  "graph": {
+    "capec_id": "76",
+    "name": "Manipulating Web Input to File System Calls",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker manipulates inputs to the target software which the target software passes to file system calls in the OS. The goal is to gain access to, and perhaps modify, areas of the file system that the target software did not intend to be accessible.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "126",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Program must allow for user controlled variables to be applied directly to the filesystem"
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To identify file system entry point and execute against an over-privileged system interface"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Design: Enforce principle of least privilege.",
+      "Design: Ensure all input is validated, and does not contain file system commands",
+      "Design: Run server interfaces with a non-root account and/or utilize chroot jails or other configuration techniques to constrain privileges even if attacker gains some limited access to commands.",
+      "Design: For interactive user applications, consider if direct file system interface is necessary, instead consider having the application proxy communication.",
+      "Implementation: Perform testing such as pen-testing and vulnerability scanning to identify directories, programs, and interfaces that grant direct access to executables."
+    ],
+    "example_instances": [
+      "The attacker uses relative path traversal to access files in the application. This is an example of accessing user's password file. http://www.example.com/getProfile.jsp?filename=../../../../etc/passwd However, the target application employs regular expressions to make sure no relative path sequences are being passed through the application to the web page. The application would replace all matches from this regex with the empty string. Then an attacker creates special payloads to bypass this filter: http://www.example.com/getProfile.jsp?filename=%2e%2e/%2e%2e/%2e%2e/%2e%2e /etc/passwd When the application gets this input string, it will be the desired vector by the attacker."
+    ],
+    "related_weaknesses": [
+      "23",
+      "22",
+      "73",
+      "77",
+      "346",
+      "348",
+      "285",
+      "272",
+      "59",
+      "74",
+      "15"
+    ],
+    "matched_cwes": [
+      "74",
+      "23",
+      "77",
+      "285",
+      "73",
+      "22",
+      "59"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Fingerprinting of the operating system] In order to create a valid file injection, the attacker needs to know what the underlying OS is so that the proper file seperator is used.",
+        "techniques": [
+          "Port mapping. Identify ports that the system is listening on, and attempt to identify inputs and protocol types on those ports.",
+          "TCP/IP Fingerprinting. The attacker uses various software to make connections or partial connections and observe idiosyncratic responses from the operating system. Using those responses, they attempt to guess the actual operating system.",
+          "Induce errors to find informative error messages"
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Survey the Application to Identify User-controllable Inputs] The attacker surveys the target application to identify all user-controllable inputs, possibly as a valid and authenticated user",
+        "techniques": [
+          "Spider web sites for all available links, entry points to the web site.",
+          "Manually explore application and inventory all application inputs"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Vary inputs, looking for malicious results] Depending on whether the application being exploited is a remote or local one, the attacker crafts the appropriate malicious input containing the path of the targeted file or other file system control syntax to be passed to the application",
+        "techniques": [
+          "Inject context-appropriate malicious file path using network packet injection tools (netcat, nemesis, etc.)",
+          "Inject context-appropriate malicious file path using web test frameworks (proxies, TamperData, custom programs, etc.) or simple HTTP requests",
+          "Inject context-appropriate malicious file system control syntax"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Manipulate files accessible by the application] The attacker may steal information or directly manipulate files (delete, copy, flush, etc.)",
+        "techniques": [
+          "The attacker injects context-appropriate malicious file path to access the content of the targeted file.",
+          "The attacker injects context-appropriate malicious file system control syntax to access the content of the targeted file.",
+          "The attacker injects context-appropriate malicious file path to cause the application to create, delete a targeted file.",
+          "The attacker injects context-appropriate malicious file system control syntax to cause the application to create, delete a targeted file.",
+          "The attacker injects context-appropriate malicious file path in order to manipulate the meta-data of the targeted file.",
+          "The attacker injects context-appropriate malicious file system control syntax in order to manipulate the meta-data of the targeted file."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_ports_that_the_system_is_listening_on",
+      "attributes": {}
+    },
+    {
+      "id": "make_connections_or_partial_connections",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_using_those_responses",
+      "attributes": {}
+    },
+    {
+      "id": "induce_errors",
+      "attributes": {}
+    },
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "explore_application_and_inventory",
+      "attributes": {}
+    },
+    {
+      "id": "input_vary",
+      "attributes": {}
+    },
+    {
+      "id": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "attributes": {}
+    },
+    {
+      "id": "inject_command_delimiters_using_web_test_frameworks_proxies_tamperdata_custom_programs_etc",
+      "attributes": {}
+    },
+    {
+      "id": "steal_information_or_directly_manipulate_files_delete_copy_flush_etc",
+      "attributes": {}
+    },
+    {
+      "id": "inject_context_appropriate_malicious_file_path",
+      "attributes": {}
+    },
+    {
+      "id": "use_relative_path_traversal",
+      "attributes": {}
+    },
+    {
+      "id": "employ_regular_expressions_to_make_sure_no_relative_path_sequences_are_being_passed_through_the_application_to_the_web_page",
+      "attributes": {}
+    },
+    {
+      "id": "replace_all_matches",
+      "attributes": {}
+    },
+    {
+      "id": "create_special_payloads_to_bypass_this_filter_http_www_example_com_getprofile_jsp_filename_2e_2e_2e_2e_2e_2e_2e_2e_etc",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_ports_that_the_system_is_listening_on",
+      "target": "make_connections_or_partial_connections",
+      "attributes": {}
+    },
+    {
+      "source": "make_connections_or_partial_connections",
+      "target": "attempt_using_those_responses",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_using_those_responses",
+      "target": "induce_errors",
+      "attributes": {}
+    },
+    {
+      "source": "induce_errors",
+      "target": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "survey_the_target_application",
+      "target": "explore_application_and_inventory",
+      "attributes": {}
+    },
+    {
+      "source": "explore_application_and_inventory",
+      "target": "input_vary",
+      "attributes": {}
+    },
+    {
+      "source": "input_vary",
+      "target": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "target": "inject_command_delimiters_using_web_test_frameworks_proxies_tamperdata_custom_programs_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_command_delimiters_using_web_test_frameworks_proxies_tamperdata_custom_programs_etc",
+      "target": "steal_information_or_directly_manipulate_files_delete_copy_flush_etc",
+      "attributes": {}
+    },
+    {
+      "source": "steal_information_or_directly_manipulate_files_delete_copy_flush_etc",
+      "target": "inject_context_appropriate_malicious_file_path",
+      "attributes": {}
+    },
+    {
+      "source": "inject_context_appropriate_malicious_file_path",
+      "target": "inject_context_appropriate_malicious_file_path",
+      "attributes": {}
+    },
+    {
+      "source": "inject_context_appropriate_malicious_file_path",
+      "target": "use_relative_path_traversal",
+      "attributes": {}
+    },
+    {
+      "source": "use_relative_path_traversal",
+      "target": "employ_regular_expressions_to_make_sure_no_relative_path_sequences_are_being_passed_through_the_application_to_the_web_page",
+      "attributes": {}
+    },
+    {
+      "source": "employ_regular_expressions_to_make_sure_no_relative_path_sequences_are_being_passed_through_the_application_to_the_web_page",
+      "target": "replace_all_matches",
+      "attributes": {}
+    },
+    {
+      "source": "replace_all_matches",
+      "target": "create_special_payloads_to_bypass_this_filter_http_www_example_com_getprofile_jsp_filename_2e_2e_2e_2e_2e_2e_2e_2e_etc",
+      "attributes": {}
+    }
+  ]
+}

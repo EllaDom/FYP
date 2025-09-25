@@ -1,0 +1,272 @@
+{
+  "graph": {
+    "capec_id": "88",
+    "name": "OS Command Injection",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "In this type of an attack, an adversary injects operating system commands into existing application functions. An application that uses untrusted input to build command strings is vulnerable. An adversary can leverage OS command injection in an application to elevate privileges, execute arbitrary commands and compromise the underlying operating system.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "248",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "User controllable input used as part of commands to the underlying operating system."
+    ],
+    "skills_required": [
+      {
+        "level": "High",
+        "description": "The attacker needs to have knowledge of not only the application to exploit but also the exact nature of commands that pertain to the target operating system. This may involve, though not always, knowledge of specific assembly commands for the platform."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Use language APIs rather than relying on passing data to the operating system shell or command line. Doing so ensures that the available protection mechanisms in the language are intact and applicable.",
+      "Filter all incoming data to escape or remove characters or strings that can be potentially misinterpreted as operating system or shell commands",
+      "All application processes should be run with the minimal privileges required. Also, processes must shed privileges as soon as they no longer require them."
+    ],
+    "example_instances": [
+      "A transaction processing system relies on code written in a number of languages. To access this functionality, the system passes transaction information on the system command line. An attacker can gain access to the system command line and execute malicious commands by injecting these commands in the transaction data. If successful, the attacker can steal information, install backdoors and perform other nefarious activities that can compromise the system and its data. See also: A vulnerability in Mozilla Firefox 1.x browser allows an attacker to execute arbitrary commands on the UNIX/Linux operating system. The vulnerability is caused due to the shell script used to launch Firefox parsing shell commands that are enclosed within back-ticks in the URL provided via the command line. This can be exploited to execute arbitrary shell commands by tricking a user into following a malicious link in an external application which uses Firefox as the default browser (e.g. the mail client Evolution on Red Hat Enterprise Linux 4)."
+    ],
+    "related_weaknesses": [
+      "78",
+      "88",
+      "20",
+      "697"
+    ],
+    "matched_cwes": [
+      "20",
+      "78"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "31",
+        "entry_name": "OS Commanding"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify inputs for OS commands] The attacker determines user controllable input that gets passed as part of a command to the underlying operating system.",
+        "techniques": [
+          "Port mapping. Identify ports that the system is listening on, and attempt to identify inputs and protocol types on those ports.",
+          "TCP/IP Fingerprinting. The attacker uses various software to make connections or partial connections and observe idiosyncratic responses from the operating system. Using those responses, they attempt to guess the actual operating system.",
+          "Induce errors to find informative error messages"
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Survey the Application] The attacker surveys the target application, possibly as a valid and authenticated user",
+        "techniques": [
+          "Spidering web sites for all available links",
+          "Inventory all application inputs"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Vary inputs, looking for malicious results.] Depending on whether the application being exploited is a remote or local one the attacker crafts the appropriate malicious input, containing OS commands, to be passed to the application",
+        "techniques": [
+          "Inject command delimiters using network packet injection tools (netcat, nemesis, etc.)",
+          "Inject command delimiters using web test frameworks (proxies, TamperData, custom programs, etc.)"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Execute malicious commands] The attacker may steal information, install a back door access mechanism, elevate privileges or compromise the system in some other way.",
+        "techniques": [
+          "The attacker executes a command that stores sensitive information into a location where they can retrieve it later (perhaps using a different command injection)."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_inputs_for_os_commands",
+      "attributes": {}
+    },
+    {
+      "id": "identify_ports_that_the_system_is_listening_on",
+      "attributes": {}
+    },
+    {
+      "id": "make_connections_or_partial_connections",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_using_those_responses",
+      "attributes": {}
+    },
+    {
+      "id": "induce_errors",
+      "attributes": {}
+    },
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "input_all_application",
+      "attributes": {}
+    },
+    {
+      "id": "input_vary",
+      "attributes": {}
+    },
+    {
+      "id": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "attributes": {}
+    },
+    {
+      "id": "inject_command_delimiters_using_web_test_frameworks_proxies_tamperdata_custom_programs_etc",
+      "attributes": {}
+    },
+    {
+      "id": "execute_malicious_commands",
+      "attributes": {}
+    },
+    {
+      "id": "execute_a_command_that_stores_sensitive_information_into_a_location_where_they_can_retrieve_it_later_perhaps_using_a_different_command_injection",
+      "attributes": {}
+    },
+    {
+      "id": "access_this_functionality",
+      "attributes": {}
+    },
+    {
+      "id": "gain_access_to_the_system_command_line",
+      "attributes": {}
+    },
+    {
+      "id": "steal_information",
+      "attributes": {}
+    },
+    {
+      "id": "cause_the_vulnerability",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_that",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_inputs_for_os_commands",
+      "target": "identify_ports_that_the_system_is_listening_on",
+      "attributes": {}
+    },
+    {
+      "source": "identify_ports_that_the_system_is_listening_on",
+      "target": "make_connections_or_partial_connections",
+      "attributes": {}
+    },
+    {
+      "source": "make_connections_or_partial_connections",
+      "target": "attempt_using_those_responses",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_using_those_responses",
+      "target": "induce_errors",
+      "attributes": {}
+    },
+    {
+      "source": "induce_errors",
+      "target": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "survey_the_target_application",
+      "target": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "survey_the_target_application",
+      "target": "input_all_application",
+      "attributes": {}
+    },
+    {
+      "source": "input_all_application",
+      "target": "input_vary",
+      "attributes": {}
+    },
+    {
+      "source": "input_vary",
+      "target": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_command_delimiters_using_network_packet_injection_tools_netcat_nemesis_etc",
+      "target": "inject_command_delimiters_using_web_test_frameworks_proxies_tamperdata_custom_programs_etc",
+      "attributes": {}
+    },
+    {
+      "source": "inject_command_delimiters_using_web_test_frameworks_proxies_tamperdata_custom_programs_etc",
+      "target": "execute_malicious_commands",
+      "attributes": {}
+    },
+    {
+      "source": "execute_malicious_commands",
+      "target": "execute_a_command_that_stores_sensitive_information_into_a_location_where_they_can_retrieve_it_later_perhaps_using_a_different_command_injection",
+      "attributes": {}
+    },
+    {
+      "source": "execute_a_command_that_stores_sensitive_information_into_a_location_where_they_can_retrieve_it_later_perhaps_using_a_different_command_injection",
+      "target": "access_this_functionality",
+      "attributes": {}
+    },
+    {
+      "source": "access_this_functionality",
+      "target": "gain_access_to_the_system_command_line",
+      "attributes": {}
+    },
+    {
+      "source": "gain_access_to_the_system_command_line",
+      "target": "steal_information",
+      "attributes": {}
+    },
+    {
+      "source": "steal_information",
+      "target": "cause_the_vulnerability",
+      "attributes": {}
+    },
+    {
+      "source": "cause_the_vulnerability",
+      "target": "exploit_that",
+      "attributes": {}
+    }
+  ]
+}

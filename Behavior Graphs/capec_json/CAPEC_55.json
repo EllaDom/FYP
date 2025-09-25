@@ -1,0 +1,228 @@
+{
+  "graph": {
+    "capec_id": "55",
+    "name": "Rainbow Table Password Cracking",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker gets access to the database table where hashes of passwords are stored. They then use a rainbow table of pre-computed hash chains to attempt to look up the original password. Once the original password corresponding to the hash is obtained, the attacker uses the original password to gain access to the system.",
+    "likelihood": "Medium",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "49",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "600",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "560",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "561",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "653",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "Hash of the original password is available to the attacker. For a better chance of success, an attacker should have more than one hash of the original password, and ideally the whole table.",
+      "Salt was not used to create the hash of the original password. Otherwise the rainbow tables have to be re-computed, which is very expensive and will make the attack effectively infeasible (especially if salt was added in iterations).",
+      "The system uses one factor password based authentication."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "A variety of password cracking tools are available that can leverage a rainbow table. The more difficult part is to obtain the password hash(es) in the first place."
+      }
+    ],
+    "resources_required": [
+      "Rainbow table of password hash chains with the right algorithm used. A password cracking tool that leverages this rainbow table will also be required. Hash(es) of the password is required."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Use salt when computing password hashes. That is, concatenate the salt (random bits) with the original password prior to hashing it."
+    ],
+    "example_instances": [
+      "BusyBox 1.1.1 does not use a salt when generating passwords, which makes it easier for local users to guess passwords from a stolen password file using techniques such as rainbow tables. See also: CVE-2006-1058"
+    ],
+    "related_weaknesses": [
+      "261",
+      "521",
+      "262",
+      "263",
+      "654",
+      "916",
+      "308",
+      "309"
+    ],
+    "matched_cwes": [
+      "521",
+      "916"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1110.002",
+        "entry_name": "Brute Force:Password Cracking"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine application's/system's password policy] Determine the password policies of the target application/system.",
+        "techniques": [
+          "Determine minimum and maximum allowed password lengths.",
+          "Determine format of allowed passwords (whether they are required or allowed to contain numbers, special characters, etc.).",
+          "Determine account lockout policy (a strict account lockout policy will prevent brute force attacks)."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Obtain password hashes] An attacker gets access to the database table storing hashes of passwords or potentially just discovers a hash of an individual password.",
+        "techniques": [
+          "Obtain copy of database table or flat file containing password hashes (by breaking access controls, using SQL Injection, etc.)",
+          "Obtain password hashes from platform-specific storage locations (e.g. Windows registry)",
+          "Sniff network packets containing password hashes."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Run rainbow table-based password cracking tool] An attacker finds or writes a password cracking tool that uses a previously computed rainbow table for the right hashing algorithm. It helps if the attacker knows what hashing algorithm was used by the password system.",
+        "techniques": [
+          "Run rainbow table-based password cracking tool such as Ophcrack or RainbowCrack. Reduction function must depend on application's/system's password policy."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_the_password_policies_of_the_target_application_system",
+      "attributes": {}
+    },
+    {
+      "id": "determine_minimum_and_maximum_allowed_password_lengths",
+      "attributes": {}
+    },
+    {
+      "id": "determine_account",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_password_hashes",
+      "attributes": {}
+    },
+    {
+      "id": "get_access_to_the_database_table_storing_hashes_of_passwords_or",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_copy_of_database_table_or_flat_file_containing_password_hashes",
+      "attributes": {}
+    },
+    {
+      "id": "run_rainbow_table_based_password_cracking_tool",
+      "attributes": {}
+    },
+    {
+      "id": "help_if_the_attacker_knows_what_hashing_algorithm_was_used_by_the_password_system",
+      "attributes": {}
+    },
+    {
+      "id": "generate_passwords_which_makes_it_easier_for_local_users_to_guess_passwords_from_a_stolen_password_file_using_techniques_such_as_rainbow_tables",
+      "attributes": {}
+    },
+    {
+      "id": "have_more_than_one_hash_of_the_original_password",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_the_password_policies_of_the_target_application_system",
+      "target": "determine_minimum_and_maximum_allowed_password_lengths",
+      "attributes": {}
+    },
+    {
+      "source": "determine_minimum_and_maximum_allowed_password_lengths",
+      "target": "determine_account",
+      "attributes": {}
+    },
+    {
+      "source": "determine_account",
+      "target": "obtain_password_hashes",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_password_hashes",
+      "target": "get_access_to_the_database_table_storing_hashes_of_passwords_or",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_password_hashes",
+      "target": "obtain_password_hashes",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_password_hashes",
+      "target": "run_rainbow_table_based_password_cracking_tool",
+      "attributes": {}
+    },
+    {
+      "source": "get_access_to_the_database_table_storing_hashes_of_passwords_or",
+      "target": "obtain_copy_of_database_table_or_flat_file_containing_password_hashes",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_copy_of_database_table_or_flat_file_containing_password_hashes",
+      "target": "obtain_password_hashes",
+      "attributes": {}
+    },
+    {
+      "source": "run_rainbow_table_based_password_cracking_tool",
+      "target": "help_if_the_attacker_knows_what_hashing_algorithm_was_used_by_the_password_system",
+      "attributes": {}
+    },
+    {
+      "source": "run_rainbow_table_based_password_cracking_tool",
+      "target": "generate_passwords_which_makes_it_easier_for_local_users_to_guess_passwords_from_a_stolen_password_file_using_techniques_such_as_rainbow_tables",
+      "attributes": {}
+    },
+    {
+      "source": "help_if_the_attacker_knows_what_hashing_algorithm_was_used_by_the_password_system",
+      "target": "run_rainbow_table_based_password_cracking_tool",
+      "attributes": {}
+    },
+    {
+      "source": "generate_passwords_which_makes_it_easier_for_local_users_to_guess_passwords_from_a_stolen_password_file_using_techniques_such_as_rainbow_tables",
+      "target": "have_more_than_one_hash_of_the_original_password",
+      "attributes": {}
+    },
+    {
+      "source": "have_more_than_one_hash_of_the_original_password",
+      "target": "have_more_than_one_hash_of_the_original_password",
+      "attributes": {}
+    }
+  ]
+}

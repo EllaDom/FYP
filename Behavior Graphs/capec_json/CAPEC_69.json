@@ -1,0 +1,229 @@
+{
+  "graph": {
+    "capec_id": "69",
+    "name": "Target Programs with Elevated Privileges",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "This attack targets programs running with elevated privileges. The adversary tries to leverage a vulnerability in the running program and get arbitrary code to execute with elevated privileges.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "233",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "8",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "9",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "10",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "67",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The targeted program runs with elevated OS privileges.",
+      "The targeted program accepts input data from the user or from another program.",
+      "The targeted program is giving away information about itself. Before performing such attack, an eventual attacker may need to gather information about the services running on the host target. The more the host target is verbose about the services that are running (version number of application, etc.) the more information can be gather by an attacker.",
+      "This attack often requires communicating with the host target services directly. For instance Telnet may be enough to communicate with the host target."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "An attacker can use a tool to scan and automatically launch an attack against known issues. A tool can also repeat a sequence of instructions and try to brute force the service on the host target, an example of that would be the flooding technique."
+      },
+      {
+        "level": "Medium",
+        "description": "More advanced attack may require knowledge of the protocol spoken by the host service."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Resource Consumption"
+      }
+    ],
+    "mitigations": [
+      "Apply the principle of least privilege.",
+      "Validate all untrusted data.",
+      "Apply the latest patches.",
+      "Scan your services and disable the ones which are not needed and are exposed unnecessarily. Exposing programs increases the attack surface. Only expose the services which are needed and have security mechanisms such as authentication built around them.",
+      "Avoid revealing information about your system (e.g., version of the program) to anonymous users.",
+      "Make sure that your program or service fail safely. What happen if the communication protocol is interrupted suddenly? What happen if a parameter is missing? Does your system have resistance and resilience to attack? Fail safely when a resource exhaustion occurs.",
+      "If possible use a sandbox model which limits the actions that programs can take. A sandbox restricts a program to a set of privileges and commands that make it difficult or impossible for the program to cause any damage.",
+      "Check your program for buffer overflow and format String vulnerabilities which can lead to execution of malicious code.",
+      "Monitor traffic and resource usage and pay attention if resource exhaustion occurs.",
+      "Protect your log file from unauthorized modification and log forging."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "250",
+      "15"
+    ],
+    "matched_cwes": [
+      "250"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Find programs with elevated priveleges] The adversary probes for programs running with elevated privileges.",
+        "techniques": [
+          "Look for programs that write to the system directories or registry keys (such as HKLM, which stores a number of critical Windows environment variables). These programs are typically running with elevated privileges and have usually not been designed with security in mind. Such programs are excellent exploit targets because they yield lots of power when they break."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Find vulnerability in running program] The adversary looks for a vulnerability in the running program that would allow for arbitrary code execution with the privilege of the running program.",
+        "techniques": [
+          "Look for improper input validation",
+          "Look for improper failure safety. For instance when a program fails it may authorize restricted access to anyone.",
+          "Look for a buffer overflow which may be exploited if an adversary can inject unvalidated data."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Execute arbitrary code] The adversary exploits the vulnerability that they have found. For instance, they can try to inject and execute arbitrary code or write to OS resources.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_process_with_elevated_priveleges",
+      "attributes": {}
+    },
+    {
+      "id": "yield_lots_of_power",
+      "attributes": {}
+    },
+    {
+      "id": "find_vulnerability_in_running_process",
+      "attributes": {}
+    },
+    {
+      "id": "execute_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_that",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_inject_and_execute_arbitrary_code_or_write_to_os_resources",
+      "attributes": {}
+    },
+    {
+      "id": "accept_user_data_for_processing_and",
+      "attributes": {}
+    },
+    {
+      "id": "give_information_about_itself",
+      "attributes": {}
+    },
+    {
+      "id": "perform_such_attack",
+      "attributes": {}
+    },
+    {
+      "id": "verbose_the_host_target",
+      "attributes": {}
+    },
+    {
+      "id": "gather_the_necessary_information",
+      "attributes": {}
+    },
+    {
+      "id": "require_communicating_with_the_host_target_services",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_process_with_elevated_priveleges",
+      "target": "yield_lots_of_power",
+      "attributes": {}
+    },
+    {
+      "source": "yield_lots_of_power",
+      "target": "find_vulnerability_in_running_process",
+      "attributes": {}
+    },
+    {
+      "source": "find_vulnerability_in_running_process",
+      "target": "execute_arbitrary_code",
+      "attributes": {}
+    },
+    {
+      "source": "execute_arbitrary_code",
+      "target": "exploit_that",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_that",
+      "target": "try_to_inject_and_execute_arbitrary_code_or_write_to_os_resources",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_inject_and_execute_arbitrary_code_or_write_to_os_resources",
+      "target": "accept_user_data_for_processing_and",
+      "attributes": {}
+    },
+    {
+      "source": "accept_user_data_for_processing_and",
+      "target": "give_information_about_itself",
+      "attributes": {}
+    },
+    {
+      "source": "give_information_about_itself",
+      "target": "perform_such_attack",
+      "attributes": {}
+    },
+    {
+      "source": "perform_such_attack",
+      "target": "verbose_the_host_target",
+      "attributes": {}
+    },
+    {
+      "source": "verbose_the_host_target",
+      "target": "gather_the_necessary_information",
+      "attributes": {}
+    },
+    {
+      "source": "gather_the_necessary_information",
+      "target": "require_communicating_with_the_host_target_services",
+      "attributes": {}
+    }
+  ]
+}

