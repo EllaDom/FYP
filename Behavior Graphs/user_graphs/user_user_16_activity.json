@@ -1,0 +1,135 @@
+{
+  "nodes": [
+    {
+      "id": "action_80_download_file",
+      "label": "download_file\n2025-09-23\n11:40:40.721843+00:00",
+      "type": "action",
+      "timestamp": "2025-09-23 11:40:40.721843+00:00",
+      "user_id": "user_16",
+      "device_id": "DEVICE-854",
+      "role": "service_account",
+      "geo_location": "US",
+      "application_name": "EHR-System",
+      "auth_status": "failure",
+      "severity_level": "Warning",
+      "event_type": "policy_violation",
+      "policy_violation": "no",
+      "firewall_action": "allowed",
+      "connection_status": "established",
+      "status_code": "500",
+      "canonical_label": "download_a_file"
+    },
+    {
+      "id": "context_80_0_role",
+      "label": "role=service_account",
+      "type": "context"
+    },
+    {
+      "id": "context_80_1_geo_location",
+      "label": "geo_location=US",
+      "type": "context"
+    },
+    {
+      "id": "context_80_2_device_id",
+      "label": "device_id=DEVICE-854",
+      "type": "context"
+    },
+    {
+      "id": "context_80_3_application_name",
+      "label": "application_name=EHR\n-System",
+      "type": "context"
+    },
+    {
+      "id": "outcome_80_0_auth_status",
+      "label": "auth_status=failure",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_80_1_severity_level",
+      "label": "severity_level=Warni\nng",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_80_2_event_type",
+      "label": "event_type=policy_vi\nolation",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_80_3_policy_violation",
+      "label": "policy_violation=no",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_80_4_firewall_action",
+      "label": "firewall_action=allo\nwed",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_80_5_connection_status",
+      "label": "connection_status=es\ntablished",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_80_6_status_code",
+      "label": "status_code=500",
+      "type": "outcome"
+    }
+  ],
+  "edges": [
+    {
+      "source": "action_80_download_file",
+      "target": "context_80_0_role",
+      "relation": "context"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "context_80_1_geo_location",
+      "relation": "context"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "context_80_2_device_id",
+      "relation": "context"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "context_80_3_application_name",
+      "relation": "context"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_0_auth_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_1_severity_level",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_2_event_type",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_3_policy_violation",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_4_firewall_action",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_5_connection_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_80_download_file",
+      "target": "outcome_80_6_status_code",
+      "relation": "outcome"
+    }
+  ]
+}

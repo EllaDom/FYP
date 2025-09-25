@@ -1,0 +1,537 @@
+{
+  "nodes": [
+    {
+      "id": "action_77_read_record",
+      "label": "read_record 2025-09-23\n12:48:47.721843+00:00",
+      "type": "action",
+      "timestamp": "2025-09-23 12:48:47.721843+00:00",
+      "user_id": "user_11",
+      "device_id": "DEVICE-990",
+      "role": "admin",
+      "geo_location": "UK",
+      "application_name": "EHR-System",
+      "auth_status": "success",
+      "severity_level": "Warning",
+      "event_type": "xss_attempt",
+      "policy_violation": "yes",
+      "firewall_action": "blocked",
+      "connection_status": "reset",
+      "status_code": "404",
+      "canonical_label": "analyze_the_timestamp_values"
+    },
+    {
+      "id": "context_77_0_role",
+      "label": "role=admin",
+      "type": "context"
+    },
+    {
+      "id": "context_77_1_geo_location",
+      "label": "geo_location=UK",
+      "type": "context"
+    },
+    {
+      "id": "context_77_2_device_id",
+      "label": "device_id=DEVICE-990",
+      "type": "context"
+    },
+    {
+      "id": "context_77_3_application_name",
+      "label": "application_name=EHR\n-System",
+      "type": "context"
+    },
+    {
+      "id": "outcome_77_0_auth_status",
+      "label": "auth_status=success",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_77_1_severity_level",
+      "label": "severity_level=Warni\nng",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_77_2_event_type",
+      "label": "event_type=xss_attem\npt",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_77_3_policy_violation",
+      "label": "policy_violation=yes",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_77_4_firewall_action",
+      "label": "firewall_action=bloc\nked",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_77_5_connection_status",
+      "label": "connection_status=re\nset",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_77_6_status_code",
+      "label": "status_code=404",
+      "type": "outcome"
+    },
+    {
+      "id": "action_33_download_file",
+      "label": "download_file\n2025-09-23\n13:13:53.721843+00:00",
+      "type": "action",
+      "timestamp": "2025-09-23 13:13:53.721843+00:00",
+      "user_id": "user_11",
+      "device_id": "DEVICE-926",
+      "role": "external",
+      "geo_location": "UK",
+      "application_name": "EHR-System",
+      "auth_status": "success",
+      "severity_level": "Warning",
+      "event_type": "ddos_spike",
+      "policy_violation": "no",
+      "firewall_action": "dropped",
+      "connection_status": "timeout",
+      "status_code": "404",
+      "canonical_label": "download_a_file"
+    },
+    {
+      "id": "context_33_0_role",
+      "label": "role=external",
+      "type": "context"
+    },
+    {
+      "id": "context_33_1_geo_location",
+      "label": "geo_location=UK",
+      "type": "context"
+    },
+    {
+      "id": "context_33_2_device_id",
+      "label": "device_id=DEVICE-926",
+      "type": "context"
+    },
+    {
+      "id": "context_33_3_application_name",
+      "label": "application_name=EHR\n-System",
+      "type": "context"
+    },
+    {
+      "id": "outcome_33_0_auth_status",
+      "label": "auth_status=success",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_33_1_severity_level",
+      "label": "severity_level=Warni\nng",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_33_2_event_type",
+      "label": "event_type=ddos_spik\ne",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_33_3_policy_violation",
+      "label": "policy_violation=no",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_33_4_firewall_action",
+      "label": "firewall_action=drop\nped",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_33_5_connection_status",
+      "label": "connection_status=ti\nmeout",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_33_6_status_code",
+      "label": "status_code=404",
+      "type": "outcome"
+    },
+    {
+      "id": "action_36_query_db",
+      "label": "query_db 2025-09-23\n22:23:11.721843+00:00",
+      "type": "action",
+      "timestamp": "2025-09-23 22:23:11.721843+00:00",
+      "user_id": "user_11",
+      "device_id": "DEVICE-456",
+      "role": "staff",
+      "geo_location": "UK",
+      "application_name": "EHR-System",
+      "auth_status": "success",
+      "severity_level": "Info",
+      "event_type": "sql_injection_attempt",
+      "policy_violation": "no",
+      "firewall_action": "dropped",
+      "connection_status": "timeout",
+      "status_code": "404",
+      "canonical_label": "create_a_sql_query"
+    },
+    {
+      "id": "context_36_0_role",
+      "label": "role=staff",
+      "type": "context"
+    },
+    {
+      "id": "context_36_1_geo_location",
+      "label": "geo_location=UK",
+      "type": "context"
+    },
+    {
+      "id": "context_36_2_device_id",
+      "label": "device_id=DEVICE-456",
+      "type": "context"
+    },
+    {
+      "id": "context_36_3_application_name",
+      "label": "application_name=EHR\n-System",
+      "type": "context"
+    },
+    {
+      "id": "outcome_36_0_auth_status",
+      "label": "auth_status=success",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_36_1_severity_level",
+      "label": "severity_level=Info",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_36_2_event_type",
+      "label": "event_type=sql_injec\ntion_attempt",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_36_3_policy_violation",
+      "label": "policy_violation=no",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_36_4_firewall_action",
+      "label": "firewall_action=drop\nped",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_36_5_connection_status",
+      "label": "connection_status=ti\nmeout",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_36_6_status_code",
+      "label": "status_code=404",
+      "type": "outcome"
+    },
+    {
+      "id": "action_25_password_reset",
+      "label": "password_reset\n2025-09-24\n09:52:05.721843+00:00",
+      "type": "action",
+      "timestamp": "2025-09-24 09:52:05.721843+00:00",
+      "user_id": "user_11",
+      "device_id": "DEVICE-685",
+      "role": "staff",
+      "geo_location": "IN",
+      "application_name": "EHR-System",
+      "auth_status": "success",
+      "severity_level": "Warning",
+      "event_type": "unencrypted_data_transfer",
+      "policy_violation": "no",
+      "firewall_action": "dropped",
+      "connection_status": "established",
+      "status_code": "200",
+      "canonical_label": "reset_the_ata_password"
+    },
+    {
+      "id": "context_25_0_role",
+      "label": "role=staff",
+      "type": "context"
+    },
+    {
+      "id": "context_25_1_geo_location",
+      "label": "geo_location=IN",
+      "type": "context"
+    },
+    {
+      "id": "context_25_2_device_id",
+      "label": "device_id=DEVICE-685",
+      "type": "context"
+    },
+    {
+      "id": "context_25_3_application_name",
+      "label": "application_name=EHR\n-System",
+      "type": "context"
+    },
+    {
+      "id": "outcome_25_0_auth_status",
+      "label": "auth_status=success",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_25_1_severity_level",
+      "label": "severity_level=Warni\nng",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_25_2_event_type",
+      "label": "event_type=unencrypt\ned_data_transfer",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_25_3_policy_violation",
+      "label": "policy_violation=no",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_25_4_firewall_action",
+      "label": "firewall_action=drop\nped",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_25_5_connection_status",
+      "label": "connection_status=es\ntablished",
+      "type": "outcome"
+    },
+    {
+      "id": "outcome_25_6_status_code",
+      "label": "status_code=200",
+      "type": "outcome"
+    }
+  ],
+  "edges": [
+    {
+      "source": "action_77_read_record",
+      "target": "context_77_0_role",
+      "relation": "context"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "context_77_1_geo_location",
+      "relation": "context"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "context_77_2_device_id",
+      "relation": "context"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "context_77_3_application_name",
+      "relation": "context"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_0_auth_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_1_severity_level",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_2_event_type",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_3_policy_violation",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_4_firewall_action",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_5_connection_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "outcome_77_6_status_code",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_77_read_record",
+      "target": "action_33_download_file",
+      "relation": "sequence"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "context_33_0_role",
+      "relation": "context"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "context_33_1_geo_location",
+      "relation": "context"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "context_33_2_device_id",
+      "relation": "context"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "context_33_3_application_name",
+      "relation": "context"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_0_auth_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_1_severity_level",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_2_event_type",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_3_policy_violation",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_4_firewall_action",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_5_connection_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "outcome_33_6_status_code",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_33_download_file",
+      "target": "action_36_query_db",
+      "relation": "sequence"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "context_36_0_role",
+      "relation": "context"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "context_36_1_geo_location",
+      "relation": "context"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "context_36_2_device_id",
+      "relation": "context"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "context_36_3_application_name",
+      "relation": "context"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_0_auth_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_1_severity_level",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_2_event_type",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_3_policy_violation",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_4_firewall_action",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_5_connection_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "outcome_36_6_status_code",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_36_query_db",
+      "target": "action_25_password_reset",
+      "relation": "sequence"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "context_25_0_role",
+      "relation": "context"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "context_25_1_geo_location",
+      "relation": "context"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "context_25_2_device_id",
+      "relation": "context"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "context_25_3_application_name",
+      "relation": "context"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_0_auth_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_1_severity_level",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_2_event_type",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_3_policy_violation",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_4_firewall_action",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_5_connection_status",
+      "relation": "outcome"
+    },
+    {
+      "source": "action_25_password_reset",
+      "target": "outcome_25_6_status_code",
+      "relation": "outcome"
+    }
+  ]
+}
