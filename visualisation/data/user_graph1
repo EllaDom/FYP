@@ -1,0 +1,527 @@
+graph [
+  directed 1
+  user "user_13"
+  node [
+    id 0
+    label "download_file@2025-09-23 20:03:32.721843+00:00"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+    type "action"
+  ]
+  node [
+    id 1
+    label "role=service_account@2025-09-23 20:03:32.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 2
+    label "geo_location=UK@2025-09-23 20:03:32.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 3
+    label "device_id=DEVICE-249@2025-09-23 20:03:32.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 4
+    label "application_name=EHR-System@2025-09-23 20:03:32.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 5
+    label "auth_status=success@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 6
+    label "severity_level=Warning@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 7
+    label "event_type=xss_attempt@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 8
+    label "policy_violation=no@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 9
+    label "firewall_action=dropped@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 10
+    label "connection_status=timeout@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 11
+    label "status_code=404@2025-09-23 20:03:32.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+  ]
+  node [
+    id 12
+    label "password_reset@2025-09-23 20:03:37.721843+00:00"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+    type "action"
+  ]
+  node [
+    id 13
+    label "role=external@2025-09-23 20:03:37.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 14
+    label "geo_location=IN@2025-09-23 20:03:37.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 15
+    label "device_id=DEVICE-227@2025-09-23 20:03:37.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 16
+    label "application_name=EHR-System@2025-09-23 20:03:37.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 17
+    label "auth_status=failure@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 18
+    label "severity_level=Error@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 19
+    label "event_type=config_change@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 20
+    label "policy_violation=yes@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 21
+    label "firewall_action=allowed@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 22
+    label "connection_status=reset@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 23
+    label "status_code=access_denied@2025-09-23 20:03:37.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+  ]
+  node [
+    id 24
+    label "upload_file@2025-09-23 22:17:16.721843+00:00"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+    type "action"
+  ]
+  node [
+    id 25
+    label "role=external@2025-09-23 22:17:16.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 26
+    label "geo_location=EU@2025-09-23 22:17:16.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 27
+    label "device_id=DEVICE-653@2025-09-23 22:17:16.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 28
+    label "application_name=EHR-System@2025-09-23 22:17:16.721843+00:00"
+    type "context"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 29
+    label "auth_status=failure@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 30
+    label "severity_level=Info@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 31
+    label "event_type=policy_violation@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 32
+    label "policy_violation=yes@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 33
+    label "firewall_action=dropped@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 34
+    label "connection_status=reset@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 35
+    label "status_code=500@2025-09-23 22:17:16.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+  ]
+  node [
+    id 36
+    label "upload_file@2025-09-24 08:46:15.721843+00:00"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+    type "action"
+  ]
+  node [
+    id 37
+    label "role=external@2025-09-24 08:46:15.721843+00:00"
+    type "context"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 38
+    label "geo_location=EU@2025-09-24 08:46:15.721843+00:00"
+    type "context"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 39
+    label "device_id=DEVICE-231@2025-09-24 08:46:15.721843+00:00"
+    type "context"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 40
+    label "application_name=EHR-System@2025-09-24 08:46:15.721843+00:00"
+    type "context"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 41
+    label "auth_status=failure@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 42
+    label "severity_level=Warning@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 43
+    label "event_type=xss_attempt@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 44
+    label "policy_violation=no@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 45
+    label "firewall_action=allowed@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 46
+    label "connection_status=established@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  node [
+    id 47
+    label "status_code=404@2025-09-24 08:46:15.721843+00:00"
+    type "outcome"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+  ]
+  edge [
+    source 0
+    target 1
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 2
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 3
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 4
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 5
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 6
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 7
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 8
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 9
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 10
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 11
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 12
+    relation "sequence"
+  ]
+  edge [
+    source 12
+    target 13
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 14
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 15
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 16
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 17
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 18
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 19
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 20
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 21
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 22
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 23
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 24
+    relation "sequence"
+  ]
+  edge [
+    source 24
+    target 25
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 26
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 27
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 28
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 29
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 30
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 31
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 32
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 33
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 34
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 35
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 36
+    relation "sequence"
+  ]
+  edge [
+    source 36
+    target 37
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 38
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 39
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 40
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 41
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 42
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 43
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 44
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 45
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 46
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 47
+    relation "outcome"
+  ]
+]
