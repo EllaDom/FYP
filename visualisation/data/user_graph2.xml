@@ -1,0 +1,531 @@
+graph [
+  directed 1
+  user "user_13"
+  node [
+    id 0
+    label "action_81_download_file"
+    type "action"
+    timestamp "2025-09-23 20:03:32.721843+00:00"
+    user_id "user_13"
+    device_id "DEVICE-249"
+    role "service_account"
+    geo_location "UK"
+    application_name "EHR-System"
+    auth_status "success"
+    severity_level "Warning"
+    event_type "xss_attempt"
+    policy_violation "no"
+    firewall_action "dropped"
+    connection_status "timeout"
+    status_code "404"
+  ]
+  node [
+    id 1
+    label "context_81_0_role"
+    type "context"
+  ]
+  node [
+    id 2
+    label "context_81_1_geo_location"
+    type "context"
+  ]
+  node [
+    id 3
+    label "context_81_2_device_id"
+    type "context"
+  ]
+  node [
+    id 4
+    label "context_81_3_application_name"
+    type "context"
+  ]
+  node [
+    id 5
+    label "outcome_81_0_auth_status"
+    type "outcome"
+  ]
+  node [
+    id 6
+    label "outcome_81_1_severity_level"
+    type "outcome"
+  ]
+  node [
+    id 7
+    label "outcome_81_2_event_type"
+    type "outcome"
+  ]
+  node [
+    id 8
+    label "outcome_81_3_policy_violation"
+    type "outcome"
+  ]
+  node [
+    id 9
+    label "outcome_81_4_firewall_action"
+    type "outcome"
+  ]
+  node [
+    id 10
+    label "outcome_81_5_connection_status"
+    type "outcome"
+  ]
+  node [
+    id 11
+    label "outcome_81_6_status_code"
+    type "outcome"
+  ]
+  node [
+    id 12
+    label "action_94_password_reset"
+    type "action"
+    timestamp "2025-09-23 20:03:37.721843+00:00"
+    user_id "user_13"
+    device_id "DEVICE-227"
+    role "external"
+    geo_location "IN"
+    application_name "EHR-System"
+    auth_status "failure"
+    severity_level "Error"
+    event_type "config_change"
+    policy_violation "yes"
+    firewall_action "allowed"
+    connection_status "reset"
+    status_code "access_denied"
+  ]
+  node [
+    id 13
+    label "context_94_0_role"
+    type "context"
+  ]
+  node [
+    id 14
+    label "context_94_1_geo_location"
+    type "context"
+  ]
+  node [
+    id 15
+    label "context_94_2_device_id"
+    type "context"
+  ]
+  node [
+    id 16
+    label "context_94_3_application_name"
+    type "context"
+  ]
+  node [
+    id 17
+    label "outcome_94_0_auth_status"
+    type "outcome"
+  ]
+  node [
+    id 18
+    label "outcome_94_1_severity_level"
+    type "outcome"
+  ]
+  node [
+    id 19
+    label "outcome_94_2_event_type"
+    type "outcome"
+  ]
+  node [
+    id 20
+    label "outcome_94_3_policy_violation"
+    type "outcome"
+  ]
+  node [
+    id 21
+    label "outcome_94_4_firewall_action"
+    type "outcome"
+  ]
+  node [
+    id 22
+    label "outcome_94_5_connection_status"
+    type "outcome"
+  ]
+  node [
+    id 23
+    label "outcome_94_6_status_code"
+    type "outcome"
+  ]
+  node [
+    id 24
+    label "action_47_upload_file"
+    type "action"
+    timestamp "2025-09-23 22:17:16.721843+00:00"
+    user_id "user_13"
+    device_id "DEVICE-653"
+    role "external"
+    geo_location "EU"
+    application_name "EHR-System"
+    auth_status "failure"
+    severity_level "Info"
+    event_type "policy_violation"
+    policy_violation "yes"
+    firewall_action "dropped"
+    connection_status "reset"
+    status_code "500"
+  ]
+  node [
+    id 25
+    label "context_47_0_role"
+    type "context"
+  ]
+  node [
+    id 26
+    label "context_47_1_geo_location"
+    type "context"
+  ]
+  node [
+    id 27
+    label "context_47_2_device_id"
+    type "context"
+  ]
+  node [
+    id 28
+    label "context_47_3_application_name"
+    type "context"
+  ]
+  node [
+    id 29
+    label "outcome_47_0_auth_status"
+    type "outcome"
+  ]
+  node [
+    id 30
+    label "outcome_47_1_severity_level"
+    type "outcome"
+  ]
+  node [
+    id 31
+    label "outcome_47_2_event_type"
+    type "outcome"
+  ]
+  node [
+    id 32
+    label "outcome_47_3_policy_violation"
+    type "outcome"
+  ]
+  node [
+    id 33
+    label "outcome_47_4_firewall_action"
+    type "outcome"
+  ]
+  node [
+    id 34
+    label "outcome_47_5_connection_status"
+    type "outcome"
+  ]
+  node [
+    id 35
+    label "outcome_47_6_status_code"
+    type "outcome"
+  ]
+  node [
+    id 36
+    label "action_48_upload_file"
+    type "action"
+    timestamp "2025-09-24 08:46:15.721843+00:00"
+    user_id "user_13"
+    device_id "DEVICE-231"
+    role "external"
+    geo_location "EU"
+    application_name "EHR-System"
+    auth_status "failure"
+    severity_level "Warning"
+    event_type "xss_attempt"
+    policy_violation "no"
+    firewall_action "allowed"
+    connection_status "established"
+    status_code "404"
+  ]
+  node [
+    id 37
+    label "context_48_0_role"
+    type "context"
+  ]
+  node [
+    id 38
+    label "context_48_1_geo_location"
+    type "context"
+  ]
+  node [
+    id 39
+    label "context_48_2_device_id"
+    type "context"
+  ]
+  node [
+    id 40
+    label "context_48_3_application_name"
+    type "context"
+  ]
+  node [
+    id 41
+    label "outcome_48_0_auth_status"
+    type "outcome"
+  ]
+  node [
+    id 42
+    label "outcome_48_1_severity_level"
+    type "outcome"
+  ]
+  node [
+    id 43
+    label "outcome_48_2_event_type"
+    type "outcome"
+  ]
+  node [
+    id 44
+    label "outcome_48_3_policy_violation"
+    type "outcome"
+  ]
+  node [
+    id 45
+    label "outcome_48_4_firewall_action"
+    type "outcome"
+  ]
+  node [
+    id 46
+    label "outcome_48_5_connection_status"
+    type "outcome"
+  ]
+  node [
+    id 47
+    label "outcome_48_6_status_code"
+    type "outcome"
+  ]
+  edge [
+    source 0
+    target 1
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 2
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 3
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 4
+    relation "context"
+  ]
+  edge [
+    source 0
+    target 5
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 6
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 7
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 8
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 9
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 10
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 11
+    relation "outcome"
+  ]
+  edge [
+    source 0
+    target 12
+    relation "sequence"
+  ]
+  edge [
+    source 12
+    target 13
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 14
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 15
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 16
+    relation "context"
+  ]
+  edge [
+    source 12
+    target 17
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 18
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 19
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 20
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 21
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 22
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 23
+    relation "outcome"
+  ]
+  edge [
+    source 12
+    target 24
+    relation "sequence"
+  ]
+  edge [
+    source 24
+    target 25
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 26
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 27
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 28
+    relation "context"
+  ]
+  edge [
+    source 24
+    target 29
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 30
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 31
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 32
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 33
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 34
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 35
+    relation "outcome"
+  ]
+  edge [
+    source 24
+    target 36
+    relation "sequence"
+  ]
+  edge [
+    source 36
+    target 37
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 38
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 39
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 40
+    relation "context"
+  ]
+  edge [
+    source 36
+    target 41
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 42
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 43
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 44
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 45
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 46
+    relation "outcome"
+  ]
+  edge [
+    source 36
+    target 47
+    relation "outcome"
+  ]
+]
