@@ -1,0 +1,49 @@
+{
+  "graph": {
+    "capec_id": "387",
+    "name": "Navigation Remapping To Propagate Malicious Content",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary manipulates either egress or ingress data from a client within an application framework in order to change the content of messages and thereby circumvent the expected application logic.",
+    "likelihood": "",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "386",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Targeted software is utilizing application framework APIs"
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "A software program that allows the use of adversary-in-the-middle communications between the client and server, such as a man-in-the-middle proxy."
+    ],
+    "consequences": [],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "471",
+      "345",
+      "346",
+      "602",
+      "311"
+    ],
+    "matched_cwes": [
+      "345",
+      "311",
+      "602"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "utilize_application_framework_apis",
+      "attributes": {}
+    }
+  ],
+  "edges": []
+}

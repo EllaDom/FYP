@@ -1,0 +1,120 @@
+{
+  "graph": {
+    "capec_id": "540",
+    "name": "Overread Buffers",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary attacks a target by providing input that causes an application to read beyond the boundary of a defined buffer. This typically occurs when a value influencing where to start or stop reading is set to reflect positions outside of the valid memory location of the buffer. This type of attack may result in exposure of sensitive information, a system crash, or arbitrary code execution.",
+    "likelihood": "Low",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "123",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "For this type of attack to be successful, a few prerequisites must be met. First, the targeted software must be written in a language that enables fine grained buffer control. (e.g., c, c++) Second, the targeted software must actually perform buffer operations and inadequately perform bounds-checking on those buffer operations. Finally, the adversary must have the capability to influence the input that guides these buffer operations."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "125"
+    ],
+    "matched_cwes": [
+      "125"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify target application] The adversary identifies a target application or program to perform the buffer overread on. Adversaries often look for applications that accept user input and that perform manual memory management.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Find attack vector] The adversary identifies an attack vector by looking for areas in the application where they can specify to read more data than is required.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Overread the buffer] The adversary provides input to the application that gets it to read past the bounds of a buffer, possibly revealing sensitive information that was not intended to be given to the adversary.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "find_attack_vector",
+      "attributes": {}
+    },
+    {
+      "id": "overread_the_buffer",
+      "attributes": {}
+    },
+    {
+      "id": "meet_for_this_type_of_attack_to_be_successful",
+      "attributes": {}
+    },
+    {
+      "id": "influence_the_input_to_buffer_operations",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_application",
+      "target": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "identify_target_application",
+      "target": "find_attack_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_attack_vector",
+      "target": "find_attack_vector",
+      "attributes": {}
+    },
+    {
+      "source": "find_attack_vector",
+      "target": "overread_the_buffer",
+      "attributes": {}
+    },
+    {
+      "source": "overread_the_buffer",
+      "target": "meet_for_this_type_of_attack_to_be_successful",
+      "attributes": {}
+    },
+    {
+      "source": "meet_for_this_type_of_attack_to_be_successful",
+      "target": "influence_the_input_to_buffer_operations",
+      "attributes": {}
+    }
+  ]
+}

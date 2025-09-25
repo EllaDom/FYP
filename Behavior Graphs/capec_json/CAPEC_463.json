@@ -1,0 +1,84 @@
+{
+  "graph": {
+    "capec_id": "463",
+    "name": "Padding Oracle Crypto Attack",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary is able to efficiently decrypt data without knowing the decryption key if a target system leaks data on whether or not a padding error happened while decrypting the ciphertext. A target system that leaks this type of information becomes the padding oracle and an adversary is able to make use of that oracle to efficiently decrypt data without knowing the decryption key by issuing on average 128*b calls to the padding oracle (where b is the number of bytes in the ciphertext block). In addition to performing decryption, an adversary is also able to produce valid ciphertexts (i.e., perform encryption) by using the padding oracle, all without knowing the encryption key.",
+    "likelihood": "",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "97",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The decryption routine does not properly authenticate the message / does not verify its integrity prior to performing the decryption operation",
+      "The target system leaks data (in some way) on whether a padding error has occurred when attempting to decrypt the ciphertext.",
+      "The padding oracle remains available for enough time / for as many requests as needed for the adversary to decrypt the ciphertext."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "Ability to detect instances where a target system is vulnerable to an oracle padding attack Sufficient cryptography knowledge and tools needed to take advantage of the presence of the padding oracle to perform decryption / encryption of data without a key"
+    ],
+    "consequences": [],
+    "mitigations": [
+      "Design: Use a message authentication code (MAC) or another mechanism to perform verification of message authenticity / integrity prior to decryption",
+      "Implementation: Do not leak information back to the user as to any cryptography (e.g., padding) encountered during decryption."
+    ],
+    "example_instances": [
+      "An adversary sends a request containing ciphertext to the target system. Due to the browser's same origin policy, the adversary is not able to see the response directly, but can use cross-domain information leak techniques to still get the information needed (i.e., information on whether or not a padding error has occurred). This can be done using \"img\" tag plus the onerror()/onload() events. The adversary's JavaScript can make web browsers to load an image on the target site, and know if the image is loaded or not. This is 1-bit information needed for the padding oracle attack to work: if the image is loaded, then it is valid padding, otherwise it is not."
+    ],
+    "related_weaknesses": [
+      "209",
+      "514",
+      "649",
+      "347",
+      "354",
+      "696"
+    ],
+    "matched_cwes": [
+      "209",
+      "347"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "send_a_request_containing_ciphertext_to_the_target_system",
+      "attributes": {}
+    },
+    {
+      "id": "read_the_response",
+      "attributes": {}
+    },
+    {
+      "id": "do_this",
+      "attributes": {}
+    },
+    {
+      "id": "authenticate_the_message",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "send_a_request_containing_ciphertext_to_the_target_system",
+      "target": "read_the_response",
+      "attributes": {}
+    },
+    {
+      "source": "read_the_response",
+      "target": "do_this",
+      "attributes": {}
+    },
+    {
+      "source": "do_this",
+      "target": "authenticate_the_message",
+      "attributes": {}
+    }
+  ]
+}

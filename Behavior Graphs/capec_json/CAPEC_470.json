@@ -1,0 +1,224 @@
+{
+  "graph": {
+    "capec_id": "470",
+    "name": "Expanding Control over the Operating System from the Database",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker is able to leverage access gained to the database to read / write data to the file system, compromise the operating system, create a tunnel for accessing the host machine, and use this access to potentially attack other machines on the same network as the database machine. Traditionally SQL injections attacks are viewed as a way to gain unauthorized read access to the data stored in the database, modify the data in the database, delete the data, etc. However, almost every data base management system (DBMS) system includes facilities that if compromised allow an attacker complete access to the file system, operating system, and full access to the host running the database. The attacker can then use this privileged access to launch subsequent attacks. These facilities include dropping into a command shell, creating user defined functions that can call system level libraries present on the host machine, stored procedures, etc.",
+    "likelihood": "",
+    "severity": "Very High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "66",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "A vulnerable DBMS is usedA SQL injection exists that gives an attacker access to the database or an attacker has access to the DBMS via other means"
+    ],
+    "skills_required": [
+      {
+        "level": "High",
+        "description": "Low level knowledge of the various facilities available in different DBMS systems for interacting with the file system and operating system"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Design: Follow the defensive programming practices needed to protect an application accessing the database from SQL injection",
+      "Configuration: Ensure that the DBMS is patched with the latest security patches",
+      "Design: Ensure that the DBMS login used by the application has the lowest possible level of privileges in the DBMS",
+      "Design: Ensure that DBMS runs with the lowest possible level of privileges on the host machine and that it runs as a separate user",
+      "Usage: Do not use the DBMS machine for anything else other than the database",
+      "Usage: Do not place any trust in the database host on the internal network. Authenticate and validate all network activity originating from the database host.",
+      "Usage: Use an intrusion detection system to monitor network connections and logs on the database host.",
+      "Implementation: Remove / disable all unneeded / unused functions of the DBMS system that may allow an attacker to elevate privileges if compromised"
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "250",
+      "89"
+    ],
+    "matched_cwes": [
+      "250",
+      "89"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "The adversary identifies a database management system running on a machine they would like to gain control over, or on a network they want to move laterally through.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "The adversary goes about the typical steps of an SQL injection and determines if an injection is possible.",
+        "techniques": []
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "Once the Adversary determines that an SQL injection is possible, they must ensure that the requirements for the attack are met. These are a high privileged session user and batched query support. This is done in similar ways to discovering if an SQL injection is possible.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Experiment",
+        "description": "If the requirements are met, based on the database management system that is running, the adversary will find or create user defined functions (UDFs) that can be loaded as DLLs. An example of a DLL can be found at https://github.com/rapid7/metasploit-framework/tree/master/data/exploits/mysql",
+        "techniques": []
+      },
+      {
+        "step": "5",
+        "phase": "Experiment",
+        "description": "In order to load the DLL, the adversary must first find the path to the plugin directory. The command to achieve this is different based on the type of DBMS, but for MySQL, this can be achieved by running the command \"select @@plugin_dir\"",
+        "techniques": []
+      },
+      {
+        "step": "6",
+        "phase": "Exploit",
+        "description": "The DLL is then moved into the previously found plugin directory so that the contained functions can be loaded. This can be done in a number of ways; loading from a network share, writing the entire hex encoded string to a file in the plugin directory, or loading the DLL into a table and then into a file. An example using MySQL to load the hex string is as follows. select 0x4d5a9000... into dump file \"{plugin directory}\\\\udf.dll\";",
+        "techniques": []
+      },
+      {
+        "step": "6",
+        "phase": "Exploit",
+        "description": "Once the DLL is in the plugin directory, a command is then run to load the UDFs. An example of this in MySQL is \"create function sys_eval returns string soname 'udf.dll';\" The function sys_eval is specific to the example DLL listed above.",
+        "techniques": []
+      },
+      {
+        "step": "6",
+        "phase": "Exploit",
+        "description": "Once the adversary has loaded the desired function(s), they will use these to execute arbitrary commands on the compromised system. This is done through a simple select command to the loaded UDF. For example: \"select sys_eval('dir');\". Because the prerequisite to this attack is that the database session user is a super user, this means that the adversary will be able to execute commands with elevated privileges.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_a_database_management_system_running_on_a_machine_they_would_like_to_gain_control_over",
+      "attributes": {}
+    },
+    {
+      "id": "go_if_an_injection_is_possible",
+      "attributes": {}
+    },
+    {
+      "id": "batch_query_support",
+      "attributes": {}
+    },
+    {
+      "id": "meet_the_requirements",
+      "attributes": {}
+    },
+    {
+      "id": "find_an_example_of_a_dll",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_dll",
+      "attributes": {}
+    },
+    {
+      "id": "achieve_this",
+      "attributes": {}
+    },
+    {
+      "id": "move_the_dll",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_hex_string",
+      "attributes": {}
+    },
+    {
+      "id": "run_once_the_dll_is_in_the_plugin_directory",
+      "attributes": {}
+    },
+    {
+      "id": "create_function",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_desired_function_s",
+      "attributes": {}
+    },
+    {
+      "id": "do_this",
+      "attributes": {}
+    },
+    {
+      "id": "mean_because_the_prerequisite_to_this_attack_is_that_the_database_session_user_is_a_super_user",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_a_database_management_system_running_on_a_machine_they_would_like_to_gain_control_over",
+      "target": "go_if_an_injection_is_possible",
+      "attributes": {}
+    },
+    {
+      "source": "go_if_an_injection_is_possible",
+      "target": "batch_query_support",
+      "attributes": {}
+    },
+    {
+      "source": "batch_query_support",
+      "target": "meet_the_requirements",
+      "attributes": {}
+    },
+    {
+      "source": "meet_the_requirements",
+      "target": "find_an_example_of_a_dll",
+      "attributes": {}
+    },
+    {
+      "source": "find_an_example_of_a_dll",
+      "target": "load_the_dll",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_dll",
+      "target": "achieve_this",
+      "attributes": {}
+    },
+    {
+      "source": "achieve_this",
+      "target": "move_the_dll",
+      "attributes": {}
+    },
+    {
+      "source": "move_the_dll",
+      "target": "load_the_hex_string",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_hex_string",
+      "target": "run_once_the_dll_is_in_the_plugin_directory",
+      "attributes": {}
+    },
+    {
+      "source": "run_once_the_dll_is_in_the_plugin_directory",
+      "target": "create_function",
+      "attributes": {}
+    },
+    {
+      "source": "create_function",
+      "target": "load_the_desired_function_s",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_desired_function_s",
+      "target": "do_this",
+      "attributes": {}
+    },
+    {
+      "source": "do_this",
+      "target": "mean_because_the_prerequisite_to_this_attack_is_that_the_database_session_user_is_a_super_user",
+      "attributes": {}
+    }
+  ]
+}

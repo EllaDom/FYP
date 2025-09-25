@@ -1,0 +1,264 @@
+{
+  "graph": {
+    "capec_id": "500",
+    "name": "WebView Injection",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary, through a previously installed malicious application, injects code into the context of a web page displayed by a WebView component. Through the injected code, an adversary is able to manipulate the DOM tree and cookies of the page, expose sensitive information, and can launch attacks against the web application from within the web page.",
+    "likelihood": "",
+    "severity": "",
+    "related_attack_patterns": [
+      {
+        "capec_id": "253",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "An adversary must be able install a purpose built malicious application onto the device and convince the user to execute it. The malicious application is designed to target a specific web application and is used to load the target web pages via the WebView component. For example, an adversary may develop an application that interacts with Facebook via WebView and adds a new feature that a user desires. The user would install this 3rd party app instead of the Facebook app."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "The only known mitigation to this type of attack is to keep the malicious application off the system. There is nothing that can be done to the target application to protect itself from a malicious application that has been installed and executed."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "749",
+      "940"
+    ],
+    "matched_cwes": [
+      "749"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine target web application] An adversary first needs to determine what web application they wish to target.",
+        "techniques": [
+          "Target web applications that require users to enter sensitive information.",
+          "Target web applications that an adversary wishes to operate on behalf of a logged in user."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Create malicious application] An adversary creates an application, often mobile, that incorporates a WebView component to display the targeted web application. This malicious application needs to downloaded by a user, so adversaries will make this application useful in some way.",
+        "techniques": [
+          "Create a 3rd party application that adds useful functionality to the targeted web application. Victims will download the application as a means of using the targeted web application.",
+          "Create a fun game that at some point directs a user to the targeted web application. For example, prompt the user to buy in game currency by directing them to PayPal."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Get the victim to download and run the application] An adversary needs to get the victim to willingly download and run the application.",
+        "techniques": [
+          "Pay for App Store advertisements",
+          "Promote the application on social media, either through accounts made by the adversary or by paying for other accounts to advertise."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Inject malicious code] Once the victim runs the malicious application and views the targeted web page in the WebView component, the malicious application will inject malicious JavaScript code into the web application. This is done by using WebView's loadURL() API, which can inject arbitrary JavaScript code into pages loaded by the WebView component with the same privileges. This is often done by adding a script tag to the document body with a src destination to a remote location that serves malicious JavaScript code.",
+        "techniques": [
+          "Execute operations on the targeted web page on behalf of an authenticated user.",
+          "Steal cookie information from the victim.",
+          "Add in extra fields to the DOM in an attempt to get a user to divulge sensitive information."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_target_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_determine_what_web_application_they_wish_to_target",
+      "attributes": {}
+    },
+    {
+      "id": "require_users",
+      "attributes": {}
+    },
+    {
+      "id": "wish_that_to_operate_on_behalf_of_a_logged_in_user",
+      "attributes": {}
+    },
+    {
+      "id": "create_malicious_application",
+      "attributes": {}
+    },
+    {
+      "id": "create_an_application_often_mobile_that_incorporates_a_webview_component_to_display_the_targeted_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_downloaded_by_a_user",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_3rd_party_application_that_adds_useful_functionality_to_the_targeted_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "download_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_fun_game_that_at_some_point_directs_a_user_to_the_targeted_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "prompt_a_user",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_get_the_victim_to_willingly_download_and_run_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "promote_the_application_on_social_media",
+      "attributes": {}
+    },
+    {
+      "id": "inject_their_malicious_file",
+      "attributes": {}
+    },
+    {
+      "id": "inject_arbitrary_javascript_code",
+      "attributes": {}
+    },
+    {
+      "id": "add_a_script_tag",
+      "attributes": {}
+    },
+    {
+      "id": "steal_cookie",
+      "attributes": {}
+    },
+    {
+      "id": "install_a_purpose_built_malicious_application_onto_the_device_and_convince_the_user_to_execute_it",
+      "attributes": {}
+    },
+    {
+      "id": "develop_an_application_that_interacts_with_facebook_via_webview",
+      "attributes": {}
+    },
+    {
+      "id": "install_this_3rd_party_app_instead_of_the_facebook_app",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_target_web_application",
+      "target": "need_to_determine_what_web_application_they_wish_to_target",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_determine_what_web_application_they_wish_to_target",
+      "target": "require_users",
+      "attributes": {}
+    },
+    {
+      "source": "require_users",
+      "target": "wish_that_to_operate_on_behalf_of_a_logged_in_user",
+      "attributes": {}
+    },
+    {
+      "source": "wish_that_to_operate_on_behalf_of_a_logged_in_user",
+      "target": "create_malicious_application",
+      "attributes": {}
+    },
+    {
+      "source": "create_malicious_application",
+      "target": "create_an_application_often_mobile_that_incorporates_a_webview_component_to_display_the_targeted_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "create_malicious_application",
+      "target": "inject_arbitrary_javascript_code",
+      "attributes": {}
+    },
+    {
+      "source": "create_malicious_application",
+      "target": "develop_an_application_that_interacts_with_facebook_via_webview",
+      "attributes": {}
+    },
+    {
+      "source": "create_an_application_often_mobile_that_incorporates_a_webview_component_to_display_the_targeted_web_application",
+      "target": "need_to_downloaded_by_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_downloaded_by_a_user",
+      "target": "create_a_3rd_party_application_that_adds_useful_functionality_to_the_targeted_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_3rd_party_application_that_adds_useful_functionality_to_the_targeted_web_application",
+      "target": "download_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "download_the_application",
+      "target": "create_a_fun_game_that_at_some_point_directs_a_user_to_the_targeted_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_fun_game_that_at_some_point_directs_a_user_to_the_targeted_web_application",
+      "target": "prompt_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "prompt_a_user",
+      "target": "need_to_get_the_victim_to_willingly_download_and_run_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_get_the_victim_to_willingly_download_and_run_the_application",
+      "target": "promote_the_application_on_social_media",
+      "attributes": {}
+    },
+    {
+      "source": "promote_the_application_on_social_media",
+      "target": "inject_their_malicious_file",
+      "attributes": {}
+    },
+    {
+      "source": "inject_their_malicious_file",
+      "target": "create_malicious_application",
+      "attributes": {}
+    },
+    {
+      "source": "inject_arbitrary_javascript_code",
+      "target": "add_a_script_tag",
+      "attributes": {}
+    },
+    {
+      "source": "add_a_script_tag",
+      "target": "steal_cookie",
+      "attributes": {}
+    },
+    {
+      "source": "steal_cookie",
+      "target": "install_a_purpose_built_malicious_application_onto_the_device_and_convince_the_user_to_execute_it",
+      "attributes": {}
+    },
+    {
+      "source": "install_a_purpose_built_malicious_application_onto_the_device_and_convince_the_user_to_execute_it",
+      "target": "create_malicious_application",
+      "attributes": {}
+    },
+    {
+      "source": "develop_an_application_that_interacts_with_facebook_via_webview",
+      "target": "install_this_3rd_party_app_instead_of_the_facebook_app",
+      "attributes": {}
+    }
+  ]
+}

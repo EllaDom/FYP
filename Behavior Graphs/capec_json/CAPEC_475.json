@@ -1,0 +1,99 @@
+{
+  "graph": {
+    "capec_id": "475",
+    "name": "Signature Spoofing by Improper Validation",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary exploits a cryptographic weakness in the signature verification algorithm implementation to generate a valid signature without knowing the key.",
+    "likelihood": "Low",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "473",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "542",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "Recipient is using a weak cryptographic signature verification algorithm or a weak implementation of a cryptographic signature verification algorithm, or the configuration of the recipient's application accepts the use of keys generated using cryptographically weak signature verification algorithms."
+    ],
+    "skills_required": [
+      {
+        "level": "High",
+        "description": "Cryptanalysis of signature verification algorithm"
+      },
+      {
+        "level": "High",
+        "description": "Reverse engineering and cryptanalysis of signature verification algorithm implementation"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Use programs and products that contain cryptographic elements that have been thoroughly tested for flaws in the signature verification routines."
+    ],
+    "example_instances": [
+      "The Windows CryptoAPI (Crypt32.dll) was shown to be vulnerable to signature spoofing by failing to properly validate Elliptic Curve Cryptography (ECC) certificates. If the CryptoAPI's signature validator allows the specification of a nonstandard base point (G): \"An adversary can create a custom ECDSA certificate with an elliptic curve (ECC) signature that appears to match a known standard curve, like P-256 that includes a public key for an existing known trusted certificate authority, but which was in fact not signed by that certificate authority. Windows checks the public key and other curve parameters, but not the (bespoke adversary-supplied) base point generator (G) parameter constant which actually generated the curve\" [REF-562]. Exploiting this vulnerability allows the adversary to leverage a spoofed certificate to dupe trusted network connections and deliver/execute malicious code, while appearing as legitimately trusted entity [REF-563]. This ultimately tricks the victim into believing the malicious website or executable is legitimate and originates from a properly verified source. See also: CVE-2020-0601"
+    ],
+    "related_weaknesses": [
+      "347",
+      "327",
+      "295"
+    ],
+    "matched_cwes": [
+      "295",
+      "347",
+      "327"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "show_the_windows_cryptoapi_crypt32_dll",
+      "attributes": {}
+    },
+    {
+      "id": "check_the_public_key_and_other_curve_parameters",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_that",
+      "attributes": {}
+    },
+    {
+      "id": "trick_the_victim",
+      "attributes": {}
+    },
+    {
+      "id": "accept_the_use_of_keys_generated_using_cryptographically_weak_signature_verification_algorithms",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "show_the_windows_cryptoapi_crypt32_dll",
+      "target": "check_the_public_key_and_other_curve_parameters",
+      "attributes": {}
+    },
+    {
+      "source": "check_the_public_key_and_other_curve_parameters",
+      "target": "exploit_that",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_that",
+      "target": "trick_the_victim",
+      "attributes": {}
+    },
+    {
+      "source": "trick_the_victim",
+      "target": "accept_the_use_of_keys_generated_using_cryptographically_weak_signature_verification_algorithms",
+      "attributes": {}
+    }
+  ]
+}

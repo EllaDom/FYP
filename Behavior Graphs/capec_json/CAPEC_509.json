@@ -1,0 +1,191 @@
+{
+  "graph": {
+    "capec_id": "509",
+    "name": "Kerberoasting",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "Through the exploitation of how service accounts leverage Kerberos authentication with Service Principal Names (SPNs), the adversary obtains and subsequently cracks the hashed credentials of a service account target to exploit its privileges. The Kerberos authentication protocol centers around a ticketing system which is used to request/grant access to services and to then access the requested services. As an authenticated user, the adversary may request Active Directory and obtain a service ticket with portions encrypted via RC4 with the private key of the authenticated account. By extracting the local ticket and saving it disk, the adversary can brute force the hashed value to reveal the target account credentials.",
+    "likelihood": "",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "652",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "151",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The adversary requires access as an authenticated user on the system. This attack pattern relates to elevating privileges.",
+      "The adversary requires use of a third-party credential harvesting tool (e.g., Mimikatz).",
+      "The adversary requires a brute force tool."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": ""
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Monitor system and domain logs for abnormal access.",
+      "Employ a robust password policy for service accounts. Passwords should be of adequate length and complexity, and they should expire after a period of time.",
+      "Employ the principle of least privilege: limit service accounts privileges to what is required for functionality and no more.",
+      "Enable AES Kerberos encryption (or another stronger encryption algorithm), rather than RC4, where possible."
+    ],
+    "example_instances": [
+      "PowerSploit's Invoke-Kerberoast module can be leveraged to request Ticket Granting Service (TGS) tickets and return crackable ticket hashes. [REF-585] [REF-586]"
+    ],
+    "related_weaknesses": [
+      "522",
+      "308",
+      "309",
+      "294",
+      "263",
+      "262",
+      "521"
+    ],
+    "matched_cwes": [
+      "521",
+      "522",
+      "294"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1558.003",
+        "entry_name": "Steal or Forge Kerberos Tickets:Kerberoasting"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "Scan for user accounts with set SPN values",
+        "techniques": [
+          "These can be found via Powershell or LDAP queries, as well as enumerating startup name accounts and other means."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "Request service tickets",
+        "techniques": [
+          "Using user account's SPN value, request other service tickets from Active Directory"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "Extract ticket and save to disk",
+        "techniques": [
+          "Certain tools like Mimikatz can extract local tickets and save them to memory/disk."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "Crack the encrypted ticket to harvest plain text credentials",
+        "techniques": [
+          "Leverage a brute force application/script on the hashed value offline until cracked. The shorter the password, the easier it is to crack."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_this",
+      "attributes": {}
+    },
+    {
+      "id": "request_other_service_tickets_from_active_directory",
+      "attributes": {}
+    },
+    {
+      "id": "extract_ticket",
+      "attributes": {}
+    },
+    {
+      "id": "crack_the_encrypted_ticket",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_a_brute_force_application_script_on_the_hashed_value",
+      "attributes": {}
+    },
+    {
+      "id": "request_ticket_granting_service_tgs_tickets",
+      "attributes": {}
+    },
+    {
+      "id": "require_access_as_an_authenticated_user_on_the_system",
+      "attributes": {}
+    },
+    {
+      "id": "require_use_of_a_third_party_credential_harvesting_tool",
+      "attributes": {}
+    },
+    {
+      "id": "require_a_brute_force_tool",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_this",
+      "target": "request_other_service_tickets_from_active_directory",
+      "attributes": {}
+    },
+    {
+      "source": "request_other_service_tickets_from_active_directory",
+      "target": "extract_ticket",
+      "attributes": {}
+    },
+    {
+      "source": "extract_ticket",
+      "target": "extract_ticket",
+      "attributes": {}
+    },
+    {
+      "source": "extract_ticket",
+      "target": "crack_the_encrypted_ticket",
+      "attributes": {}
+    },
+    {
+      "source": "crack_the_encrypted_ticket",
+      "target": "leverage_a_brute_force_application_script_on_the_hashed_value",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_a_brute_force_application_script_on_the_hashed_value",
+      "target": "request_ticket_granting_service_tgs_tickets",
+      "attributes": {}
+    },
+    {
+      "source": "request_ticket_granting_service_tgs_tickets",
+      "target": "require_access_as_an_authenticated_user_on_the_system",
+      "attributes": {}
+    },
+    {
+      "source": "require_access_as_an_authenticated_user_on_the_system",
+      "target": "require_use_of_a_third_party_credential_harvesting_tool",
+      "attributes": {}
+    },
+    {
+      "source": "require_use_of_a_third_party_credential_harvesting_tool",
+      "target": "require_a_brute_force_tool",
+      "attributes": {}
+    }
+  ]
+}

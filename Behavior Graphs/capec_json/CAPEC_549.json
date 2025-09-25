@@ -1,0 +1,81 @@
+{
+  "graph": {
+    "capec_id": "549",
+    "name": "Local Execution of Code",
+    "abstraction": "Meta",
+    "status": "Stable",
+    "description": "An adversary installs and executes malicious code on the target system in an effort to achieve a negative technical impact. Examples include rootkits, ransomware, spyware, adware, and others.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [],
+    "prerequisites": [
+      "Knowledge of the target system's vulnerabilities that can be capitalized on with malicious code.The adversary must be able to place the malicious code on the target system."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "The means by which the adversary intends to place the malicious code on the system dictates the tools required. For example, suppose the adversary wishes to leverage social engineering and convince a legitimate user to open a malicious file attached to a seemingly legitimate email. In this case, the adversary might require a tool capable of wrapping malicious code into an innocuous filetype (e.g., PDF, .doc, etc.)"
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Other"
+      }
+    ],
+    "mitigations": [
+      "Employ robust cybersecurity training for all employees.",
+      "Implement system antivirus software that scans all attachments before opening them.",
+      "Regularly patch all software.",
+      "Execute all suspicious files in a sandbox environment."
+    ],
+    "example_instances": [
+      "BlueBorne refers to a set of nine vulnerabilities on different platforms (Linux, Windows, Android, iOS) that offer an adversary the ability to install and execute malicious code on a system if they were close in proximity to a Bluetooth enabled device. One vulnerability affecting iOS versions 7 through 9 allowed an attacker to overflow the Low Energy Audio Protocol since commands sent over this protocol are improperly validated and gain the elevated permissions of the Bluetooth stack. These vulnerabilities were a result of poor validation and were patched shortly after their exposure in 2017, but many non-updated devices remain vulnerable."
+    ],
+    "related_weaknesses": [
+      "829"
+    ],
+    "matched_cwes": [
+      "829"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "affect_ios_versions",
+      "attributes": {}
+    },
+    {
+      "id": "capitalize_that",
+      "attributes": {}
+    },
+    {
+      "id": "place_the_malicious_file",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "affect_ios_versions",
+      "target": "capitalize_that",
+      "attributes": {}
+    },
+    {
+      "source": "capitalize_that",
+      "target": "place_the_malicious_file",
+      "attributes": {}
+    }
+  ]
+}

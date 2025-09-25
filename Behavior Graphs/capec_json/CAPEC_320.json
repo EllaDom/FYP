@@ -1,0 +1,130 @@
+{
+  "graph": {
+    "capec_id": "320",
+    "name": "TCP Timestamp Probe",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "This OS fingerprinting probe examines the remote server's implementation of TCP timestamps. Not all operating systems implement timestamps within the TCP header, but when timestamps are used then this provides the attacker with a means to guess the operating system of the target. The attacker begins by probing any active TCP service in order to get response which contains a TCP timestamp. Different Operating systems update the timestamp value using different intervals. This type of analysis is most accurate when multiple timestamp responses are received and then analyzed. TCP timestamps can be found in the TCP Options field of the TCP header.",
+    "likelihood": "Medium",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "312",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The ability to monitor and interact with network communications.Access to at least one host, and the privileges to interface with the network interface card.The target OS must support the TCP timestamp option in order to obtain a fingerprint."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "Any type of active probing that involves non-standard packet headers requires the use of raw sockets, which is not available on particular operating systems (Microsoft Windows XP SP 2, for example). Raw socket manipulation on Unix/Linux requires root privileges. A tool capable of sending and receiving packets from a remote system."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine if timestamps are present.] The adversary sends a probe packet to the remote host to identify if timestamps are present.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Record and analyze timestamp values.] If the remote host is using timestamp, obtain several timestamps, analyze them and compare them to known values.",
+        "techniques": [
+          "The adversary sends several requests and records the timestamp values.",
+          "The adversary analyzes the timestamp values and determines an average increments per second in the timestamps for the target.",
+          "The adversary compares this result to a database of known TCP timestamp increments for a possible match."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_if_timestamps_are_present",
+      "attributes": {}
+    },
+    {
+      "id": "send_a_probe_packet",
+      "attributes": {}
+    },
+    {
+      "id": "obtain_several_timestamps",
+      "attributes": {}
+    },
+    {
+      "id": "send_request",
+      "attributes": {}
+    },
+    {
+      "id": "analyze_the_timestamp_values",
+      "attributes": {}
+    },
+    {
+      "id": "compare_this_result",
+      "attributes": {}
+    },
+    {
+      "id": "support_the_tcp_timestamp_option",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_if_timestamps_are_present",
+      "target": "send_a_probe_packet",
+      "attributes": {}
+    },
+    {
+      "source": "send_a_probe_packet",
+      "target": "obtain_several_timestamps",
+      "attributes": {}
+    },
+    {
+      "source": "obtain_several_timestamps",
+      "target": "send_request",
+      "attributes": {}
+    },
+    {
+      "source": "send_request",
+      "target": "analyze_the_timestamp_values",
+      "attributes": {}
+    },
+    {
+      "source": "analyze_the_timestamp_values",
+      "target": "compare_this_result",
+      "attributes": {}
+    },
+    {
+      "source": "compare_this_result",
+      "target": "support_the_tcp_timestamp_option",
+      "attributes": {}
+    }
+  ]
+}

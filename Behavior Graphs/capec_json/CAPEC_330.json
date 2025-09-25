@@ -1,0 +1,53 @@
+{
+  "graph": {
+    "capec_id": "330",
+    "name": "ICMP Error Message Echoing Integrity Probe",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "An adversary uses a technique to generate an ICMP Error message (Port Unreachable, Destination Unreachable, Redirect, Source Quench, Time Exceeded, Parameter Problem) from a target and then analyze the integrity of data returned or \"Quoted\" from the originating request that generated the error message.",
+    "likelihood": "Medium",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "312",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The ability to monitor and interact with network communications.Access to at least one host, and the privileges to interface with the network interface card."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "A tool capable of sending/receiving UDP datagram packets from a remote system to a closed port and receive an ICMP Error Message Type 3, \"Port Unreachable.."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [],
+  "edges": []
+}

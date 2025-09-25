@@ -1,0 +1,163 @@
+{
+  "graph": {
+    "capec_id": "504",
+    "name": "Task Impersonation",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "An adversary, through a previously installed malicious application, impersonates an expected or routine task in an attempt to steal sensitive information or leverage a user's privileges.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "173",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary must already have access to the target system via some means.",
+      "A legitimate task must exist that an adversary can impersonate to glean credentials.",
+      "The user's privileges allow them to execute certain tasks with elevated privileges."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Once an adversary has gained access to the target system, impersonating a task is trivial."
+      }
+    ],
+    "resources_required": [
+      "Malware or some other means to initially comprise the target system.",
+      "Additional malware to impersonate a legitimate task."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Access Control",
+          "Authentication"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "The only known mitigation to this attack is to avoid installing the malicious application on the device. However, to impersonate a running task the malicious application does need the GET_TASKS permission to be able to query the task list, and being suspicious of applications with that permission can help."
+    ],
+    "example_instances": [
+      "An adversary monitors the system task list for Microsoft Outlook in an attempt to determine when the application may prompt the user to enter their credentials to view encrypted email. Once the task is executed, the adversary impersonates the credential prompt to obtain the user's Microsoft Outlook encryption credentials. These credentials can then be leveraged by the adversary to read a user's encrypted email.",
+      "An adversary prompts a user to authorize an elevation of privileges, implying that a background task needs additional permissions to execute. The user accepts the privilege elevation, allowing the adversary to execute additional malware or tasks with the user's privileges."
+    ],
+    "related_weaknesses": [
+      "1021"
+    ],
+    "matched_cwes": [
+      "1021"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1036.004",
+        "entry_name": "Masquerading: Masquerade Task or Service"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Determine suitable tasks to exploit] Determine what tasks exist on the target system that may result in a user providing sensitive information.",
+        "techniques": [
+          "Determine what tasks prompt a user for their credentials.",
+          "Determine what tasks may prompt a user to authorize a process to execute with elevated privileges."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Exploit",
+        "description": "[Impersonate Task] Impersonate a legitimate task, either expected or unexpected, in an attempt to gain user credentials or to ride the user's privileges.",
+        "techniques": [
+          "Prompt a user for their credentials, while making the user believe the credential request is legitimate.",
+          "Prompt a user to authorize a task to run with elevated privileges, while making the user believe the request is legitimate."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_suitable_tasks_to_exploit",
+      "attributes": {}
+    },
+    {
+      "id": "impersonate_a_legitimate_task",
+      "attributes": {}
+    },
+    {
+      "id": "prompt_a_user",
+      "attributes": {}
+    },
+    {
+      "id": "monitor_the_system_task_list_for_microsoft_outlook",
+      "attributes": {}
+    },
+    {
+      "id": "execute_the_task",
+      "attributes": {}
+    },
+    {
+      "id": "leverage_these_credentials",
+      "attributes": {}
+    },
+    {
+      "id": "accept_the_privilege_elevation",
+      "attributes": {}
+    },
+    {
+      "id": "gain_access_to_the_target_system",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_suitable_tasks_to_exploit",
+      "target": "impersonate_a_legitimate_task",
+      "attributes": {}
+    },
+    {
+      "source": "impersonate_a_legitimate_task",
+      "target": "prompt_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "prompt_a_user",
+      "target": "prompt_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "prompt_a_user",
+      "target": "monitor_the_system_task_list_for_microsoft_outlook",
+      "attributes": {}
+    },
+    {
+      "source": "prompt_a_user",
+      "target": "accept_the_privilege_elevation",
+      "attributes": {}
+    },
+    {
+      "source": "monitor_the_system_task_list_for_microsoft_outlook",
+      "target": "execute_the_task",
+      "attributes": {}
+    },
+    {
+      "source": "execute_the_task",
+      "target": "leverage_these_credentials",
+      "attributes": {}
+    },
+    {
+      "source": "leverage_these_credentials",
+      "target": "prompt_a_user",
+      "attributes": {}
+    },
+    {
+      "source": "accept_the_privilege_elevation",
+      "target": "gain_access_to_the_target_system",
+      "attributes": {}
+    }
+  ]
+}

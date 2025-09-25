@@ -1,0 +1,53 @@
+{
+  "graph": {
+    "capec_id": "503",
+    "name": "WebView Exposure",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary, through a malicious web page, accesses application specific functionality by leveraging interfaces registered through WebView's addJavascriptInterface API. Once an interface is registered to WebView through addJavascriptInterface, it becomes global and all pages loaded in the WebView can call this interface.",
+    "likelihood": "",
+    "severity": "",
+    "related_attack_patterns": [
+      {
+        "capec_id": "122",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "This type of an attack requires the adversary to convince the user to load the malicious web page inside the target application. Once loaded, the malicious web page will have the same permissions as the target application and will have access to all registered interfaces. Both the permission and the interface must be in place for the functionality to be exposed."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "To mitigate this type of an attack, an application should limit permissions to only those required and should verify the origin of all web content it loads."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "284"
+    ],
+    "matched_cwes": [
+      "284"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "allow_the_adversary",
+      "attributes": {}
+    },
+    {
+      "id": "expose_the_functionality",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "allow_the_adversary",
+      "target": "expose_the_functionality",
+      "attributes": {}
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "graph": {
+    "capec_id": "476",
+    "name": "Signature Spoofing by Misrepresentation",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker exploits a weakness in the parsing or display code of the recipient software to generate a data blob containing a supposedly valid signature, but the signer's identity is falsely represented, which can lead to the attacker manipulating the recipient software or its victim user to perform compromising actions.",
+    "likelihood": "Low",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "473",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "Recipient is using signature verification software that does not clearly indicate potential homographs in the signer identity.Recipient is using signature verification software that contains a parsing vulnerability, or allows control characters in the signer identity field, such that a signature is mistakenly displayed as valid and from a known or authoritative signer."
+    ],
+    "skills_required": [
+      {
+        "level": "High",
+        "description": "Attacker needs to understand the layout and composition of data blobs used by the target application."
+      },
+      {
+        "level": "High",
+        "description": "To discover a specific vulnerability, attacker needs to reverse engineer signature parsing, signature verification and signer representation code."
+      },
+      {
+        "level": "High",
+        "description": "Attacker may be required to create malformed data blobs and know how to insert them in a location that the recipient will visit."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Ensure the application is using parsing and data display techniques that will accurately display control characters, international symbols and markings, and ultimately recognize potential homograph attacks."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "290"
+    ],
+    "matched_cwes": [
+      "290"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "indicate_potential_homographs_in_the_signer_identity",
+      "attributes": {}
+    },
+    {
+      "id": "contain_a_parsing_vulnerability",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "indicate_potential_homographs_in_the_signer_identity",
+      "target": "contain_a_parsing_vulnerability",
+      "attributes": {}
+    }
+  ]
+}
