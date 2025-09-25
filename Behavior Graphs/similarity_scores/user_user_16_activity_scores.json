@@ -1,0 +1,2228 @@
+{
+  "CAPEC_1.json": {
+    "fuzzy_node_score": 0.324,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.13
+  },
+  "CAPEC_10.json": {
+    "fuzzy_node_score": 0.386,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.154
+  },
+  "CAPEC_100.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_101.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_102.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_103.json": {
+    "fuzzy_node_score": 0.389,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.156
+  },
+  "CAPEC_104.json": {
+    "fuzzy_node_score": 0.417,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.167
+  },
+  "CAPEC_105.json": {
+    "fuzzy_node_score": 0.317,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.127
+  },
+  "CAPEC_107.json": {
+    "fuzzy_node_score": 0.293,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.117
+  },
+  "CAPEC_108.json": {
+    "fuzzy_node_score": 0.286,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.114
+  },
+  "CAPEC_109.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_110.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_111.json": {
+    "fuzzy_node_score": 0.424,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.17
+  },
+  "CAPEC_112.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_114.json": {
+    "fuzzy_node_score": 0.136,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.054
+  },
+  "CAPEC_115.json": {
+    "fuzzy_node_score": 0.136,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.054
+  },
+  "CAPEC_116.json": {
+    "fuzzy_node_score": 0.226,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.09
+  },
+  "CAPEC_117.json": {
+    "fuzzy_node_score": 0.214,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.086
+  },
+  "CAPEC_12.json": {
+    "fuzzy_node_score": 0.375,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.15
+  },
+  "CAPEC_120.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_121.json": {
+    "fuzzy_node_score": 0.267,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.107
+  },
+  "CAPEC_122.json": {
+    "fuzzy_node_score": 0.372,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.149
+  },
+  "CAPEC_123.json": {
+    "fuzzy_node_score": 0.18,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.072
+  },
+  "CAPEC_126.json": {
+    "fuzzy_node_score": 0.254,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.102
+  },
+  "CAPEC_127.json": {
+    "fuzzy_node_score": 0.444,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.178
+  },
+  "CAPEC_13.json": {
+    "fuzzy_node_score": 0.629,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.251
+  },
+  "CAPEC_132.json": {
+    "fuzzy_node_score": 0.421,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.168
+  },
+  "CAPEC_135.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_136.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_139.json": {
+    "fuzzy_node_score": 0.444,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.178
+  },
+  "CAPEC_14.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_141.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_142.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_143.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_144.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_147.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_148.json": {
+    "fuzzy_node_score": 0.276,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.11
+  },
+  "CAPEC_149.json": {
+    "fuzzy_node_score": 0.219,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.088
+  },
+  "CAPEC_15.json": {
+    "fuzzy_node_score": 0.308,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.123
+  },
+  "CAPEC_150.json": {
+    "fuzzy_node_score": 0.37,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.148
+  },
+  "CAPEC_151.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_153.json": {
+    "fuzzy_node_score": 0.24,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.096
+  },
+  "CAPEC_155.json": {
+    "fuzzy_node_score": 0.435,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.174
+  },
+  "CAPEC_157.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_158.json": {
+    "fuzzy_node_score": 0.291,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.116
+  },
+  "CAPEC_16.json": {
+    "fuzzy_node_score": 0.261,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.104
+  },
+  "CAPEC_162.json": {
+    "fuzzy_node_score": 0.424,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.17
+  },
+  "CAPEC_166.json": {
+    "fuzzy_node_score": 0.261,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.104
+  },
+  "CAPEC_169.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_17.json": {
+    "fuzzy_node_score": 0.629,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.251
+  },
+  "CAPEC_170.json": {
+    "fuzzy_node_score": 0.343,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.137
+  },
+  "CAPEC_175.json": {
+    "fuzzy_node_score": 0.471,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.188
+  },
+  "CAPEC_178.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_18.json": {
+    "fuzzy_node_score": 0.389,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.156
+  },
+  "CAPEC_180.json": {
+    "fuzzy_node_score": 0.308,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.123
+  },
+  "CAPEC_181.json": {
+    "fuzzy_node_score": 0.298,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.119
+  },
+  "CAPEC_182.json": {
+    "fuzzy_node_score": 0.298,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.119
+  },
+  "CAPEC_183.json": {
+    "fuzzy_node_score": 0.389,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.156
+  },
+  "CAPEC_184.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_185.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_186.json": {
+    "fuzzy_node_score": 0.389,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.156
+  },
+  "CAPEC_187.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_19.json": {
+    "fuzzy_node_score": 0.452,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.181
+  },
+  "CAPEC_191.json": {
+    "fuzzy_node_score": 0.32,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.128
+  },
+  "CAPEC_192.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_193.json": {
+    "fuzzy_node_score": 0.524,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.21
+  },
+  "CAPEC_194.json": {
+    "fuzzy_node_score": 0.133,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.053
+  },
+  "CAPEC_196.json": {
+    "fuzzy_node_score": 0.412,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.165
+  },
+  "CAPEC_20.json": {
+    "fuzzy_node_score": 0.415,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.166
+  },
+  "CAPEC_201.json": {
+    "fuzzy_node_score": 0.391,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.157
+  },
+  "CAPEC_202.json": {
+    "fuzzy_node_score": 0.074,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.03
+  },
+  "CAPEC_204.json": {
+    "fuzzy_node_score": 0.267,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.107
+  },
+  "CAPEC_206.json": {
+    "fuzzy_node_score": 0.324,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.13
+  },
+  "CAPEC_207.json": {
+    "fuzzy_node_score": 0.324,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.13
+  },
+  "CAPEC_208.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_209.json": {
+    "fuzzy_node_score": 0.629,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.251
+  },
+  "CAPEC_21.json": {
+    "fuzzy_node_score": 0.414,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.166
+  },
+  "CAPEC_215.json": {
+    "fuzzy_node_score": 0.329,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.132
+  },
+  "CAPEC_216.json": {
+    "fuzzy_node_score": 0.259,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.104
+  },
+  "CAPEC_218.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_22.json": {
+    "fuzzy_node_score": 0.345,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.138
+  },
+  "CAPEC_221.json": {
+    "fuzzy_node_score": 0.483,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.193
+  },
+  "CAPEC_222.json": {
+    "fuzzy_node_score": 0.36,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.144
+  },
+  "CAPEC_224.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_227.json": {
+    "fuzzy_node_score": 0.25,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.1
+  },
+  "CAPEC_228.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_23.json": {
+    "fuzzy_node_score": 0.611,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.244
+  },
+  "CAPEC_230.json": {
+    "fuzzy_node_score": 0.227,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.091
+  },
+  "CAPEC_231.json": {
+    "fuzzy_node_score": 0.227,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.091
+  },
+  "CAPEC_233.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_234.json": {
+    "fuzzy_node_score": 0.269,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.108
+  },
+  "CAPEC_237.json": {
+    "fuzzy_node_score": 0.294,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.118
+  },
+  "CAPEC_24.json": {
+    "fuzzy_node_score": 0.545,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.218
+  },
+  "CAPEC_242.json": {
+    "fuzzy_node_score": 0.118,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.047
+  },
+  "CAPEC_248.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_25.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_250.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_251.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_252.json": {
+    "fuzzy_node_score": 0.562,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.225
+  },
+  "CAPEC_253.json": {
+    "fuzzy_node_score": 0.308,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.123
+  },
+  "CAPEC_26.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_261.json": {
+    "fuzzy_node_score": 0.305,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.122
+  },
+  "CAPEC_263.json": {
+    "fuzzy_node_score": 0.316,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.126
+  },
+  "CAPEC_267.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_27.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_273.json": {
+    "fuzzy_node_score": 0.267,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.107
+  },
+  "CAPEC_276.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_277.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_278.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_279.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_28.json": {
+    "fuzzy_node_score": 0.305,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.122
+  },
+  "CAPEC_285.json": {
+    "fuzzy_node_score": 0.264,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.106
+  },
+  "CAPEC_287.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_29.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_290.json": {
+    "fuzzy_node_score": 0.154,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.062
+  },
+  "CAPEC_291.json": {
+    "fuzzy_node_score": 0.343,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.137
+  },
+  "CAPEC_292.json": {
+    "fuzzy_node_score": 0.237,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.095
+  },
+  "CAPEC_293.json": {
+    "fuzzy_node_score": 0.238,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.095
+  },
+  "CAPEC_294.json": {
+    "fuzzy_node_score": 0.258,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.103
+  },
+  "CAPEC_295.json": {
+    "fuzzy_node_score": 0.414,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.166
+  },
+  "CAPEC_296.json": {
+    "fuzzy_node_score": 0.264,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.106
+  },
+  "CAPEC_297.json": {
+    "fuzzy_node_score": 0.302,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_298.json": {
+    "fuzzy_node_score": 0.348,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.139
+  },
+  "CAPEC_299.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_3.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_300.json": {
+    "fuzzy_node_score": 0.237,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.095
+  },
+  "CAPEC_301.json": {
+    "fuzzy_node_score": 0.237,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.095
+  },
+  "CAPEC_302.json": {
+    "fuzzy_node_score": 0.327,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.131
+  },
+  "CAPEC_303.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_304.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_305.json": {
+    "fuzzy_node_score": 0.316,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.126
+  },
+  "CAPEC_306.json": {
+    "fuzzy_node_score": 0.316,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.126
+  },
+  "CAPEC_307.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_308.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_309.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_31.json": {
+    "fuzzy_node_score": 0.444,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.178
+  },
+  "CAPEC_310.json": {
+    "fuzzy_node_score": 0.214,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.086
+  },
+  "CAPEC_312.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_313.json": {
+    "fuzzy_node_score": 0.178,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.071
+  },
+  "CAPEC_317.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_318.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_319.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_32.json": {
+    "fuzzy_node_score": 0.429,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.171
+  },
+  "CAPEC_320.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_321.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_322.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_323.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_324.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_325.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_326.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_327.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_328.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_329.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_330.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_34.json": {
+    "fuzzy_node_score": 0.317,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.127
+  },
+  "CAPEC_35.json": {
+    "fuzzy_node_score": 0.372,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.149
+  },
+  "CAPEC_36.json": {
+    "fuzzy_node_score": 0.368,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.147
+  },
+  "CAPEC_37.json": {
+    "fuzzy_node_score": 0.49,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.196
+  },
+  "CAPEC_38.json": {
+    "fuzzy_node_score": 0.359,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.144
+  },
+  "CAPEC_383.json": {
+    "fuzzy_node_score": 0.245,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.098
+  },
+  "CAPEC_384.json": {
+    "fuzzy_node_score": 0.245,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.098
+  },
+  "CAPEC_385.json": {
+    "fuzzy_node_score": 0.245,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.098
+  },
+  "CAPEC_386.json": {
+    "fuzzy_node_score": 0.245,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.098
+  },
+  "CAPEC_387.json": {
+    "fuzzy_node_score": 0.245,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.098
+  },
+  "CAPEC_388.json": {
+    "fuzzy_node_score": 0.28,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.112
+  },
+  "CAPEC_39.json": {
+    "fuzzy_node_score": 0.424,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.17
+  },
+  "CAPEC_40.json": {
+    "fuzzy_node_score": 0.5,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.2
+  },
+  "CAPEC_401.json": {
+    "fuzzy_node_score": 0.133,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.053
+  },
+  "CAPEC_402.json": {
+    "fuzzy_node_score": 0.444,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.178
+  },
+  "CAPEC_42.json": {
+    "fuzzy_node_score": 0.414,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.166
+  },
+  "CAPEC_43.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_44.json": {
+    "fuzzy_node_score": 1.0,
+    "exact_node_overlap": 0.059,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.412
+  },
+  "CAPEC_441.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_45.json": {
+    "fuzzy_node_score": 0.417,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.167
+  },
+  "CAPEC_457.json": {
+    "fuzzy_node_score": 0.292,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.117
+  },
+  "CAPEC_459.json": {
+    "fuzzy_node_score": 0.326,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.13
+  },
+  "CAPEC_46.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_461.json": {
+    "fuzzy_node_score": 0.318,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.127
+  },
+  "CAPEC_462.json": {
+    "fuzzy_node_score": 0.429,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.171
+  },
+  "CAPEC_463.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_464.json": {
+    "fuzzy_node_score": 0.133,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.053
+  },
+  "CAPEC_467.json": {
+    "fuzzy_node_score": 0.205,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.082
+  },
+  "CAPEC_468.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_47.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_470.json": {
+    "fuzzy_node_score": 0.519,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.207
+  },
+  "CAPEC_471.json": {
+    "fuzzy_node_score": 0.438,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.175
+  },
+  "CAPEC_472.json": {
+    "fuzzy_node_score": 0.128,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.051
+  },
+  "CAPEC_473.json": {
+    "fuzzy_node_score": 0.323,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.129
+  },
+  "CAPEC_474.json": {
+    "fuzzy_node_score": 0.156,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.062
+  },
+  "CAPEC_475.json": {
+    "fuzzy_node_score": 0.264,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.106
+  },
+  "CAPEC_476.json": {
+    "fuzzy_node_score": 0.348,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.139
+  },
+  "CAPEC_477.json": {
+    "fuzzy_node_score": 0.269,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.107
+  },
+  "CAPEC_478.json": {
+    "fuzzy_node_score": 0.36,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.144
+  },
+  "CAPEC_479.json": {
+    "fuzzy_node_score": 0.318,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.127
+  },
+  "CAPEC_480.json": {
+    "fuzzy_node_score": 0.298,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.119
+  },
+  "CAPEC_485.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_49.json": {
+    "fuzzy_node_score": 0.326,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.13
+  },
+  "CAPEC_492.json": {
+    "fuzzy_node_score": 0.207,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.083
+  },
+  "CAPEC_497.json": {
+    "fuzzy_node_score": 0.379,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.152
+  },
+  "CAPEC_498.json": {
+    "fuzzy_node_score": 0.13,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.052
+  },
+  "CAPEC_5.json": {
+    "fuzzy_node_score": 0.255,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.102
+  },
+  "CAPEC_50.json": {
+    "fuzzy_node_score": 0.424,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.17
+  },
+  "CAPEC_500.json": {
+    "fuzzy_node_score": 0.564,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.226
+  },
+  "CAPEC_502.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_503.json": {
+    "fuzzy_node_score": 0.308,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.123
+  },
+  "CAPEC_504.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_506.json": {
+    "fuzzy_node_score": 0.167,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.067
+  },
+  "CAPEC_508.json": {
+    "fuzzy_node_score": 0.312,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_509.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_51.json": {
+    "fuzzy_node_score": 0.385,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.154
+  },
+  "CAPEC_52.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_53.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_533.json": {
+    "fuzzy_node_score": 0.341,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.137
+  },
+  "CAPEC_536.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_538.json": {
+    "fuzzy_node_score": 0.417,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.167
+  },
+  "CAPEC_54.json": {
+    "fuzzy_node_score": 0.314,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.125
+  },
+  "CAPEC_540.json": {
+    "fuzzy_node_score": 0.412,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.165
+  },
+  "CAPEC_546.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_549.json": {
+    "fuzzy_node_score": 0.308,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.123
+  },
+  "CAPEC_55.json": {
+    "fuzzy_node_score": 0.378,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.151
+  },
+  "CAPEC_550.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_551.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_552.json": {
+    "fuzzy_node_score": 0.296,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.119
+  },
+  "CAPEC_554.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_555.json": {
+    "fuzzy_node_score": 0.273,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.109
+  },
+  "CAPEC_556.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_558.json": {
+    "fuzzy_node_score": 0.232,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.093
+  },
+  "CAPEC_560.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_561.json": {
+    "fuzzy_node_score": 0.339,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.136
+  },
+  "CAPEC_562.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_563.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_564.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_565.json": {
+    "fuzzy_node_score": 0.261,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.104
+  },
+  "CAPEC_57.json": {
+    "fuzzy_node_score": 0.375,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.15
+  },
+  "CAPEC_573.json": {
+    "fuzzy_node_score": 0.296,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.119
+  },
+  "CAPEC_574.json": {
+    "fuzzy_node_score": 0.213,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.085
+  },
+  "CAPEC_575.json": {
+    "fuzzy_node_score": 0.213,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.085
+  },
+  "CAPEC_576.json": {
+    "fuzzy_node_score": 0.213,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.085
+  },
+  "CAPEC_577.json": {
+    "fuzzy_node_score": 0.213,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.085
+  },
+  "CAPEC_578.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_58.json": {
+    "fuzzy_node_score": 0.214,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.086
+  },
+  "CAPEC_586.json": {
+    "fuzzy_node_score": 0.194,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.077
+  },
+  "CAPEC_587.json": {
+    "fuzzy_node_score": 0.12,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.048
+  },
+  "CAPEC_588.json": {
+    "fuzzy_node_score": 0.429,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.171
+  },
+  "CAPEC_59.json": {
+    "fuzzy_node_score": 0.412,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.165
+  },
+  "CAPEC_591.json": {
+    "fuzzy_node_score": 0.429,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.171
+  },
+  "CAPEC_592.json": {
+    "fuzzy_node_score": 0.429,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.171
+  },
+  "CAPEC_593.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_597.json": {
+    "fuzzy_node_score": 0.444,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.178
+  },
+  "CAPEC_6.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_60.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_600.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_608.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_609.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_61.json": {
+    "fuzzy_node_score": 0.412,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.165
+  },
+  "CAPEC_614.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_616.json": {
+    "fuzzy_node_score": 0.25,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.1
+  },
+  "CAPEC_62.json": {
+    "fuzzy_node_score": 0.48,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.192
+  },
+  "CAPEC_63.json": {
+    "fuzzy_node_score": 0.429,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.171
+  },
+  "CAPEC_633.json": {
+    "fuzzy_node_score": 0.2,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.08
+  },
+  "CAPEC_639.json": {
+    "fuzzy_node_score": 0.281,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.112
+  },
+  "CAPEC_64.json": {
+    "fuzzy_node_score": 0.357,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.143
+  },
+  "CAPEC_640.json": {
+    "fuzzy_node_score": 0.203,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.081
+  },
+  "CAPEC_642.json": {
+    "fuzzy_node_score": 0.519,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.207
+  },
+  "CAPEC_643.json": {
+    "fuzzy_node_score": 0.36,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.144
+  },
+  "CAPEC_644.json": {
+    "fuzzy_node_score": 0.339,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.136
+  },
+  "CAPEC_645.json": {
+    "fuzzy_node_score": 0.25,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.1
+  },
+  "CAPEC_646.json": {
+    "fuzzy_node_score": 0.25,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.1
+  },
+  "CAPEC_647.json": {
+    "fuzzy_node_score": 0.36,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.144
+  },
+  "CAPEC_65.json": {
+    "fuzzy_node_score": 0.357,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.143
+  },
+  "CAPEC_650.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_651.json": {
+    "fuzzy_node_score": 0.098,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.039
+  },
+  "CAPEC_652.json": {
+    "fuzzy_node_score": 0.3,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.12
+  },
+  "CAPEC_653.json": {
+    "fuzzy_node_score": 0.303,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.121
+  },
+  "CAPEC_654.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_657.json": {
+    "fuzzy_node_score": 0.0,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.0
+  },
+  "CAPEC_66.json": {
+    "fuzzy_node_score": 0.485,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.194
+  },
+  "CAPEC_660.json": {
+    "fuzzy_node_score": 0.37,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.148
+  },
+  "CAPEC_662.json": {
+    "fuzzy_node_score": 0.375,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.15
+  },
+  "CAPEC_664.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_665.json": {
+    "fuzzy_node_score": 0.308,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.123
+  },
+  "CAPEC_667.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_668.json": {
+    "fuzzy_node_score": 0.414,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.166
+  },
+  "CAPEC_67.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_676.json": {
+    "fuzzy_node_score": 0.343,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.137
+  },
+  "CAPEC_681.json": {
+    "fuzzy_node_score": 0.244,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.098
+  },
+  "CAPEC_69.json": {
+    "fuzzy_node_score": 0.273,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.109
+  },
+  "CAPEC_691.json": {
+    "fuzzy_node_score": 0.25,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.1
+  },
+  "CAPEC_692.json": {
+    "fuzzy_node_score": 0.413,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.165
+  },
+  "CAPEC_693.json": {
+    "fuzzy_node_score": 0.413,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.165
+  },
+  "CAPEC_694.json": {
+    "fuzzy_node_score": 0.324,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.13
+  },
+  "CAPEC_695.json": {
+    "fuzzy_node_score": 0.393,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.157
+  },
+  "CAPEC_698.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_7.json": {
+    "fuzzy_node_score": 0.385,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.154
+  },
+  "CAPEC_70.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_701.json": {
+    "fuzzy_node_score": 0.311,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.124
+  },
+  "CAPEC_71.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_72.json": {
+    "fuzzy_node_score": 0.375,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.15
+  },
+  "CAPEC_73.json": {
+    "fuzzy_node_score": 0.29,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.116
+  },
+  "CAPEC_74.json": {
+    "fuzzy_node_score": 0.346,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.138
+  },
+  "CAPEC_75.json": {
+    "fuzzy_node_score": 0.438,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.175
+  },
+  "CAPEC_76.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_77.json": {
+    "fuzzy_node_score": 0.438,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.175
+  },
+  "CAPEC_78.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_79.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_8.json": {
+    "fuzzy_node_score": 0.364,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.145
+  },
+  "CAPEC_80.json": {
+    "fuzzy_node_score": 0.432,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.173
+  },
+  "CAPEC_81.json": {
+    "fuzzy_node_score": 0.333,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.133
+  },
+  "CAPEC_83.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_84.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_85.json": {
+    "fuzzy_node_score": 0.4,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.16
+  },
+  "CAPEC_86.json": {
+    "fuzzy_node_score": 0.389,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.156
+  },
+  "CAPEC_87.json": {
+    "fuzzy_node_score": 0.346,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.138
+  },
+  "CAPEC_88.json": {
+    "fuzzy_node_score": 0.3,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.12
+  },
+  "CAPEC_9.json": {
+    "fuzzy_node_score": 0.353,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.141
+  },
+  "CAPEC_92.json": {
+    "fuzzy_node_score": 0.293,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.117
+  },
+  "CAPEC_94.json": {
+    "fuzzy_node_score": 0.3,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.12
+  },
+  "CAPEC_97.json": {
+    "fuzzy_node_score": 0.424,
+    "exact_node_overlap": 0.0,
+    "edge_overlap": 0.0,
+    "context_overlap": 0.0,
+    "final_score": 0.17
+  }
+}
