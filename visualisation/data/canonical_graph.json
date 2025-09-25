@@ -1,0 +1,58 @@
+{
+  "user_id": "user_6",
+  "nodes": [
+    {
+      "id": "target_this_malware@2025-09-24 10:42:00+00:00",
+      "label": "target_this_malware",
+      "timestamp": "2025-09-24 10:42:00+00:00",
+      "role": "nurse",
+      "geo_location": "AU",
+      "application": "Lab-Module",
+      "event_type": "ddos_spike"
+    },
+    {
+      "id": "attempt_a_pass_the_ticket_attack@2025-09-24 10:49:30+00:00",
+      "label": "attempt_a_pass_the_ticket_attack",
+      "timestamp": "2025-09-24 10:49:30+00:00",
+      "role": "staff",
+      "geo_location": "CA",
+      "application": "EHR-System",
+      "event_type": "malware_detected"
+    },
+    {
+      "id": "begin_the_authentication_process@2025-09-24 11:01:30+00:00",
+      "label": "begin_the_authentication_process",
+      "timestamp": "2025-09-24 11:01:30+00:00",
+      "role": "admin",
+      "geo_location": "IN",
+      "application": "Lab-Module",
+      "event_type": "xss_attempt"
+    },
+    {
+      "id": "recover_temporary_information@2025-09-24 11:07:30+00:00",
+      "label": "recover_temporary_information",
+      "timestamp": "2025-09-24 11:07:30+00:00",
+      "role": "nurse",
+      "geo_location": "CA",
+      "application": "Billing-System",
+      "event_type": "malware_detected"
+    }
+  ],
+  "edges": [
+    {
+      "source": "target_this_malware@2025-09-24 10:42:00+00:00",
+      "target": "attempt_a_pass_the_ticket_attack@2025-09-24 10:49:30+00:00",
+      "relation": "sequence"
+    },
+    {
+      "source": "attempt_a_pass_the_ticket_attack@2025-09-24 10:49:30+00:00",
+      "target": "begin_the_authentication_process@2025-09-24 11:01:30+00:00",
+      "relation": "sequence"
+    },
+    {
+      "source": "begin_the_authentication_process@2025-09-24 11:01:30+00:00",
+      "target": "recover_temporary_information@2025-09-24 11:07:30+00:00",
+      "relation": "sequence"
+    }
+  ]
+}
