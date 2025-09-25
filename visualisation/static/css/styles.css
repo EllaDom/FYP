@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
+.container { width:95%; margin:auto; padding:20px; }
+.tabs { overflow:hidden; background:#333; }
+.tablink { background:#333; color:white; float:left; border:none; outline:none; cursor:pointer; padding:14px 16px; transition:0.3s; }
+.tablink:hover { background:#555; }
+.tabcontent { display:none; padding:20px; background:white; margin-top:10px; border-radius:5px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+table { width:100%; border-collapse:collapse; margin-top:10px; }
+th, td { padding:10px; border:1px solid #ddd; text-align:left; }
+th { background:#333; color:white; }
