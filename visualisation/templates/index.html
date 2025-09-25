@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cyber Threat Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Cyber Threat Dashboard</h1>
+    <div class="tabs">
+        <button class="tablink" onclick="openTab('UserGraphs')">User Graphs</button>
+        <button class="tablink" onclick="openTab('CanonicalGraph')">Canonical Graph</button>
+        <button class="tablink" onclick="openTab('CAPECGraphs')">CAPEC Graphs</button>
+        <button class="tablink" onclick="openTab('Threats')">Top Threats</button>
+    </div>
+
+    <div id="UserGraphs" class="tabcontent">
+        <h2>User Graphs</h2>
+        <iframe id="user1" src="" width="100%" height="600px"></iframe>
+        <iframe id="user2" src="" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="CanonicalGraph" class="tabcontent">
+        <h2>Canonical Graph</h2>
+        <iframe id="canonical" src="" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="CAPECGraphs" class="tabcontent">
+        <h2>CAPEC Graphs</h2>
+        <select id="capecSelect" onchange="loadCAPEC()"></select>
+        <iframe id="capecFrame" src="" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="Threats" class="tabcontent">
+        <h2>Top Threats</h2>
+        Top N: <input type="number" id="topN" value="5" min="1" max="20">
+        <button onclick="loadThreats()">Apply</button>
+        <table id="threatTable">
+            <thead>
+                <tr><th>CAPEC ID</th><th>Description</th><th>Score</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
