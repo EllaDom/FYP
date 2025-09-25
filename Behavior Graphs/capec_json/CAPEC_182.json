@@ -1,0 +1,222 @@
+{
+  "graph": {
+    "capec_id": "182",
+    "name": "Flash Injection",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An attacker tricks a victim to execute malicious flash content that executes commands or makes flash calls specified by the attacker. One example of this attack is cross-site flashing, an attacker controlled parameter to a reference call loads from content specified by the attacker.",
+    "likelihood": "High",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "137",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "248",
+        "nature": "CanAlsoBe"
+      }
+    ],
+    "prerequisites": [
+      "The target must be capable of running Flash applications. In some cases, the victim must follow an attacker-supplied link."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "The attacker needs to have knowledge of Flash, especially how to insert content the executes commands."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack. The attacker may need to be able to serve the injected Flash content."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Other"
+      },
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Accountability",
+          "Authentication",
+          "Authorization",
+          "Non-Repudiation"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [
+      "Implementation: remove sensitive information such as user name and password in the SWF file.",
+      "Implementation: use validation on both client and server side.",
+      "Implementation: remove debug information.",
+      "Implementation: use SSL when loading external data",
+      "Implementation: use crossdomain.xml file to allow the application domain to load stuff or the SWF file called by other domain."
+    ],
+    "example_instances": [
+      "In the following example, the SWF file contains getURL('javascript:SomeFunc(\"someValue\")','','GET') A request like http://example.com/noundef.swf?a=0:0;alert('XSS') becomes javascript:SomeFunc(\"someValue\")?a=0:0;alert(123)"
+    ],
+    "related_weaknesses": [
+      "20",
+      "184",
+      "697"
+    ],
+    "matched_cwes": [
+      "20"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Find Injection Entry Points] The attacker first takes an inventory of the entry points of the application.",
+        "techniques": [
+          "Spider the website for all available URLs that reference a Flash application.",
+          "List all uninitialized global variables (such as _root.*, _global.*, _level0.*) in ActionScript, registered global variables in included files, load variables to external movies."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Determine the application's susceptibility to Flash injection] Determine the application's susceptibility to Flash injection. For each URL identified in the explore phase, the attacker attempts to use various techniques such as direct load asfunction, controlled evil page/host, Flash HTML injection, and DOM injection to determine whether the application is susceptible to Flash injection.",
+        "techniques": [
+          "Test the page using direct load asfunction, getURL,javascript:gotRoot(\"\")///d.jpg",
+          "Test the page using controlled evil page/host, http://example.com/evil.swf",
+          "Test the page using Flash HTML injection, \"'><img src='asfunction:getURL,javascript:gotRoot(\"\")//.jpg' >",
+          "Test the page using DOM injection, (gotRoot(''))"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Inject malicious content into target] Inject malicious content into target utilizing vulnerable injection vectors identified in the Experiment phase",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_injection_point",
+      "attributes": {}
+    },
+    {
+      "id": "take_an_inventory_of_the_entry_points_of_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "spider_the_web_site_for_all_available_links",
+      "attributes": {}
+    },
+    {
+      "id": "list_all_uninitialized_global_variables_such_as_root",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_application_s_susceptibility",
+      "attributes": {}
+    },
+    {
+      "id": "test_the_page",
+      "attributes": {}
+    },
+    {
+      "id": "inject_their_malicious_file",
+      "attributes": {}
+    },
+    {
+      "id": "become_somefunc_somevalue_a_0_0_alert_123",
+      "attributes": {}
+    },
+    {
+      "id": "target_the_current_flash_application",
+      "attributes": {}
+    },
+    {
+      "id": "follow_an_attacker_supplied_link",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_injection_point",
+      "target": "take_an_inventory_of_the_entry_points_of_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "take_an_inventory_of_the_entry_points_of_the_application",
+      "target": "spider_the_web_site_for_all_available_links",
+      "attributes": {}
+    },
+    {
+      "source": "spider_the_web_site_for_all_available_links",
+      "target": "list_all_uninitialized_global_variables_such_as_root",
+      "attributes": {}
+    },
+    {
+      "source": "list_all_uninitialized_global_variables_such_as_root",
+      "target": "determine_the_application_s_susceptibility",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_application_s_susceptibility",
+      "target": "test_the_page",
+      "attributes": {}
+    },
+    {
+      "source": "test_the_page",
+      "target": "test_the_page",
+      "attributes": {}
+    },
+    {
+      "source": "test_the_page",
+      "target": "inject_their_malicious_file",
+      "attributes": {}
+    },
+    {
+      "source": "inject_their_malicious_file",
+      "target": "inject_their_malicious_file",
+      "attributes": {}
+    },
+    {
+      "source": "inject_their_malicious_file",
+      "target": "become_somefunc_somevalue_a_0_0_alert_123",
+      "attributes": {}
+    },
+    {
+      "source": "become_somefunc_somevalue_a_0_0_alert_123",
+      "target": "target_the_current_flash_application",
+      "attributes": {}
+    },
+    {
+      "source": "target_the_current_flash_application",
+      "target": "follow_an_attacker_supplied_link",
+      "attributes": {}
+    }
+  ]
+}

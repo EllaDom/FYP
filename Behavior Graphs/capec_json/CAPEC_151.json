@@ -1,0 +1,45 @@
+{
+  "graph": {
+    "capec_id": "151",
+    "name": "Identity Spoofing",
+    "abstraction": "Meta",
+    "status": "Stable",
+    "description": "Identity Spoofing refers to the action of assuming (i.e., taking on) the identity of some other entity (human or non-human) and then using that identity to accomplish a goal. An adversary may craft messages that appear to come from a different principle or use stolen / spoofed authentication credentials.",
+    "likelihood": "Medium",
+    "severity": "Medium",
+    "related_attack_patterns": [],
+    "prerequisites": [
+      "The identity associated with the message or resource must be removable or modifiable in an undetectable way."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Authentication",
+          "Access Control"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Employ robust authentication processes (e.g., multi-factor authentication)."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "287"
+    ],
+    "matched_cwes": [
+      "287"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [],
+  "edges": []
+}

@@ -1,0 +1,197 @@
+{
+  "graph": {
+    "capec_id": "279",
+    "name": "SOAP Manipulation",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "Simple Object Access Protocol (SOAP) is used as a communication protocol between a client and server to invoke web services on the server. It is an XML-based protocol, and therefore suffers from many of the same shortcomings as other XML-based protocols. Adversaries can make use of these shortcomings and manipulate the content of SOAP paramters, leading to undesirable behavior on the server and allowing the adversary to carry out a number of further attacks.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "278",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "110",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "228",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "An application uses SOAP-based web service api.",
+      "An application does not perform sufficient input validation to ensure that user-controllable data is safe for an XML parser.",
+      "The targeted server either fails to verify that data in SOAP messages conforms to the appropriate XML schema, or it fails to correctly handle the complete range of data allowed by the schema."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Resource Consumption"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "707"
+    ],
+    "matched_cwes": [
+      "707"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Exploit",
+        "description": "[Find target application] The adversary needs to identify an application that uses SOAP as a communication protocol.",
+        "techniques": [
+          "Observe HTTP traffic to an application and look for SOAP headers."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Detect Incorrect SOAP Parameter Handling] The adversary tampers with the SOAP message parameters and looks for indications that the tampering caused a change in behavior of the targeted application.",
+        "techniques": [
+          "Send more data than would seem reasonable for a field and see if the server complains.",
+          "Send nonsense data in a field that expects a certain subset, such as product names or sequence numbers, and see if the server complains.",
+          "Send XML metacharacters as data and see how the server responds."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Manipulate SOAP parameters] The adversary manipulates SOAP parameters in a way that causes undesirable behavior for the server. This can result in denial of service, information disclosure, arbitrary code exection, and more.",
+        "techniques": [
+          "Create a recursive XML payload that will take up all of the memory on the server when parsed, resulting in a denial of service. This is known as the billion laughs attack.",
+          "Insert XML metacharacters into data fields that could cause the server to go into an error state when parsing. This could lead to a denial of service.",
+          "Insert a large amount of data into a field that should have a character limit, causing a buffer overflow."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_identify_an_application_that_uses_soap_as_a_communication_protocol",
+      "attributes": {}
+    },
+    {
+      "id": "continue_the_monitoring_of_http_traffic",
+      "attributes": {}
+    },
+    {
+      "id": "detect_incorrect_soap_parameter_handling",
+      "attributes": {}
+    },
+    {
+      "id": "send_more_data",
+      "attributes": {}
+    },
+    {
+      "id": "send_xml_metacharacters",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_soap_parameters",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_recursive_xml_payload_that_will_take_up_all_of_the_memory_on_the_server_when_parsed_resulting_in_a_denial_of_service",
+      "attributes": {}
+    },
+    {
+      "id": "know_this",
+      "attributes": {}
+    },
+    {
+      "id": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "id": "perform_sufficient_validation",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_application",
+      "target": "need_to_identify_an_application_that_uses_soap_as_a_communication_protocol",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_identify_an_application_that_uses_soap_as_a_communication_protocol",
+      "target": "continue_the_monitoring_of_http_traffic",
+      "attributes": {}
+    },
+    {
+      "source": "continue_the_monitoring_of_http_traffic",
+      "target": "detect_incorrect_soap_parameter_handling",
+      "attributes": {}
+    },
+    {
+      "source": "detect_incorrect_soap_parameter_handling",
+      "target": "send_more_data",
+      "attributes": {}
+    },
+    {
+      "source": "send_more_data",
+      "target": "send_more_data",
+      "attributes": {}
+    },
+    {
+      "source": "send_more_data",
+      "target": "send_xml_metacharacters",
+      "attributes": {}
+    },
+    {
+      "source": "send_xml_metacharacters",
+      "target": "manipulate_soap_parameters",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_soap_parameters",
+      "target": "create_a_recursive_xml_payload_that_will_take_up_all_of_the_memory_on_the_server_when_parsed_resulting_in_a_denial_of_service",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_recursive_xml_payload_that_will_take_up_all_of_the_memory_on_the_server_when_parsed_resulting_in_a_denial_of_service",
+      "target": "know_this",
+      "attributes": {}
+    },
+    {
+      "source": "know_this",
+      "target": "overflow_the_buffer",
+      "attributes": {}
+    },
+    {
+      "source": "overflow_the_buffer",
+      "target": "perform_sufficient_validation",
+      "attributes": {}
+    }
+  ]
+}

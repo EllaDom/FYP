@@ -1,0 +1,232 @@
+{
+  "graph": {
+    "capec_id": "196",
+    "name": "Session Credential Falsification through Forging",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An attacker creates a false but functional session credential in order to gain or usurp access to a service. Session credentials allow users to identify themselves to a service after an initial authentication without needing to resend the authentication information (usually a username and password) with every message. If an attacker is able to forge valid session credentials they may be able to bypass authentication or piggy-back off some other authenticated user's session. This attack differs from Reuse of Session IDs and Session Sidejacking attacks in that in the latter attacks an attacker uses a previous or existing credential without modification while, in a forging attack, the attacker must create their own credential, although it may be based on previously observed credentials.",
+    "likelihood": "Medium",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "384",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "61",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "21",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The targeted application must use session credentials to identify legitimate users. Session identifiers that remains unchanged when the privilege levels change. Predictable session identifiers."
+    ],
+    "skills_required": [
+      {
+        "level": "Medium",
+        "description": "Forge the session credential and reply the request."
+      }
+    ],
+    "resources_required": [
+      "Attackers may require tools to craft messages containing their forged credentials, and ability to send HTTP request to a web application."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Accountability",
+          "Authentication",
+          "Authorization",
+          "Non-Repudiation"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [
+      "Implementation: Use session IDs that are difficult to guess or brute-force: One way for the attackers to obtain valid session IDs is by brute-forcing or guessing them. By choosing session identifiers that are sufficiently random, brute-forcing or guessing becomes very difficult.",
+      "Implementation: Regenerate and destroy session identifiers when there is a change in the level of privilege: This ensures that even though a potential victim may have followed a link with a fixated identifier, a new one is issued when the level of privilege changes."
+    ],
+    "example_instances": [
+      "This example uses client side scripting to set session ID in the victim's browser. The JavaScript code document.cookie=\"sessionid=0123456789\" fixates a falsified session credential into victim's browser, with the help of crafted a URL link. http://www.example.com/<script>document.cookie=\"sessionid=0123456789\";</script> A similar example uses session ID as an argument of the URL. http://www.example.com/index.php/sessionid=0123456789 Once the victim clicks the links, the attacker may be able to bypass authentication or piggy-back off some other authenticated victim's session."
+    ],
+    "related_weaknesses": [
+      "384",
+      "664"
+    ],
+    "matched_cwes": [
+      "384"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1134.002",
+        "entry_name": "Access Token Manipulation: Create Process with Token"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1134.003",
+        "entry_name": "Access Token Manipulation: Make and Impersonate Token"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1606",
+        "entry_name": "Forge Web Credentials"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Analyze and Understand Session IDs] The attacker finds that the targeted application use session credentials to identify legitimate users.",
+        "techniques": [
+          "An attacker makes many anonymous connections and records the session IDs.",
+          "An attacker makes authorized connections and records the session tokens or credentials."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Create Session IDs.] Attackers craft messages containing their forged credentials in GET, POST request, HTTP headers or cookies.",
+        "techniques": [
+          "The attacker manipulates the HTTP request message and adds their forged session IDs in to the requests or cookies."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Abuse the Victim's Session Credentials] The attacker fixates falsified session ID to the victim when victim access the system. Once the victim has achieved a higher level of privilege, possibly by logging into the application, the attacker can now take over the session using the forged session identifier.",
+        "techniques": [
+          "The attacker loads the predefined or predicted session ID into their browser and browses to protected data or functionality.",
+          "The attacker loads the predefined or predicted session ID into their software and utilizes functionality with the rights of the victim."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "make_many_anonymous_connections",
+      "attributes": {}
+    },
+    {
+      "id": "make_authorized_connections_and_records_the_session_tokens_or_credentials_issued",
+      "attributes": {}
+    },
+    {
+      "id": "craft_messages_containing_their_forged_credentials_in_get_post_request_http_headers_or_cookies",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_the_http_request_message",
+      "attributes": {}
+    },
+    {
+      "id": "achieve_a_higher_level_of_privilege",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_predefined_or_predicted_session_id",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_session_id",
+      "attributes": {}
+    },
+    {
+      "id": "fixate_a_falsified_session_credential",
+      "attributes": {}
+    },
+    {
+      "id": "click_the_links",
+      "attributes": {}
+    },
+    {
+      "id": "remain_when_the_privilege_levels_change",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "make_many_anonymous_connections",
+      "target": "make_authorized_connections_and_records_the_session_tokens_or_credentials_issued",
+      "attributes": {}
+    },
+    {
+      "source": "make_authorized_connections_and_records_the_session_tokens_or_credentials_issued",
+      "target": "craft_messages_containing_their_forged_credentials_in_get_post_request_http_headers_or_cookies",
+      "attributes": {}
+    },
+    {
+      "source": "craft_messages_containing_their_forged_credentials_in_get_post_request_http_headers_or_cookies",
+      "target": "manipulate_the_http_request_message",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_the_http_request_message",
+      "target": "achieve_a_higher_level_of_privilege",
+      "attributes": {}
+    },
+    {
+      "source": "achieve_a_higher_level_of_privilege",
+      "target": "load_the_predefined_or_predicted_session_id",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_predefined_or_predicted_session_id",
+      "target": "load_the_predefined_or_predicted_session_id",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_predefined_or_predicted_session_id",
+      "target": "load_the_session_id",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_session_id",
+      "target": "fixate_a_falsified_session_credential",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_session_id",
+      "target": "click_the_links",
+      "attributes": {}
+    },
+    {
+      "source": "fixate_a_falsified_session_credential",
+      "target": "load_the_session_id",
+      "attributes": {}
+    },
+    {
+      "source": "click_the_links",
+      "target": "remain_when_the_privilege_levels_change",
+      "attributes": {}
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "graph": {
+    "capec_id": "300",
+    "name": "Port Scanning",
+    "abstraction": "Standard",
+    "status": "Stable",
+    "description": "An adversary uses a combination of techniques to determine the state of the ports on a remote target. Any service or application available for TCP or UDP networking will have a port open for communications over the network.",
+    "likelihood": "",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "169",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary requires logical access to the target's network in order to carry out this type of attack."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "The adversary requires a network mapping/scanning tool, or must conduct socket programming on the command line. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Other"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1046",
+        "entry_name": "Network Service Scanning"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "require_logical_access_to_the_target_network",
+      "attributes": {}
+    }
+  ],
+  "edges": []
+}

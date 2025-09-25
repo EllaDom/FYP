@@ -1,0 +1,170 @@
+{
+  "graph": {
+    "capec_id": "147",
+    "name": "XML Ping of the Death",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker initiates a resource depletion attack where a large number of small XML messages are delivered at a sufficiently rapid rate to cause a denial of service or crash of the target. Transactions such as repetitive SOAP transactions can deplete resources faster than a simple flooding attack because of the additional resources used by the SOAP protocol and the resources necessary to process SOAP messages. The transactions used are immaterial as long as they cause resource utilization on the target. In other words, this is a normal flooding attack augmented by using messages that will require extra processing on the target.",
+    "likelihood": "Low",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "528",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The target must receive and process XML transactions."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To send small XML messages"
+      },
+      {
+        "level": "High",
+        "description": "To use distributed network to launch the attack"
+      }
+    ],
+    "resources_required": [
+      "Transaction generator(s)/source(s) and ability to cause arrival of messages at the target with sufficient rapidity to overload target. Larger targets may be able to handle large volumes of requests so the attacker may require significant resources (such as a distributed network) to affect the target. However, the resources required of the attacker would be less than in the case of a simple flooding attack against the same target."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Resource Consumption"
+      }
+    ],
+    "mitigations": [
+      "Design: Build throttling mechanism into the resource allocation. Provide for a timeout mechanism for allocated resources whose transaction does not complete within a specified interval.",
+      "Implementation: Provide for network flow control and traffic shaping to control access to the resources."
+    ],
+    "example_instances": [
+      "Consider the case of attack performed against the createCustomerBillingAccount Web Service for an online store. In this case, the createCustomerBillingAccount Web Service receives a huge number of simultaneous requests, containing nonsense billing account creation information (the small XML messages). The createCustomerBillingAccount Web Services may forward the messages to other Web Services for processing. The application suffers from a high load of requests, potentially leading to a complete loss of availability the involved Web Service."
+    ],
+    "related_weaknesses": [
+      "400",
+      "770"
+    ],
+    "matched_cwes": [
+      "400"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the target] Using a browser or an automated tool, an attacker records all instance of web services to process XML requests.",
+        "techniques": [
+          "Use an automated tool to record all instances of URLs to process XML requests.",
+          "Use a browser to manually explore the website and analyze how the application processes XML requests."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Exploit",
+        "description": "[Launch a resource depletion attack] The attacker delivers a large number of small XML messages to the target URLs found in the explore phase at a sufficiently rapid rate. It causes denial of service to the target application.",
+        "techniques": [
+          "Send a large number of crafted small XML messages to the target URL."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_instances_of_urls",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "launch_a_resource_depletion_attack",
+      "attributes": {}
+    },
+    {
+      "id": "deliver_a_large_number_of_small_xml_messages",
+      "attributes": {}
+    },
+    {
+      "id": "cause_denial_of_service_to_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "consider_the_case_of_attack_performed_against_the_createcustomerbillingaccount_web_service_for_an_online_store",
+      "attributes": {}
+    },
+    {
+      "id": "receive_a_huge_number_of_simultaneous_requests",
+      "attributes": {}
+    },
+    {
+      "id": "forward_the_messages_to_other_web_services_for_processing",
+      "attributes": {}
+    },
+    {
+      "id": "suffer_potentially_leading_to_a_complete_loss_of_availability_the_involved_web_service",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_target_application",
+      "target": "record_all_instances_of_urls",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_instances_of_urls",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "launch_a_resource_depletion_attack",
+      "attributes": {}
+    },
+    {
+      "source": "launch_a_resource_depletion_attack",
+      "target": "deliver_a_large_number_of_small_xml_messages",
+      "attributes": {}
+    },
+    {
+      "source": "deliver_a_large_number_of_small_xml_messages",
+      "target": "cause_denial_of_service_to_the_target_application",
+      "attributes": {}
+    },
+    {
+      "source": "deliver_a_large_number_of_small_xml_messages",
+      "target": "consider_the_case_of_attack_performed_against_the_createcustomerbillingaccount_web_service_for_an_online_store",
+      "attributes": {}
+    },
+    {
+      "source": "cause_denial_of_service_to_the_target_application",
+      "target": "deliver_a_large_number_of_small_xml_messages",
+      "attributes": {}
+    },
+    {
+      "source": "consider_the_case_of_attack_performed_against_the_createcustomerbillingaccount_web_service_for_an_online_store",
+      "target": "receive_a_huge_number_of_simultaneous_requests",
+      "attributes": {}
+    },
+    {
+      "source": "receive_a_huge_number_of_simultaneous_requests",
+      "target": "forward_the_messages_to_other_web_services_for_processing",
+      "attributes": {}
+    },
+    {
+      "source": "forward_the_messages_to_other_web_services_for_processing",
+      "target": "suffer_potentially_leading_to_a_complete_loss_of_availability_the_involved_web_service",
+      "attributes": {}
+    }
+  ]
+}

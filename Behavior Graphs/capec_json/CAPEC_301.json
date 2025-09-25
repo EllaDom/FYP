@@ -1,0 +1,93 @@
+{
+  "graph": {
+    "capec_id": "301",
+    "name": "TCP Connect Scan",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "An adversary uses full TCP connection attempts to determine if a port is open on the target system. The scanning process involves completing a 'three-way handshake' with a remote port, and reports the port as closed if the full handshake cannot be established. An advantage of TCP connect scanning is that it works against any TCP/IP stack.",
+    "likelihood": "",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "300",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The adversary requires logical access to the target network. The TCP connect Scan requires the ability to connect to an available port and complete a 'three-way-handshake' This scanning technique does not require any special privileges in order to perform. This type of scan works against all TCP/IP stack implementations."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "The adversary can leverage a network mapper or scanner, or perform this attack via routine socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network to see the response."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "Employ a robust network defense posture that includes an IDS/IPS system."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Experiment",
+        "description": "An adversary attempts to initialize a TCP connection with with the target port.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "An adversary uses the result of their TCP connection to determine the state of the target port. A successful connection indicates a port is open with a service listening on it while a failed connection indicates the port is not open.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "attempt_to_initialize_a_tcp_connection_with_with_the_target_port",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_port_s_state",
+      "attributes": {}
+    },
+    {
+      "id": "require_logical_access_to_the_target_network",
+      "attributes": {}
+    },
+    {
+      "id": "require_the_ability_to_connect_to_an_available_port_and_complete_a_three_way_handshake_this_scanning_technique_does_not_require_any_special_privileges_in_order_to_perform",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "attempt_to_initialize_a_tcp_connection_with_with_the_target_port",
+      "target": "determine_the_port_s_state",
+      "attributes": {}
+    },
+    {
+      "source": "determine_the_port_s_state",
+      "target": "require_logical_access_to_the_target_network",
+      "attributes": {}
+    },
+    {
+      "source": "require_logical_access_to_the_target_network",
+      "target": "require_the_ability_to_connect_to_an_available_port_and_complete_a_three_way_handshake_this_scanning_technique_does_not_require_any_special_privileges_in_order_to_perform",
+      "attributes": {}
+    }
+  ]
+}

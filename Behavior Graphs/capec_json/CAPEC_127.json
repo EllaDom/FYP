@@ -1,0 +1,353 @@
+{
+  "graph": {
+    "capec_id": "127",
+    "name": "Directory Indexing",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary crafts a request to a target that results in the target listing/indexing the content of a directory as output. One common method of triggering directory contents as output is to construct a request containing a path that terminates in a directory name rather than a file name since many applications are configured to provide a list of the directory's contents when such a request is received. An adversary can use this to explore the directory tree on a target as well as learn the names of files. This can often end up revealing test files, backup files, temporary files, hidden files, configuration files, user accounts, script contents, as well as naming conventions, all of which can be used by an attacker to mount additional attacks.",
+    "likelihood": "High",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "54",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The target must be misconfigured to return a list of a directory's content when it receives a request that ends in a directory name rather than a file name.",
+      "The adversary must be able to control the path that is requested of the target.",
+      "The administrator must have failed to properly configure an ACL or has associated an overly permissive ACL with a particular directory.",
+      "The server version or patch level must not inherently prevent known directory listing attacks from working."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "To issue the request to URL without given a specific file name"
+      },
+      {
+        "level": "High",
+        "description": "To bypass the access control of the directory of listings"
+      }
+    ],
+    "resources_required": [
+      "Ability to send HTTP requests to a web application."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      }
+    ],
+    "mitigations": [
+      "1. Using blank index.html: putting blank index.html simply prevent directory listings from displaying to site visitors.",
+      "2. Preventing with .htaccess in Apache web server: In .htaccess, write \"Options-indexes\".",
+      "3. Suppressing error messages: using error 403 \"Forbidden\" message exactly like error 404 \"Not Found\" message."
+    ],
+    "example_instances": [
+      "The adversary uses directory listing to view sensitive files in the application. This is an example of accessing the backup file. The attack issues a request for http://www.example.com/admin/ and receives the following dynamic directory indexing content in the response: Index of /admin Name Last Modified Size Description backup/ 31-May-2007 08:18 - Apache/ 2.0.55 Server at www.example.com Port 80 The target application does not have direct hyperlink to the \"backup\" directory in the normal html webpage, however the attacker has learned of this directory due to indexing the content. The client then requests the backup directory URL and receives output which has a \"db_dump.php\" file in it. This sensitive data should not be disclosed publicly."
+    ],
+    "related_weaknesses": [
+      "424",
+      "425",
+      "288",
+      "285",
+      "732",
+      "276",
+      "693"
+    ],
+    "matched_cwes": [
+      "288",
+      "276",
+      "732",
+      "693",
+      "285",
+      "425"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1083",
+        "entry_name": "File and Directory Discovery"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Directory Discovery] Use a method, either manual, scripted, or automated to discover the directories on the server by making requests for directories that may possibly exist. During this phase the adversary is less concerned with whether a directory can be accessed or indexed and more focused on simply discovering what directories do exist on the target.",
+        "techniques": [
+          "Send requests to the web server for common directory names",
+          "If directories are discovered that are native to a server type further refine the directory search to include directories usually present on those types of servers.",
+          "Search for uncommon or potentially user created directories that may be present."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Iteratively explore directory/file structures] The adversary attempts to access the discovered directories that allow access and may attempt to bypass server or application level ACLs by using manual or automated methods",
+        "techniques": [
+          "Use a scanner tool to dynamically add directories/files to include their scan based upon data obtained in initial probes.",
+          "Use a browser to manually explore the website by issuing a request ending the URL in a slash '/'.",
+          "Attempt to bypass ACLs on directories by using methods that known to work against some server types by appending data to the directory request. For instance, appending a Null byte to the end of the request which may cause an ACL to fail and allow access.",
+          "Sequentially request a list of common base files to each directory discovered.",
+          "Try multiple fuzzing techniques to list directory contents for directories that will not reveal their contents with a \"/\" request"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Read directories or files which are not intended for public viewing.] The adversary attempts to access the discovered directories that allow access and may attempt to bypass server or application level ACLs by using manual or automated methods",
+        "techniques": [
+          "Try multiple exploit techniques to list directory contents for directories that will not reveal their contents with a \"/\" request",
+          "Try other known exploits to elevate privileges sufficient to bypass protected directories.",
+          "List the files in the directory by issuing a request with the URL ending in a \"/\" slash.",
+          "Access the files via direct URL and capture contents.",
+          "Attempt to bypass ACLs on directories by using methods that are known to work against some server types by appending data to the directory request. For instance, appending a Null byte to the end of the request which may cause an ACL to fail and allow access.",
+          "Sequentially request a list of common base files to each directory discovered."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "automate_to_discover_the_directories_on_the_server",
+      "attributes": {}
+    },
+    {
+      "id": "access_a_directory",
+      "attributes": {}
+    },
+    {
+      "id": "send_requests_to_the_web_server_for_common_directory_names",
+      "attributes": {}
+    },
+    {
+      "id": "explore_directory_file_structures",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_to_access_the_discovered_directories_that_allow_access_and_may_attempt_to_bypass_server_or_application_level_acls_by_using_manual_or_automated_methods",
+      "attributes": {}
+    },
+    {
+      "id": "add_directories_files",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_to_bypass_acls_on_directories_by_using_methods_that_known_to_work_against_some_server_types_by_appending_data_to_the_directory_request",
+      "attributes": {}
+    },
+    {
+      "id": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "id": "request_a_list_of_common_base_files",
+      "attributes": {}
+    },
+    {
+      "id": "try_multiple_fuzzing_techniques",
+      "attributes": {}
+    },
+    {
+      "id": "read_directories_or_files_which_are_not_intended_for_public_viewing",
+      "attributes": {}
+    },
+    {
+      "id": "try_multiple_exploit_techniques_to_list_directory_contents_for_directories_that_will_not_reveal_their_contents_with_a_request",
+      "attributes": {}
+    },
+    {
+      "id": "try_other_known_exploits",
+      "attributes": {}
+    },
+    {
+      "id": "list_the_files_in_the_directory",
+      "attributes": {}
+    },
+    {
+      "id": "access_arbitrary_files",
+      "attributes": {}
+    },
+    {
+      "id": "list_to_view_sensitive_files_in_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "access_the_backup_file",
+      "attributes": {}
+    },
+    {
+      "id": "issue_a_request_for_http_www_example_com_admin_index_of_admin_name_last_modified_size_description_backup_31_may_2007_08_18_apache",
+      "attributes": {}
+    },
+    {
+      "id": "request_the_backup_directory_url",
+      "attributes": {}
+    },
+    {
+      "id": "disclose_this_sensitive_data",
+      "attributes": {}
+    },
+    {
+      "id": "misconfigure_the_target",
+      "attributes": {}
+    },
+    {
+      "id": "control_the_path_that_is_requested_of_the_target",
+      "attributes": {}
+    },
+    {
+      "id": "fail_to_properly_configure_an_acl",
+      "attributes": {}
+    },
+    {
+      "id": "prevent_known_directory_listing_attacks",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "automate_to_discover_the_directories_on_the_server",
+      "target": "access_a_directory",
+      "attributes": {}
+    },
+    {
+      "source": "automate_to_discover_the_directories_on_the_server",
+      "target": "explore_directory_file_structures",
+      "attributes": {}
+    },
+    {
+      "source": "access_a_directory",
+      "target": "send_requests_to_the_web_server_for_common_directory_names",
+      "attributes": {}
+    },
+    {
+      "source": "send_requests_to_the_web_server_for_common_directory_names",
+      "target": "automate_to_discover_the_directories_on_the_server",
+      "attributes": {}
+    },
+    {
+      "source": "explore_directory_file_structures",
+      "target": "attempt_to_access_the_discovered_directories_that_allow_access_and_may_attempt_to_bypass_server_or_application_level_acls_by_using_manual_or_automated_methods",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_to_access_the_discovered_directories_that_allow_access_and_may_attempt_to_bypass_server_or_application_level_acls_by_using_manual_or_automated_methods",
+      "target": "add_directories_files",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_to_access_the_discovered_directories_that_allow_access_and_may_attempt_to_bypass_server_or_application_level_acls_by_using_manual_or_automated_methods",
+      "target": "try_multiple_exploit_techniques_to_list_directory_contents_for_directories_that_will_not_reveal_their_contents_with_a_request",
+      "attributes": {}
+    },
+    {
+      "source": "add_directories_files",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "attempt_to_bypass_acls_on_directories_by_using_methods_that_known_to_work_against_some_server_types_by_appending_data_to_the_directory_request",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_to_bypass_acls_on_directories_by_using_methods_that_known_to_work_against_some_server_types_by_appending_data_to_the_directory_request",
+      "target": "append_a_null_byte",
+      "attributes": {}
+    },
+    {
+      "source": "append_a_null_byte",
+      "target": "request_a_list_of_common_base_files",
+      "attributes": {}
+    },
+    {
+      "source": "request_a_list_of_common_base_files",
+      "target": "try_multiple_fuzzing_techniques",
+      "attributes": {}
+    },
+    {
+      "source": "request_a_list_of_common_base_files",
+      "target": "list_to_view_sensitive_files_in_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "try_multiple_fuzzing_techniques",
+      "target": "read_directories_or_files_which_are_not_intended_for_public_viewing",
+      "attributes": {}
+    },
+    {
+      "source": "read_directories_or_files_which_are_not_intended_for_public_viewing",
+      "target": "attempt_to_access_the_discovered_directories_that_allow_access_and_may_attempt_to_bypass_server_or_application_level_acls_by_using_manual_or_automated_methods",
+      "attributes": {}
+    },
+    {
+      "source": "try_multiple_exploit_techniques_to_list_directory_contents_for_directories_that_will_not_reveal_their_contents_with_a_request",
+      "target": "try_other_known_exploits",
+      "attributes": {}
+    },
+    {
+      "source": "try_other_known_exploits",
+      "target": "list_the_files_in_the_directory",
+      "attributes": {}
+    },
+    {
+      "source": "list_the_files_in_the_directory",
+      "target": "access_arbitrary_files",
+      "attributes": {}
+    },
+    {
+      "source": "access_arbitrary_files",
+      "target": "attempt_to_bypass_acls_on_directories_by_using_methods_that_known_to_work_against_some_server_types_by_appending_data_to_the_directory_request",
+      "attributes": {}
+    },
+    {
+      "source": "list_to_view_sensitive_files_in_the_application",
+      "target": "access_the_backup_file",
+      "attributes": {}
+    },
+    {
+      "source": "access_the_backup_file",
+      "target": "issue_a_request_for_http_www_example_com_admin_index_of_admin_name_last_modified_size_description_backup_31_may_2007_08_18_apache",
+      "attributes": {}
+    },
+    {
+      "source": "issue_a_request_for_http_www_example_com_admin_index_of_admin_name_last_modified_size_description_backup_31_may_2007_08_18_apache",
+      "target": "request_the_backup_directory_url",
+      "attributes": {}
+    },
+    {
+      "source": "request_the_backup_directory_url",
+      "target": "disclose_this_sensitive_data",
+      "attributes": {}
+    },
+    {
+      "source": "disclose_this_sensitive_data",
+      "target": "misconfigure_the_target",
+      "attributes": {}
+    },
+    {
+      "source": "misconfigure_the_target",
+      "target": "control_the_path_that_is_requested_of_the_target",
+      "attributes": {}
+    },
+    {
+      "source": "control_the_path_that_is_requested_of_the_target",
+      "target": "fail_to_properly_configure_an_acl",
+      "attributes": {}
+    },
+    {
+      "source": "fail_to_properly_configure_an_acl",
+      "target": "prevent_known_directory_listing_attacks",
+      "attributes": {}
+    }
+  ]
+}

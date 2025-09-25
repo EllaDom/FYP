@@ -1,0 +1,63 @@
+{
+  "graph": {
+    "capec_id": "299",
+    "name": "TCP SYN Ping",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "An adversary uses TCP SYN packets as a means towards host discovery. Typical RFC 793 behavior specifies that when a TCP port is open, a host must respond to an incoming SYN \"synchronize\" packet by completing stage two of the 'three-way handshake' - by sending an SYN/ACK in response. When a port is closed, RFC 793 behavior is to respond with a RST \"reset\" packet. This behavior can be used to 'ping' a target to see if it is alive by sending a TCP SYN packet to a port and then looking for a RST or an ACK packet in response.",
+    "likelihood": "",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "292",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The ability to send a TCP SYN packet to a remote target. Depending upon the operating system, the ability to craft SYN packets may require elevated privileges."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "The adversary needs to know how to craft and send protocol commands from the command line or within a tool."
+      }
+    ],
+    "resources_required": [
+      "SYN pings can be performed via the use of a port scanner or by raw socket manipulation using a scripting or programming language. Packet injection tools are also useful for this purpose. Depending upon the technique used it may also be necessary to sniff the network in order to see the response."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Other"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "send_syn_packets",
+      "attributes": {}
+    }
+  ],
+  "edges": []
+}

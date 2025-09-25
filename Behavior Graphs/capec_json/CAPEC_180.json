@@ -1,0 +1,257 @@
+{
+  "graph": {
+    "capec_id": "180",
+    "name": "Exploiting Incorrectly Configured Access Control Security Levels",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An attacker exploits a weakness in the configuration of access controls and is able to bypass the intended protection that these measures guard against and thereby obtain unauthorized access to the system or network. Sensitive functionality should always be protected with access controls. However configuring all but the most trivial access control systems can be very complicated and there are many opportunities for mistakes. If an attacker can learn of incorrectly configured access security settings, they may be able to exploit this in an attack.",
+    "likelihood": "High",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "122",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "17",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The target must apply access controls, but incorrectly configure them. However, not all incorrect configurations can be exploited by an attacker. If the incorrect configuration applies too little security to some functionality, then the attacker may be able to exploit it if the access control would be the only thing preventing an attacker's access and it no longer does so. If the incorrect configuration applies too much security, it must prevent legitimate activity and the attacker must be able to force others to require this activity.."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "In order to discover unrestricted resources, the attacker does not need special tools or skills. They only have to observe the resources or access mechanisms invoked as each action is performed and then try and access those access mechanisms directly."
+      }
+    ],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      }
+    ],
+    "mitigations": [
+      "Design: Configure the access control correctly."
+    ],
+    "example_instances": [
+      "For example, an incorrectly configured Web server, may allow unauthorized access to it, thus threaten the security of the Web application."
+    ],
+    "related_weaknesses": [
+      "732",
+      "1190",
+      "1191",
+      "1193",
+      "1220",
+      "1268",
+      "1280",
+      "1297",
+      "1311",
+      "1315",
+      "1318",
+      "1320",
+      "1321"
+    ],
+    "matched_cwes": [
+      "1191",
+      "732",
+      "1220"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1574.010",
+        "entry_name": "Hijack Execution Flow: Services File Permissions Weaknesses"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey] The attacker surveys the target application, possibly as a valid and authenticated user.",
+        "techniques": [
+          "Spider the web site for all available links.",
+          "Brute force to guess all function names/action with different privileges."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Identify weak points in access control configurations] The attacker probes the access control for functions and data identified in the Explore phase to identify potential weaknesses in how the access controls are configured.",
+        "techniques": [
+          "The attacker attempts authenticated access to targeted functions and data.",
+          "The attacker attempts unauthenticated access to targeted functions and data.",
+          "The attacker attempts indirect and side channel access to targeted functions and data."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Access the function or data bypassing the access control] The attacker executes the function or accesses the data identified in the Explore phase bypassing the access control.",
+        "techniques": [
+          "The attacker executes the function or accesses the data not authorized to them."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "spider_the_web_site_for_all_available_links",
+      "attributes": {}
+    },
+    {
+      "id": "guess_all_function_names",
+      "attributes": {}
+    },
+    {
+      "id": "identify_weak_points_in_access_control_configurations",
+      "attributes": {}
+    },
+    {
+      "id": "probe_the_access_control_for_functions_and_data_identified_in_the_explore_phase",
+      "attributes": {}
+    },
+    {
+      "id": "authenticate_access_to_targeted_functions_and_data",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_indirect_and_side_channel_access_to_targeted_functions_and_data",
+      "attributes": {}
+    },
+    {
+      "id": "access_the_function_or_data_bypassing_the_access_control",
+      "attributes": {}
+    },
+    {
+      "id": "execute_the_function",
+      "attributes": {}
+    },
+    {
+      "id": "apply_access_controls",
+      "attributes": {}
+    },
+    {
+      "id": "exploit_not_all_incorrect_configurations",
+      "attributes": {}
+    },
+    {
+      "id": "apply_too_little_security",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_target_application",
+      "target": "spider_the_web_site_for_all_available_links",
+      "attributes": {}
+    },
+    {
+      "source": "spider_the_web_site_for_all_available_links",
+      "target": "guess_all_function_names",
+      "attributes": {}
+    },
+    {
+      "source": "guess_all_function_names",
+      "target": "identify_weak_points_in_access_control_configurations",
+      "attributes": {}
+    },
+    {
+      "source": "identify_weak_points_in_access_control_configurations",
+      "target": "probe_the_access_control_for_functions_and_data_identified_in_the_explore_phase",
+      "attributes": {}
+    },
+    {
+      "source": "probe_the_access_control_for_functions_and_data_identified_in_the_explore_phase",
+      "target": "authenticate_access_to_targeted_functions_and_data",
+      "attributes": {}
+    },
+    {
+      "source": "authenticate_access_to_targeted_functions_and_data",
+      "target": "authenticate_access_to_targeted_functions_and_data",
+      "attributes": {}
+    },
+    {
+      "source": "authenticate_access_to_targeted_functions_and_data",
+      "target": "attempt_indirect_and_side_channel_access_to_targeted_functions_and_data",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_indirect_and_side_channel_access_to_targeted_functions_and_data",
+      "target": "access_the_function_or_data_bypassing_the_access_control",
+      "attributes": {}
+    },
+    {
+      "source": "access_the_function_or_data_bypassing_the_access_control",
+      "target": "execute_the_function",
+      "attributes": {}
+    },
+    {
+      "source": "execute_the_function",
+      "target": "execute_the_function",
+      "attributes": {}
+    },
+    {
+      "source": "execute_the_function",
+      "target": "apply_access_controls",
+      "attributes": {}
+    },
+    {
+      "source": "apply_access_controls",
+      "target": "exploit_not_all_incorrect_configurations",
+      "attributes": {}
+    },
+    {
+      "source": "exploit_not_all_incorrect_configurations",
+      "target": "apply_too_little_security",
+      "attributes": {}
+    },
+    {
+      "source": "apply_too_little_security",
+      "target": "apply_too_little_security",
+      "attributes": {}
+    }
+  ]
+}

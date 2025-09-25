@@ -1,0 +1,137 @@
+{
+  "graph": {
+    "capec_id": "144",
+    "name": "Detect Unpublicized Web Services",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An adversary searches a targeted web site for web services that have not been publicized. This attack can be especially dangerous since unpublished but available services may not have adequate security controls placed upon them given that an administrator may believe they are unreachable.",
+    "likelihood": "",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "150",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The targeted web site must include unpublished services within its web tree. The nature of these services determines the severity of this attack."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "Spidering tools to explore the target web site are extremely useful in this attack especially when attacking large sites. Some tools might also be able to automatically construct common service queries from known paths."
+    ],
+    "consequences": [],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "425"
+    ],
+    "matched_cwes": [
+      "425"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Find target web site] An adversary finds a target web site that they think may have unpublicized web services",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Map the published web site] The adversary will map the published web site either by using an automated tool or by manually accessing well-known debugging or logging pages, or otherwise predictable pages within the site tree",
+        "techniques": [
+          "Use Dirbuster to brute force directories and file names to find unpublicized web services",
+          "Find a pattern in the naming of documents and extrapolate this pattern to discover additional documents that have been created but are no longer externally linked"
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Try to find weaknesses or information] The adversary will try to find weaknesses in the unpublicized services that the targeted site did not intend to be public",
+        "techniques": [
+          "Use Nikto to look for web service vulnerabilities"
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Follow-up attack] Use any information or weaknesses found to carry out a follow-up attack",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_target_web_site",
+      "attributes": {}
+    },
+    {
+      "id": "find_a_target_web_site_they_think_that_may_have_unpublicized_web_pages",
+      "attributes": {}
+    },
+    {
+      "id": "map_the_published_web_site",
+      "attributes": {}
+    },
+    {
+      "id": "brute_force_directories",
+      "attributes": {}
+    },
+    {
+      "id": "find_a_pattern_in_the_naming_of_documents",
+      "attributes": {}
+    },
+    {
+      "id": "find_weaknesses",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_find_weaknesses_or_information_on_the_unpublicized_pages_that_the_targeted_site_did_not_intend_to_be_public",
+      "attributes": {}
+    },
+    {
+      "id": "determine_the_severity_of_this_attack",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_target_web_site",
+      "target": "find_a_target_web_site_they_think_that_may_have_unpublicized_web_pages",
+      "attributes": {}
+    },
+    {
+      "source": "find_a_target_web_site_they_think_that_may_have_unpublicized_web_pages",
+      "target": "map_the_published_web_site",
+      "attributes": {}
+    },
+    {
+      "source": "map_the_published_web_site",
+      "target": "brute_force_directories",
+      "attributes": {}
+    },
+    {
+      "source": "brute_force_directories",
+      "target": "find_a_pattern_in_the_naming_of_documents",
+      "attributes": {}
+    },
+    {
+      "source": "find_a_pattern_in_the_naming_of_documents",
+      "target": "find_weaknesses",
+      "attributes": {}
+    },
+    {
+      "source": "find_weaknesses",
+      "target": "try_to_find_weaknesses_or_information_on_the_unpublicized_pages_that_the_targeted_site_did_not_intend_to_be_public",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_find_weaknesses_or_information_on_the_unpublicized_pages_that_the_targeted_site_did_not_intend_to_be_public",
+      "target": "determine_the_severity_of_this_attack",
+      "attributes": {}
+    }
+  ]
+}

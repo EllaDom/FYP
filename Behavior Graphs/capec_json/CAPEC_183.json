@@ -1,0 +1,223 @@
+{
+  "graph": {
+    "capec_id": "183",
+    "name": "IMAP/SMTP Command Injection",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary exploits weaknesses in input validation on web-mail servers to execute commands on the IMAP/SMTP server. Web-mail servers often sit between the Internet and the IMAP or SMTP mail server. User requests are received by the web-mail servers which then query the back-end mail server for the requested information and return this response to the user. In an IMAP/SMTP command injection attack, mail-server commands are embedded in parts of the request sent to the web-mail server. If the web-mail server fails to adequately sanitize these requests, these commands are then sent to the back-end mail server when it is queried by the web-mail server, where the commands are then executed. This attack can be especially dangerous since administrators may assume that the back-end server is protected against direct Internet access and therefore may not secure it adequately against the execution of malicious commands.",
+    "likelihood": "",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "248",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The target environment must consist of a web-mail server that the attacker can query and a back-end mail server. The back-end mail server need not be directly accessible to the attacker.",
+      "The web-mail server must fail to adequately sanitize fields received from users and passed on to the back-end mail server.",
+      "The back-end mail server must not be adequately secured against receiving malicious commands from the web-mail server."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "None: No specialized resources are required to execute this type of attack. However, in most cases, the attacker will need to be a recognized user of the web-mail server."
+    ],
+    "consequences": [],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "77"
+    ],
+    "matched_cwes": [
+      "77"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Identify Target Web-Mail Server] The adversary first identifies the web-mail server they wish to exploit.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Identify Vulnerable Parameters] Once the adversary has identified a web-mail server, they identify any vulnerable parameters by altering their values in requests. The adversary knows that the parameter is vulnerable if the web-mail server returns an error of any sort. Ideally, the adversary is looking for a descriptive error message.",
+        "techniques": [
+          "Assign a null value to a parameter being used by the web-mail server and observe the response.",
+          "Assign a random value to a parameter being used by the web-mail server and observe the response.",
+          "Add additional values to a parameter being used by the web-mail server and observe the response.",
+          "Add non standard special characters (i.e.: \\, ', \", @, #, !, |) to a parameter being used by the web-mail server and observe the response.",
+          "Eliminate a parameter being used by the web-mail server and observe the response."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Experiment",
+        "description": "[Determine Level of Injection] After identifying all vulnerable parameters, the adversary determines what level of injection is possible.",
+        "techniques": [
+          "Evaluate error messages to determine what IMAP/SMTP command is being executed for the vulnerable parameter. Sometimes the actually query will be placed in the error message.",
+          "If there aren't descriptive error messages, the adversary will analyze the affected functionality to deduce the possible commands that could be being used by the mail-server."
+        ]
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Inject IMAP/SMTP Commands] The adversary manipulates the vulnerable parameters to inject an IMAP/SMTP command and execute it on the mail-server.",
+        "techniques": [
+          "Structure the injection as a header, body, and footer. The header contains the ending of the expected message, the body contains the injection of the new command, and the footer contains the beginning of the expected command.",
+          "Each part of the injection payload needs to be terminated with the CRLF (%0d%0a) sequence."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "identify_target_web_mail_server",
+      "attributes": {}
+    },
+    {
+      "id": "identify_the_web_mail_server_they_wish_to_exploit",
+      "attributes": {}
+    },
+    {
+      "id": "determine_vulnerable_interface",
+      "attributes": {}
+    },
+    {
+      "id": "assign_a_null_value",
+      "attributes": {}
+    },
+    {
+      "id": "assign_a_random_value",
+      "attributes": {}
+    },
+    {
+      "id": "add_additional_values",
+      "attributes": {}
+    },
+    {
+      "id": "add_standard_special_characters_i_e",
+      "attributes": {}
+    },
+    {
+      "id": "eliminate_a_parameter_being_used_by_the_web_mail_server",
+      "attributes": {}
+    },
+    {
+      "id": "evaluate_error_messages",
+      "attributes": {}
+    },
+    {
+      "id": "place_the_actually_query",
+      "attributes": {}
+    },
+    {
+      "id": "analyze_the_affected_functionality_to_deduce_the_possible_commands_that_could_be_being_used_by_the_mail_server",
+      "attributes": {}
+    },
+    {
+      "id": "manipulate_the_vulnerable_parameters",
+      "attributes": {}
+    },
+    {
+      "id": "contain_the_ending_of_the_expected_message",
+      "attributes": {}
+    },
+    {
+      "id": "need_to_be_terminated_with_the_crlf_0d_0a_sequence",
+      "attributes": {}
+    },
+    {
+      "id": "fail_to_adequately_sanitize_fields_received_from_users_and_passed_on_to_the_back_end_mail_server",
+      "attributes": {}
+    },
+    {
+      "id": "secure_the_back_end_mail_server",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "identify_target_web_mail_server",
+      "target": "identify_the_web_mail_server_they_wish_to_exploit",
+      "attributes": {}
+    },
+    {
+      "source": "identify_the_web_mail_server_they_wish_to_exploit",
+      "target": "determine_vulnerable_interface",
+      "attributes": {}
+    },
+    {
+      "source": "determine_vulnerable_interface",
+      "target": "assign_a_null_value",
+      "attributes": {}
+    },
+    {
+      "source": "determine_vulnerable_interface",
+      "target": "evaluate_error_messages",
+      "attributes": {}
+    },
+    {
+      "source": "assign_a_null_value",
+      "target": "assign_a_random_value",
+      "attributes": {}
+    },
+    {
+      "source": "assign_a_random_value",
+      "target": "add_additional_values",
+      "attributes": {}
+    },
+    {
+      "source": "add_additional_values",
+      "target": "add_standard_special_characters_i_e",
+      "attributes": {}
+    },
+    {
+      "source": "add_standard_special_characters_i_e",
+      "target": "eliminate_a_parameter_being_used_by_the_web_mail_server",
+      "attributes": {}
+    },
+    {
+      "source": "eliminate_a_parameter_being_used_by_the_web_mail_server",
+      "target": "determine_vulnerable_interface",
+      "attributes": {}
+    },
+    {
+      "source": "evaluate_error_messages",
+      "target": "place_the_actually_query",
+      "attributes": {}
+    },
+    {
+      "source": "place_the_actually_query",
+      "target": "analyze_the_affected_functionality_to_deduce_the_possible_commands_that_could_be_being_used_by_the_mail_server",
+      "attributes": {}
+    },
+    {
+      "source": "analyze_the_affected_functionality_to_deduce_the_possible_commands_that_could_be_being_used_by_the_mail_server",
+      "target": "manipulate_the_vulnerable_parameters",
+      "attributes": {}
+    },
+    {
+      "source": "manipulate_the_vulnerable_parameters",
+      "target": "contain_the_ending_of_the_expected_message",
+      "attributes": {}
+    },
+    {
+      "source": "contain_the_ending_of_the_expected_message",
+      "target": "need_to_be_terminated_with_the_crlf_0d_0a_sequence",
+      "attributes": {}
+    },
+    {
+      "source": "need_to_be_terminated_with_the_crlf_0d_0a_sequence",
+      "target": "fail_to_adequately_sanitize_fields_received_from_users_and_passed_on_to_the_back_end_mail_server",
+      "attributes": {}
+    },
+    {
+      "source": "fail_to_adequately_sanitize_fields_received_from_users_and_passed_on_to_the_back_end_mail_server",
+      "target": "secure_the_back_end_mail_server",
+      "attributes": {}
+    }
+  ]
+}

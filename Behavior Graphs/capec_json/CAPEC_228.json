@@ -1,0 +1,154 @@
+{
+  "graph": {
+    "capec_id": "228",
+    "name": "DTD Injection",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "An attacker injects malicious content into an application's DTD in an attempt to produce a negative technical impact. DTDs are used to describe how XML documents are processed. Certain malformed DTDs (for example, those with excessive entity expansion as described in CAPEC 197) can cause the XML parsers that process the DTDs to consume excessive resources resulting in resource depletion.",
+    "likelihood": "",
+    "severity": "Medium",
+    "related_attack_patterns": [
+      {
+        "capec_id": "250",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "197",
+        "nature": "CanPrecede"
+      },
+      {
+        "capec_id": "491",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "The target must be running an XML based application that leverages DTDs."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [],
+    "mitigations": [
+      "Design: Sanitize incoming DTDs to prevent excessive expansion or other actions that could result in impacts like resource depletion.",
+      "Implementation: Disallow the inclusion of DTDs as part of incoming messages.",
+      "Implementation: Use XML parsing tools that protect against DTD attacks."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "829"
+    ],
+    "matched_cwes": [
+      "829"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the target] Using a browser or an automated tool, an attacker records all instances of web services to process XML requests.",
+        "techniques": [
+          "Use an automated tool to record all instances of URLs to process XML requests.",
+          "Use a browser to manually explore the website and analyze how the application processes XML requests."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Explore",
+        "description": "[Determine use of XML with DTDs] Examine application input to identify XML input that leverage the use of one or more DTDs.",
+        "techniques": [
+          "Examine any available documentation for the application that discusses expected XML input.",
+          "Exercise the application using XML input with and without a DTD specified. Failure without DTD likely indicates use of DTD."
+        ]
+      },
+      {
+        "step": "3",
+        "phase": "Exploit",
+        "description": "[Craft and inject XML containg malicious DTD payload]",
+        "techniques": [
+          "Inject XML expansion attack that creates a Denial of Service impact on the targeted server using its DTD.",
+          "Inject XML External Entity (XEE) attack that can cause the disclosure of confidential information, execute abitrary code, create a Denial of Service of the targeted server, or several other malicious impacts."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_target_application",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_instances_of_urls",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "determine_use_of_xml_with_dtds",
+      "attributes": {}
+    },
+    {
+      "id": "examine_any_available_documentation_for_the_application",
+      "attributes": {}
+    },
+    {
+      "id": "exercise_the_application_using_xml_input_with_and_without_a_dtd_specified",
+      "attributes": {}
+    },
+    {
+      "id": "indicate_use_of_dtd",
+      "attributes": {}
+    },
+    {
+      "id": "inject_xml_expansion_attack_that_creates_a_denial_of_service_impact_on_the_targeted_server_using_its_dtd",
+      "attributes": {}
+    },
+    {
+      "id": "run_an_xml_based_application_that_leverages_dtds",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_target_application",
+      "target": "record_all_instances_of_urls",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_instances_of_urls",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "determine_use_of_xml_with_dtds",
+      "attributes": {}
+    },
+    {
+      "source": "determine_use_of_xml_with_dtds",
+      "target": "examine_any_available_documentation_for_the_application",
+      "attributes": {}
+    },
+    {
+      "source": "examine_any_available_documentation_for_the_application",
+      "target": "exercise_the_application_using_xml_input_with_and_without_a_dtd_specified",
+      "attributes": {}
+    },
+    {
+      "source": "exercise_the_application_using_xml_input_with_and_without_a_dtd_specified",
+      "target": "indicate_use_of_dtd",
+      "attributes": {}
+    },
+    {
+      "source": "indicate_use_of_dtd",
+      "target": "inject_xml_expansion_attack_that_creates_a_denial_of_service_impact_on_the_targeted_server_using_its_dtd",
+      "attributes": {}
+    },
+    {
+      "source": "inject_xml_expansion_attack_that_creates_a_denial_of_service_impact_on_the_targeted_server_using_its_dtd",
+      "target": "run_an_xml_based_application_that_leverages_dtds",
+      "attributes": {}
+    }
+  ]
+}

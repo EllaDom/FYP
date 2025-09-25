@@ -1,0 +1,224 @@
+{
+  "graph": {
+    "capec_id": "267",
+    "name": "Leverage Alternate Encoding",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary leverages the possibility to encode potentially harmful input or content used by applications such that the applications are ineffective at validating this encoding standard.",
+    "likelihood": "High",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "153",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The application's decoder accepts and interprets encoded characters. Data canonicalization, input filtering and validating is not done properly leaving the door open to harmful characters for the target host."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "An adversary can inject different representation of a filtered character in a different encoding."
+      },
+      {
+        "level": "Medium",
+        "description": "An adversary may craft subtle encoding of input data by using the knowledge that they have gathered about the target host."
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Integrity"
+        ],
+        "impact": "Modify Data"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Authorization"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Accountability",
+          "Authentication",
+          "Authorization",
+          "Non-Repudiation"
+        ],
+        "impact": "Gain Privileges"
+      },
+      {
+        "scope": [
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Bypass Protection Mechanism"
+      },
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Unreliable Execution"
+      }
+    ],
+    "mitigations": [
+      "Assume all input might use an improper representation. Use canonicalized data inside the application; all data must be converted into the representation used inside the application (UTF-8, UTF-16, etc.)",
+      "Assume all input is malicious. Create an allowlist that defines all valid input to the software system based on the requirements specifications. Input that does not match against the allowlist should not be permitted to enter into the system. Test your decoding process against malicious input."
+    ],
+    "example_instances": [
+      "Microsoft Internet Explorer 5.01 SP4, 6, 6 SP1, and 7 does not properly handle unspecified \"encoding strings,\" which allows remote adversaries to bypass the Same Origin Policy and obtain sensitive information via a crafted web site, aka \"Post Encoding Information Disclosure Vulnerability.\" Related Vulnerabilities CVE-2010-0488",
+      "Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit. This is common behavior that can be used across different platforms and the network to evade defenses."
+    ],
+    "related_weaknesses": [
+      "173",
+      "172",
+      "180",
+      "181",
+      "73",
+      "74",
+      "20",
+      "697",
+      "692"
+    ],
+    "matched_cwes": [
+      "73",
+      "20",
+      "74"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1027",
+        "entry_name": "Obfuscated Files or Information"
+      }
+    ],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "[Survey the application for user-controllable inputs] Using a browser, an automated tool or by inspecting the application, an adversary records all entry points to the application.",
+        "techniques": [
+          "Use a spidering tool to follow and record all links and analyze the web pages to find entry points. Make special note of any links that include parameters in the URL.",
+          "Use a proxy tool to record all user input entry points visited during a manual traversal of the web application.",
+          "Use a browser to manually explore the website and analyze how it is constructed. Many browsers' plugins are available to facilitate the analysis or automate the discovery.",
+          "Manually inspect the application to find entry points."
+        ]
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "[Probe entry points to locate vulnerabilities] The adversary uses the entry points gathered in the \"Explore\" phase as a target list and injects various payloads using a variety of different types of encodings to determine if an entry point actually represents a vulnerability with insufficient validation logic and to characterize the extent to which the vulnerability can be exploited.",
+        "techniques": [
+          "Try to use different encodings of content in order to bypass validation routines."
+        ]
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "survey_the_application_for_user_controllable_inputs",
+      "attributes": {}
+    },
+    {
+      "id": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "id": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "id": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "id": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "id": "inspect_the_application_to_find_entry_points",
+      "attributes": {}
+    },
+    {
+      "id": "locate_vulnerabilities",
+      "attributes": {}
+    },
+    {
+      "id": "try_to_use_different_encodings_of_content_in_order_to_bypass_validation_routines",
+      "attributes": {}
+    },
+    {
+      "id": "handle_unspecified_encoding_strings_which_allows_remote_adversaries_to_bypass_the_same_origin_policy_and_obtain_sensitive_information_via_a_crafted_web_site_aka_post_encoding_information_disclosure_vulnerability",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_to_make_an_executable_or_file_difficult_to_discover_or_analyze_by_encrypting_encoding_or_otherwise_obfuscating_its_contents_on_the_system_or_in_transit",
+      "attributes": {}
+    },
+    {
+      "id": "evade_defenses",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "survey_the_application_for_user_controllable_inputs",
+      "target": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "attributes": {}
+    },
+    {
+      "source": "make_special_note_of_any_links_that_include_parameters_in_the_url",
+      "target": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "attributes": {}
+    },
+    {
+      "source": "record_all_links_visited_during_a_manual_traversal_of_the_web_application",
+      "target": "explore_the_website",
+      "attributes": {}
+    },
+    {
+      "source": "explore_the_website",
+      "target": "facilitate_the_analysis",
+      "attributes": {}
+    },
+    {
+      "source": "facilitate_the_analysis",
+      "target": "inspect_the_application_to_find_entry_points",
+      "attributes": {}
+    },
+    {
+      "source": "inspect_the_application_to_find_entry_points",
+      "target": "locate_vulnerabilities",
+      "attributes": {}
+    },
+    {
+      "source": "locate_vulnerabilities",
+      "target": "try_to_use_different_encodings_of_content_in_order_to_bypass_validation_routines",
+      "attributes": {}
+    },
+    {
+      "source": "try_to_use_different_encodings_of_content_in_order_to_bypass_validation_routines",
+      "target": "handle_unspecified_encoding_strings_which_allows_remote_adversaries_to_bypass_the_same_origin_policy_and_obtain_sensitive_information_via_a_crafted_web_site_aka_post_encoding_information_disclosure_vulnerability",
+      "attributes": {}
+    },
+    {
+      "source": "handle_unspecified_encoding_strings_which_allows_remote_adversaries_to_bypass_the_same_origin_policy_and_obtain_sensitive_information_via_a_crafted_web_site_aka_post_encoding_information_disclosure_vulnerability",
+      "target": "attempt_to_make_an_executable_or_file_difficult_to_discover_or_analyze_by_encrypting_encoding_or_otherwise_obfuscating_its_contents_on_the_system_or_in_transit",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_to_make_an_executable_or_file_difficult_to_discover_or_analyze_by_encrypting_encoding_or_otherwise_obfuscating_its_contents_on_the_system_or_in_transit",
+      "target": "evade_defenses",
+      "attributes": {}
+    }
+  ]
+}

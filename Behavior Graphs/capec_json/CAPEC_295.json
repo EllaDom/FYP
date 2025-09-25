@@ -1,0 +1,141 @@
+{
+  "graph": {
+    "capec_id": "295",
+    "name": "Timestamp Request",
+    "abstraction": "Detailed",
+    "status": "Stable",
+    "description": "This pattern of attack leverages standard requests to learn the exact time associated with a target system. An adversary may be able to use the timestamp returned from the target to attack time-based security algorithms, such as random number generators, or time-based authentication mechanisms.",
+    "likelihood": "",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "292",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "The ability to send a timestamp request to a remote target and receive a response."
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "Scanners or utilities that provide the ability to send custom ICMP queries."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Other"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [
+      "An adversary sends an ICMP type 13 Timestamp Request to determine the time as recorded by a remote target. Timestamp Replies, ICMP Type 14, usually return a value in Greenwich Mean Time. An adversary can attempt to use an ICMP Timestamp requests to 'ping' a remote system to see if is alive. Additionally, because these types of messages are rare they are easily spotted by intrusion detection systems, many ICMP scanning tools support IP spoofing to help conceal the origin of the actual request among a storm of similar ICMP messages. It is a common practice for border firewalls and gateways to be configured to block ingress ICMP type 13 and egress ICMP type 14 messages.",
+      "An adversary may gather the system time or time zone from a local or remote system. This information may be gathered in a number of ways, such as with Net on Windows by performing net time \\\\hostname to gather the system time on a remote system. The victim's time zone may also be inferred from the current system time or gathered by using w32tm /tz. The information could be useful for performing other techniques, such as executing a file with a Scheduled Task, or to discover locality information based on time zone to assist in victim targeting"
+    ],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1124",
+        "entry_name": "System Time Discovery"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "send_an_icmp_type_13_timestamp_request",
+      "attributes": {}
+    },
+    {
+      "id": "return_a_value",
+      "attributes": {}
+    },
+    {
+      "id": "attempt_to_use_an_icmp_timestamp_requests_to_ping_a_remote_system_to_see_if_is_alive",
+      "attributes": {}
+    },
+    {
+      "id": "spot_because_these_types_of_messages_are_rare",
+      "attributes": {}
+    },
+    {
+      "id": "configure_to_block_ingress_icmp_type_13",
+      "attributes": {}
+    },
+    {
+      "id": "gather_the_system_time_or_time_zone",
+      "attributes": {}
+    },
+    {
+      "id": "gather_the_necessary_information",
+      "attributes": {}
+    },
+    {
+      "id": "infer_the_victim_s_time_zone",
+      "attributes": {}
+    },
+    {
+      "id": "perform_other_techniques_such_as_executing_a_file_with_a_scheduled_task_or_to_discover_locality_information_based_on_time_zone_to_assist_in_victim_targeting",
+      "attributes": {}
+    },
+    {
+      "id": "send_a_timestamp_request",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "send_an_icmp_type_13_timestamp_request",
+      "target": "return_a_value",
+      "attributes": {}
+    },
+    {
+      "source": "return_a_value",
+      "target": "attempt_to_use_an_icmp_timestamp_requests_to_ping_a_remote_system_to_see_if_is_alive",
+      "attributes": {}
+    },
+    {
+      "source": "attempt_to_use_an_icmp_timestamp_requests_to_ping_a_remote_system_to_see_if_is_alive",
+      "target": "spot_because_these_types_of_messages_are_rare",
+      "attributes": {}
+    },
+    {
+      "source": "spot_because_these_types_of_messages_are_rare",
+      "target": "configure_to_block_ingress_icmp_type_13",
+      "attributes": {}
+    },
+    {
+      "source": "configure_to_block_ingress_icmp_type_13",
+      "target": "gather_the_system_time_or_time_zone",
+      "attributes": {}
+    },
+    {
+      "source": "gather_the_system_time_or_time_zone",
+      "target": "gather_the_necessary_information",
+      "attributes": {}
+    },
+    {
+      "source": "gather_the_necessary_information",
+      "target": "infer_the_victim_s_time_zone",
+      "attributes": {}
+    },
+    {
+      "source": "infer_the_victim_s_time_zone",
+      "target": "perform_other_techniques_such_as_executing_a_file_with_a_scheduled_task_or_to_discover_locality_information_based_on_time_zone_to_assist_in_victim_targeting",
+      "attributes": {}
+    },
+    {
+      "source": "perform_other_techniques_such_as_executing_a_file_with_a_scheduled_task_or_to_discover_locality_information_based_on_time_zone_to_assist_in_victim_targeting",
+      "target": "send_a_timestamp_request",
+      "attributes": {}
+    }
+  ]
+}

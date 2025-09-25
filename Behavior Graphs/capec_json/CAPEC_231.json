@@ -1,0 +1,130 @@
+{
+  "graph": {
+    "capec_id": "231",
+    "name": "Oversized Serialized Data Payloads",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary injects oversized serialized data payloads into a parser during data processing to produce adverse effects upon the parser such as exhausting system resources and arbitrary code execution.",
+    "likelihood": "Medium",
+    "severity": "High",
+    "related_attack_patterns": [
+      {
+        "capec_id": "130",
+        "nature": "ChildOf"
+      }
+    ],
+    "prerequisites": [
+      "An application uses an parser for serialized data to perform transformation on user-controllable data.",
+      "An application does not perform sufficient validation to ensure that user-controllable data is safe for a data parser."
+    ],
+    "skills_required": [
+      {
+        "level": "Low",
+        "description": "Denial of service"
+      },
+      {
+        "level": "High",
+        "description": "Arbitrary code execution"
+      }
+    ],
+    "resources_required": [],
+    "consequences": [
+      {
+        "scope": [
+          "Availability"
+        ],
+        "impact": "Resource Consumption"
+      },
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Read Data"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Integrity",
+          "Availability"
+        ],
+        "impact": "Execute Unauthorized Commands"
+      },
+      {
+        "scope": [
+          "Confidentiality",
+          "Access Control",
+          "Authorization"
+        ],
+        "impact": "Gain Privileges"
+      }
+    ],
+    "mitigations": [
+      "Carefully validate and sanitize all user-controllable serialized data prior to passing it to the parser routine. Ensure that the resultant data is safe to pass to the parser.",
+      "Perform validation on canonical data.",
+      "Pick a robust implementation of the serialized data parser.",
+      "Validate data against a valid schema or DTD prior to parsing."
+    ],
+    "example_instances": [],
+    "related_weaknesses": [
+      "112",
+      "20",
+      "674",
+      "770"
+    ],
+    "matched_cwes": [
+      "20",
+      "112"
+    ],
+    "taxonomy_mappings": [],
+    "execution_flow": [
+      {
+        "step": "1",
+        "phase": "Explore",
+        "description": "An adversary determines the input data stream that is being processed by an serialized data parser on the victim's side.",
+        "techniques": []
+      },
+      {
+        "step": "2",
+        "phase": "Experiment",
+        "description": "An adversary crafts input data that may have an adverse effect on the operation of the data parser when the data is parsed on the victim's system.",
+        "techniques": []
+      }
+    ],
+    "directed": true
+  },
+  "nodes": [
+    {
+      "id": "determine_the_input_data_stream_that_is_being_processed_by_a_data_parser_that_supports_using_substitution_on_the_victim_s_side",
+      "attributes": {}
+    },
+    {
+      "id": "input_data_that_may_have_an_adverse_effect_on_the_operation_of_the_parser_when_the_data_is_parsed_on_the_victim_s_system",
+      "attributes": {}
+    },
+    {
+      "id": "express_an_application_s_user_controllable_data",
+      "attributes": {}
+    },
+    {
+      "id": "perform_sufficient_validation",
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "determine_the_input_data_stream_that_is_being_processed_by_a_data_parser_that_supports_using_substitution_on_the_victim_s_side",
+      "target": "input_data_that_may_have_an_adverse_effect_on_the_operation_of_the_parser_when_the_data_is_parsed_on_the_victim_s_system",
+      "attributes": {}
+    },
+    {
+      "source": "input_data_that_may_have_an_adverse_effect_on_the_operation_of_the_parser_when_the_data_is_parsed_on_the_victim_s_system",
+      "target": "express_an_application_s_user_controllable_data",
+      "attributes": {}
+    },
+    {
+      "source": "express_an_application_s_user_controllable_data",
+      "target": "perform_sufficient_validation",
+      "attributes": {}
+    }
+  ]
+}

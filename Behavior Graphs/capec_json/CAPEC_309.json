@@ -1,0 +1,65 @@
+{
+  "graph": {
+    "capec_id": "309",
+    "name": "Network Topology Mapping",
+    "abstraction": "Standard",
+    "status": "Draft",
+    "description": "An adversary engages in scanning activities to map network nodes, hosts, devices, and routes. Adversaries usually perform this type of network reconnaissance during the early stages of attack against an external network. Many types of scanning utilities are typically employed, including ICMP tools, network mappers, port scanners, and route testing utilities such as traceroute.",
+    "likelihood": "",
+    "severity": "Low",
+    "related_attack_patterns": [
+      {
+        "capec_id": "169",
+        "nature": "ChildOf"
+      },
+      {
+        "capec_id": "664",
+        "nature": "CanPrecede"
+      }
+    ],
+    "prerequisites": [
+      "None"
+    ],
+    "skills_required": [],
+    "resources_required": [
+      "Probing requires the ability to interactively send and receive data from a target, whereas passive listening requires a sufficient understanding of the protocol to analyze a preexisting channel of communication."
+    ],
+    "consequences": [
+      {
+        "scope": [
+          "Confidentiality"
+        ],
+        "impact": "Other"
+      }
+    ],
+    "mitigations": [],
+    "example_instances": [],
+    "related_weaknesses": [
+      "200"
+    ],
+    "matched_cwes": [
+      "200"
+    ],
+    "taxonomy_mappings": [
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1016",
+        "entry_name": "System Network Configuration Discovery"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1049",
+        "entry_name": "System Network Connections Discovery"
+      },
+      {
+        "taxonomy_name": "ATTACK",
+        "entry_id": "1590",
+        "entry_name": "Gather Victim Network Information"
+      }
+    ],
+    "execution_flow": [],
+    "directed": true
+  },
+  "nodes": [],
+  "edges": []
+}
