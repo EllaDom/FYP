@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="relation" attr.type="string"/>
+<key id="d5" for="node" attr.name="value" attr.type="string"/>
+<key id="d4" for="node" attr.name="param_type" attr.type="string"/>
+<key id="d3" for="node" attr.name="sessions" attr.type="string"/>
+<key id="d2" for="node" attr.name="occurrences" attr.type="long"/>
+<key id="d1" for="node" attr.name="type" attr.type="string"/>
+<key id="d0" for="node" attr.name="orig_label" attr.type="string"/>
+<graph edgedefault="directed"><node id="n0">
+  <data key="d0">application | auth:failure</data>
+  <data key="d1">action</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n1">
+  <data key="d0">event_type:failed_login</data>
+  <data key="d1">param</data>
+  <data key="d4">event_type</data>
+  <data key="d5">failed_login</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n2">
+  <data key="d0">action_type:edit_record</data>
+  <data key="d1">param</data>
+  <data key="d4">action_type</data>
+  <data key="d5">edit_record</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n3">
+  <data key="d0">policy_violation:yes</data>
+  <data key="d1">param</data>
+  <data key="d4">policy_violation</data>
+  <data key="d5">yes</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n4">
+  <data key="d0">connection_status:established</data>
+  <data key="d1">param</data>
+  <data key="d4">connection_status</data>
+  <data key="d5">established</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n5">
+  <data key="d0">status_code:access_denied</data>
+  <data key="d1">param</data>
+  <data key="d4">status_code</data>
+  <data key="d5">access_denied</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n6">
+  <data key="d0">protocol:HTTP</data>
+  <data key="d1">param</data>
+  <data key="d4">protocol</data>
+  <data key="d5">HTTP</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<node id="n7">
+  <data key="d0">role:nurse</data>
+  <data key="d1">param</data>
+  <data key="d4">role</data>
+  <data key="d5">nurse</data>
+  <data key="d2">1</data>
+  <data key="d3">["user_45"]</data>
+</node>
+<edge source="n0" target="n1">
+  <data key="d6">param</data>
+</edge>
+<edge source="n0" target="n2">
+  <data key="d6">param</data>
+</edge>
+<edge source="n0" target="n3">
+  <data key="d6">param</data>
+</edge>
+<edge source="n0" target="n4">
+  <data key="d6">param</data>
+</edge>
+<edge source="n0" target="n5">
+  <data key="d6">param</data>
+</edge>
+<edge source="n0" target="n6">
+  <data key="d6">param</data>
+</edge>
+<edge source="n0" target="n7">
+  <data key="d6">param</data>
+</edge>
+</graph></graphml>
